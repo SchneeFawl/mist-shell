@@ -66,7 +66,7 @@ hl.window_rule({
 
 hl.window_rule({
     match = {
-        class = "^(org%.kde%.dolphin)$",
+        class = "^(org.kde.dolphin)$",
         title = "^(Copying)(.*)$"
     },
     float = true,
@@ -76,12 +76,21 @@ hl.window_rule({
 
 hl.window_rule({
     match = {
-        class = "^(org%.kde%.dolphin)$",
+        class = "^(org.kde.dolphin)$",
         title = "^(File Already Exists)(.*)$"
     },
     float = true,
     center = true,
     border_size = 2
+})
+
+hl.window_rule({
+    match = {
+        title = "^(Volume Control)(.*)$"
+    },
+    float = true,
+    center = true,
+    size = {800, 600}
 })
 
 -- universal system dialog rule
