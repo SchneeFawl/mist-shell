@@ -48,3 +48,6 @@ link_xdg_directory "$REPO_DOTS/.config" "$HOME/.config"
 #link_xdg_directory "$REPO_DOTS/.local/share" "$HOME/.local/share"
 
 echo "Completed mapping workspace"
+
+echo "! Reloading Hyprland configuration !"
+hyprctl reload
