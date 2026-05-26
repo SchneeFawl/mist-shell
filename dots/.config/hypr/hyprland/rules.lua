@@ -100,7 +100,7 @@ hl.window_rule({
     },
     float = true,
     center = true,
-    size = {800, 600},
+    size = { 800, 600 },
     opacity = "0.8 0.7"
 })
 
