@@ -58,10 +58,20 @@ hl.window_rule({
 })
 
 hl.window_rule({
-    match = { title = "^(nm-connection-editor)$" },
+    match = { class = "^(nm-connection-editor)$" },
     float = true,
     center = true,
-    border_size = 3
+    border_size = 3,
+    size = { 800, 600 },
+    opacity = "0.8 0.7"
+})
+
+hl.window_rule({
+    match = { title = "^(nm-applet)$" },
+    float = true,
+    center = true,
+    border_size = 3,
+    size = { 800, 600 }
 })
 
 hl.window_rule({
@@ -90,7 +100,51 @@ hl.window_rule({
     },
     float = true,
     center = true,
-    size = {800, 600}
+    size = {800, 600},
+    opacity = "0.8 0.7"
+})
+
+-- APP SPECIFIC WINDOW RULES AHEAD
+hl.window_rule({
+    match = {
+        class = "^(code)$"
+    },
+    -- opacity = "0.9 0.82"
+})
+
+hl.window_rule({
+    match = {
+        class = "^(discord)$"
+    },
+    -- opacity = "0.9 0.8"
+})
+
+hl.window_rule({
+    match = {
+        class = "^(org.kde.dolphin)$"
+    },
+    opacity = "0.85 0.75"
+})
+
+hl.window_rule({
+    match = {
+        class = "^(zen)$"       -- zen browser
+    },
+    opacity = "0.92 0.82 1"
+})
+
+hl.window_rule({
+    match = {
+        class = "^(firefox)$"
+    },
+    opacity = "0.92 0.82"
+})
+
+hl.window_rule({
+    match = {
+        class = "^(kitty)$"
+    },
+    opacity = "0.85 0.73"
 })
 
 -- universal system dialog rule
@@ -100,10 +154,27 @@ hl.window_rule({
         title = "^(Open File|Save File|Select a Directory)(.*)$"
     },
     float = true,
-    size =  {800, 600},
+    size = {800, 600},
     center = true
 })
 
+--[[
+local suppressMaximizeRule = hl.window_rule({
+    -- Ignore maximize requests from all apps
+    name  = "suppress-maximize-events",
+    match = { class = ".*" },
+    suppress_event = "maximize",
+})
+]]
+
+---------------------------
+--|   WORKSPACE RULES   |--
+---------------------------
+
+hl.workspace_rule({
+    workspace = "special:magic",
+    gaps_out = 24
+})
 
 -----------------------
 --|   LAYER RULES   |--

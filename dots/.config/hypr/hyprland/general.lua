@@ -1,4 +1,4 @@
- -- MONITOR CONFIG
+-- MONITOR CONFIG
 hl.monitor({
     output   = "",
     mode     = "preferred",
@@ -23,9 +23,9 @@ hl.device({
     sensitivity = -0.5,
 })
 
--- -------------------
--- |  LOOK AND FEEL  |
--- -------------------
+-----------------------
+--|  LOOK AND FEEL  |--
+-----------------------
 hl.config({
     general = {
         gaps_in  = 4,
@@ -51,8 +51,8 @@ hl.config({
         rounding_power = 3,
 
         -- Change transparency of focused and unfocused windows
-        active_opacity = 1.0,
-        inactive_opacity = 1.0,
+        active_opacity = 0.9,
+        inactive_opacity = 0.8,
 
         shadow = {
             enabled      = true,
@@ -64,9 +64,10 @@ hl.config({
         blur = {
             enabled   = true,
             new_optimizations = true,
-            size      = 3,
-            passes    = 1,
+            size      = 7,
+            passes    = 2,
             vibrancy  = 0.1696,
+            contrast = 0.9
         },
     },
 
@@ -92,7 +93,7 @@ hl.config({
         -- accel_profile = "flat",
 
         touchpad = {
-            natural_scroll = false,
+            natural_scroll = true,
         },
     },
 })
