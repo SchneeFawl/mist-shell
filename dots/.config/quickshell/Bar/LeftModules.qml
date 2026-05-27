@@ -7,34 +7,39 @@ RowLayout {
 
     // custom logo
     Pill {
-        innerPadding: 6
+        innerPadding: 12
+        pillSpacing: 6
+
         BarText {
-            text: "󱄅"   // I DO NOT USE NIX LMAO
+            text: "󱄅"   // I DO NOT USE NIX BTW
             color: themePalette.activeAccent
             font.pixelSize: 20
+            Layout.alignment: Qt.AlignCenter
         }
         BarText {
             text: "mist"
             font.weight: Font.DemiBold
+            Layout.alignment: Qt.AlignCenter
         }
     }
 
     Pill {
-        innerPadding: 10
+        id: keybindPill
+        innerPadding: 0
+
         MouseArea {
             id: keybindHelper
-            Layout.preferredWidth: 15
+            implicitWidth: keybindText.implicitWidth + 24
             Layout.fillHeight: true
             cursorShape: Qt.PointingHandCursor
+            hoverEnabled: true
 
-            RowLayout {
+            BarText {
+                id: keybindText
                 anchors.centerIn: parent
-                spacing: 6
-                BarText {
-                    text: ""
-                    font.pixelSize: 25
-                    color: themePalette.activeAccent
-                }
+                text: ""
+                font.pixelSize: 20
+                color: themePalette.activeAccent
             }
             onClicked: console.log("trigge keybinds help menu")
         }

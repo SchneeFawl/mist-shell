@@ -2,18 +2,22 @@ import QtQuick
 import QtQuick.Layouts
 
 RowLayout {
-    spacing: 10
+    spacing: 12
     Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
 
     Pill {
-        innerPadding: 14
-        BarText { text: "󰅟 󰋋 󱚽"; font.pixelSize: 20 }   // temp representation
-        Layout.alignment: Qt.AlignHCenter
+        innerPadding: 12
+        BarText {      // temp representation
+            text: "󰅟 󰋋 󱚽"
+            font.pixelSize: 18
+            Layout.alignment: Qt.AlignVCenter
+        }
     }
 
     // clock display widget
     Pill {
-        innerPadding: 0
+        innerPadding: 12
+        pillSpacing: 6
 
         Timer {
             interval: 1000
@@ -28,20 +32,22 @@ RowLayout {
             }
         }
 
-        BarText { id: timeDisplay }
-        BarText { text: "•"; color: themePalette.textSub }
-        BarText { id: dayDisplay; text: "Monday"; isSubText: true }
-        BarText { id: dateDisplay; text: "00/0"; isSubText: true }
+        BarText { id: timeDisplay; Layout.alignment: Qt.AlignCenter }
+        // BarText { text: "•"; color: themePalette.textSub; Layout.alignment: Qt.AlignCenter }
+        BarText { id: dayDisplay; isSubText: true; Layout.alignment: Qt.AlignCenter }
+        BarText { id: dateDisplay; isSubText: true; Layout.alignment: Qt.AlignCenter }
     }
 
     // core desktop feature handlers
     Pill {
-        innerPadding: 8
-        pillSpacing: 0
+        innerPadding: 4
+        pillSpacing: 2
 
         MouseArea {     // network
-            Layout.preferredWidth: 28
+            implicitWidth: 30
             Layout.fillHeight: true
+            cursorShape: Qt.PointingHandCursor
+
             BarText {
                 anchors.centerIn: parent
                 text: "󰖩"
@@ -52,8 +58,10 @@ RowLayout {
         }
 
         MouseArea {     // audio control
-            Layout.preferredWidth: 28
+            implicitWidth: 30
             Layout.fillHeight: true
+            cursorShape: Qt.PointingHandCursor
+
             BarText {
                 anchors.centerIn: parent
                 text: "󰕾"
@@ -64,8 +72,10 @@ RowLayout {
         }
 
         MouseArea {     // power actions dashboard
-            Layout.preferredWidth: 28
+            implicitWidth: 30
             Layout.fillHeight: true
+            cursorShape: Qt.PointingHandCursor
+
             BarText {
                 anchors.centerIn: parent
                 text: "⏻"

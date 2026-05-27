@@ -16,8 +16,8 @@ PanelWindow {       // qmllint disable
         right: true
     }
 
-    implicitHeight: 36
-    exclusiveZone: 39
+    height: 40
+    exclusiveZone: 40
     color: "transparent"
 
     // wayland config bounds
@@ -40,11 +40,11 @@ PanelWindow {       // qmllint disable
 
             Item { Layout.fillWidth: true }
 
-            CenterModules { Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter }
-
-            Item { Layout.fillWidth: true }
-
             RightModules { Layout.alignment: Qt.AlignRight | Qt.AlignVCenter }
+        }
+
+        CenterModules {
+            anchors.centerIn: parent
         }
     }
 }
