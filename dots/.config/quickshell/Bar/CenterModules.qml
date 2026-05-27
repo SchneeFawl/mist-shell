@@ -3,21 +3,24 @@ import QtQuick.Layouts
 
 RowLayout {
     spacing: 12
+    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
     Pill {
         id: mediaPill
-        innerPadding: 12
+        innerPadding: 14
+        pillSpacing: 0
 
         // left settings button
         MouseArea {
             id: leftTrigger
-            Layout.preferredWidth: 20
+            Layout.preferredWidth: 24
             Layout.fillHeight: true
             cursorShape: Qt.PointingHandCursor
 
             BarText {
                 anchors.centerIn: parent
                 text: "⚙"
+                font.pixelSize: 20
                 color: parent.containsMouse ? themePalette.activeAccent : themePalette.inactiveAccent
             }
             onClicked: console.log("Settings button clicked")
@@ -25,22 +28,24 @@ RowLayout {
 
         // center block: media player state details
         BarText {
-            Layout.alignment: Qt.AlignHCenter
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             text: "󰎈 Currently Playing Track..."
             color: themePalette.statusVibrant
-            font.pixelSize: 12
+            font.pixelSize: 14
         }
 
         // right dnd button
         MouseArea {
             id: rightTrigger
-            Layout.preferredWidth: 20
+            Layout.preferredWidth: 24
             Layout.fillHeight: true
             cursorShape: Qt.PointingHandCursor
+            hoverEnabled: true
 
             BarText {
                 anchors.centerIn: parent
                 text: root.dndActive ? "󰂛" : "󰂚"
+                font.pixelSize: 20
                 color: root.dndActive ? themePalette.activeAccent : themePalette.textSub
             }
             onClicked: root.dndActive = !root.dndActive
@@ -52,11 +57,11 @@ RowLayout {
             hoverEnabled: true
             z: -1       // behind left/right trigger areas to avoid breaking button clicks
             onEntered: {
-                mediaPill.border.color = themePalette.activeAccent
+                mediaPill.customBorderColor = themePalette.activeAccent
                 // TODO: trigger event hook to load Fabric module
             }
             onExited: {
-                mediaPill.border.color = themePalette.pillBorder
+                mediaPill.customBorderColor = themePalette.pillBorder
             }
         }
     }

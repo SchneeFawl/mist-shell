@@ -27,7 +27,7 @@ PanelWindow {       // qmllint disable
     // visual background container
     Rectangle {
         anchors.fill: parent
-        color: "white"
+        color: "transparent"
 
         RowLayout {
             anchors.fill: parent
@@ -44,7 +44,7 @@ PanelWindow {       // qmllint disable
 
             Item { Layout.fillWidth: true }
 
-            
+            RightModules { Layout.alignment: Qt.AlignRight | Qt.AlignVCenter }
         }
     }
 }

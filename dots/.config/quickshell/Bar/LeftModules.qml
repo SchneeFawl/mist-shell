@@ -3,17 +3,46 @@ import QtQuick.Layouts
 
 RowLayout {
     spacing: 12
+    Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
 
-    // system stats pill
+    // custom logo
     Pill {
-        BarText { text: " " + sysStats.cpuUsage + "%" }
-        Rectangle { width: 1; height: 14; color: themePalette.pillBorder }
-        BarText { text: " " + sysStats.usedMemory + "G" }
+        innerPadding: 6
+        BarText {
+            text: "󱄅"   // I DO NOT USE NIX LMAO
+            color: themePalette.activeAccent
+            font.pixelSize: 20
+        }
+        BarText {
+            text: "mist"
+            font.weight: Font.DemiBold
+        }
+    }
+
+    Pill {
+        innerPadding: 10
+        MouseArea {
+            id: keybindHelper
+            Layout.preferredWidth: 15
+            Layout.fillHeight: true
+            cursorShape: Qt.PointingHandCursor
+
+            RowLayout {
+                anchors.centerIn: parent
+                spacing: 6
+                BarText {
+                    text: ""
+                    font.pixelSize: 25
+                    color: themePalette.activeAccent
+                }
+            }
+            onClicked: console.log("trigge keybinds help menu")
+        }
     }
 
     // active window workspace layout panel
     Pill {
-        innerPadding: 10
+        innerPadding: 12
         Workspaces {}
     }
 }

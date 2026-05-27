@@ -2,7 +2,7 @@
 import Quickshell
 import QtQuick
 import "Bar"
-//import "scripts"
+// import "scripts"
 
 ShellRoot {
     id: root
