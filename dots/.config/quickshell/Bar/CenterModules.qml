@@ -1,72 +1,65 @@
 import QtQuick
-import QtQuick.Layouts
+import Quickshell.Io
 
-RowLayout {
-    id: centerModulesRoot
-    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+Pill {
+    id: centerMediaPill
 
-    Pill {
-        id: mediaPill
-        innerPadding: 6
-        pillSpacing: 12
+    property bool holdsTargetPointer: false
 
-        // left settings button
-        MouseArea {
-            id: leftTrigger
-            implicitWidth: 28
-            Layout.fillHeight: true
-            cursorShape: Qt.PointingHandCursor
-            hoverEnabled: true
+    Text {
+        anchors.centerIn: parent
+        text: "󰕮  System Center"
+        color: "#cdd6f4"
+        font.pixelSize: 14
+    }
 
-            BarText {
-                anchors.centerIn: parent
-                text: " ⚙"
-                font.pixelSize: 20
-                // color: themePalette.inactiveAccent
-                Layout.alignment: Qt.AlignCenter
-            }
-            onClicked: console.log("Settings button clicked")
-        }
+    MouseArea {
+	id: interactionCanvas
+	anchors.fill: parent
+	hoverEnabled: true
 
-        // center block: media player state details
-        BarText {
-            Layout.alignment: Qt.AlignCenter
-            text: "󰎈 Currently Playing Track..."
-            color: themePalette.statusVibrant
-            font.pixelSize: 14
-        }
+	onContainsMouseChanged: {
+	    if (containsMouse) {
+		hoverLatencyTimer.start();
+	    } else {
+		hoverLatencyTimer.stop();
 
-        // right dnd button
-        MouseArea {
-            id: rightTrigger
-            implicitWidth: 28
-            Layout.fillHeight: true
-            cursorShape: Qt.PointingHandCursor
-            hoverEnabled: true
+		backendIpcStream.sendSignal("CLOSE");
+	    }
+	}
+    }
 
-            BarText {
-                anchors.centerIn: parent
-                text: root.dndActive ? "󰂛" : "󰂚"
-                font.pixelSize: 20
-                color: root.dndActive ? themePalette.activeAccent : themePalette.textSub
-                Layout.alignment: Qt.AlignCenter
-            }
-            onClicked: root.dndActive = !root.dndActive
-        }
+    // hover delay config
+    Timer {
+	id: hoverLatencyTimer
+	interval: 700
+	repeat: false
+	onTriggered: {
+	    // map relative local coordinates to absolute screen canvas space
+	    var globalCoordinates = centerMediaPill.mapToItem(null, 0, 0);
+	    var targetX = globalCoordinates.x;
+	    var targetY = globalCoordinates.y + centerMediaPill.height + 12;	// 12px vertical gap
 
-        // TODO: hovering scaling interaction mapping to Fabric widget layer
-        MouseArea {
-            anchors.fill: parent
-            hoverEnabled: true
-            z: -1       // behind left/right trigger areas to avoid breaking button clicks
+	    var formatPacket = "OPEN: " + Math.round(targetX) + "," + Math.round(targetY);
+	    backendIpcStream.sendSignal(formatPacket)
+	}
+    }
 
-            onEntered: {
-                mediaPill.customBorderColor = themePalette.activeAccent
-                // TODO: trigger event hook to load Fabric module
-            }
-            onExited: {
-                mediaPill.customBorderColor = themePalette.pillBorder
-            }
-        }
+    // persistent communication pipeline
+    Process {
+	id: backendIpcStream
+
+	function sendSignal(message) {
+	    command = ["sh", "-c", "echo '" + message + "' | nc -U /tmp/mist_dashboard.sock"]
+	    running = true
+	}
+
+	// automatic self-clearing engine
+	onRunningChanged: {
+	    if (!running) {
+		command = []
+	    }
+	}
     }
 }
+

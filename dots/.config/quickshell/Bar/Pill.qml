@@ -7,7 +7,7 @@ Item {
     default property alias pillContent: contentLayout.data
     property int innerPadding: 14
     property int pillSpacing: 8
-    property color customBorderColor: themePalette.pillBorderr
+    property color customBorderColor: themePalette.pillBorder
 
     implicitWidth: contentLayout.implicitWidth + (innerPadding * 2)
     implicitHeight: 32

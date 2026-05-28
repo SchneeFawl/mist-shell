@@ -23,6 +23,7 @@ RowLayout {
         }
     }
 
+    // keybinds trigger
     Pill {
         id: keybindPill
         innerPadding: 0
@@ -41,13 +42,13 @@ RowLayout {
                 font.pixelSize: 20
                 color: themePalette.activeAccent
             }
-            onClicked: console.log("trigge keybinds help menu")
+            onClicked: console.log("trigger keybinds help menu")
         }
     }
 
     // active window workspace layout panel
     Pill {
-        innerPadding: 12
+        innerPadding: 8
         Workspaces {}
     }
 }
