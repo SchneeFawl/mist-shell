@@ -104,6 +104,17 @@ hl.window_rule({
     opacity = "0.8 0.7"
 })
 
+-- Picture-in-picture mode
+hl.window_rule({
+    match = {
+	title = "^([Pp]icture[-\\s]?[Ii]n[-\\s]?[Pp]icture)(.*)$"
+    },
+    float = true,
+    keep_aspect_ratio = true,
+    pin = true
+})
+
+
 -- APP SPECIFIC WINDOW RULES AHEAD
 hl.window_rule({
     match = {
