@@ -21,7 +21,7 @@ class MistDashboard(Window):
     def __init__(self, app):
         super().__init__(
             layer="top",
-            anchor="none",
+            anchor="top left",
             visible=False,
             all_visible=False,
         )
@@ -53,17 +53,18 @@ class MistDashboard(Window):
             spacing=12
         )
 
-        self.media_btn = Button(label="󰎈 Media Mode")
-        self.sysinfo_btn = Button(label="󰄦 System Info")
-        self.theme_btn = Button(label="󰔎 Theme Manager")
-        self.apps_btn = Button(label="󰀻 App Selector")
+        self.media_btn = Button(label="󰎈 ", tooltip_text="Media Mode")
+        self.sysinfo_btn = Button(label="󰄦 ", tooltip_text="System Information")
+        self.theme_btn = Button(label="󰔎 ", tooltip_text="Theme Manager")
+        self.apps_btn = Button(label="󰀻 ", tooltip_text="App Selector")
 
         # spacing so that settings button sits at the absolute bottom
         self.sidebar_spacer = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         
         self.settings_btn = Button(
             name="sidebar-settings-btn",
-            label="󰒓 Settings"
+            label="󰒓 ",
+            tooltip_text="Settings"
         )
 
         self.sidebar.pack_start(self.media_btn, False, False, 0)
@@ -93,10 +94,10 @@ class MistDashboard(Window):
             orientation="v",
             spacing=8
         )
-
         self.notification_pane.pack_start(Label("󰂚 Notifications", name="pane-header"), False, False, 0)
 
         # placeholder for now
+        self.notification_pane.set_size_request(280, -1)
         self.main_layout.pack_start(self.notification_pane, True, True, 0)
 
     def init_calendar_column(self):
@@ -114,14 +115,14 @@ class MistDashboard(Window):
     def init_slider_column(self):
         self.slider_pane = Box(
             name="dashboard-slider-pane",
-            orientation="v",
-            spacing=14
+            orientation="h",
+            spacing=16
         )
 
         # top toggles container
         self.toggle_header = Box(
-            orientation="h",
-            spacing=8
+            orientation="v",
+            spacing=12
         )
         self.vol_toggle = Button(label="Vol")
         self.brightness_toggle = Button(label="Brightness")
@@ -134,20 +135,21 @@ class MistDashboard(Window):
         # shared scale component
         self.shared_scale = Scale(
             name="dashboard-shared-slider",
-            orientation="horizontal",
+            orientation="vertical",
             min=0,
             max=100,
-            value=50
+            value=65
         )
 
         self.slider_pane.pack_start(self.toggle_header, False, False, 0)
-        self.slider_pane.pack_end(self.shared_scale, True, False, 0)
+        self.slider_pane.pack_start(self.shared_scale, True, True, 0)
 
         self.main_layout.pack_start(self.slider_pane, False, False, 0)
 
     def move_and_reveal(self, x, y):
         # reposition surface coordinate bounding points safely before rendering canvas
-        self.move(int(x), int(y))
+        self.set_margin_left(int(x))
+        self.set_margin_top(int(y))
         self.set_visible(True)
 
     def close_widget(self):

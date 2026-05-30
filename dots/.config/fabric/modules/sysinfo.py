@@ -38,22 +38,25 @@ class SystemInfoModule(Box):
 
         # resouce metrics
         self.ram_bar = Gtk.ProgressBar(name="sys-progress")
-        self.ram_label = Label(" : ", h_align="start")
+        self.ram_label = Label(" : ", h_align="start", name="sys-text-dim")
 
         self.cpu_bar = Gtk.ProgressBar(name="sys-progress")
-        self.cpu_label = Label(" : ", h_align="start")
+        self.cpu_label = Label(" : ", h_align="start", name="sys-text-dim")
         
         self.gpu_bar = Gtk.ProgressBar(name="sys-progress")
-        self.gpu_label = Label("󰇺 : ", h_align="start")
+        self.gpu_label = Label("󰇺 : ", h_align="start", name="sys-text-dim")
 
         self.disk_bar = Gtk.ProgressBar(name="sys-progress")
-        self.disk_label = Label("󰋊 : ", h_align="start")
+        self.disk_label = Label("󰋊 : ", h_align="start", name="sys-text-dim")
 
         # pack items according to layout
         self.append_metric_slot(self.ram_bar, self.ram_label)
         self.append_metric_slot(self.cpu_bar, self.cpu_label)
         self.append_metric_slot(self.gpu_bar, self.gpu_label)
         self.append_metric_slot(self.disk_bar, self.disk_label)
+
+        # schedule the timing thread loop to run immediately
+        GLib.timeout_add(1000, self.poll_hardware_metrics)
 
 
     def append_metric_slot(self, bar_widget, label_widget):
@@ -73,26 +76,35 @@ class SystemInfoModule(Box):
 
     def poll_hardware_metrics(self):
         # RAM tracker
-        ram = psutil.virtual_memory()
-        ram_used_gib = ram.used / (1024 ** 3)
-        ram_total_gib = ram.total / (1024 ** 3)
-        self.ram_bar.set_fraction(ram.percent / 100.0)
-        self.ram_label.set_text(f"󰘚  {ram_used_gib:.1f} GiB / {ram_total_gib} GiB")
+        try:
+            ram = psutil.virtual_memory()
+            ram_used_gib = ram.used / (1024 ** 3)
+            ram_total_gib = ram.total / (1024 ** 3)
+            self.ram_bar.set_fraction(ram.percent / 100.0)
+            self.ram_label.set_text(f"󰘚  {ram_used_gib:.1f} GiB / {ram_total_gib} GiB")
+        except:
+            pass
 
         # CPU tracker
-        cpu_percent = psutil.cpu_percent()
-        cpu_temp = self.get_cpu_thermal()
-        self.cpu_bar.set_fraction(cpu_percent / 100.0)
-        self.cpu_label.set_text(f" {cpu_percent}% | 󰔏 {cpu_temp}°C")
+        try:
+            cpu_percent = psutil.cpu_percent()
+            cpu_temp = self.get_cpu_thermal()
+            self.cpu_bar.set_fraction(cpu_percent / 100.0)
+            self.cpu_label.set_text(f" {cpu_percent}% | 󰔏 {cpu_temp}°C")
+        except:
+            pass
 
         # GPU tracker block here:
 
         # disk tracker (root partition)
-        disk = psutil.disk_usage('/')
-        disk_used_gib = disk.used / (1024 ** 3)
-        disk_total_gib = disk.total / (1024 ** 3)
-        self.disk_bar.set_fraction(disk.percent / 100.0)
-        self.disk_label.set_text(f"󰋊 : {disk_used_gib:.1f} GiB / {disk_total_gib} GiB")
+        try:
+            disk = psutil.disk_usage('/')
+            disk_used_gib = disk.used / (1024 ** 3)
+            disk_total_gib = disk.total / (1024 ** 3)
+            self.disk_bar.set_fraction(disk.percent / 100.0)
+            self.disk_label.set_text(f"󰋊 : {disk_used_gib:.1f} GiB / {disk_total_gib} GiB")
+        except:
+            pass
 
         return True     # retains timeout activation cycle
 

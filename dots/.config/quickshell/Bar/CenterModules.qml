@@ -49,6 +49,7 @@ Pill {
 	id: backendIpcStream
 
 	function sendSignal(message) {
+	    running = false
 	    command = ["sh", "-c", "echo '" + message + "' | nc -U /tmp/mist_dashboard.sock"]
 	    running = true
 	}
