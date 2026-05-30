@@ -23,7 +23,6 @@ Pill {
 		hoverLatencyTimer.start();
 	    } else {
 		hoverLatencyTimer.stop();
-
 		backendIpcStream.sendSignal("CLOSE");
 	    }
 	}
@@ -52,13 +51,6 @@ Pill {
 	function sendSignal(message) {
 	    command = ["sh", "-c", "echo '" + message + "' | nc -U /tmp/mist_dashboard.sock"]
 	    running = true
-	}
-
-	// automatic self-clearing engine
-	onRunningChanged: {
-	    if (!running) {
-		command = []
-	    }
 	}
     }
 }

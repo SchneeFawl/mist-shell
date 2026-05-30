@@ -1,4 +1,3 @@
-
 tree.txt
 packages.md
 
@@ -17,6 +16,7 @@ __pycache__/
 venv/
 ENV/
 *.egg-info/
+.python-version
 
 # component layout build/LSP artifacts
 .luarc.json
