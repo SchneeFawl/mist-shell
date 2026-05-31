@@ -81,7 +81,7 @@ class SystemInfoModule(Box):
             ram_used_gib = ram.used / (1024 ** 3)
             ram_total_gib = ram.total / (1024 ** 3)
             self.ram_bar.set_fraction(ram.percent / 100.0)
-            self.ram_label.set_text(f"󰘚  {ram_used_gib:.1f} GiB / {ram_total_gib} GiB")
+            self.ram_label.set_text(f"󰘚  {ram_used_gib:.2f} GiB / {ram_total_gib:.2f} GiB")
         except:
             pass
 
@@ -102,7 +102,7 @@ class SystemInfoModule(Box):
             disk_used_gib = disk.used / (1024 ** 3)
             disk_total_gib = disk.total / (1024 ** 3)
             self.disk_bar.set_fraction(disk.percent / 100.0)
-            self.disk_label.set_text(f"󰋊 : {disk_used_gib:.1f} GiB / {disk_total_gib} GiB")
+            self.disk_label.set_text(f"󰋊 : {disk_used_gib:.2f} GiB / {disk_total_gib:.2f} GiB")
         except:
             pass
 

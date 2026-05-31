@@ -20,26 +20,37 @@ Pill {
 
 	onContainsMouseChanged: {
 	    if (containsMouse) {
+		closeGraceTimer.stop();
 		hoverLatencyTimer.start();
 	    } else {
 		hoverLatencyTimer.stop();
-		backendIpcStream.sendSignal("CLOSE");
+		closeGraceTimer.start();
 	    }
+	}
+    }
+
+    // grace period window: allows the cursor to safely traverse teh gap b/w bar and widget
+    Timer {
+	id: closeGraceTimer
+	interval: 1000
+	repeat: false
+	onTriggered: {
+	    backendIpcStream.sendSignal("CLOSE");
 	}
     }
 
     // hover delay config
     Timer {
 	id: hoverLatencyTimer
-	interval: 700
+	interval: 800
 	repeat: false
 	onTriggered: {
 	    // map relative local coordinates to absolute screen canvas space
 	    var globalCoordinates = centerMediaPill.mapToItem(null, 0, 0);
 	    var targetX = globalCoordinates.x;
-	    var targetY = globalCoordinates.y + centerMediaPill.height + 12;	// 12px vertical gap
+	    var targetY = globalCoordinates.y + centerMediaPill.height + 6;	// 6px vertical gap from the pill
 
-	    var formatPacket = "OPEN: " + Math.round(targetX) + "," + Math.round(targetY);
+	    var formatPacket = "OPEN: " + Math.round(targetX) + "," + Math.round(targetY) + "," + Math.round(centerMediaPill.width);
 	    backendIpcStream.sendSignal(formatPacket)
 	}
     }
@@ -50,7 +61,7 @@ Pill {
 
 	function sendSignal(message) {
 	    running = false
-	    command = ["sh", "-c", "echo '" + message + "' | nc -U /tmp/mist_dashboard.sock"]
+	    command = ["sh", "-c", "echo '" + message + "' | nc -U -N /tmp/mist_dashboard.sock"]
 	    running = true
 	}
     }

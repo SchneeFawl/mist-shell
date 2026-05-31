@@ -1,13 +1,13 @@
 import os
-import sys
 import socket
 import threading
 import gi
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, GLib
+gi.require_version("GtkLayerShell", "0.1")
+from gi.repository import Gtk, GLib, Gdk, GtkLayerShell
 
 from fabric import Application
-from fabric.widgets.window import Window
+from fabric.widgets.wayland import WaylandWindow as Window
 from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 from fabric.widgets.button import Button
@@ -25,14 +25,25 @@ class MistDashboard(Window):
             visible=False,
             all_visible=False,
         )
+        GtkLayerShell.set_exclusive_zone(self, -1)
         self.app = app
         self.set_name("mist-dashboard-root")
+
+        # critical: strip all os borders
+        # self.set_decorated(False)
+
+        # tracker to see if mouse has successfully entered the widget boundaries
+        self.mouse_is_inside = False
 
         self.main_layout = Box(
             name="dashboard-main-container",
             orientation="h",
-            spacing=16
+            spacing=18
         )
+
+        # connect native hardware signal bridges to track direct pointer interaction
+        self.connect("enter-notify-event", self.on_window_hover_enter)
+        self.connect("leave-notify-event", self.on_window_hover_leave)
 
         # 5 separate columns
         self.init_sidebar_column()
@@ -124,9 +135,9 @@ class MistDashboard(Window):
             orientation="v",
             spacing=12
         )
-        self.vol_toggle = Button(label="Vol")
-        self.brightness_toggle = Button(label="Brightness")
-        self.mic_toggle = Button(label="Mic")
+        self.vol_toggle = Button(label=" ", tooltip_text="Volume")
+        self.brightness_toggle = Button(label="󰃟 ", tooltip_text="Brightness")
+        self.mic_toggle = Button(label=" ", tooltip_text="Microphone Volume")
 
         self.toggle_header.pack_start(self.vol_toggle, True, True, 0)
         self.toggle_header.pack_start(self.brightness_toggle, True, True, 0)
@@ -138,7 +149,8 @@ class MistDashboard(Window):
             orientation="vertical",
             min=0,
             max=100,
-            value=65
+            value=65,
+            inverted=True
         )
 
         self.slider_pane.pack_start(self.toggle_header, False, False, 0)
@@ -146,10 +158,49 @@ class MistDashboard(Window):
 
         self.main_layout.pack_start(self.slider_pane, False, False, 0)
 
-    def move_and_reveal(self, x, y):
+    
+    # signal triggers tracking mouse pointer coords directly
+    def on_window_hover_enter(self, widget, event):
+        self.mouse_is_inside = True
+
+    def on_window_hover_leave(self, widget, event):
+        if event.detail == Gdk.NotifyType.INFERIOR:
+            return
+        
+        """
+        crossing event representing a real leave must occur at the window's boundary
+        if the coordinates are far from any edge, it means the leave was triggered
+        by an overlapping window (like a tooltip) grabbing the pointer
+        """
+        alloc = self.get_allocation()
+        tolerance = 10
+        on_edge = (
+            event.x <= tolerance or 
+            event.x >= (alloc.width - tolerance) or 
+            event.y <= tolerance or 
+            event.y >= (alloc.height - tolerance)
+        )
+        
+        if not on_edge:
+            return  # ignore the leave event since it didnt happen at the window boundaries
+            
+        self.mouse_is_inside = False
+        self.set_visible(False)
+
+    def handle_external_close_signal(self):
+        # only accept the qml close req if mouse hasnt made it inside yet
+        if not self.mouse_is_inside:
+            self.set_visible(False)
+
+    def move_and_reveal(self, x, y, pill_width=0.0):
         # reposition surface coordinate bounding points safely before rendering canvas
-        self.set_margin_left(int(x))
-        self.set_margin_top(int(y))
+        if pill_width > 0:
+            _, natural_size = self.get_preferred_size()
+            widget_width = natural_size.width
+            if widget_width > 1:
+                x = x + (pill_width / 2) - (widget_width / 2)
+        
+        self.margin = (int(max(0, y)), 0, 0, int(max(0, x)))
         self.set_visible(True)
 
     def close_widget(self):
@@ -175,10 +226,13 @@ def start_ipc_listener(window_instance):
 
             if message.startswith("OPEN"):
                 coords = message.split(":")[1].split(",")
+                x = float(coords[0])
+                y = float(coords[1])
+                pill_width = float(coords[2]) if len(coords) > 2 else 0.0
                 # safely schedule geometry modifications inside the main thread loop
-                GLib.idle_add(window_instance.move_and_reveal, coords[0], coords[1])
+                GLib.idle_add(window_instance.move_and_reveal, x, y, pill_width)
             elif message == "CLOSE":
-                GLib.idle_add(window_instance.close_widget)
+                GLib.idle_add(window_instance.handle_external_close_signal)
         conn.close()
 
 if __name__ == "__main__":
