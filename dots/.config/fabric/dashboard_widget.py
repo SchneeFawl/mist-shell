@@ -12,6 +12,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 from fabric.widgets.button import Button
 from fabric.widgets.scale import Scale
+from fabric.utils import get_relative_path
 
 from modules.sysinfo import SystemInfoModule
 
@@ -118,7 +119,7 @@ class MistDashboard(Window):
             spacing=8
         )
         
-        self.gtk_calendar = Gtk.Calendar()
+        self.gtk_calendar = Gtk.Calendar(name="dashboard-calendar")
         self.calendar_pane.pack_start(self.gtk_calendar, True, True, 0)
 
         self.main_layout.pack_start(self.calendar_pane, False, False, 0)
@@ -245,6 +246,8 @@ if __name__ == "__main__":
         daemon=True
     )
     ipc_thread.start()
+
+    app.set_stylesheet_from_file(get_relative_path("./style.css"))
 
     app.run()
 

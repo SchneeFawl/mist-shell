@@ -20,7 +20,7 @@ Item {
         color: themePalette.pillBackground
         border.color: pillRoot.customBorderColor
         border.width: 1
-        radius: 10
+        radius: 12
 
         Behavior on border.color { ColorAnimation { duration: 175 } }
 
