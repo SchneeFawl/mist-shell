@@ -6,17 +6,17 @@ import QtQuick.Layouts
 PanelWindow {       // qmllint disable
     id: barWindow
 
-    required property var targetScreen
+    required property var modelData
     property string layoutStyle: "top-fragmented"
 
-    screen: targetScreen
+    screen: modelData
     anchors {
         top: true
         left: true
         right: true
     }
 
-    height: 40
+    implicitHeight: 40
     exclusiveZone: 40
     color: "transparent"
 

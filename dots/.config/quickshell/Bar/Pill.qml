@@ -5,7 +5,7 @@ Item {
     id: pillRoot
     // anything inside Pill will go into contentLayout
     default property alias pillContent: contentLayout.data
-    property int innerPadding: 14
+    property int innerPadding: variables.pillInnerPadding
     property int pillSpacing: 8
     property color customBorderColor: themePalette.pillBorder
 

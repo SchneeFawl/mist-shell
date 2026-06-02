@@ -4,7 +4,6 @@ import QtQuick.Layouts
 
 RowLayout {
     spacing: 2
-    Layout.alignment: Qt.AlignHCenter
 
     Repeater {
         model: Hyprland.workspaces
@@ -15,7 +14,6 @@ RowLayout {
 
             implicitWidth: 24
             implicitHeight: 24
-            Layout.alignment: Qt.AlignVCenter
 
             Rectangle {         // outer ring of the Repeater
                 id: outerRing

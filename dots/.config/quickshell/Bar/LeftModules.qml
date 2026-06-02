@@ -2,8 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 
 RowLayout {
-    spacing: 12
-    Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+    spacing: variables.pillOuterSpacing
 
     // custom logo
     Pill {

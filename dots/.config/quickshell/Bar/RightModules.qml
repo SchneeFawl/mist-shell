@@ -1,22 +1,19 @@
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
 
 RowLayout {
-    spacing: 12
-    Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+    spacing: variables.pillOuterSpacing
 
+    // system tray (placeholder for now)
     Pill {
-        innerPadding: 12
-        BarText {      // temp representation
-            text: "󰅟 󰋋 󱚽"
-            font.pixelSize: 18
-            Layout.alignment: Qt.AlignVCenter
-        }
+        innerPadding: variables.pillInnerPadding
+        SystemTray {}
     }
 
     // clock display widget
     Pill {
-        innerPadding: 12
+        innerPadding: variables.pillInnerPadding
         pillSpacing: 6
 
         Timer {
@@ -34,18 +31,15 @@ RowLayout {
 
         BarText {
             id: timeDisplay
-            Layout.alignment: Qt.AlignCenter
         }
         // BarText { text: "•"; color: themePalette.textSub; Layout.alignment: Qt.AlignCenter }
         BarText {
             id: dayDisplay
             isSubText: true
-            Layout.alignment: Qt.AlignCenter
         }
         BarText {
             id: dateDisplay
             isSubText: true
-            Layout.alignment: Qt.AlignCenter
         }
     }
 
@@ -65,7 +59,7 @@ RowLayout {
                 color: themePalette.activeAccent
                 font.pixelSize: 20
             }
-            onClicked: console.log("run: nm-connection-editor")
+            onClicked: { Quickshell.execDetached(["nm-connection-editor"]) }
         }
 
         MouseArea {     // audio control
@@ -79,7 +73,7 @@ RowLayout {
                 color: themePalette.activeAccent
                 font.pixelSize: 20
             }
-            onClicked: console.log("run: pavucontrol")
+            onClicked: { Quickshell.execDetached(["pavucontrol"]) }
         }
 
         MouseArea {     // power actions dashboard

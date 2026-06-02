@@ -1,4 +1,5 @@
 //@ pragma IconTheme Papirus
+//@ pragma UseQApplication
 import Quickshell
 import QtQuick
 import "Bar"
@@ -12,7 +13,7 @@ ShellRoot {
     property bool dndActive: false
 
     Colors { id: themePalette }
-    //Variables { id: variables }
+    Variables { id: variables }
     SystemStats { id: sysStats }
 
     // scrreen tracking window instantiation
@@ -22,7 +23,6 @@ ShellRoot {
         delegate: Component {
             Bar {
                 // pass system model bounds down to individual monitgor frames
-                targetScreen: modelData
                 layoutStyle: root.activeBarLayout
             }
         }
