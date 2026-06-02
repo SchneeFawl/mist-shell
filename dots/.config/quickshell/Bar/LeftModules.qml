@@ -7,9 +7,6 @@ RowLayout {
 
     // custom logo
     Pill {
-        innerPadding: 12
-        pillSpacing: 6
-
         BarText {
             text: "󱄅"   // I DO NOT USE NIX BTW
             color: themePalette.activeAccent
@@ -52,3 +49,4 @@ RowLayout {
         Workspaces {}
     }
 }
+

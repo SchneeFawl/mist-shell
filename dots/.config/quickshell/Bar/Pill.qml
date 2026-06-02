@@ -18,18 +18,17 @@ Item {
         id: bgRect
         anchors.fill: parent
         color: themePalette.pillBackground
-        border.color: pillRoot.customBorderColor
-        border.width: 1
+        border.width: 0     // no border
         radius: 12
 
-        Behavior on border.color { ColorAnimation { duration: 175 } }
+        // Behavior on border.color { ColorAnimation { duration: 175 } }
 
-	RowLayout {
-	    id: contentLayout
-	    anchors.fill: parent
-	    anchors.leftMargin: pillRoot.innerPadding
-	    anchors.rightMargin: pillRoot.innerPadding
-	    spacing: pillRoot.pillSpacing
-	}
+        RowLayout {
+            id: contentLayout
+            anchors.fill: parent
+            anchors.leftMargin: pillRoot.innerPadding
+            anchors.rightMargin: pillRoot.innerPadding
+            spacing: pillRoot.pillSpacing
+        }
     }
 }

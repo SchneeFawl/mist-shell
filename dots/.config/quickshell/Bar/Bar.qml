@@ -24,27 +24,24 @@ PanelWindow {       // qmllint disable
     exclusionMode: ExclusionMode.Normal     // optinally: ExclusionMode.Exclude
     WlrLayershell.layer: WlrLayer.Top
 
-    // visual background container
-    Rectangle {
+    property bool popupVisible: false
+
+    RowLayout {
         anchors.fill: parent
-        color: "transparent"
+        anchors.leftMargin: 16
+        anchors.rightMargin: 16
+        spacing: 0
 
-        RowLayout {
-            anchors.fill: parent
-            anchors.leftMargin: 16
-            anchors.rightMargin: 16
-            spacing: 0
+        // modules here
+        LeftModules {}
 
-            // modules here
-            LeftModules { Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter }
+        Item { Layout.fillWidth: true }
 
-            Item { Layout.fillWidth: true }
+        RightModules {}
+    }
 
-            RightModules { Layout.alignment: Qt.AlignRight | Qt.AlignVCenter }
-        }
-
-        CenterModules {
-            anchors.centerIn: parent
-        }
+    CenterModules {
+        id: centerModules
+        anchors.centerIn: parent
     }
 }

@@ -25,17 +25,28 @@ RowLayout {
             repeat: true
             triggeredOnStart: true
             onTriggered: {
-                var d = new Date()
-                timeDisplay.text = d.toLocaleTimeString(Qt.locale(), "hh:mm AP")
-                dateDisplay.text = Qt.formatDate(d, "dd/M")
-                dayDisplay.text = Qt.formatDate(d, "dddd")
+                var d = new Date();
+                timeDisplay.text = d.toLocaleTimeString(Qt.locale(), "hh:mm AP");
+                dateDisplay.text = Qt.formatDate(d, "dd/M");
+                dayDisplay.text = Qt.formatDate(d, "dddd");
             }
         }
 
-        BarText { id: timeDisplay; Layout.alignment: Qt.AlignCenter }
+        BarText {
+            id: timeDisplay
+            Layout.alignment: Qt.AlignCenter
+        }
         // BarText { text: "•"; color: themePalette.textSub; Layout.alignment: Qt.AlignCenter }
-        BarText { id: dayDisplay; isSubText: true; Layout.alignment: Qt.AlignCenter }
-        BarText { id: dateDisplay; isSubText: true; Layout.alignment: Qt.AlignCenter }
+        BarText {
+            id: dayDisplay
+            isSubText: true
+            Layout.alignment: Qt.AlignCenter
+        }
+        BarText {
+            id: dateDisplay
+            isSubText: true
+            Layout.alignment: Qt.AlignCenter
+        }
     }
 
     // core desktop feature handlers
@@ -86,3 +97,4 @@ RowLayout {
         }
     }
 }
+

@@ -16,3 +16,4 @@ QtObject {
     property color inactiveAccent: "#24283B"    // sleeping components
     property color statusVibrant: "#BB9AF7"     // media text elements
 }
+

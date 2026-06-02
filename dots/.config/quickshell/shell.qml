@@ -2,7 +2,7 @@
 import Quickshell
 import QtQuick
 import "Bar"
-// import "scripts"
+import "scripts"
 
 ShellRoot {
     id: root
@@ -11,9 +11,9 @@ ShellRoot {
     property string activeBarLayout: "top-fragmented"  // OPTIONS: "vertical-sidebar", "minimal"
     property bool dndActive: false
 
-    // shared state management objects:
     Colors { id: themePalette }
-    //SystemStats { id: sysStats }
+    //Variables { id: variables }
+    SystemStats { id: sysStats }
 
     // scrreen tracking window instantiation
     Variants {
@@ -21,9 +21,9 @@ ShellRoot {
 
         delegate: Component {
             Bar {
-            // pass system model bounds down to individual monitgor frames
-            targetScreen: modelData
-            layoutStyle: root.activeBarLayout
+                // pass system model bounds down to individual monitgor frames
+                targetScreen: modelData
+                layoutStyle: root.activeBarLayout
             }
         }
     }

@@ -125,13 +125,6 @@ hl.window_rule({
 
 hl.window_rule({
     match = {
-        class = "^(discord)$"
-    },
-    -- opacity = "0.9 0.8"
-})
-
-hl.window_rule({
-    match = {
         class = "^(org.kde.dolphin)$"
     },
     opacity = "0.85 0.75"
@@ -141,7 +134,7 @@ hl.window_rule({
     match = {
         class = "^(zen)$"       -- zen browser
     },
-    opacity = "0.92 0.82 1"
+    opacity = "1 0.82 1"
 })
 
 hl.window_rule({
@@ -155,7 +148,7 @@ hl.window_rule({
     match = {
         class = "^(kitty)$"
     },
-    opacity = "0.85 0.73"
+    opacity = "1 0.8"
 })
 
 -- universal system dialog rule
