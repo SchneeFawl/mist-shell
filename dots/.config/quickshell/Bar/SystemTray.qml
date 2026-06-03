@@ -47,59 +47,10 @@ RowLayout {
                 onCleared: customMenuPopup.visible = false
             }
 
-            PopupWindow {
+            SystemTrayMenu {
                 id: customMenuPopup
-                anchor {
-                    item: trayIcon
-                    edges: Edges.Bottom | Edges.Left        // qmllint disable missing-type
-                    gravity: Edges.Bottom | Edges.Right     // qmllint disable missing-type
-                }
-                visible: false
-                color: "transparent"
-                implicitWidth: trayItemsColumn.implicitWidth + 16
-                implicitHeight: trayItemsColumn.implicitHeight + 16
-                grabFocus: true
-
-                QsMenuOpener {
-                    id: menuOpener
-                    menu: modelData.menu
-                }
-
-                WrapperRectangle {
-                    anchors.fill: parent
-                    color: themePalette.pillBackground
-                    border.color: themePalette.pillBorder
-                    border.width: 2
-                    radius: 8
-                    margin: { left: 5 }
-
-                    Column {
-                        id: trayItemsColumn
-                        anchors.fill: parent
-                        anchors.margins: 8
-
-                        Repeater {
-                            model: menuOpener.children
-
-                            delegate: Text {
-                                text: modelData.text
-                                font.pixelSize: 12
-                                color: themePalette.textMain
-
-                                MouseArea {
-                                    anchors.fill: parent
-                                    hoverEnabled: true
-                                    acceptedButtons: Qt.LeftButton
-
-                                    onClicked: mouse => {
-                                        modelData.triggered();
-                                        customMenuPopup.visible = false;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                trayIcon: trayIcon
+                trayModelData: modelData
             }
 
             MouseArea {

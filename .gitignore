@@ -40,3 +40,4 @@ scratchpad.*
 local-test.sh
 .obsidian-docs/
 .obsidian/
+.no-vibe
