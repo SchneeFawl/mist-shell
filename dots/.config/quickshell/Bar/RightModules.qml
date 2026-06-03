@@ -7,8 +7,9 @@ RowLayout {
 
     // system tray (placeholder for now)
     Pill {
-        innerPadding: variables.pillInnerPadding
-        SystemTray {}
+        visible: sysTray.implicitWidth > 0
+        innerPadding: visible ? variables.pillInnerPadding : 0
+        SystemTray { id: sysTray }
     }
 
     // clock display widget
