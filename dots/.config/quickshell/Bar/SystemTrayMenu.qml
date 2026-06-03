@@ -1,5 +1,6 @@
 import Quickshell
 import QtQuick
+import QtQuick.Layouts
 import Quickshell.Widgets
 
 PopupWindow {
@@ -31,7 +32,7 @@ PopupWindow {
         radius: 8
         margin: { left: 5 }
 
-        Column {
+        ColumnLayout {
             id: trayItemsColumn
             anchors.fill: parent
             anchors.margins: 8
@@ -41,11 +42,11 @@ PopupWindow {
 
                 delegate: Item {
                     id: menuItemContainer
-                    implicitWidth: modelData.isSeparator ? 0 : menuItemText.implicitWidth + 32
+                    Layout.fillWidth: true
+                    implicitWidth: modelData.isSeparator ? 0 : menuItemText.implicitWidth + 20
                     implicitHeight: modelData.isSeparator ? 8 : 20
 
-                    // separator line
-                    Rectangle {
+                    Rectangle {     // separator line
                         visible: modelData.isSeparator
                         anchors.verticalCenter: parent.verticalCenter
                         width: parent.width
@@ -53,23 +54,41 @@ PopupWindow {
                         color: "#45475a"
                     }
 
-                    Text {
-                        id: menuItemText
-                        visible: !modelData.isSeparator
-                        anchors.verticalCenter: parent.verticalCenter
-                        text: modelData.text
-                        font.pixelSize: 12
-                        color: themePalette.textMain
+                    RowLayout {
+                        spacing: 8
+
+                        IconImage {
+                            id: menuItemIcon
+                            source: modelData.icon
+                            visible: modelData.icon ? true : false
+                            implicitSize: 14
+                            Layout.alignment: Qt.AlignVCenter
+                        }
+
+                        Text {         // menu item text
+                            id: menuItemText
+                            visible: !modelData.isSeparator
+                            Layout.alignment: Qt.AlignVCenter   // might not be necessary
+                            text: modelData.text
+                            font.pixelSize: 12
+                            color: themePalette.textMain
+                        }
                     }
 
-                    MouseArea {
+                    MouseArea {       // click handler for the menu items
                         anchors.fill: parent
                         hoverEnabled: true
                         acceptedButtons: Qt.LeftButton
 
                         onClicked: mouse => {
-                            modelData.triggered();
-                            customMenuPopup.visible = false;
+                            if (modelData.isSeparator) {
+                                /*  can put customMenuPopup.visible = true; but its
+                                    not necessary since it stays true anyways */
+                            }
+                            else if (!modelData.isSeparator) {
+                                modelData.triggered();
+                                customMenuPopup.visible = false;
+                            }
                         }
                     }
                 }
