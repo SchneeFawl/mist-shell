@@ -25,17 +25,38 @@ PopupWindow {
     }
 
     WrapperRectangle {
-        anchors.fill: parent
+        id: menuItemWrapper
+        //anchors.fill: parent
         color: themePalette.pillBackground
         border.color: themePalette.pillBorder
         border.width: 2
+        width: visible ? parent.width : 0
+        height: visible ? parent.height : 0
         radius: 8
         margin: { left: 5 }
+        clip: true
+
+        Behavior on height {
+            NumberAnimation {
+                duration: 150
+                easing.type: Easing.Bezier
+                easing.bezierCurve: [0.38, 0.8, 0.22, 1, 1, 1]  // material ui curve
+            }
+        }
+
+        Behavior on width {
+            NumberAnimation {
+                duration: 150
+                easing.type: Easing.Bezier
+                easing.bezierCurve: [0.34, 0.8, 0.22, 1, 1, 1]
+            }
+        }
 
         ColumnLayout {
             id: trayItemsColumn
             anchors.fill: parent
             anchors.margins: 8
+            spacing: 2
 
             Repeater {
                 model: menuOpener.children
@@ -44,7 +65,23 @@ PopupWindow {
                     id: menuItemContainer
                     Layout.fillWidth: true
                     implicitWidth: modelData.isSeparator ? 0 : menuItemText.implicitWidth + 20
-                    implicitHeight: modelData.isSeparator ? 8 : 20
+                    implicitHeight: modelData.isSeparator ? 6 : 28
+
+                    Rectangle {     // hover rectangle
+                        id: menuItemRect
+                        visible: true
+                        opacity: (delegateMouseHandler.containsMouse && !modelData.isSeparator) ? 1.0 : 0
+                        anchors.fill: parent
+                        color: '#21212d'
+                        radius: menuItemWrapper.radius
+
+                        Behavior on opacity {
+                            NumberAnimation {
+                                duration: 150
+                                easing.type: Easing.OutCubic
+                            }
+                        }
+                    }
 
                     Rectangle {     // separator line
                         visible: modelData.isSeparator
@@ -54,28 +91,32 @@ PopupWindow {
                         color: "#45475a"
                     }
 
-                    RowLayout {
-                        spacing: 8
+                    Row {     // (icon + text) layout
+                        spacing: menuItemText.leftPadding
+                        leftPadding: 4                      // 4+4=8
+                        anchors.verticalCenter: parent.verticalCenter
 
                         IconImage {
                             id: menuItemIcon
                             source: modelData.icon
                             visible: modelData.icon ? true : false
                             implicitSize: 14
-                            Layout.alignment: Qt.AlignVCenter
+                            anchors.verticalCenter: parent.verticalCenter
                         }
 
-                        Text {         // menu item text
+                        Text {       // menu item text
                             id: menuItemText
                             visible: !modelData.isSeparator
-                            Layout.alignment: Qt.AlignVCenter   // might not be necessary
+                            anchors.verticalCenter: parent.verticalCenter
                             text: modelData.text
                             font.pixelSize: 12
                             color: themePalette.textMain
+                            leftPadding: 4
                         }
                     }
 
-                    MouseArea {       // click handler for the menu items
+                    MouseArea {       // move events handler for the menu items
+                        id: delegateMouseHandler
                         anchors.fill: parent
                         hoverEnabled: true
                         acceptedButtons: Qt.LeftButton
@@ -90,6 +131,13 @@ PopupWindow {
                                 customMenuPopup.visible = false;
                             }
                         }
+
+                        // onEntered: {
+                        //     if (!modelData.isSeparator && containsMouse) {
+                        //         menuItemRect.visible = true
+                        //     }
+                        // }
+                        // onExited: menuItemRect.visible = false
                     }
                 }
             }
