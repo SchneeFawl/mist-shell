@@ -9,7 +9,9 @@ RowLayout {
     Pill {
         visible: sysTray.implicitWidth > 0
         innerPadding: visible ? variables.pillInnerPadding : 0
-        SystemTray { id: sysTray }
+        SystemTray {
+            id: sysTray
+        }
     }
 
     // clock display widget
@@ -49,20 +51,6 @@ RowLayout {
         innerPadding: 4
         pillSpacing: 2
 
-        MouseArea {     // network
-            implicitWidth: 30
-            Layout.fillHeight: true
-            cursorShape: Qt.PointingHandCursor
-
-            BarText {
-                anchors.centerIn: parent
-                text: "󰖩"
-                color: themePalette.activeAccent
-                font.pixelSize: 20
-            }
-            onClicked: { Quickshell.execDetached(["nm-connection-editor"]) }
-        }
-
         MouseArea {     // audio control
             implicitWidth: 30
             Layout.fillHeight: true
@@ -74,7 +62,9 @@ RowLayout {
                 color: themePalette.activeAccent
                 font.pixelSize: 20
             }
-            onClicked: { Quickshell.execDetached(["pavucontrol"]) }
+            onClicked: {
+                Quickshell.execDetached(["pavucontrol"]);
+            }
         }
 
         MouseArea {     // power actions dashboard
@@ -92,4 +82,3 @@ RowLayout {
         }
     }
 }
-
