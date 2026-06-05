@@ -2,6 +2,8 @@ import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Layouts
 
+// qmllint disable unqualified
+
 RowLayout {
     spacing: 2
 
