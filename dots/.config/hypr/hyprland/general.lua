@@ -28,22 +28,22 @@ hl.device({
 -----------------------
 hl.config({
     general = {
-        gaps_in  = 4,
-        gaps_out = 6,
+        gaps_in          = 4,
+        gaps_out         = 6,
 
-        border_size = 2,
+        border_size      = 2,
 
-        col = {
-            active_border   = { colors = {"rgba(33ccffee)", "rgba(00ff99ee)"}, angle = 45 },
+        col              = {
+            active_border   = { colors = { "rgba(33ccffee)", "rgba(00ff99ee)" }, angle = 45 },
             inactive_border = "rgba(595959aa)",
         },
 
         -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
         resize_on_border = false,
 
-        allow_tearing = false,
+        allow_tearing    = false,
 
-        layout = "dwindle",
+        layout           = "dwindle",
     },
 
     decoration = {
@@ -62,11 +62,11 @@ hl.config({
         },
 
         blur = {
-            enabled   = true,
+            enabled           = true,
             new_optimizations = true,
-            size      = 7,
-            passes    = 2,
-            vibrancy  = 0.1696,
+            size              = 6,
+            passes            = 2,
+            vibrancy          = 0.1696,
         },
     },
 
@@ -83,15 +83,15 @@ hl.config({
 -- INPUT CONFIG
 hl.config({
     input = {
-        kb_layout  = "us",
+        kb_layout          = "us",
         numlock_by_default = true,
 
-        follow_mouse = 1,
-        force_no_accel = false,
-        sensitivity = 0,
+        follow_mouse       = 1,
+        force_no_accel     = false,
+        sensitivity        = 0,
         -- accel_profile = "flat",
 
-        touchpad = {
+        touchpad           = {
             natural_scroll = true,
         },
     },

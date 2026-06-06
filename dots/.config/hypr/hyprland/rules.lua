@@ -16,6 +16,17 @@ hl.window_rule({
     no_focus = true,
 })
 
+hl.window_rule( {
+    match = { class = "^(xwaylandvideobridge)$" },
+
+    no_initial_focus = true,
+    no_focus = true,
+    no_anim = true,
+    no_blur = true,
+    max_size = { 1, 1 },
+    opacity = 0.0,
+})
+
 -- disabling blur for xwayland context menus
 hl.window_rule({
     match = { class = "^()$", title = "^()$"},
@@ -121,13 +132,6 @@ hl.window_rule({
         class = "^(code)$"
     },
     -- opacity = "0.9 0.82"
-})
-
-hl.window_rule({
-    match = {
-        class = "^(org.kde.dolphin)$"
-    },
-    opacity = "0.85 0.75"
 })
 
 hl.window_rule({
