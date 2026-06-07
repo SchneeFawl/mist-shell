@@ -4,7 +4,7 @@ import "./components"
 
 RowLayout {
 
-    property int activeTab
+    property int activeTab: 1           // defaults to media mode
 
     id: dashboardColumnsLayout
     spacing: 5
@@ -12,6 +12,7 @@ RowLayout {
     anchors.fill: parent
     clip: true
 
+    // navigation panel
     ColumnRectangle {
         Layout.preferredWidth: 50
         color: "transparent"
@@ -21,8 +22,14 @@ RowLayout {
         }
     }
 
+    // main content
     ColumnRectangle {
         Layout.fillWidth: true
+        color: "transparent"
+
+        MainContent {
+            activeTab: dashboardColumnsLayout.activeTab
+        }
     }
 
     ColumnRectangle {

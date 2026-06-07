@@ -4,7 +4,7 @@ import "components"
 
 Rectangle {
 
-    property int activeTab: 0
+    property int activeTab: 1
     signal tabSelected(int index)
 
     id: navWrapper
