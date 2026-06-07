@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Layouts
 import Quickshell
 
 // qmllint disable unqualified
@@ -19,18 +20,18 @@ PopupWindow {
         gravity: Edges.Bottom                       // qmllint disable missing-type
     }
 
-    implicitWidth: 700
-    implicitHeight: 350
+    implicitWidth: 1000
+    implicitHeight: 400
 
     Rectangle {
         id: dashboardBg
 
-        implicitWidth: centerPill ? (active ? 700 : centerPill.width) : 0
-        implicitHeight: centerPill ? (active ? 350 : centerPill.height) : 0
+        implicitWidth: centerPill ? (active ? dashboardPopup.implicitWidth : centerPill.width) : 0
+        implicitHeight: centerPill ? (active ? dashboardPopup.implicitHeight : centerPill.height) : 0
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
 
-        radius: active ? 20 : 12
+        radius: active ? 24 : 12
         color: themePalette.pillBackground
         border.color: themePalette.pillBorder
         border.width: 1
@@ -54,25 +55,17 @@ PopupWindow {
             NumberAnimation { duration: 250 }
         }
 
-        Text {
-            anchors.centerIn: parent
-            text: "Dashboard"
-            color: "#cdd6f4"
-            font.pixelSize: 14
-            opacity: active ? 1 : 0
-            Behavior on opacity { NumberAnimation { duration: 150 } }
+        HoverHandler {
+            id: dashboardPopupHover
+            onHoveredChanged: {
+                if (hovered && closeTimer) {
+                    closeTimer.stop();
+                } else if (!hovered && closeTimer) {
+                    closeTimer.start();
+                }
+            }
         }
-    }
 
-    MouseArea {
-        anchors.fill: dashboardBg
-        hoverEnabled: true
-
-        onEntered: {
-            if (closeTimer) closeTimer.stop();
-        }
-        onExited: {
-            if (closeTimer) closeTimer.start();
-        }
+        DashboardColumns { visible: true }
     }
 }

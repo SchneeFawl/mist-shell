@@ -243,8 +243,7 @@ PopupWindow {
 
                 onClicked: mouse => {
                     if (modelData.isSeparator) {
-                        /*  can put customMenuPopup.visible = true; but its
-                            not necessary since it stays true anyways */
+                        /* do noting */
                     } else if (!modelData.isSeparator && modelData.hasChildren && modelData.buttonType === QsMenuButtonType.None) {
                         modelData.triggered();
                     } else if (!modelData.isSeparator && !modelData.hasChildren && modelData.buttonType === QsMenuButtonType.None) {

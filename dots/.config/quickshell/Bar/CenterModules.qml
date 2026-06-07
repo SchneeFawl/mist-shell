@@ -37,7 +37,7 @@ Item {
 
     Timer {
         id: closeTimer
-        interval: 700
+        interval: 600
         repeat: false
         onTriggered: centerModulesRoot.dashboardActive = false
     }
