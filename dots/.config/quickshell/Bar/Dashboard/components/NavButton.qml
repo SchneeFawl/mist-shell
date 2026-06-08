@@ -1,5 +1,7 @@
 import QtQuick
 
+// qmllint disable unqualified
+
 Rectangle {
     property string icon: ""
     property int iconSize: 20

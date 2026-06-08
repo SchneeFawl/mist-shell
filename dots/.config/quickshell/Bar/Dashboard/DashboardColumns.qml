@@ -36,8 +36,28 @@ RowLayout {
         Layout.fillWidth: true
     }
 
+    // quick controls + calendar
     ColumnRectangle {
-        Layout.fillWidth: true
+        Layout.preferredWidth: 280
+        color: "transparent"
+
+        ColumnLayout {
+            anchors.fill: parent
+            spacing: 5
+
+            Rectangle {
+                Layout.fillWidth: true
+                Layout.preferredHeight: 80      // only one row of controls
+                color: "transparent"
+                QuickControls {}
+            }
+
+            Calendar {
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+            }
+        }
+
     }
 
     ColumnRectangle {
