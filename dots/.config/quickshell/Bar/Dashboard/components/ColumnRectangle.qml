@@ -5,6 +5,6 @@ import QtQuick.Layouts
 Rectangle {
     // color: themePalette.pillBackground
     color: "white"
-    radius: 12
+    radius: 14
     Layout.fillHeight: true
 }

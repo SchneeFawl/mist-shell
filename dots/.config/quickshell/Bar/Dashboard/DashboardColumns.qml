@@ -1,6 +1,7 @@
 import QtQuick.Layouts
 import QtQuick
 import "./components"
+import "./Calendar"
 
 RowLayout {
 

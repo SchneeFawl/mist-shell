@@ -13,7 +13,7 @@ Rectangle {
     id: buttonRoot
     implicitWidth: 50
     implicitHeight: 50
-    radius: 12
+    radius: 14
     color: active ? themePalette.activeBtnVibrant : btnBgColor
 
     Behavior on color {

@@ -30,7 +30,7 @@ PopupWindow {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
 
-        radius: active ? 24 : 12
+        radius: active ? 28 : 14
         color: themePalette.pillBackground
         border.color: themePalette.pillBorder
         border.width: 1
