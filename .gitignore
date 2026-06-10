@@ -1,6 +1,5 @@
 tree.txt
 packages.md
-ref.css
 color_theme.json
 
 # system trash
@@ -41,4 +40,5 @@ scratchpad.*
 local-test.sh
 .obsidian-docs/
 .obsidian/
-.no-vibe
+.no-vibe/
+.agents/

@@ -63,5 +63,8 @@ RowLayout {
 
     ColumnRectangle {
         Layout.preferredWidth: 50
+        color: themePalette.pillBorder
+
+        SliderControls {}
     }
 }
