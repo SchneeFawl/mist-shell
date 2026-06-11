@@ -34,6 +34,7 @@ PopupWindow {
         color: themePalette.pillBackground
         border.color: themePalette.pillBorder
         border.width: 1
+        clip: true
 
         Behavior on implicitWidth {
             NumberAnimation {

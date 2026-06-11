@@ -3,6 +3,8 @@ import QtQuick
 // qmllint disable unqualified
 
 Rectangle {
+    id: buttonRoot
+
     property string icon: ""
     property int iconSize: 20
     property color btnBgColor: themePalette.pillBackground
@@ -10,11 +12,11 @@ Rectangle {
 
     signal clicked()
 
-    id: buttonRoot
     implicitWidth: 50
     implicitHeight: 50
     radius: 14
     color: active ? themePalette.activeBtnVibrant : btnBgColor
+    clip: true
 
     Behavior on color {
         ColorAnimation {

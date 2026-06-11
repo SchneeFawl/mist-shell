@@ -1,10 +1,9 @@
 import QtQuick.Layouts
 import QtQuick
 import "./components"
-import "./Calendar"
+import "./calendar"
 
 RowLayout {
-
     property int activeTab: 1           // defaults to media mode
 
     id: dashboardColumnsLayout
@@ -61,6 +60,7 @@ RowLayout {
 
     }
 
+    // slider controls
     ColumnRectangle {
         Layout.preferredWidth: 50
         color: themePalette.pillBorder

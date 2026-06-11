@@ -1,28 +1,25 @@
 import QtQuick
-import QtQuick.Layouts
+
+// qmllint disable unqualified
 
 Rectangle {
-    id: sliderButtonRoot
+    id: controlsButtonRoot
 
-    property int active
+    property bool active: false
     signal clicked()
 
-    Layout.fillWidth: true
-    Layout.fillHeight: true
+    radius: 14
     color: active ? themePalette.activeBtnVibrant : themePalette.inactiveAccent
-    radius: 9
 
     Behavior on color {
         ColorAnimation {
-            duration: 180
+            duration: 130
             easing.type: Easing.OutCubic
         }
     }
 
-    clip: true
-
     MouseArea {
         anchors.fill: parent
-        onClicked: sliderButtonRoot.clicked()
+        onClicked: controlsButtonRoot.clicked()
     }
 }
