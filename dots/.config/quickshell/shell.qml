@@ -1,8 +1,7 @@
-//@ pragma IconTheme Papirus
 //@ pragma UseQApplication
 import Quickshell
 import QtQuick
-import "Bar"
+import "./Bar"
 import "scripts"
 
 ShellRoot {

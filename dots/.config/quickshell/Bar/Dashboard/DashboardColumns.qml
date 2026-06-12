@@ -32,8 +32,12 @@ RowLayout {
         }
     }
 
+    // notifications
     ColumnRectangle {
         Layout.fillWidth: true
+        color: themePalette.pillBorder
+
+        NotificationsList {}
     }
 
     // quick controls + calendar
