@@ -4,9 +4,11 @@ import "./components"
 import "./calendar"
 
 RowLayout {
-    property int activeTab: 1           // defaults to media mode
-
     id: dashboardColumnsLayout
+
+    property int activeTab: 1           // defaults to media mode
+    property bool active: false
+
     spacing: 5
     anchors.margins: 16
     anchors.fill: parent
@@ -37,7 +39,7 @@ RowLayout {
         Layout.fillWidth: true
         color: themePalette.pillBorder
 
-        NotificationsList {}
+        NotificationsList { active: dashboardColumnsLayout.active }
     }
 
     // quick controls + calendar

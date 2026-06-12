@@ -6,6 +6,8 @@ import qs.services
 // qmllint disable unqualified
 
 ColumnLayout {
+    property bool active: false
+
     anchors.fill: parent
     anchors.margins: 5
     spacing: 5
@@ -34,7 +36,48 @@ ColumnLayout {
             anchors.fill: parent
             clip: true
             spacing: 4
-            model: Notifications.trackedNotifications.values
+            model: Notifications.trackedNotifications
+
+            property Transition entryTransition: Transition {
+                NumberAnimation {
+                    property: "x"
+                    from: -parentRect.width
+                    duration: 200
+                    easing.type: Easing.OutCubic
+                }
+                NumberAnimation {
+                    property: "opacity"
+                    from: 0
+                    to: 1
+                    duration: 200
+                }
+            }
+
+            property Transition exitTransition: Transition {
+                NumberAnimation {
+                    property: "x"
+                    to: parentRect.width
+                    duration: 200
+                    easing.type: Easing.OutCubic
+                }
+                NumberAnimation {
+                    property: "opacity"
+                    to: 0
+                    duration: 200
+                }
+            }
+
+            add: active ? entryTransition : null
+
+            remove: active ? exitTransition : null
+
+            displaced: Transition {
+                NumberAnimation {
+                    property: "y"
+                    duration: 200
+                    easing.type: Easing.OutQuad
+                }
+            }
 
             delegate: Rectangle {
                 implicitHeight: 100
@@ -49,22 +92,27 @@ ColumnLayout {
                     clip: true
 
                     Text {
-                        color: "white"
+                        color: themePalette.textVibrant
                         text: modelData.appName
                         font.pixelSize: 14
                     }
 
                     Text {
-                        color: "white"
+                        color: themePalette.textMain
                         text: modelData.summary
                         font.pixelSize: 12
                     }
 
                     Text {
-                        color: "white"
+                        color: themePalette.textSub
                         text: modelData.body
                         font.pixelSize: 12
                     }
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: modelData.dismiss()
                 }
             }
         }

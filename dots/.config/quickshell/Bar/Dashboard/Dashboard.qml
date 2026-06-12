@@ -66,6 +66,6 @@ PopupWindow {
             }
         }
 
-        DashboardColumns { visible: true }
+        DashboardColumns { active: dashboardPopup.active }
     }
 }
