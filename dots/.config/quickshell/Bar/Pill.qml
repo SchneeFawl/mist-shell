@@ -1,6 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
 
+// qmllint disable unqualified
+
 Item {
     id: pillRoot
     // anything inside Pill will go into contentLayout

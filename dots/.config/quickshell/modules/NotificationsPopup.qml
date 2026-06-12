@@ -1,0 +1,137 @@
+import QtQuick
+import Quickshell
+// import Quickshell.Services.Notifications
+import qs.services
+
+// qmllint disable unqualified
+
+PanelWindow {           // qmllint disable uncreatable-type
+    id: notifPopup
+
+    required property var modelData
+    property var notif
+
+    anchors {
+        right: true
+        top: true
+    }
+
+    margins {       // qmllint disable unresolved-type
+        top: 5
+        right: 5
+    }
+
+    implicitHeight: notifListView.contentHeight
+    implicitWidth: 200
+    color: "transparent"
+
+    ListModel {
+        id: notifModel
+    }
+
+    ListView {
+        id: notifListView
+
+        model: notifModel
+        spacing: 4
+        anchors.fill: parent
+
+        add: Transition {
+            NumberAnimation {
+                property: "x"
+                from: notifPopup.width
+                duration: 200
+                easing.type: Easing.OutCubic
+            }
+            NumberAnimation {
+                property: "opacity"
+                from: 0
+                to: 1
+                duration: 200
+                easing.type: Easing.OutCubic
+            }
+        }
+
+        remove: Transition {
+            NumberAnimation {
+                property: "x"
+                to: notifPopup.width
+                duration: 200
+                easing.type: Easing.OutCubic
+            }
+            // NumberAnimation {
+            //     property: "opacity"
+            //     to: 0
+            //     duration: 200
+            //     easing.type: Easing.OutCubic
+            // }
+        }
+
+        displaced: Transition {
+            NumberAnimation {
+                property: "y"
+                duration: 200
+                easing.type: Easing.OutQuad
+            }
+        }
+
+        delegate: Rectangle {
+            implicitHeight: 80
+            implicitWidth: notifPopup.width
+            color: themePalette.inactiveAccent
+            border.color: themePalette.pillBorder
+            border.width: 2
+            radius: 12
+            clip: true
+
+            Column {
+                anchors.fill: parent
+                anchors.margins: 7
+                clip: true
+
+                Text {
+                    color: themePalette.textVibrant
+                    text: model.notifObject.appName
+                    font.pixelSize: 14
+                }
+
+                Text {
+                    color: themePalette.textMain
+                    text: model.notifObject.summary
+                    font.pixelSize: 12
+                }
+
+                Text {
+                    color: themePalette.textSub
+                    text: model.notifObject.body
+                    font.pixelSize: 12
+                    elide: Text.ElideMiddle
+                }
+            }
+
+            Timer {
+                id: notifTimer
+                interval: 5000
+                running: true
+                repeat: false
+                onTriggered: { notifModel.remove(index) }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    model.notifObject.dismiss();
+                    notifModel.remove(index)
+                }
+            }
+        }
+    }
+
+    Connections {
+        target: Notifications
+
+        function onNotification(notification) {
+            notifModel.append({ "notifObject" : notification})
+        }
+    }
+}

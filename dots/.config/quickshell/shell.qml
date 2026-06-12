@@ -2,7 +2,9 @@
 import Quickshell
 import QtQuick
 import "./Bar"
-import "scripts"
+import qs.scripts
+import qs.modules
+// import qs.services
 
 ShellRoot {
     id: root
@@ -15,13 +17,19 @@ ShellRoot {
     Variables { id: variables }
     SystemStats { id: sysStats }
 
-    // scrreen tracking window instantiation
     Variants {
-	model: Quickshell.screens
+        model: Quickshell.screens
+
+        delegate: NotificationsPopup {}
+    }
+
+    // screen tracking window instantiation
+    Variants {
+	    model: Quickshell.screens
 
         delegate: Component {
             Bar {
-                // pass system model bounds down to individual monitgor frames
+                // pass system model bounds down to individual monitor frames
                 layoutStyle: root.activeBarLayout
             }
         }

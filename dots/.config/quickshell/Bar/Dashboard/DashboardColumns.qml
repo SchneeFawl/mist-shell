@@ -3,6 +3,8 @@ import QtQuick
 import "./components"
 import "./calendar"
 
+// qmllint disable unqualified
+
 RowLayout {
     id: dashboardColumnsLayout
 

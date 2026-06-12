@@ -107,6 +107,7 @@ ColumnLayout {
                         color: themePalette.textSub
                         text: modelData.body
                         font.pixelSize: 12
+                        elide: Text.ElideMiddle
                     }
                 }
 
