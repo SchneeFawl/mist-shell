@@ -16,24 +16,25 @@ Rectangle {
 
     Image {
         id: bgMediaCover
+        source: (root.activePlayer && root.activePlayer.trackArtUrl)
+            ? root.activePlayer.trackArtUrl : ""
         anchors.fill: parent
-        source: (root.activePlayer && root.activePlayer.trackArtUrl) ? root.activePlayer.trackArtUrl : ""
         asynchronous: true
         fillMode: Image.PreserveAspectCrop
         visible: false
     }
 
     MultiEffect {
-        id: bgMediaBlurred
-        anchors.fill: parent
+        id: blurEffect
         source: bgMediaCover
-        blurEnabled: true
-        blurMax: 32
-        blur: 1.0
-        opacity: 1
         visible: bgMediaCover.source !== ""
+        anchors.fill: parent
+        blurEnabled: true
+        blurMax: 36
+        blur: 1.0
     }
 
+    // DEBUG
     Text {
         anchors.centerIn: parent
         color: "black"

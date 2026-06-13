@@ -28,11 +28,11 @@ Item {
                 property var activePlayer: MprisController.activePlayer
 
                 Layout.alignment: Qt.AlignCenter
+                color: themePalette.textVibrant
+                font.pixelSize: 14
                 text: MprisController.activePlayer ?
                     "󰕮 " + activePlayer.trackTitle + " - " + activePlayer.trackArtist
                     : "󰕮 No media playing"
-                color: themePalette.textVibrant
-                font.pixelSize: 14
             }
         }
     }
