@@ -1,6 +1,5 @@
 import QtQuick
 import Quickshell
-// import Quickshell.Services.Notifications
 import qs.services
 
 // qmllint disable unqualified
@@ -21,8 +20,8 @@ PanelWindow {           // qmllint disable uncreatable-type
         right: 5
     }
 
-    implicitHeight: notifListView.contentHeight
-    implicitWidth: 200
+    implicitHeight: Math.min(200, notifListView.contentHeight)
+    implicitWidth: 300
     color: "transparent"
 
     ListModel {
@@ -59,12 +58,6 @@ PanelWindow {           // qmllint disable uncreatable-type
                 duration: 200
                 easing.type: Easing.OutCubic
             }
-            // NumberAnimation {
-            //     property: "opacity"
-            //     to: 0
-            //     duration: 200
-            //     easing.type: Easing.OutCubic
-            // }
         }
 
         displaced: Transition {
