@@ -15,7 +15,7 @@ Rectangle {
     color: themePalette.pillBorder
     radius: 12
 
-    MediaMode {
+    MediaPlayer {
         visible: parent.activeTab === 1
     }
 

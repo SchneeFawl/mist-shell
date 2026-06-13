@@ -26,6 +26,14 @@ RowLayout {
         }
     }
 
+    // notifications
+    ColumnRectangle {
+        Layout.fillWidth: true
+        color: themePalette.pillBorder
+
+        NotificationsList { active: dashboardColumnsLayout.active }
+    }
+
     // main content
     ColumnRectangle {
         Layout.fillWidth: true
@@ -34,14 +42,6 @@ RowLayout {
         MainContent {
             activeTab: dashboardColumnsLayout.activeTab
         }
-    }
-
-    // notifications
-    ColumnRectangle {
-        Layout.fillWidth: true
-        color: themePalette.pillBorder
-
-        NotificationsList { active: dashboardColumnsLayout.active }
     }
 
     // quick controls + calendar

@@ -24,7 +24,7 @@ Rectangle {
             onClicked: {
                 navWrapper.activeTab = 1;
                 navWrapper.tabSelected(1);
-                console.log("Clicked Tab 1")
+                // console.log("Clicked Tab 1")
             }
 
             active: navWrapper.activeTab === 1
