@@ -12,7 +12,8 @@ Rectangle {
     property string settingsText: "Settings Placeholder"
 
     anchors.fill: parent
-    color: themePalette.pillBorder
+    // color: themePalette.pillBorder
+    color: "transparent"
     radius: 12
 
     MediaPlayer {
