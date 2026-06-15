@@ -1,6 +1,5 @@
 import QtQuick
-
-// qmllint disable unqualified
+import qs.modules.theme
 
 Rectangle {
     id: controlsButtonRoot
@@ -9,7 +8,7 @@ Rectangle {
     signal clicked()
 
     radius: 14
-    color: active ? themePalette.activeBtnVibrant : themePalette.inactiveAccent
+    color: active ? Colors.activeBtnVibrant : Colors.inactiveAccent
 
     Behavior on color {
         ColorAnimation {

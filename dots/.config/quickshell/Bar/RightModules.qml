@@ -1,14 +1,15 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import qs.modules.theme
 
 RowLayout {
-    spacing: variables.pillOuterSpacing
+    spacing: Variables.pillOuterSpacing
 
-    // system tray (placeholder for now)
+    // system tray
     Pill {
         visible: sysTray.implicitWidth > 0
-        innerPadding: visible ? variables.pillInnerPadding : 0
+        innerPadding: visible ? Variables.pillInnerPadding : 0
         SystemTray {
             id: sysTray
         }
@@ -16,7 +17,7 @@ RowLayout {
 
     // clock display widget
     Pill {
-        innerPadding: variables.pillInnerPadding
+        innerPadding: Variables.pillInnerPadding
         pillSpacing: 6
 
         Timer {
@@ -35,18 +36,19 @@ RowLayout {
         BarText {
             id: timeDisplay
         }
-        // BarText { text: "•"; color: themePalette.textSub; Layout.alignment: Qt.AlignCenter }
+
         BarText {
             id: dayDisplay
             isSubText: true
         }
+
         BarText {
             id: dateDisplay
             isSubText: true
         }
     }
 
-    // core desktop feature handlers
+    // desktop feature
     Pill {
         innerPadding: 4
         pillSpacing: 2
@@ -59,7 +61,7 @@ RowLayout {
             BarText {
                 anchors.centerIn: parent
                 text: "󰕾"
-                color: themePalette.activeAccent
+                color: Colors.activeAccent
                 font.pixelSize: 20
             }
             onClicked: {

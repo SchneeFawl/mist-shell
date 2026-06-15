@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import qs.modules.theme
 
 // qmllint disable unqualified
 
@@ -22,7 +23,7 @@ Rectangle {
             id: notifTextContainer
             Layout.fillHeight: true
             Layout.fillWidth: true
-            color: themePalette.inactiveAccent
+            color: Colors.inactiveAccent
             radius: 9
             clip: true
 
@@ -39,7 +40,7 @@ Rectangle {
             id: notifClearBtn
             Layout.fillHeight: true
             Layout.preferredWidth: notifTextContainer.height
-            color: notifClearMouse.pressed ? themePalette.activeBtnVibrant : themePalette.inactiveAccent
+            color: notifClearMouse.pressed ? Colors.activeBtnVibrant : Colors.inactiveAccent
             radius: width / 2
             clip: true
 

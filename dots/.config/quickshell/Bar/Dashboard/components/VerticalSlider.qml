@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import qs.modules.theme
 
 // qmllint disable unqualified
 
@@ -11,7 +12,7 @@ Rectangle {
     Layout.rightMargin: 5
     Layout.bottomMargin: 5
 
-    color: themePalette.inactiveAccent
+    color: Colors.inactiveAccent
     radius: 9
     clip: true
 
@@ -24,7 +25,7 @@ Rectangle {
         anchors.centerIn: parent
         implicitHeight: 200
         implicitWidth: 16
-        color: themePalette.pillBackground
+        color: Colors.pillBackground
         radius: width / 2
 
         // filled rect
@@ -34,7 +35,7 @@ Rectangle {
             height: parent.height * sliderRoot.value
             anchors.bottom: parent.bottom       // fills from bottom
             radius: parent.radius
-            color: themePalette.activeAccent
+            color: Colors.activeAccent
         }
 
         MouseArea {

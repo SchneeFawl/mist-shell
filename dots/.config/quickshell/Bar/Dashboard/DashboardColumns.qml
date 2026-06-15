@@ -2,8 +2,7 @@ import QtQuick.Layouts
 import QtQuick
 import "./components"
 import "./calendar"
-
-// qmllint disable unqualified
+import qs.modules.theme
 
 RowLayout {
     id: dashboardColumnsLayout
@@ -29,7 +28,7 @@ RowLayout {
     // notifications
     ColumnRectangle {
         Layout.fillWidth: true
-        color: themePalette.pillBorder
+        color: Colors.pillBorder
 
         NotificationsList { active: dashboardColumnsLayout.active }
     }
@@ -71,7 +70,7 @@ RowLayout {
     // slider controls
     ColumnRectangle {
         Layout.preferredWidth: 50
-        color: themePalette.pillBorder
+        color: Colors.pillBorder
 
         SliderControls {}
     }

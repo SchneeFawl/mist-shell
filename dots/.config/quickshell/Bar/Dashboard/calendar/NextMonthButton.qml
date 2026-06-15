@@ -1,4 +1,5 @@
 import QtQuick
+import qs.modules.theme
 
 Rectangle {
     id: nextMonthRoot
@@ -8,7 +9,7 @@ Rectangle {
     implicitHeight: 28
     implicitWidth: 28
     radius: width / 2
-    color: nextHover.hovered ? themePalette.activeBtnVibrant : "black"
+    color: nextHover.hovered ? Colors.activeBtnVibrant : "black"
 
     Behavior on color {
         ColorAnimation {

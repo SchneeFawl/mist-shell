@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import qs.modules.theme
 
 Rectangle {
     id: sliderButtonRoot
@@ -9,7 +10,7 @@ Rectangle {
 
     Layout.fillWidth: true
     Layout.fillHeight: true
-    color: active ? themePalette.activeBtnVibrant : themePalette.inactiveAccent
+    color: active ? Colors.activeBtnVibrant : Colors.inactiveAccent
     radius: 9
 
     Behavior on color {

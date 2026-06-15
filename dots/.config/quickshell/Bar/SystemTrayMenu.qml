@@ -2,7 +2,7 @@ import Quickshell
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Widgets
-import Quickshell.Services.SystemTray
+import qs.modules.theme
 
 // qmllint disable unqualified
 
@@ -75,8 +75,8 @@ PopupWindow {
                         WrapperRectangle {
                             id: submenuItemWrapper
                             // anchors.fill: parent
-                            color: themePalette.pillBackground
-                            border.color: themePalette.pillBorder
+                            color: Colors.pillBackground
+                            border.color: Colors.pillBorder
                             border.width: 2
                             width: customSubmenuPopup.visible ? parent.width : 0
                             height: customSubmenuPopup.visible ? parent.height : 0
@@ -157,15 +157,15 @@ PopupWindow {
                         height: 16
                         width: 16
                         border.width: 1
-                        border.color: modelData ? (modelData.checkState === 0 ? themePalette.inactiveAccent : themePalette.activeAccent) : ""
+                        border.color: modelData ? (modelData.checkState === 0 ? Colors.inactiveAccent : Colors.activeAccent) : ""
                         radius: 4
-                        color: modelData ? (modelData.checkState === 0 ? "transparent" : themePalette.pillBorder) : ""
+                        color: modelData ? (modelData.checkState === 0 ? "transparent" : Colors.pillBorder) : ""
 
                         Text {
                             anchors.centerIn: parent
                             visible: modelData ? modelData.checkState !== 0 : false
                             text: modelData ? (modelData.checkState === 1 ? "\u2212" : "\u2713") : ""  // "-" and "{tick}"
-                            color: themePalette.activeAccent
+                            color: Colors.activeAccent
                             font.pixelSize: 10
                             font.bold: true
                         }
@@ -178,16 +178,16 @@ PopupWindow {
                         height: 16
                         width: 16
                         border.width: 1
-                        border.color: themePalette.pillBorder
+                        border.color: Colors.pillBorder
                         radius: 4
-                        color: modelData ? (modelData.checkState === 2 ? themePalette.activeAccent : themePalette.inactiveAccent) : ""
+                        color: modelData ? (modelData.checkState === 2 ? Colors.activeAccent : Colors.inactiveAccent) : ""
 
                         Rectangle {
                             visible: modelData ? modelData.checkState === 2 : false
                             height: 12
                             width: 12
                             radius: 4
-                            color: themePalette.activeAccent
+                            color: Colors.activeAccent
                         }
                     }
                 }
@@ -207,7 +207,7 @@ PopupWindow {
                     anchors.verticalCenter: parent.verticalCenter
                     text: modelData ? modelData.text : ""
                     font.pixelSize: 12
-                    color: themePalette.textMain
+                    color: Colors.textMain
                     leftPadding: 4
                 }
             }
@@ -219,7 +219,7 @@ PopupWindow {
                 anchors.rightMargin: 20
                 anchors.verticalCenter: parent.verticalCenter
                 text: "›"
-                color: themePalette.textMain
+                color: Colors.textMain
                 font.pixelSize: 18
                 opacity: 0.7
             }
@@ -275,8 +275,8 @@ PopupWindow {
     WrapperRectangle {
         id: menuItemWrapper
         // anchors.fill: parent
-        color: themePalette.pillBackground
-        border.color: themePalette.pillBorder
+        color: Colors.pillBackground
+        border.color: Colors.pillBorder
         border.width: 2
         width: customMenuPopup.visible ? parent.width : 0
         height: customMenuPopup.visible ? parent.height : 0

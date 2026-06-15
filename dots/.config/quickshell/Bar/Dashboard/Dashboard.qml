@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell
+import qs.modules.theme
 
 // qmllint disable unqualified
 
@@ -31,8 +32,8 @@ PopupWindow {
         anchors.top: parent.top
 
         radius: active ? 28 : 14
-        color: themePalette.pillBackground
-        border.color: themePalette.pillBorder
+        color: Colors.pillBackground
+        border.color: Colors.pillBorder
         border.width: 1
         clip: true
 

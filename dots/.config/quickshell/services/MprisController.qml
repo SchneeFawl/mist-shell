@@ -2,9 +2,8 @@ pragma Singleton
 import QtQuick
 import Quickshell.Services.Mpris
 
-// qmllint disable unqualified
-
 Item {
+    id: controllerRoot
 
     property var activePlayer: null
     property bool isPlaying: {
@@ -32,17 +31,17 @@ Item {
     Instantiator {
         model: Mpris.players
 
-        onObjectAdded: updateTrackedPlayer()
-        onObjectRemoved: updateTrackedPlayer()
+        onObjectAdded: controllerRoot.updateTrackedPlayer()
+        onObjectRemoved: controllerRoot.updateTrackedPlayer()
 
         delegate: Connections {
             target: modelData
             function onPlaybackStateChanged() {
-                updateTrackedPlayer();
+                controllerRoot.updateTrackedPlayer();
             }
         }
 
         // run on start
-        Component.onCompleted: updateTrackedPlayer()
+        Component.onCompleted: controllerRoot.updateTrackedPlayer()
     }
 }

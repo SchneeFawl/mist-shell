@@ -1,9 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.services
+import qs.modules.theme
 import "./Dashboard"
-
-// qmllint disable unqualified
 
 Item {
     id: centerModulesRoot
@@ -28,11 +27,12 @@ Item {
                 property var activePlayer: MprisController.activePlayer
 
                 Layout.alignment: Qt.AlignCenter
-                color: themePalette.textVibrant
+                color: Colors.textVibrant
                 font.pixelSize: 14
                 text: MprisController.activePlayer ?
                     "󰕮 " + activePlayer.trackTitle + " - " + activePlayer.trackArtist
                     : "󰕮 No media playing"
+                elide: Text.ElideRight
             }
         }
     }

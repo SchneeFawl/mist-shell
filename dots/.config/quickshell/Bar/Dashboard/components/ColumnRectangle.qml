@@ -3,7 +3,7 @@ import QtQuick.Layouts
 // import "../"
 
 Rectangle {
-    // color: themePalette.pillBackground
+    // color: Colors.pillBackground
     color: "white"
     radius: 14
     Layout.fillHeight: true

@@ -13,8 +13,6 @@ ShellRoot {
     property string activeBarLayout: "top-fragmented"  // OPTIONS: "vertical-sidebar", "minimal"
     property bool dndActive: false
 
-    Colors { id: themePalette }
-    Variables { id: variables }
     SystemStats { id: sysStats }
 
     Variants {

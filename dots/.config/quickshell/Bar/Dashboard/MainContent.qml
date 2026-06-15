@@ -12,7 +12,7 @@ Rectangle {
     property string settingsText: "Settings Placeholder"
 
     anchors.fill: parent
-    // color: themePalette.pillBorder
+    // color: Colors.pillBorder
     color: "transparent"
     radius: 12
 

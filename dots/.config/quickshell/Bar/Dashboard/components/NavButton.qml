@@ -1,4 +1,5 @@
 import QtQuick
+import qs.modules.theme
 
 // qmllint disable unqualified
 
@@ -7,7 +8,7 @@ Rectangle {
 
     property string icon: ""
     property int iconSize: 20
-    property color btnBgColor: themePalette.pillBackground
+    property color btnBgColor: Colors.pillBackground
     property bool active: false
 
     signal clicked()
@@ -15,7 +16,7 @@ Rectangle {
     implicitWidth: 50
     implicitHeight: 50
     radius: 14
-    color: active ? themePalette.activeBtnVibrant : btnBgColor
+    color: active ? Colors.activeBtnVibrant : btnBgColor
     clip: true
 
     Behavior on color {

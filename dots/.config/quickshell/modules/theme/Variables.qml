@@ -1,3 +1,4 @@
+pragma Singleton
 import QtQuick
 
 QtObject {
@@ -6,4 +7,3 @@ QtObject {
     readonly property int pillInnerPadding: 12
     readonly property int pillOuterSpacing: 12
 }
-

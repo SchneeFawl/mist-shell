@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import qs.modules.theme
 
 // qmllint disable unqualified
 
@@ -7,9 +8,9 @@ Item {
     id: pillRoot
     // anything inside Pill will go into contentLayout
     default property alias pillContent: contentLayout.data
-    property int innerPadding: variables.pillInnerPadding
+    property int innerPadding: Variables.pillInnerPadding
     property int pillSpacing: 8
-    property color customBorderColor: themePalette.pillBorder
+    property color customBorderColor: Colors.pillBorder
 
     implicitWidth: contentLayout.implicitWidth + (innerPadding * 2)
     implicitHeight: 32
@@ -19,7 +20,7 @@ Item {
     Rectangle {
         id: bgRect
         anchors.fill: parent
-        color: themePalette.pillBackground
+        color: Colors.pillBackground
         border.width: 0     // no border
         radius: 12
 

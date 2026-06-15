@@ -1,6 +1,7 @@
 import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Layouts
+import qs.modules.theme
 
 // qmllint disable unqualified
 
@@ -25,8 +26,8 @@ RowLayout {
                 height: modelData.active ? 22 : 10
                 radius: width / 2
 
-                color: themePalette.inactiveAccent
-                // border.color: themePalette.activeAccent
+                color: Colors.inactiveAccent
+                // border.color: Colors.activeAccent
                 // border.width: 1
 
                 opacity: modelData.active ? 1.0 : 0
@@ -59,7 +60,7 @@ RowLayout {
                 height: 6
                 radius: 3
 
-                color: modelData.active ? themePalette.activeAccent : themePalette.inactiveAccent
+                color: modelData.active ? Colors.activeAccent : Colors.inactiveAccent
 
                 Behavior on color {
                     ColorAnimation {

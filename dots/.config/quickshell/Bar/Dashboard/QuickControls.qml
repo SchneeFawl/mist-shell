@@ -1,8 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import "./components"
-
-// qmllint disable unqualified
+import qs.modules.theme
 
 Rectangle {
     id: quickControlsRoot
@@ -12,14 +11,13 @@ Rectangle {
     property bool bluetoothActive: false
     property bool dndActive: false
 
-    color: themePalette.pillBorder
+    color: Colors.pillBorder
     implicitHeight: 80
     implicitWidth: rootWidth
     radius: 24
     anchors.horizontalCenter: parent.horizontalCenter
     clip: true
 
-    // QuickControlsButton { id: controlsLayout }
     RowLayout {
         id: controlsLayout
         anchors.fill: parent

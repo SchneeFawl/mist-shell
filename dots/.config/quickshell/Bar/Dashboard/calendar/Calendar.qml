@@ -1,6 +1,9 @@
 import QtQuick
 import QtQuick.Layouts
 import "calendar.js" as CalendarLogic
+import qs.modules.theme
+
+// qmllint disable unqualified
 
 Rectangle {
     id: root
@@ -10,7 +13,7 @@ Rectangle {
 
     Layout.fillWidth: true
     Layout.fillHeight: true
-    color: themePalette.pillBorder      // qmllint disable unqualified
+    color: Colors.pillBorder
     radius: 14
 
     ColumnLayout {
@@ -145,12 +148,12 @@ Rectangle {
                     delegate: Rectangle {
                         Layout.fillHeight: true
                         Layout.fillWidth: true
-                        color: themePalette.pillBorder      // qmllint disable unqualified
+                        color: Colors.pillBorder
                         radius: 5
 
                         Text {
                             anchors.centerIn: parent
-                            color: modelData.isCurrentMonth ? themePalette.textVibrant : themePalette.textSub
+                            color: modelData.isCurrentMonth ? Colors.textVibrant : Colors.textSub
                             text: modelData.day
                         }
                     }

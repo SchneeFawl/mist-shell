@@ -1,14 +1,15 @@
 import QtQuick
 import QtQuick.Layouts
+import qs.modules.theme
 
 RowLayout {
-    spacing: variables.pillOuterSpacing
+    spacing: Variables.pillOuterSpacing
 
     // custom logo
     Pill {
         BarText {
             text: "󱄅"   // I DO NOT USE NIX BTW
-            color: themePalette.activeAccent
+            color: Colors.activeAccent
             font.pixelSize: 20
             Layout.alignment: Qt.AlignCenter
         }
@@ -36,7 +37,7 @@ RowLayout {
                 anchors.centerIn: parent
                 text: ""
                 font.pixelSize: 20
-                color: themePalette.activeAccent
+                color: Colors.activeAccent
             }
             onClicked: console.log("trigger keybinds help menu")
         }

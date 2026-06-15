@@ -3,18 +3,22 @@ import QtQuick.Effects
 import QtQuick.Layouts
 import QtQuick.Shapes
 import Quickshell.Widgets
+import Quickshell.Services.Mpris
 import qs.services
+import qs.modules.theme
+import "../components"
 
 // qmllint disable unqualified
 
 ClippingRectangle {
     id: player
 
-    property var activePlayer: MprisController.activePlayer
-    property bool isPlaying: MprisController.isPlaying
+    readonly property var activePlayer: MprisController.activePlayer
+    readonly property bool isPlaying: MprisController.isPlaying
     property var mediaCover: (activePlayer && activePlayer.trackArtUrl) ? activePlayer.trackArtUrl : ""
 
-    property real progress: (activePlayer && activePlayer.length > 0) ? (activePlayer.position / activePlayer.length) : 0
+    property real progress: 0
+    onActivePlayerChanged: progress = 0
 
     anchors.fill: parent
     color: "transparent"
@@ -41,22 +45,20 @@ ClippingRectangle {
         blurMax: 48
         blur: 1.0
         opacity: 0.8
-        contrast: 0.3
-        brightness: -0.175
+        contrast: 0.2
     }
 
     ColumnLayout {
         anchors.fill: parent
-        anchors.margins: 10
-        spacing: 12
+        anchors.margins: 12
+        spacing: 6
 
         // wrapper for disc + progress ring
         Item {
             id: discWrapper
-            Layout.preferredHeight: 120
-            Layout.preferredWidth: 120
+            Layout.preferredHeight: discMediaContainer.height + 20
+            Layout.preferredWidth: discMediaContainer.width + 20
             Layout.alignment: Qt.AlignHCenter
-            visible: player.mediaCover !== ""
 
             // progress ring
             Shape {
@@ -66,7 +68,7 @@ ClippingRectangle {
 
                 ShapePath {
                     id: discPath
-                    strokeColor: themePalette.statusVibrant
+                    strokeColor: Colors.statusVibrant
                     strokeWidth: 4
                     fillColor: "transparent"
                     capStyle: ShapePath.RoundCap
@@ -86,9 +88,10 @@ ClippingRectangle {
             ClippingRectangle {
                 id: discMediaContainer
                 anchors.centerIn: parent
-                height: 100
-                width: 100
+                height: 120
+                width: 120
                 radius: width / 2
+                color: "transparent"
 
                 Image {
                     id: coverArt
@@ -98,25 +101,127 @@ ClippingRectangle {
                     asynchronous: true
                     mipmap: true
                 }
+
+                NumberAnimation on rotation {
+                    from: 0
+                    to: 360
+                    duration: 15000
+                    loops: Animation.Infinite
+                    running: player.activePlayer?.playbackState === MprisPlaybackState.Playing
+                }
+            }
+        }
+
+        ColumnLayout {
+            id: trackDetails
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            spacing: 3
+            Layout.leftMargin: 10
+            Layout.rightMargin: 10
+
+            Text {
+                id: songProgress
+                text: player.activePlayer ?
+                    (formatTime(player.activePlayer.position) + " / " + formatTime(player.activePlayer.length))
+                    : "--:--"
+                color: Colors.textSub
+                font.pixelSize: 10
+                Layout.fillWidth: true
+                horizontalAlignment: Text.AlignHCenter
+
+                // helper func to format media length into mins and secs
+                function formatTime(seconds) {
+                    const totalSeconds = Math.floor(seconds);
+                    const hours = Math.floor(totalSeconds / 3600);
+                    const mins = Math.floor((totalSeconds % 3600) / 60);
+                    const secs = totalSeconds % 60;
+
+                    if (hours > 0) {
+                        return hours + ":" + (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs;
+                    } else {
+                        return mins + ":" + (secs < 10 ? "0" : "") + secs;
+                    }
+                }
+            }
+
+            Text {
+                id: songTitle
+                text: player.activePlayer ? player.activePlayer.trackTitle : "No media playing"
+                color: Colors.textMain
+                font.bold: true
+                font.pixelSize: 18
+                elide: Text.ElideRight
+                Layout.fillWidth: true
+                horizontalAlignment: Text.AlignHCenter
+            }
+
+            Text {
+                id: artistName
+                text: player.activePlayer ? player.activePlayer.trackArtist : ""
+                color: Colors.textSub
+                font.pixelSize: 13
+                elide: Text.ElideRight
+                Layout.fillWidth: true
+                horizontalAlignment: Text.AlignHCenter
+            }
+        }
+
+        RowLayout {
+            id: playbackControls
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.leftMargin: 8
+            Layout.rightMargin: 8
+            Layout.bottomMargin: 12
+            Layout.alignment: Qt.AlignHCenter
+            spacing: 12
+
+            MediaControlBtn {
+                icon: ""
+            }
+
+            MediaControlBtn {
+                icon: "󰒮"
+                iconSize: 28
+            }
+
+            MediaControlBtn {
+                icon: ""       // 
+                iconSize: 32 + btnSize - 50
+                btnSize: 58
+            }
+
+            MediaControlBtn {
+                icon: "󰒭"
+                iconSize: 28
             }
         }
     }
 
     Timer {
         id: progressTimer
-        interval: 30            // 30 fps
+        interval: 33            // 1000 / 33.33 = ~30 fps
         repeat: true
         running: player.activePlayer && player.isPlaying
         onTriggered: {
             if (player.activePlayer && player.activePlayer.length > 0) {
                 progress = player.activePlayer.position / player.activePlayer.length;
             } else {
-                progress = 0
+                progress = 0;
             }
         }
     }
 
-    // DEBUG
+    Timer {
+        id: lengthTimer
+        interval: 1000
+        running: player.activePlayer && player.isPlaying
+        repeat: true
+        onTriggered: MprisController.activePlayer.positionChanged();
+    }
+
+    // DEBUG:
     // Text {
     //     anchors.centerIn: parent
     //     color: "yellow"

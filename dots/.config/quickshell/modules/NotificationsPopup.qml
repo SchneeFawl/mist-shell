@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
 import qs.services
+import qs.modules.theme
 
 // qmllint disable unqualified
 
@@ -15,7 +16,7 @@ PanelWindow {           // qmllint disable uncreatable-type
         top: true
     }
 
-    margins {       // qmllint disable unresolved-type
+    margins {       // qmllint disable unresolved-type unqualified
         top: 5
         right: 5
     }
@@ -71,8 +72,8 @@ PanelWindow {           // qmllint disable uncreatable-type
         delegate: Rectangle {
             implicitHeight: 80
             implicitWidth: notifPopup.width
-            color: themePalette.inactiveAccent
-            border.color: themePalette.pillBorder
+            color: Colors.inactiveAccent
+            border.color: Colors.pillBorder
             border.width: 2
             radius: 12
             clip: true
@@ -83,19 +84,19 @@ PanelWindow {           // qmllint disable uncreatable-type
                 clip: true
 
                 Text {
-                    color: themePalette.textVibrant
+                    color: Colors.textVibrant
                     text: model.notifObject.appName
                     font.pixelSize: 14
                 }
 
                 Text {
-                    color: themePalette.textMain
+                    color: Colors.textMain
                     text: model.notifObject.summary
                     font.pixelSize: 12
                 }
 
                 Text {
-                    color: themePalette.textSub
+                    color: Colors.textSub
                     text: model.notifObject.body
                     font.pixelSize: 12
                     elide: Text.ElideMiddle

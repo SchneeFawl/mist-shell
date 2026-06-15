@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import "./components"
 import qs.services
+import qs.modules.theme
 
 // qmllint disable unqualified
 
@@ -82,7 +83,7 @@ ColumnLayout {
             delegate: Rectangle {
                 implicitHeight: 100
                 implicitWidth: parentRect.width
-                color: themePalette.inactiveAccent
+                color: Colors.inactiveAccent
                 radius: 9
                 clip: true
 
@@ -92,19 +93,19 @@ ColumnLayout {
                     clip: true
 
                     Text {
-                        color: themePalette.textVibrant
+                        color: Colors.textVibrant
                         text: modelData.appName
                         font.pixelSize: 14
                     }
 
                     Text {
-                        color: themePalette.textMain
+                        color: Colors.textMain
                         text: modelData.summary
                         font.pixelSize: 12
                     }
 
                     Text {
-                        color: themePalette.textSub
+                        color: Colors.textSub
                         text: modelData.body
                         font.pixelSize: 12
                         elide: Text.ElideMiddle
