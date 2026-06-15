@@ -16,7 +16,7 @@ PanelWindow {           // qmllint disable uncreatable-type
         top: true
     }
 
-    margins {       // qmllint disable unresolved-type unqualified
+    margins {       // qmllint disable unresolved-type
         top: 5
         right: 5
     }

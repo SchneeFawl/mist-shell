@@ -54,7 +54,7 @@ Rectangle {
             Text {
                 color: "white"
                 anchors.centerIn: parent
-                text: "󰃢"
+                text: Icons.actionClear
                 font.pixelSize: 24
             }
 

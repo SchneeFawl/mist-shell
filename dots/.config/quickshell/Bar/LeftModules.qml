@@ -8,7 +8,7 @@ RowLayout {
     // custom logo
     Pill {
         BarText {
-            text: "󱄅"   // I DO NOT USE NIX BTW
+            text: Icons.barIcon
             color: Colors.activeAccent
             font.pixelSize: 20
             Layout.alignment: Qt.AlignCenter
@@ -35,8 +35,8 @@ RowLayout {
             BarText {
                 id: keybindText
                 anchors.centerIn: parent
-                text: ""
-                font.pixelSize: 20
+                text: Icons.barShortcuts
+                font.pixelSize: 24
                 color: Colors.activeAccent
             }
             onClicked: console.log("trigger keybinds help menu")

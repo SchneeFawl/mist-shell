@@ -7,7 +7,8 @@ Rectangle {
     id: mediaContBtn
 
     property string icon
-    property int iconSize: 32
+    property int iconSize: 36
+    property color iconColor: Colors.inactiveAccent
     property int btnSize: 50
 
     signal clicked()
@@ -21,7 +22,7 @@ Rectangle {
         anchors.centerIn: parent
         text: mediaContBtn.icon
         font.pixelSize: mediaContBtn.iconSize
-        color: Colors.inactiveAccent
+        color: mediaContBtn.iconColor
     }
 
     MouseArea {

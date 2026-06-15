@@ -30,8 +30,8 @@ Item {
                 color: Colors.textVibrant
                 font.pixelSize: 14
                 text: MprisController.activePlayer ?
-                    "󰕮 " + activePlayer.trackTitle + " - " + activePlayer.trackArtist
-                    : "󰕮 No media playing"
+                    Icons.barMedia + "  " + activePlayer.trackTitle + " - " + activePlayer.trackArtist
+                    : Icons.barMedia + " No media playing"
                 elide: Text.ElideRight
             }
         }

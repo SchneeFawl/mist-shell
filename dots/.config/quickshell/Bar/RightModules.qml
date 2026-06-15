@@ -60,7 +60,7 @@ RowLayout {
 
             BarText {
                 anchors.centerIn: parent
-                text: "󰕾"
+                text: Icons.sysVolume
                 color: Colors.activeAccent
                 font.pixelSize: 20
             }
@@ -76,7 +76,7 @@ RowLayout {
 
             BarText {
                 anchors.centerIn: parent
-                text: "⏻"
+                text: Icons.powerIcon
                 color: "#F7768E"
                 font.pixelSize: 20
             }

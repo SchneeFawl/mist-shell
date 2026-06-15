@@ -45,7 +45,7 @@ ClippingRectangle {
         blurMax: 48
         blur: 1.0
         opacity: 0.8
-        contrast: 0.2
+        contrast: 0.05
     }
 
     ColumnLayout {
@@ -125,7 +125,7 @@ ClippingRectangle {
                 text: player.activePlayer ?
                     (formatTime(player.activePlayer.position) + " / " + formatTime(player.activePlayer.length))
                     : "--:--"
-                color: Colors.textSub
+                color: '#c2d1d1'
                 font.pixelSize: 10
                 Layout.fillWidth: true
                 horizontalAlignment: Text.AlignHCenter
@@ -148,7 +148,7 @@ ClippingRectangle {
             Text {
                 id: songTitle
                 text: player.activePlayer ? player.activePlayer.trackTitle : "No media playing"
-                color: Colors.textMain
+                color: '#f1f5f4'
                 font.bold: true
                 font.pixelSize: 18
                 elide: Text.ElideRight
@@ -159,7 +159,7 @@ ClippingRectangle {
             Text {
                 id: artistName
                 text: player.activePlayer ? player.activePlayer.trackArtist : ""
-                color: Colors.textSub
+                color: '#c2d1d1'
                 font.pixelSize: 13
                 elide: Text.ElideRight
                 Layout.fillWidth: true
@@ -175,26 +175,58 @@ ClippingRectangle {
             Layout.rightMargin: 8
             Layout.bottomMargin: 12
             Layout.alignment: Qt.AlignHCenter
-            spacing: 12
+            spacing: 8
 
             MediaControlBtn {
-                icon: ""
+                icon: Icons.mediaPrevious
+                iconColor: Colors.textMain
+                color: "transparent"
+                btnSize: 40
+                onClicked: player.activePlayer.previous()
             }
 
             MediaControlBtn {
-                icon: "󰒮"
-                iconSize: 28
-            }
-
-            MediaControlBtn {
-                icon: ""       // 
+                icon: player.activePlayer && player.isPlaying ? Icons.mediaPause : Icons.mediaPlay
                 iconSize: 32 + btnSize - 50
                 btnSize: 58
+                onClicked: {
+                    if (player.activePlayer && player.isPlaying) {
+                        player.activePlayer.pause();
+                    } else {
+                        player.activePlayer.play();
+                    }
+                }
             }
 
             MediaControlBtn {
-                icon: "󰒭"
-                iconSize: 28
+                icon: Icons.mediaNext
+                iconColor: Colors.textMain
+                color: "transparent"
+                btnSize: 40
+                onClicked: player.activePlayer.next()
+            }
+
+            MediaControlBtn {       // loop btn
+                icon: {
+                    if (!player.activePlayer) return Icons.mediaLoopNone;
+                    switch (player.activePlayer.loopState) {
+                        case MprisLoopState.Track: return Icons.mediaLoopTrack
+                        case MprisLoopState.Playlist: return Icons.mediaLoopPlaylist
+                        default: return Icons.mediaLoopNone
+                    }
+                }
+                iconColor: Colors.textMain
+                color: "transparent"
+                btnSize: 40
+                onClicked: {
+                    if (player.activePlayer && player.activePlayer.loopSupported) {
+                        player.activePlayer.loopState = MprisLoopState.Track;
+                    } else if (player.activePlayer.loopState === MprisLoopState.Track) {
+                        player.activePlayer.loopState = MprisLoopState.Playlist;
+                    } else {
+                        player.activePlayer.loopState = MprisLoopState.None;
+                    }
+                }
             }
         }
     }

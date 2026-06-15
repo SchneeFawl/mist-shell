@@ -6,6 +6,8 @@ import qs.scripts
 import qs.modules
 // import qs.services
 
+// qmllint disable unqualified
+
 ShellRoot {
     id: root
 
@@ -13,7 +15,7 @@ ShellRoot {
     property string activeBarLayout: "top-fragmented"  // OPTIONS: "vertical-sidebar", "minimal"
     property bool dndActive: false
 
-    SystemStats { id: sysStats }
+    // SystemStats { id: sysStats }
 
     Variants {
         model: Quickshell.screens

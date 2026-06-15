@@ -2,6 +2,8 @@ pragma Singleton
 import QtQuick
 import Quickshell.Services.Mpris
 
+// qmllint disable unqualified
+
 Item {
     id: controllerRoot
 

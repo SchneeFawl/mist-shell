@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import "./components"
+import qs.modules.theme
 
 ColumnLayout {
     id: root
@@ -26,21 +27,21 @@ ColumnLayout {
             spacing: 4
 
             SliderControlsBtn {
-                Text { text: ""; color: "white"; font.pixelSize: 24; anchors.centerIn: parent }
+                Text { text: Icons.sysVolume; color: "white"; font.pixelSize: 24; anchors.centerIn: parent }
                 onClicked: {
                     root.activeOption = 1
                 }
                 active: root.activeOption === 1
             }
             SliderControlsBtn {
-                Text { text: ""; color: "white"; font.pixelSize: 24; anchors.centerIn: parent }
+                Text { text: Icons.sysMic; color: "white"; font.pixelSize: 24; anchors.centerIn: parent }
                 onClicked: {
                     root.activeOption = 2
                 }
                 active: root.activeOption === 2
             }
             SliderControlsBtn {
-                Text { text: "󰃟"; color: "white"; font.pixelSize: 24; anchors.centerIn: parent }
+                Text { text: Icons.sysBrightness; color: "white"; font.pixelSize: 24; anchors.centerIn: parent }
                 onClicked: {
                     root.activeOption = 3
                 }

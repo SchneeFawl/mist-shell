@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import "components"
+import qs.modules.theme
 
 Rectangle {
 
@@ -18,7 +19,7 @@ Rectangle {
 
         NavButton {
             id: mediaModeBtn
-            icon: "󰽴"
+            icon: Icons.navMusic
             iconSize: 20
 
             onClicked: {
@@ -32,7 +33,7 @@ Rectangle {
 
         NavButton {
             id: systemInfoBtn
-            icon: ""
+            icon: Icons.navSystemInfo
             iconSize: 24
 
             onClicked: {
@@ -60,7 +61,7 @@ Rectangle {
 
         NavButton {
             id: appSelectBtn
-            icon: "󰕮"
+            icon: Icons.navApps
             iconSize: 22
 
             onClicked: {
@@ -76,7 +77,7 @@ Rectangle {
 
         NavButton {
             id: settingsBtn
-            icon: "󰒓"
+            icon: Icons.sysSettings
             iconSize: 24
             btnBgColor: "#2c3149"
 

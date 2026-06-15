@@ -33,7 +33,7 @@ Rectangle {
             implicitWidth: controlsLayout.rectSize
             Text {
                 color: "white"; font.pixelSize: 30; anchors.centerIn: parent
-                text: "󰂛"
+                text: Icons.sysDnd
             }
 
             onClicked: {
@@ -50,7 +50,7 @@ Rectangle {
             implicitWidth: controlsLayout.rectSize
             Text {
                 color: "white"; font.pixelSize: 28; anchors.centerIn: parent
-                text: "󰂯"
+                text: Icons.sysBluetooth
             }
 
             onClicked: {
@@ -67,7 +67,7 @@ Rectangle {
             implicitWidth: controlsLayout.rectSize
             Text {
                 anchors.centerIn: parent; color: "white"; font.pixelSize: 32
-                text: "󰊗"
+                text: Icons.sysGameMode
             }
 
             onClicked: {
@@ -84,7 +84,7 @@ Rectangle {
             implicitWidth: controlsLayout.rectSize
             Text {
                 color: "white"; font.pixelSize: 26; anchors.centerIn: parent
-                text: "󰅍"
+                text: Icons.sysClipboard
             }
         }
     }
