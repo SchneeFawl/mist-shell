@@ -219,10 +219,12 @@ ClippingRectangle {
                 color: "transparent"
                 btnSize: 40
                 onClicked: {
-                    if (player.activePlayer && player.activePlayer.loopSupported) {
+                    if (player.activePlayer && player.activePlayer.loopSupported && player.activePlayer.loopState === MprisLoopState.None) {
+                        player.activePlayer.loopState = MprisLoopState.Playlist;
+                    } else if (player.activePlayer.loopState === MprisLoopState.Playlist) {
                         player.activePlayer.loopState = MprisLoopState.Track;
                     } else if (player.activePlayer.loopState === MprisLoopState.Track) {
-                        player.activePlayer.loopState = MprisLoopState.Playlist;
+                        player.activePlayer.loopState = MprisLoopState.None;
                     } else {
                         player.activePlayer.loopState = MprisLoopState.None;
                     }
