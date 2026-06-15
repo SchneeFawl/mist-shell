@@ -8,14 +8,13 @@ import qs.services
 // qmllint disable unqualified
 
 ClippingRectangle {
-    id: root
+    id: player
 
     property var activePlayer: MprisController.activePlayer
     property bool isPlaying: MprisController.isPlaying
+    property var mediaCover: (activePlayer && activePlayer.trackArtUrl) ? activePlayer.trackArtUrl : ""
 
-    property real progress: {
-        (activePlayer && activePlayer.length > 0) ? (activePlayer.position / activePlayer.length) : 0
-    }
+    property real progress: (activePlayer && activePlayer.length > 0) ? (activePlayer.position / activePlayer.length) : 0
 
     anchors.fill: parent
     color: "transparent"
@@ -25,8 +24,7 @@ ClippingRectangle {
     // background
     Image {
         id: bgMediaCover
-        source: (root.activePlayer && root.activePlayer.trackArtUrl)
-            ? root.activePlayer.trackArtUrl : ""
+        source: player.mediaCover
         anchors.fill: parent
         asynchronous: true
         fillMode: Image.PreserveAspectCrop
@@ -37,13 +35,14 @@ ClippingRectangle {
     MultiEffect {
         id: blurEffect
         source: bgMediaCover
-        visible: bgMediaCover.source !== ""
+        visible: player.mediaCover !== ""
         anchors.fill: parent
         blurEnabled: true
         blurMax: 48
         blur: 1.0
         opacity: 0.8
         contrast: 0.3
+        brightness: -0.175
     }
 
     ColumnLayout {
@@ -51,32 +50,34 @@ ClippingRectangle {
         anchors.margins: 10
         spacing: 12
 
+        // wrapper for disc + progress ring
         Item {
             id: discWrapper
-            Layout.preferredHeight: 110
-            Layout.preferredWidth: 110
-
+            Layout.preferredHeight: 120
+            Layout.preferredWidth: 120
             Layout.alignment: Qt.AlignHCenter
+            visible: player.mediaCover !== ""
 
             // progress ring
             Shape {
                 anchors.fill: parent
                 layer.enabled: true
-                layer.samples: 4
+                layer.samples: 8
 
                 ShapePath {
-                    strokeColor: themePalette.activeBtnVibrant
-                    strokeWidth: 2
+                    id: discPath
+                    strokeColor: themePalette.statusVibrant
+                    strokeWidth: 4
                     fillColor: "transparent"
                     capStyle: ShapePath.RoundCap
 
                     PathAngleArc {
-                        centerX: 55
-                        centerY: 55
-                        radiusX: 53
-                        radiusY: 53
-                        startAngle: -90
-                        sweepAngle: 360 * progress
+                        centerX: discWrapper.width / 2
+                        centerY: discWrapper.width / 2
+                        radiusX: (discWrapper.width / 2) - discPath.strokeWidth
+                        radiusY: (discWrapper.width / 2) - discPath.strokeWidth
+                        startAngle: -90         // 0 degrees = 3 o'clock
+                        sweepAngle: 360 * player.progress
                     }
                 }
             }
@@ -92,8 +93,7 @@ ClippingRectangle {
                 Image {
                     id: coverArt
                     anchors.centerIn: parent
-                    source: (root.activePlayer && root.activePlayer.trackArtUrl)
-                        ? root.activePlayer.trackArtUrl : ""
+                    source: player.mediaCover
                     sourceSize: Qt.size(discMediaContainer.width, discMediaContainer.width)
                     asynchronous: true
                     mipmap: true
@@ -102,12 +102,26 @@ ClippingRectangle {
         }
     }
 
+    Timer {
+        id: progressTimer
+        interval: 30            // 30 fps
+        repeat: true
+        running: player.activePlayer && player.isPlaying
+        onTriggered: {
+            if (player.activePlayer && player.activePlayer.length > 0) {
+                progress = player.activePlayer.position / player.activePlayer.length;
+            } else {
+                progress = 0
+            }
+        }
+    }
+
     // DEBUG
     // Text {
     //     anchors.centerIn: parent
-    //     color: "black"
-    //     text: root.activePlayer ?
-    //         (root.activePlayer.identity + " | " + root.activePlayer.trackTitle + " | Art: "
-    //         + (root.activePlayer.trackArtUrl ? "yes" : "no")) : "no active player"
+    //     color: "yellow"
+    //     text: player.activePlayer ?
+    //         (player.activePlayer.identity + " | " + player.activePlayer.trackTitle + " | Art: "
+    //         + (player.activePlayer.trackArtUrl ? "yes" : "no")) : "no active player"
     // }
 }
