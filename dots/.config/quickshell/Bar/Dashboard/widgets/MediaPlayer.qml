@@ -21,7 +21,7 @@ ClippingRectangle {
     onActivePlayerChanged: progress = 0
 
     anchors.fill: parent
-    color: "transparent"
+    color: blurEffect.visible ? "transparent" : Colors.pillBorder
     radius: 12
     clip: true
 
@@ -158,7 +158,7 @@ ClippingRectangle {
 
             Text {
                 id: artistName
-                text: player.activePlayer ? player.activePlayer.trackArtist : ""
+                text: player.activePlayer ? player.activePlayer.trackArtist : "-"
                 color: '#c2d1d1'
                 font.pixelSize: 13
                 elide: Text.ElideRight
@@ -178,7 +178,9 @@ ClippingRectangle {
             spacing: 8
 
             MediaControlBtn {
-                icon: Icons.mediaPrevious
+                btnOneIcon: Icons.mediaPrevious
+                btnOneOpacity: 1.0
+
                 iconColor: Colors.textMain
                 color: "transparent"
                 btnSize: 40
@@ -186,7 +188,14 @@ ClippingRectangle {
             }
 
             MediaControlBtn {
-                icon: player.activePlayer && player.isPlaying ? Icons.mediaPause : Icons.mediaPlay
+                btnOneIcon: Icons.mediaPause
+                btnOneOpacity: player.isPlaying ? 1.0 : 0.0
+                btnOneScale: player.isPlaying ? 1.0 : 0.6
+
+                btnTwoIcon: Icons.mediaPlay
+                btnTwoOpacity: !player.isPlaying ? 1.0 : 0.0
+                btnTwoScale: !player.isPlaying ? 1.0 : 0.6
+
                 iconSize: 32 + btnSize - 50
                 btnSize: 58
                 onClicked: {
@@ -199,7 +208,8 @@ ClippingRectangle {
             }
 
             MediaControlBtn {
-                icon: Icons.mediaNext
+                btnOneIcon: Icons.mediaNext
+                btnOneOpacity: 1.0
                 iconColor: Colors.textMain
                 color: "transparent"
                 btnSize: 40
@@ -207,17 +217,22 @@ ClippingRectangle {
             }
 
             MediaControlBtn {       // loop btn
-                icon: {
-                    if (!player.activePlayer) return Icons.mediaLoopNone;
-                    switch (player.activePlayer.loopState) {
-                        case MprisLoopState.Track: return Icons.mediaLoopTrack
-                        case MprisLoopState.Playlist: return Icons.mediaLoopPlaylist
-                        default: return Icons.mediaLoopNone
-                    }
-                }
+                btnOneIcon: Icons.mediaLoopNone
+                btnOneOpacity: player.activePlayer.loopState === MprisLoopState.None ? 1.0 : 0.0
+                btnOneScale: player.activePlayer.loopState === MprisLoopState.None ? 1.0 : 0.8
+
+                btnTwoIcon: Icons.mediaLoopPlaylist
+                btnTwoOpacity: player.activePlayer.loopState === MprisLoopState.Playlist ? 1.0 : 0.0
+                btnTwoScale: player.activePlayer.loopState === MprisLoopState.Playlist ? 1.0 : 0.8
+
+                btnThreeIcon: Icons.mediaLoopTrack
+                btnThreeOpacity: player.activePlayer.loopState === MprisLoopState.Track ? 1.0 : 0.0
+                btnThreeScale: player.activePlayer.loopState === MprisLoopState.Track ? 1.0 : 0.8
+
                 iconColor: Colors.textMain
                 color: "transparent"
                 btnSize: 40
+
                 onClicked: {
                     if (player.activePlayer && player.activePlayer.loopSupported && player.activePlayer.loopState === MprisLoopState.None) {
                         player.activePlayer.loopState = MprisLoopState.Playlist;
