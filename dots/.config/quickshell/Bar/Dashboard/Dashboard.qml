@@ -11,7 +11,13 @@ PopupWindow {
     required property var centerPill
     required property var closeTimer
 
-    visible: active || widthAnimation.running
+    property bool _wasActive: false
+
+    onActiveChanged: {
+        if (active) _wasActive = true;
+    }
+
+    visible: active || (widthAnimation.running && _wasActive)
     color: "transparent"
 
     anchor {
@@ -42,6 +48,12 @@ PopupWindow {
                 id: widthAnimation
                 duration: 250
                 easing.type: Easing.OutCubic
+
+                onRunningChanged: {
+                    if (!running && !dashboardPopup.active) {
+                        dashboardPopup._wasActive = false;
+                    }
+                }
             }
         }
 

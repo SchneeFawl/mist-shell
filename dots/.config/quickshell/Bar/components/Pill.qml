@@ -24,8 +24,7 @@ Item {
         color: Colors.pillBackground
         border.width: 0     // no border
         radius: 12
-
-        // Behavior on border.color { ColorAnimation { duration: 175 } }
+        clip: true
 
         RowLayout {
             id: contentLayout

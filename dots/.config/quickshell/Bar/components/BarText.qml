@@ -6,7 +6,8 @@ Text {
     id: label
 
     property bool isSubText: false
-    property string displayedText: Icons.barMedia + " No media playing"
+    property string displayedText: Icons.barMedia + "  No media playing"
+    property string activeText: ""
     property var player: MprisController.activePlayer
 
     onPlayerChanged: updateDisplayText()
@@ -17,7 +18,24 @@ Text {
     color: isSubText ? Colors.textSub : Colors.textMain
     renderType: Text.NativeRendering
     verticalAlignment: Text.AlignVCenter
+    opacity: 1.0
 
+    Behavior on opacity {
+        NumberAnimation {
+            duration: 230; easing.type: Easing.OutCubic
+        }
+    }
+
+    Timer {
+        id: resetTimer
+        interval: 1000
+        repeat: false
+        onTriggered: {
+            if (!label.player) {
+                label.displayedText = Icons.barMedia + "  No media playing";
+            }
+        }
+    }
 
     Connections {
         target: MprisController.activePlayer
@@ -36,18 +54,20 @@ Text {
         let active = MprisController.activePlayer
 
         if (!active) {
-            label.displayedText = Icons.barMedia + " No Media Playing"
+            resetTimer.start();
             return;
         }
+
+        resetTimer.stop();
         
         let title = active.trackTitle;
         let artist = active.trackArtist;
 
         if (!title || title.trim() === "") {
-            if (displayedText !== Icons.barMedia + " No media playing") return;
+            if (displayedText !== Icons.barMedia + "  No media playing") return;
 
             let name = active.identity ? active.identity : "Media";
-            displayedText = Icons.barMedia + " " + name;
+            displayedText = Icons.barMedia + "  " + name;
             return;
         }
 
@@ -58,6 +78,6 @@ Text {
             actualText = actualText.substring(0, maxChars) + "...";
         }
 
-        label.displayedText = Icons.barMedia + " " + actualText;
+        label.displayedText = Icons.barMedia + "  " + actualText;
     }
 }

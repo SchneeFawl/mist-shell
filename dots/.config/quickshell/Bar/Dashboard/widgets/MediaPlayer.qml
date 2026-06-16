@@ -239,8 +239,10 @@ ClippingRectangle {
         repeat: true
         running: player.activePlayer && player.isPlaying
         onTriggered: {
-            if (player.activePlayer && player.activePlayer.length > 0) {
-                progress = player.activePlayer.position / player.activePlayer.length;
+            let active = player.activePlayer;
+
+            if (active && Mpris.players.values.includes(active) && active.length > 0) {
+                progress = active.position / active.length;
             } else {
                 progress = 0;
             }
@@ -252,7 +254,13 @@ ClippingRectangle {
         interval: 1000
         running: player.activePlayer && player.isPlaying
         repeat: true
-        onTriggered: MprisController.activePlayer.positionChanged();
+        onTriggered: {
+            let active = player.activePlayer
+
+            if (active && Mpris.players.values.includes(active)) {
+                player.activePlayer.positionChanged();
+            }
+        }
     }
 
     // DEBUG:

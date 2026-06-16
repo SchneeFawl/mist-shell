@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Layouts
-import qs.services
 import qs.modules.theme
 import "./Dashboard"
 import "./components"
@@ -18,6 +17,7 @@ Item {
 
         anchors.fill: parent
         implicitWidth: mediaText.width + Variables.pillInnerPadding * 2
+        Behavior on implicitWidth { NumberAnimation { duration: 230; easing.type: Easing.OutCubic } }
 
         opacity: centerModulesRoot.dashboardActive ? 0 : 1
         Behavior on opacity { NumberAnimation { duration: 500; easing.type: Easing.OutCubic } }
@@ -28,7 +28,19 @@ Item {
             color: Colors.textVibrant
             font.pixelSize: 14
             text: displayedText
-            elide: Text.ElideRight
+            
+            // animation
+            onDisplayedTextChanged: opacity = 0.0
+            onOpacityChanged: {
+                if (opacity === 0.0) {
+                    activeText = displayedText;
+                    opacity = 1.0;
+                }
+            }
+            Component.onCompleted: {
+                activeText = displayedText;
+                updateDisplayText();
+            }
         }
     }
 

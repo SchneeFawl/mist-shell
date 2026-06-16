@@ -3,7 +3,6 @@ import Quickshell.Wayland
 import QtQuick
 import QtQuick.Layouts
 import qs.modules.theme
-import "./components"
 
 PanelWindow {       // qmllint disable
     id: barWindow
