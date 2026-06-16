@@ -8,20 +8,31 @@ Rectangle {
 
     property string icon
     property int iconSize: 36
-    property color iconColor: Colors.inactiveAccent
+    property color iconColor: "transparent"
     property int btnSize: 50
 
-    property string btnOneIcon
-    property string btnTwoIcon
-    property string btnThreeIcon
-    property real btnOneOpacity
-    property real btnTwoOpacity
-    property real btnThreeOpacity
-    property real btnOneScale: 1.0
-    property real btnTwoScale: 1.0
-    property real btnThreeScale: 1.0
-
     signal clicked()
+
+    // private properties to manage animation
+    property bool showSecondIcon: false
+    property bool _initialized: false
+
+    onIconChanged: {
+        if (!_initialized) return;
+
+        if (showSecondIcon) {
+            text1.text = icon
+            showSecondIcon = false;
+        } else {
+            text2.text = icon;
+            showSecondIcon = true;
+        }
+    }
+
+    Component.onCompleted: {
+        text1.text = icon;
+        _initialized = true;
+    }
 
     Layout.preferredHeight: btnSize
     Layout.preferredWidth: btnSize
@@ -29,39 +40,26 @@ Rectangle {
     radius: 16
 
     Text {
-        id: btnOne
+        id: text1
         anchors.centerIn: parent
-        text: mediaContBtn.btnOneIcon
+        text: mediaContBtn.icon
         font.pixelSize: mediaContBtn.iconSize
         color: mediaContBtn.iconColor
-        opacity: mediaContBtn.btnOneOpacity
-        scale: mediaContBtn.btnOneScale
+        opacity: mediaContBtn.showSecondIcon ? 0.0 : 1.0
+        scale: mediaContBtn.showSecondIcon ? 0.6 : 1.0
 
         Behavior on opacity { NumberAnimation { duration: 150; easing.type: Easing.OutQuad } }
         Behavior on scale { NumberAnimation { duration: 150; easing.type: Easing.OutBack } }
     }
 
     Text {
-        id: btnTwo
+        id: text2
         anchors.centerIn: parent
-        text: mediaContBtn.btnTwoIcon
+        text: mediaContBtn.icon
         font.pixelSize: mediaContBtn.iconSize
         color: mediaContBtn.iconColor
-        opacity: mediaContBtn.btnTwoOpacity
-        scale: mediaContBtn.btnTwoScale
-
-        Behavior on opacity { NumberAnimation { duration: 150; easing.type: Easing.OutQuad } }
-        Behavior on scale { NumberAnimation { duration: 150; easing.type: Easing.OutBack } }
-    }
-
-    Text {
-        id: btnThree
-        anchors.centerIn: parent
-        text: mediaContBtn.btnThreeIcon
-        font.pixelSize: mediaContBtn.iconSize
-        color: mediaContBtn.iconColor
-        opacity: mediaContBtn.btnThreeOpacity
-        scale: mediaContBtn.btnThreeScale
+        opacity: mediaContBtn.showSecondIcon ? 1.0 : 0.0
+        scale: mediaContBtn.showSecondIcon ? 1.0 : 0.6
 
         Behavior on opacity { NumberAnimation { duration: 150; easing.type: Easing.OutQuad } }
         Behavior on scale { NumberAnimation { duration: 150; easing.type: Easing.OutBack } }

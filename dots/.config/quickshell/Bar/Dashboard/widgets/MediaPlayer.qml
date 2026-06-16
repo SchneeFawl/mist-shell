@@ -177,27 +177,18 @@ ClippingRectangle {
             Layout.alignment: Qt.AlignHCenter
             spacing: 8
 
-            MediaControlBtn {
-                btnOneIcon: Icons.mediaPrevious
-                btnOneOpacity: 1.0
-
+            MediaControlBtn {       // previous btn
+                icon: Icons.mediaPrevious
                 iconColor: Colors.textMain
-                color: "transparent"
                 btnSize: 40
                 onClicked: player.activePlayer.previous()
             }
 
-            MediaControlBtn {
-                btnOneIcon: Icons.mediaPause
-                btnOneOpacity: player.isPlaying ? 1.0 : 0.0
-                btnOneScale: player.isPlaying ? 1.0 : 0.6
-
-                btnTwoIcon: Icons.mediaPlay
-                btnTwoOpacity: !player.isPlaying ? 1.0 : 0.0
-                btnTwoScale: !player.isPlaying ? 1.0 : 0.6
-
+            MediaControlBtn {       // play/pause btn
+                icon: player.isPlaying ? Icons.mediaPause : Icons.mediaPlay
                 iconSize: 32 + btnSize - 50
                 btnSize: 58
+                iconColor: Colors.inactiveAccent
                 onClicked: {
                     if (player.activePlayer && player.isPlaying) {
                         player.activePlayer.pause();
@@ -207,30 +198,23 @@ ClippingRectangle {
                 }
             }
 
-            MediaControlBtn {
-                btnOneIcon: Icons.mediaNext
-                btnOneOpacity: 1.0
+            MediaControlBtn {       // next btn
+                icon: Icons.mediaNext
                 iconColor: Colors.textMain
-                color: "transparent"
                 btnSize: 40
                 onClicked: player.activePlayer.next()
             }
 
             MediaControlBtn {       // loop btn
-                btnOneIcon: Icons.mediaLoopNone
-                btnOneOpacity: player.activePlayer.loopState === MprisLoopState.None ? 1.0 : 0.0
-                btnOneScale: player.activePlayer.loopState === MprisLoopState.None ? 1.0 : 0.8
-
-                btnTwoIcon: Icons.mediaLoopPlaylist
-                btnTwoOpacity: player.activePlayer.loopState === MprisLoopState.Playlist ? 1.0 : 0.0
-                btnTwoScale: player.activePlayer.loopState === MprisLoopState.Playlist ? 1.0 : 0.8
-
-                btnThreeIcon: Icons.mediaLoopTrack
-                btnThreeOpacity: player.activePlayer.loopState === MprisLoopState.Track ? 1.0 : 0.0
-                btnThreeScale: player.activePlayer.loopState === MprisLoopState.Track ? 1.0 : 0.8
-
+                icon: {
+                    if (!player.activePlayer) return Icons.mediaLoopNone;
+                    switch (player.activePlayer.loopState) {
+                        case MprisLoopState.Playlist: return Icons.mediaLoopPlaylist
+                        case MprisLoopState.Track: return Icons.mediaLoopTrack
+                        default: return Icons.mediaLoopNone
+                    }
+                }
                 iconColor: Colors.textMain
-                color: "transparent"
                 btnSize: 40
 
                 onClicked: {
