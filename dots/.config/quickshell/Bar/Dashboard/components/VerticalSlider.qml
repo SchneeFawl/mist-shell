@@ -8,12 +8,12 @@ import qs.modules.theme
 Rectangle {
     Layout.fillWidth: true
     Layout.fillHeight: true
-    Layout.leftMargin: 5
-    Layout.rightMargin: 5
-    Layout.bottomMargin: 5
+    Layout.leftMargin: Variables.dashInnerColSpacing
+    Layout.rightMargin: Variables.dashInnerColSpacing
+    Layout.bottomMargin: Variables.dashInnerColSpacing
 
     color: Colors.inactiveAccent
-    radius: 9
+    radius: Variables.dashInnerRadius
     clip: true
 
     Rectangle {

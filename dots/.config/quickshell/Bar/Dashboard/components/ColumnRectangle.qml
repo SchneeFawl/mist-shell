@@ -1,10 +1,10 @@
 import QtQuick
 import QtQuick.Layouts
-// import "../"
+import qs.modules.theme
 
 Rectangle {
     // color: Colors.pillBackground
     color: "white"
-    radius: 14
+    radius: Variables.dashColumnRadius
     Layout.fillHeight: true
 }

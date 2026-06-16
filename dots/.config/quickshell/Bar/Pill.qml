@@ -6,14 +6,15 @@ import qs.modules.theme
 
 Item {
     id: pillRoot
+
     // anything inside Pill will go into contentLayout
     default property alias pillContent: contentLayout.data
+    property color customBorderColor: Colors.pillBorder
     property int innerPadding: Variables.pillInnerPadding
     property int pillSpacing: 8
-    property color customBorderColor: Colors.pillBorder
 
     implicitWidth: contentLayout.implicitWidth + (innerPadding * 2)
-    implicitHeight: 32
+    implicitHeight: Variables.pillHeight
 
     Behavior on implicitWidth { NumberAnimation { duration: 200; easing.type: Easing.OutCubic } }
 

@@ -45,7 +45,7 @@ RowLayout {
 
     // active window workspace layout panel
     Pill {
-        innerPadding: 8
+        innerPadding: Variables.pillInnerPadding - 4
         Workspaces {}
     }
 }

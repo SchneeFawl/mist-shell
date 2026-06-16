@@ -2,6 +2,7 @@ import Quickshell
 import Quickshell.Wayland
 import QtQuick
 import QtQuick.Layouts
+import qs.modules.theme
 
 PanelWindow {       // qmllint disable
     id: barWindow
@@ -28,11 +29,9 @@ PanelWindow {       // qmllint disable
 
     RowLayout {
         anchors.fill: parent
-        anchors.leftMargin: 16
-        anchors.rightMargin: 16
-        spacing: 0
+        anchors.leftMargin: Variables.sideMargins
+        anchors.rightMargin: Variables.sideMargins
 
-        // modules here
         LeftModules {}
 
         Item { Layout.fillWidth: true }

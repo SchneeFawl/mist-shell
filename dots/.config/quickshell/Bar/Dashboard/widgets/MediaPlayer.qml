@@ -22,7 +22,7 @@ ClippingRectangle {
 
     anchors.fill: parent
     color: blurEffect.visible ? "transparent" : Colors.pillBorder
-    radius: 12
+    radius: Variables.dashColumnRadius
     clip: true
 
     // background
@@ -188,6 +188,7 @@ ClippingRectangle {
                 icon: player.isPlaying ? Icons.mediaPause : Icons.mediaPlay
                 iconSize: 32 + btnSize - 50
                 btnSize: 58
+                bgColor: Colors.activeAccent
                 iconColor: Colors.inactiveAccent
                 onClicked: {
                     if (player.activePlayer && player.isPlaying) {

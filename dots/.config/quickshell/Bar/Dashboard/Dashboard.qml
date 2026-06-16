@@ -31,7 +31,7 @@ PopupWindow {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
 
-        radius: active ? 28 : 14
+        radius: active ? Variables.dashboardRadius : Variables.dashboardRadius / 2
         color: Colors.pillBackground
         border.color: Colors.pillBorder
         border.width: 1

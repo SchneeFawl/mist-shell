@@ -9,39 +9,48 @@ ColumnLayout {
     property int activeOption: 1
 
     anchors.fill: parent
-    spacing: 5
+    spacing: Variables.dashInnerColSpacing
     clip: true
 
     // buttons
     Rectangle {
-        Layout.leftMargin: 5
-        Layout.rightMargin: 5
-        Layout.topMargin: 5
+        Layout.leftMargin: Variables.dashInnerColSpacing
+        Layout.rightMargin: Variables.dashInnerColSpacing
+        Layout.topMargin: Variables.dashInnerColSpacing
         Layout.fillWidth: true
         Layout.preferredHeight: (40*3) + (4*2)
         color: "transparent"
-        radius: 9
+        radius: Variables.dashInnerRadius
 
         ColumnLayout {
             anchors.fill: parent
-            spacing: 4
+            spacing: Variables.dashInnerColSpacing
 
             SliderControlsBtn {
-                Text { text: Icons.sysVolume; color: "white"; font.pixelSize: 24; anchors.centerIn: parent }
+                Text {
+                    text: Icons.sysVolume; color: "white"; anchors.centerIn: parent
+                    font.pixelSize: Variables.dashIconSize
+                }
                 onClicked: {
                     root.activeOption = 1
                 }
                 active: root.activeOption === 1
             }
             SliderControlsBtn {
-                Text { text: Icons.sysMic; color: "white"; font.pixelSize: 24; anchors.centerIn: parent }
+                Text {
+                    text: Icons.sysMic; color: "white"; anchors.centerIn: parent
+                    font.pixelSize: Variables.dashIconSize
+                }
                 onClicked: {
                     root.activeOption = 2
                 }
                 active: root.activeOption === 2
             }
             SliderControlsBtn {
-                Text { text: Icons.sysBrightness; color: "white"; font.pixelSize: 24; anchors.centerIn: parent }
+                Text {
+                    text: Icons.sysBrightness; color: "white"; anchors.centerIn: parent
+                    font.pixelSize: Variables.dashIconSize
+                }
                 onClicked: {
                     root.activeOption = 3
                 }

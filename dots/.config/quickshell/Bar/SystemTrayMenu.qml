@@ -74,7 +74,6 @@ PopupWindow {
 
                         WrapperRectangle {
                             id: submenuItemWrapper
-                            // anchors.fill: parent
                             color: Colors.pillBackground
                             border.color: Colors.pillBorder
                             border.width: 2
@@ -83,7 +82,6 @@ PopupWindow {
                             radius: 8
                             anchors.left: parent.left
                             anchors.top: parent.top
-                            // anchors.rightMargin: 20
                             clip: true
 
                             ColumnLayout {
@@ -274,7 +272,6 @@ PopupWindow {
 
     WrapperRectangle {
         id: menuItemWrapper
-        // anchors.fill: parent
         color: Colors.pillBackground
         border.color: Colors.pillBorder
         border.width: 2
@@ -283,14 +280,13 @@ PopupWindow {
         radius: 8
         anchors.left: parent.left
         anchors.top: parent.top
-        // anchors.leftMargin: 5
         clip: true
 
         Behavior on height {
             NumberAnimation {
                 duration: 150
                 easing.type: Easing.Bezier
-                easing.bezierCurve: [0.38, 0.8, 0.22, 1, 1, 1]  // material ui curve
+                easing.bezierCurve: Variables.muiCurve  // material ui curve
             }
         }
 
@@ -298,7 +294,7 @@ PopupWindow {
             NumberAnimation {
                 duration: 150
                 easing.type: Easing.Bezier
-                easing.bezierCurve: [0.38, 0.8, 0.22, 1, 1, 1]
+                easing.bezierCurve: Variables.muiCurve
             }
         }
 

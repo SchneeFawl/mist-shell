@@ -11,24 +11,22 @@ RowLayout {
     Repeater {
         model: Hyprland.workspaces
 
-        delegate: Item { 	// the delegate
+        delegate: Item {
             id: workspaceSlot
             required property var modelData
 
-            implicitWidth: 24
-            implicitHeight: 24
+            implicitWidth: Variables.workspaceOuterSize
+            implicitHeight: Variables.workspaceOuterSize
 
             Rectangle {         // outer ring of the Repeater
                 id: outerRing
                 anchors.centerIn: parent
 
-                width: modelData.active ? 22 : 10
-                height: modelData.active ? 22 : 10
+                width: modelData.active ? Variables.workspaceOuterSize : 10
+                height: modelData.active ? Variables.workspaceOuterSize : 10
                 radius: width / 2
 
                 color: Colors.inactiveAccent
-                // border.color: Colors.activeAccent
-                // border.width: 1
 
                 opacity: modelData.active ? 1.0 : 0
 
@@ -52,13 +50,13 @@ RowLayout {
                 }
             }
 
-            Rectangle {		// the core center dot indicator
+            Rectangle {		// center dot indicator
                 id: centerDot
                 anchors.centerIn: parent
 
-                width: 6
-                height: 6
-                radius: 3
+                width: Variables.workspaceInnerSize
+                height: Variables.workspaceInnerSize
+                radius: Variables.workspaceInnerSize / 2
 
                 color: modelData.active ? Colors.activeAccent : Colors.inactiveAccent
 

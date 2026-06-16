@@ -37,6 +37,7 @@ QtObject {
     readonly property string navApps: "󰀻"
     readonly property string navSystemInfo: ""
     readonly property string navMusic: "󰽴"
+    readonly property string navTheme: "󰏘"
 
     // General controls/actions
     readonly property string actionClear: "󰃢"

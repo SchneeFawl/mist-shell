@@ -7,11 +7,13 @@ import qs.modules.theme
 // qmllint disable unqualified
 
 ColumnLayout {
+    id: notifListRoot
+
     property bool active: false
 
     anchors.fill: parent
-    anchors.margins: 5
-    spacing: 5
+    anchors.margins: Variables.dashInnerColSpacing
+    spacing: Variables.dashInnerColSpacing
 
     NotifListRect {
         onClicked: {
@@ -28,7 +30,7 @@ ColumnLayout {
 
         Layout.fillHeight: true
         Layout.fillWidth: true
-        radius: 9
+        radius: Variables.dashInnerRadius
         color: "transparent"
 
         clip: true
@@ -36,7 +38,7 @@ ColumnLayout {
         ListView {
             anchors.fill: parent
             clip: true
-            spacing: 4
+            spacing: Variables.dashInnerColSpacing
             model: Notifications.trackedNotifications
 
             property Transition entryTransition: Transition {
@@ -84,7 +86,7 @@ ColumnLayout {
                 implicitHeight: 100
                 implicitWidth: parentRect.width
                 color: Colors.inactiveAccent
-                radius: 9
+                radius: notifListRoot.fixedRadius
                 clip: true
 
                 ColumnLayout {

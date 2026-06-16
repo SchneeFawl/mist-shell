@@ -14,7 +14,7 @@ Rectangle {
     color: Colors.pillBorder
     implicitHeight: 80
     implicitWidth: rootWidth
-    radius: 24
+    radius: Variables.dashboardRadius - 4
     anchors.horizontalCenter: parent.horizontalCenter
     clip: true
 
@@ -23,7 +23,7 @@ Rectangle {
         anchors.fill: parent
         anchors.leftMargin: 10
         anchors.rightMargin: 10
-        spacing: 5
+        spacing: Variables.dashInnerColSpacing
         clip: true
 
         property int rectSize: 60

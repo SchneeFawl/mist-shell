@@ -1,5 +1,6 @@
 import QtQuick
 import "./widgets"
+// import qs.modules.theme
 
 Rectangle {
     id: root
@@ -14,7 +15,6 @@ Rectangle {
     anchors.fill: parent
     // color: Colors.pillBorder
     color: "transparent"
-    radius: 12
 
     MediaPlayer {
         visible: parent.activeTab === 1

@@ -7,7 +7,7 @@ Rectangle {
     property bool active: false
     signal clicked()
 
-    radius: 14
+    radius: Variables.dashColumnRadius
     color: active ? Colors.activeBtnVibrant : Colors.inactiveAccent
 
     Behavior on color {

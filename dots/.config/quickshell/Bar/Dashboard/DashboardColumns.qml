@@ -10,7 +10,7 @@ RowLayout {
     property int activeTab: 1           // defaults to media mode
     property bool active: false
 
-    spacing: 5
+    spacing: Variables.dashInnerColSpacing
     anchors.margins: 16
     anchors.fill: parent
     clip: true
@@ -36,6 +36,7 @@ RowLayout {
     // main content
     ColumnRectangle {
         Layout.fillWidth: true
+        Layout.fillHeight: true
         color: "transparent"
 
         MainContent {
@@ -50,7 +51,7 @@ RowLayout {
 
         ColumnLayout {
             anchors.fill: parent
-            spacing: 5
+            spacing: Variables.dashInnerColSpacing
 
             Rectangle {
                 Layout.fillWidth: true

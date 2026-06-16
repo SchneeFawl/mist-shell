@@ -8,7 +8,8 @@ Rectangle {
 
     property string icon
     property int iconSize: 36
-    property color iconColor: "transparent"
+    property color iconColor: Colors.inactiveAccent
+    property color bgColor: "transparent"
     property int btnSize: 50
 
     signal clicked()
@@ -36,8 +37,16 @@ Rectangle {
 
     Layout.preferredHeight: btnSize
     Layout.preferredWidth: btnSize
-    color: Colors.textVibrant
+    color: bgColor
     radius: 16
+    scale: btnMouseArea.pressed ? 0.85 : 1.0
+
+    Behavior on scale {
+        NumberAnimation {
+            duration: 100
+            easing.type: Easing.OutQuad
+        }
+    }
 
     Text {
         id: text1
@@ -66,6 +75,7 @@ Rectangle {
     }
 
     MouseArea {
+        id: btnMouseArea
         anchors.fill: parent
         onClicked: mediaContBtn.clicked()
     }

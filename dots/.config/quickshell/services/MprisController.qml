@@ -8,9 +8,7 @@ Item {
     id: controllerRoot
 
     property var activePlayer: null
-    property bool isPlaying: {
-        activePlayer ? activePlayer.playbackState === MprisPlaybackState.Playing : false
-    }
+    property bool isPlaying: activePlayer ? activePlayer.playbackState === MprisPlaybackState.Playing : false
 
     // scanner to find the playing player
     function updateTrackedPlayer() {

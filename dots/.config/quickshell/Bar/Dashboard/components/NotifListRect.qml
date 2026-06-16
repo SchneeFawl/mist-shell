@@ -11,7 +11,7 @@ Rectangle {
 
     Layout.fillWidth: true
     Layout.preferredHeight: 36
-    radius: 9
+    radius: Variables.dashInnerRadius
     color: "transparent"
     clip: true
 
@@ -24,7 +24,7 @@ Rectangle {
             Layout.fillHeight: true
             Layout.fillWidth: true
             color: Colors.inactiveAccent
-            radius: 9
+            radius: Variables.dashInnerRadius
             clip: true
 
             Text {
@@ -55,7 +55,7 @@ Rectangle {
                 color: "white"
                 anchors.centerIn: parent
                 text: Icons.actionClear
-                font.pixelSize: 24
+                font.pixelSize: Variables.dashIconSize
             }
 
             MouseArea {

@@ -11,7 +11,6 @@ Rectangle {
     id: navWrapper
     anchors.fill: parent
     color: "transparent"
-    radius: 12
 
     ColumnLayout {
         spacing: 2
@@ -20,12 +19,11 @@ Rectangle {
         NavButton {
             id: mediaModeBtn
             icon: Icons.navMusic
-            iconSize: 20
+            iconSize: Variables.dashIconSize - 4
 
             onClicked: {
                 navWrapper.activeTab = 1;
                 navWrapper.tabSelected(1);
-                // console.log("Clicked Tab 1")
             }
 
             active: navWrapper.activeTab === 1
@@ -34,7 +32,7 @@ Rectangle {
         NavButton {
             id: systemInfoBtn
             icon: Icons.navSystemInfo
-            iconSize: 24
+            iconSize: Variables.dashIconSize
 
             onClicked: {
                 navWrapper.activeTab = 2;
@@ -47,8 +45,8 @@ Rectangle {
 
         NavButton {
             id: themeBtn
-            icon: "󰏘"
-            iconSize: 24
+            icon: Icons.navTheme
+            iconSize: Variables.dashIconSize
 
             onClicked: {
                 navWrapper.activeTab = 3;
@@ -62,7 +60,7 @@ Rectangle {
         NavButton {
             id: appSelectBtn
             icon: Icons.navApps
-            iconSize: 22
+            iconSize: Variables.dashIconSize - 2
 
             onClicked: {
                 navWrapper.activeTab = 4;
@@ -78,7 +76,7 @@ Rectangle {
         NavButton {
             id: settingsBtn
             icon: Icons.sysSettings
-            iconSize: 24
+            iconSize: Variables.dashIconSize
             btnBgColor: "#2c3149"
 
             onClicked: {

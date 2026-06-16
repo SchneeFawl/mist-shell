@@ -15,7 +15,7 @@ Rectangle {
 
     implicitWidth: 50
     implicitHeight: 50
-    radius: 14
+    radius: Variables.dashColumnRadius
     color: active ? Colors.activeBtnVibrant : btnBgColor
     clip: true
 
