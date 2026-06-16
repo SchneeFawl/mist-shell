@@ -8,9 +8,9 @@ QtObject {
     property color pillBackground: "#1a2121"
     property color pillBorder: "#3f4948"
 
-    // text colors:
+    // text colors (general):
     property color textMain: "#dde4e3"
-    property color textSub: '#b2bebe'
+    property color textSub: "#b2bebe"
     property color textVibrant: "#9cf1f1"
 
     // state colors:
@@ -18,5 +18,9 @@ QtObject {
     property color inactiveAccent: "#252b2b"    // sleeping components
     property color statusVibrant: "#b3c8e9"     // media text elements
     property color activeBtnVibrant: "#004f50"
-}
 
+    // dashboard colors:
+    property color mediaPlayerDim: "#c2d1d1"
+    property color mediaPlayerTitle: "#f1f5f4"
+    property color mediaPlayerArtist: "#c2d1d1"
+}

@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import qs.modules.theme
+import "./components"
 
 RowLayout {
     spacing: Variables.pillOuterSpacing

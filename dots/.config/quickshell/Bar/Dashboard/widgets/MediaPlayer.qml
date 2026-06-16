@@ -125,7 +125,7 @@ ClippingRectangle {
                 text: player.activePlayer ?
                     (formatTime(player.activePlayer.position) + " / " + formatTime(player.activePlayer.length))
                     : "--:--"
-                color: '#c2d1d1'
+                color: Colors.mediaPlayerDim
                 font.pixelSize: 10
                 Layout.fillWidth: true
                 horizontalAlignment: Text.AlignHCenter
@@ -148,7 +148,7 @@ ClippingRectangle {
             Text {
                 id: songTitle
                 text: player.activePlayer ? player.activePlayer.trackTitle : "No media playing"
-                color: '#f1f5f4'
+                color: Colors.mediaPlayerTitle
                 font.bold: true
                 font.pixelSize: 18
                 elide: Text.ElideRight
@@ -159,7 +159,7 @@ ClippingRectangle {
             Text {
                 id: artistName
                 text: player.activePlayer ? player.activePlayer.trackArtist : "-"
-                color: '#c2d1d1'
+                color: Colors.mediaPlayerArtist
                 font.pixelSize: 13
                 elide: Text.ElideRight
                 Layout.fillWidth: true

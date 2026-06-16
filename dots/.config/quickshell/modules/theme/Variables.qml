@@ -17,6 +17,7 @@ QtObject {
     readonly property int sideMargins: 16
     readonly property int workspaceOuterSize: 24
     readonly property int workspaceInnerSize: 8
+    readonly property int maxBarMediaChars: 64
 
     // Dashboard
     readonly property int dashboardRadius: 28

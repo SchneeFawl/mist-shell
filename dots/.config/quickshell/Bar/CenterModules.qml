@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import qs.services
 import qs.modules.theme
 import "./Dashboard"
+import "./components"
 
 Item {
     id: centerModulesRoot
@@ -14,26 +15,20 @@ Item {
 
     Pill {
         id: centerMediaPill
+
         anchors.fill: parent
+        implicitWidth: mediaText.width + Variables.pillInnerPadding * 2
 
         opacity: centerModulesRoot.dashboardActive ? 0 : 1
-        Behavior on opacity { NumberAnimation { duration: 500 } }
+        Behavior on opacity { NumberAnimation { duration: 500; easing.type: Easing.OutCubic } }
 
-        RowLayout {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-
-            BarText {
-                property var activePlayer: MprisController.activePlayer
-
-                Layout.alignment: Qt.AlignCenter
-                color: Colors.textVibrant
-                font.pixelSize: 14
-                text: MprisController.activePlayer ?
-                    Icons.barMedia + "  " + activePlayer.trackTitle + " - " + activePlayer.trackArtist
-                    : Icons.barMedia + " No media playing"
-                elide: Text.ElideRight
-            }
+        BarText {
+            id: mediaText
+            Layout.alignment: Qt.AlignCenter
+            color: Colors.textVibrant
+            font.pixelSize: 14
+            text: displayedText
+            elide: Text.ElideRight
         }
     }
 
