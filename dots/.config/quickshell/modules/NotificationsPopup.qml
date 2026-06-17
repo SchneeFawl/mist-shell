@@ -73,7 +73,7 @@ PanelWindow {           // qmllint disable uncreatable-type
             implicitHeight: 80
             implicitWidth: notifPopup.width
             color: Colors.inactiveAccent
-            border.color: Colors.pillBorder
+            border.color: Colors.border
             border.width: 2
             radius: 12
             clip: true

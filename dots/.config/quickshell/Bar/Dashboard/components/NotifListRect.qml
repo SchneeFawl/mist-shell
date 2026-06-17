@@ -40,7 +40,7 @@ Rectangle {
             id: notifClearBtn
             Layout.fillHeight: true
             Layout.preferredWidth: notifTextContainer.height
-            color: notifClearMouse.pressed ? Colors.activeBtnVibrant : Colors.inactiveAccent
+            color: notifClearMouse.pressed ? Colors.activeVibrant : Colors.inactiveAccent
             radius: width / 2
             clip: true
 

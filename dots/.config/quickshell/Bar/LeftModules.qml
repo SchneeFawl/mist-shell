@@ -11,12 +11,11 @@ RowLayout {
         BarText {
             text: Icons.barIcon
             color: Colors.activeAccent
-            font.pixelSize: 20
+            font.pixelSize: 18
             Layout.alignment: Qt.AlignCenter
         }
         BarText {
             text: "mist"
-            font.weight: Font.DemiBold
             Layout.alignment: Qt.AlignCenter
         }
     }
@@ -37,7 +36,7 @@ RowLayout {
                 id: keybindText
                 anchors.centerIn: parent
                 text: Icons.barShortcuts
-                font.pixelSize: 24
+                font.pixelSize: 18
                 color: Colors.activeAccent
             }
             onClicked: console.log("trigger keybinds help menu")

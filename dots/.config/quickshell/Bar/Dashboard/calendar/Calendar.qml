@@ -13,7 +13,7 @@ Rectangle {
 
     Layout.fillWidth: true
     Layout.fillHeight: true
-    color: Colors.pillBorder
+    color: Colors.border
     radius: 14
 
     ColumnLayout {
@@ -148,7 +148,7 @@ Rectangle {
                     delegate: Rectangle {
                         Layout.fillHeight: true
                         Layout.fillWidth: true
-                        color: Colors.pillBorder
+                        color: Colors.border
                         radius: 5
 
                         Text {

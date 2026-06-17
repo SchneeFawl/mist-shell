@@ -21,7 +21,7 @@ ClippingRectangle {
     onActivePlayerChanged: progress = 0
 
     anchors.fill: parent
-    color: blurEffect.visible ? "transparent" : Colors.pillBorder
+    color: blurEffect.visible ? "transparent" : Colors.border
     radius: Variables.dashColumnRadius
     clip: true
 
@@ -68,7 +68,7 @@ ClippingRectangle {
 
                 ShapePath {
                     id: discPath
-                    strokeColor: Colors.statusVibrant
+                    strokeColor: Colors.activeAccent
                     strokeWidth: 4
                     fillColor: "transparent"
                     capStyle: ShapePath.RoundCap
@@ -125,7 +125,7 @@ ClippingRectangle {
                 text: player.activePlayer ?
                     (formatTime(player.activePlayer.position) + " / " + formatTime(player.activePlayer.length))
                     : "--:--"
-                color: Colors.mediaPlayerDim
+                color: Colors.textSub
                 font.pixelSize: 10
                 Layout.fillWidth: true
                 horizontalAlignment: Text.AlignHCenter
@@ -148,7 +148,7 @@ ClippingRectangle {
             Text {
                 id: songTitle
                 text: player.activePlayer ? player.activePlayer.trackTitle : "No media playing"
-                color: Colors.mediaPlayerTitle
+                color: Colors.textVibrant
                 font.bold: true
                 font.pixelSize: 18
                 elide: Text.ElideRight
@@ -159,7 +159,7 @@ ClippingRectangle {
             Text {
                 id: artistName
                 text: player.activePlayer ? player.activePlayer.trackArtist : "-"
-                color: Colors.mediaPlayerArtist
+                color: Colors.textMain
                 font.pixelSize: 13
                 elide: Text.ElideRight
                 Layout.fillWidth: true

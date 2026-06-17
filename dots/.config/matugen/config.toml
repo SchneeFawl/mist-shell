@@ -1,0 +1,6 @@
+[config]
+version_check = false
+
+[templates.mist_colors]
+input_path = "~/.config/matugen/templates/colors.json"
+output_path = "~/.config/quickshell/modules/theme/colors.json"

@@ -1,26 +1,39 @@
 pragma Singleton
 import QtQuick
+import Quickshell.Io
 
-QtObject {
+// qmllint disable unresolved-type
+
+FileView {
     id: colors
+    path: Qt.resolvedUrl("./colors.json")
+    watchChanges: true
+    preload: true
 
-    // base bg layers:
-    property color pillBackground: "#1a2121"
-    property color pillBorder: "#3f4948"
+    adapter: JsonAdapter {
+        // base bg layers:
+        property color background: "#101418"
+        property color border: "#42474e"
 
-    // text colors (general):
-    property color textMain: "#dde4e3"
-    property color textSub: "#b2bebe"
-    property color textVibrant: "#9cf1f1"
+        // text colors (general):
+        property color textMain: "#e0e2e8"
+        property color textSub: "#c2c7cf"
+        property color textVibrant: "#b9c8da"
 
-    // state colors:
-    property color activeAccent: "#80d4d5"      // indicator states
-    property color inactiveAccent: "#252b2b"    // sleeping components
-    property color statusVibrant: "#b3c8e9"     // media text elements
-    property color activeBtnVibrant: "#004f50"
+        // state colors:
+        property color activeAccent: "#9bcbfb"      // indicator states
+        property color inactiveAccent: "#d3bfe6"    // sleeping components
+        property color activeVibrant: "#42474e"
+    }
+    
+    property color background: adapter.background
+    property color border: adapter.border
 
-    // dashboard colors:
-    property color mediaPlayerDim: "#c2d1d1"
-    property color mediaPlayerTitle: "#f1f5f4"
-    property color mediaPlayerArtist: "#c2d1d1"
+    property color textMain: adapter.textMain
+    property color textSub: adapter.textSub
+    property color textVibrant: adapter.textVibrant
+
+    property color activeAccent: adapter.activeAccent
+    property color inactiveAccent: adapter.inactiveAccent
+    property color activeVibrant: adapter.activeVibrant
 }

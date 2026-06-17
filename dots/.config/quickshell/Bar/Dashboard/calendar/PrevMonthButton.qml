@@ -9,7 +9,7 @@ Rectangle {
     implicitHeight: 28
     implicitWidth: 28
     radius: width / 2
-    color: prevHover.hovered ? Colors.activeBtnVibrant : "black"
+    color: prevHover.hovered ? Colors.activeVibrant : "black"
 
     Behavior on color {
         ColorAnimation {

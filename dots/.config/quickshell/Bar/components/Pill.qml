@@ -9,7 +9,7 @@ Item {
 
     // anything inside Pill will go into contentLayout
     default property alias pillContent: contentLayout.data
-    property color customBorderColor: Colors.pillBorder
+    property color customBorderColor: Colors.border
     property int innerPadding: Variables.pillInnerPadding
     property int pillSpacing: 8
 
@@ -21,8 +21,7 @@ Item {
     Rectangle {
         id: bgRect
         anchors.fill: parent
-        color: Colors.pillBackground
-        border.width: 0     // no border
+        color: Colors.background
         radius: 12
         clip: true
 

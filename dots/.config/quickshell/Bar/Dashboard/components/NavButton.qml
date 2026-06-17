@@ -8,7 +8,7 @@ Rectangle {
 
     property string icon: ""
     property int iconSize: 20
-    property color btnBgColor: Colors.pillBackground
+    property color btnBgColor: Colors.background
     property bool active: false
 
     signal clicked()
@@ -16,7 +16,7 @@ Rectangle {
     implicitWidth: 50
     implicitHeight: 50
     radius: Variables.dashColumnRadius
-    color: active ? Colors.activeBtnVibrant : btnBgColor
+    color: active ? Colors.activeVibrant : btnBgColor
     clip: true
 
     Behavior on color {

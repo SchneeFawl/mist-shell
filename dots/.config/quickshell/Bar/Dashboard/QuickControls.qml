@@ -11,7 +11,7 @@ Rectangle {
     property bool bluetoothActive: false
     property bool dndActive: false
 
-    color: Colors.pillBorder
+    color: Colors.border
     implicitHeight: 80
     implicitWidth: rootWidth
     radius: Variables.dashboardRadius - 4

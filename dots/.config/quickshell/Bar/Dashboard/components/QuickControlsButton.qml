@@ -8,7 +8,7 @@ Rectangle {
     signal clicked()
 
     radius: Variables.dashColumnRadius
-    color: active ? Colors.activeBtnVibrant : Colors.inactiveAccent
+    color: active ? Colors.activeVibrant : Colors.inactiveAccent
 
     Behavior on color {
         ColorAnimation {

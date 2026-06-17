@@ -5,7 +5,8 @@ QtObject {
     id: variables
 
     // General
-    readonly property string defaultFontFamily: "Maple Mono Normal"
+    readonly property string defaultFontFamily: "GeistMono Nerd Font"
+    readonly property int defaultFontWeight: 500
 
     // Animations
     readonly property var muiCurve: [0.38, 0.8, 0.22, 1, 1, 1]

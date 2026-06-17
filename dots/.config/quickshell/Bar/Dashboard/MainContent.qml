@@ -13,7 +13,7 @@ Rectangle {
     property string settingsText: "Settings Placeholder"
 
     anchors.fill: parent
-    // color: Colors.pillBorder
+    // color: Colors.border
     color: "transparent"
 
     MediaPlayer {

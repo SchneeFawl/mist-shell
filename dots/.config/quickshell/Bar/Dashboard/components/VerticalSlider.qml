@@ -25,7 +25,7 @@ Rectangle {
         anchors.centerIn: parent
         implicitHeight: 200
         implicitWidth: 16
-        color: Colors.pillBackground
+        color: Colors.background
         radius: width / 2
 
         // filled rect

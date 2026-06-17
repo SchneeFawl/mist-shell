@@ -74,8 +74,8 @@ PopupWindow {
 
                         WrapperRectangle {
                             id: submenuItemWrapper
-                            color: Colors.pillBackground
-                            border.color: Colors.pillBorder
+                            color: Colors.background
+                            border.color: Colors.border
                             border.width: 2
                             width: customSubmenuPopup.visible ? parent.width : 0
                             height: customSubmenuPopup.visible ? parent.height : 0
@@ -157,7 +157,7 @@ PopupWindow {
                         border.width: 1
                         border.color: modelData ? (modelData.checkState === 0 ? Colors.inactiveAccent : Colors.activeAccent) : ""
                         radius: 4
-                        color: modelData ? (modelData.checkState === 0 ? "transparent" : Colors.pillBorder) : ""
+                        color: modelData ? (modelData.checkState === 0 ? "transparent" : Colors.border) : ""
 
                         Text {
                             anchors.centerIn: parent
@@ -176,7 +176,7 @@ PopupWindow {
                         height: 16
                         width: 16
                         border.width: 1
-                        border.color: Colors.pillBorder
+                        border.color: Colors.border
                         radius: 4
                         color: modelData ? (modelData.checkState === 2 ? Colors.activeAccent : Colors.inactiveAccent) : ""
 
@@ -272,8 +272,8 @@ PopupWindow {
 
     WrapperRectangle {
         id: menuItemWrapper
-        color: Colors.pillBackground
-        border.color: Colors.pillBorder
+        color: Colors.background
+        border.color: Colors.border
         border.width: 2
         width: customMenuPopup.visible ? parent.width : 0
         height: customMenuPopup.visible ? parent.height : 0

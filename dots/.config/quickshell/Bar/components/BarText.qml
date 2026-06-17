@@ -14,7 +14,7 @@ Text {
 
     font.family: Variables.defaultFontFamily
     font.pixelSize: isSubText ? 11 : 13
-    font.weight: isSubText ? Font.Normal : Font.Bold
+    font.weight: isSubText ? Variables.defaultFontWeight - 100 : Variables.defaultFontWeight
     color: isSubText ? Colors.textSub : Colors.textMain
     renderType: Text.NativeRendering
     verticalAlignment: Text.AlignVCenter

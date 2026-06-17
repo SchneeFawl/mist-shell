@@ -63,14 +63,12 @@ RowLayout {
                 anchors.centerIn: parent
                 text: Icons.sysVolume
                 color: Colors.activeAccent
-                font.pixelSize: 20
+                font.pixelSize: 18
             }
-            onClicked: {
-                Quickshell.execDetached(["pavucontrol"]);
-            }
+            onClicked: Quickshell.execDetached(["sh", "-c", "pavucontrol"]);
         }
 
-        MouseArea {     // power actions dashboard
+        MouseArea {     // power actions
             implicitWidth: 30
             Layout.fillHeight: true
             cursorShape: Qt.PointingHandCursor
@@ -79,7 +77,7 @@ RowLayout {
                 anchors.centerIn: parent
                 text: Icons.powerIcon
                 color: "#F7768E"
-                font.pixelSize: 20
+                font.pixelSize: 18
             }
             onClicked: console.log("trigger custom power actions")
         }

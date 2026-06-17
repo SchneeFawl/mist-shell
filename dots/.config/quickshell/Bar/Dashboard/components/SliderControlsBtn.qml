@@ -10,7 +10,7 @@ Rectangle {
 
     Layout.fillWidth: true
     Layout.fillHeight: true
-    color: active ? Colors.activeBtnVibrant : Colors.inactiveAccent
+    color: active ? Colors.activeVibrant : Colors.inactiveAccent
     radius: Variables.dashInnerRadius
 
     Behavior on color {

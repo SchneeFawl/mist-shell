@@ -1,0 +1,10 @@
+{
+  "background": "{{colors.background.default.hex}}",
+  "border": "{{colors.outline_variant.default.hex}}",
+  "textMain": "{{colors.on_surface.default.hex}}",
+  "textSub": "{{colors.on_surface_variant.default.hex}}",
+  "textVibrant": "{{colors.secondary.default.hex}}",
+  "activeAccent": "{{colors.primary.default.hex}}",
+  "inactiveAccent": "{{colors.tertiary.default.hex}}",
+  "activeVibrant": "{{colors.surface_variant.default.hex}}"
+}
