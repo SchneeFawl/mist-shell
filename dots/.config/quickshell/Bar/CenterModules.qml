@@ -27,19 +27,32 @@ Item {
             Layout.alignment: Qt.AlignCenter
             color: Colors.textVibrant
             font.pixelSize: 14
-            text: displayedText
-            
-            // animation
-            onDisplayedTextChanged: opacity = 0.0
-            onOpacityChanged: {
-                if (opacity === 0.0) {
-                    activeText = displayedText;
-                    opacity = 1.0;
+            text: activeText
+
+            onDisplayedTextChanged: textSwapAnim.restart()
+
+            SequentialAnimation {
+                id: textSwapAnim
+
+                NumberAnimation {
+                    target: mediaText
+                    property: "opacity"
+                    to: 0.0
+                    duration: 150
+                    easing.type: Easing.OutQuad
                 }
-            }
-            Component.onCompleted: {
-                activeText = displayedText;
-                updateDisplayText();
+
+                ScriptAction {
+                    script: mediaText.activeText = mediaText.displayedText
+                }
+
+                NumberAnimation {
+                    target: mediaText
+                    property: "opacity"
+                    to: 1.0
+                    duration: 150
+                    easing.type: Easing.OutQuad
+                }
             }
         }
     }

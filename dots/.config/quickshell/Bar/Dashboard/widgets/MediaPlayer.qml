@@ -181,7 +181,7 @@ ClippingRectangle {
                 icon: Icons.mediaPrevious
                 iconColor: Colors.textMain
                 btnSize: 40
-                onClicked: player.activePlayer.previous()
+                onClicked: player.activePlayer.canGoPrevious ? player.activePlayer.previous() : null
             }
 
             MediaControlBtn {       // play/pause btn
@@ -203,7 +203,7 @@ ClippingRectangle {
                 icon: Icons.mediaNext
                 iconColor: Colors.textMain
                 btnSize: 40
-                onClicked: player.activePlayer.next()
+                onClicked: player.activePlayer.canGoNext ? player.activePlayer.next() : null
             }
 
             MediaControlBtn {       // loop btn
@@ -262,13 +262,4 @@ ClippingRectangle {
             }
         }
     }
-
-    // DEBUG:
-    // Text {
-    //     anchors.centerIn: parent
-    //     color: "yellow"
-    //     text: player.activePlayer ?
-    //         (player.activePlayer.identity + " | " + player.activePlayer.trackTitle + " | Art: "
-    //         + (player.activePlayer.trackArtUrl ? "yes" : "no")) : "no active player"
-    // }
 }

@@ -4,7 +4,7 @@ import QtQuick
 QtObject {
     id: variables
 
-    // Overall
+    // General
     readonly property string defaultFontFamily: "Maple Mono Normal"
 
     // Animations
@@ -17,7 +17,7 @@ QtObject {
     readonly property int sideMargins: 16
     readonly property int workspaceOuterSize: 24
     readonly property int workspaceInnerSize: 8
-    readonly property int maxBarMediaChars: 64
+    readonly property int maxBarMediaChars: 48
 
     // Dashboard
     readonly property int dashboardRadius: 28

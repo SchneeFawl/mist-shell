@@ -86,7 +86,7 @@ ColumnLayout {
                 implicitHeight: 100
                 implicitWidth: parentRect.width
                 color: Colors.inactiveAccent
-                radius: notifListRoot.fixedRadius
+                radius: Variables.dashInnerRadius
                 clip: true
 
                 ColumnLayout {

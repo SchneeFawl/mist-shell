@@ -20,12 +20,6 @@ Text {
     verticalAlignment: Text.AlignVCenter
     opacity: 1.0
 
-    Behavior on opacity {
-        NumberAnimation {
-            duration: 230; easing.type: Easing.OutCubic
-        }
-    }
-
     Timer {
         id: resetTimer
         interval: 1000
