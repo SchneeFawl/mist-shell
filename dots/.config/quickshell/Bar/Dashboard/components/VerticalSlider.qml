@@ -12,7 +12,7 @@ Rectangle {
     Layout.rightMargin: Variables.dashInnerColSpacing
     Layout.bottomMargin: Variables.dashInnerColSpacing
 
-    color: Colors.inactiveAccent
+    color: Colors.surface_variant
     radius: Variables.dashInnerRadius
     clip: true
 
@@ -25,7 +25,7 @@ Rectangle {
         anchors.centerIn: parent
         implicitHeight: 200
         implicitWidth: 16
-        color: Colors.background
+        color: Colors.surface_container_low
         radius: width / 2
 
         // filled rect
@@ -35,7 +35,7 @@ Rectangle {
             height: parent.height * sliderRoot.value
             anchors.bottom: parent.bottom       // fills from bottom
             radius: parent.radius
-            color: Colors.activeAccent
+            color: Colors.primary
         }
 
         MouseArea {

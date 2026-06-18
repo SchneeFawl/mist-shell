@@ -85,23 +85,24 @@ ColumnLayout {
             delegate: Rectangle {
                 implicitHeight: 100
                 implicitWidth: parentRect.width
-                color: Colors.inactiveAccent
+                color: Colors.secondary_container
                 radius: Variables.dashInnerRadius
                 clip: true
 
                 ColumnLayout {
                     anchors.fill: parent
-                    anchors.margins: 7
+                    anchors.margins: 8
+                    spacing: 4
                     clip: true
 
                     Text {
-                        color: Colors.textVibrant
+                        color: Colors.textMain
                         text: modelData.appName
                         font.pixelSize: 14
                     }
 
                     Text {
-                        color: Colors.textMain
+                        color: Colors.textVibrant
                         text: modelData.summary
                         font.pixelSize: 12
                     }

@@ -15,7 +15,7 @@ Text {
     font.family: Variables.defaultFontFamily
     font.pixelSize: isSubText ? 11 : 13
     font.weight: isSubText ? Variables.defaultFontWeight - 100 : Variables.defaultFontWeight
-    color: isSubText ? Colors.textSub : Colors.primary
+    color: isSubText ? Colors.textSub : Colors.primary_fixed
     renderType: Text.NativeRendering
     verticalAlignment: Text.AlignVCenter
     opacity: 1.0
@@ -65,7 +65,7 @@ Text {
             return;
         }
 
-        let actualText = artist ? (title + " - " + artist) : title;
+        let actualText = artist ? (title + " " + Icons.dot + " " + artist) : title;
         let maxChars = Variables.maxBarMediaChars;
         
         if (actualText.length > maxChars) {

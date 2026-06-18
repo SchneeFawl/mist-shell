@@ -9,7 +9,7 @@ Rectangle {
     implicitHeight: 28
     implicitWidth: 28
     radius: width / 2
-    color: nextHover.hovered ? Colors.activeVibrant : "black"
+    color: nextHover.hovered ? Colors.surface_container_highest : Colors.surface_container_high
 
     Behavior on color {
         ColorAnimation {

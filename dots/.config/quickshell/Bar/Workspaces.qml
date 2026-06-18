@@ -26,7 +26,7 @@ RowLayout {
                 height: modelData.active ? Variables.workspaceOuterSize : 10
                 radius: width / 2
 
-                color: Colors.inactiveAccent
+                color: Colors.inverse_primary
 
                 opacity: modelData.active ? 1.0 : 0
 

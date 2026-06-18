@@ -29,8 +29,8 @@ RowLayout {
             onTriggered: {
                 var d = new Date();
                 timeDisplay.text = d.toLocaleTimeString(Qt.locale(), "hh:mm AP");
-                dateDisplay.text = Qt.formatDate(d, "dd/M");
                 dayDisplay.text = Qt.formatDate(d, "dddd");
+                dateDisplay.text = Qt.formatDate(d, "dd/M");
             }
         }
 
@@ -62,7 +62,7 @@ RowLayout {
             BarText {
                 anchors.centerIn: parent
                 text: Icons.sysVolume
-                color: Colors.activeAccent
+                color: Colors.primary
                 font.pixelSize: 18
             }
             onClicked: Quickshell.execDetached(["sh", "-c", "pavucontrol"]);

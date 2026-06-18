@@ -23,15 +23,15 @@ Rectangle {
             id: notifTextContainer
             Layout.fillHeight: true
             Layout.fillWidth: true
-            color: Colors.inactiveAccent
+            color: Colors.surface_container_high
             radius: Variables.dashInnerRadius
             clip: true
 
             Text {
-                color: "white"
+                color: Colors.on_surface
                 text: "Notifications"
                 font.pixelSize: 16
-                font.family: "Maple Mono Normal"
+                font.family: Variables.defaultFontFamily
                 anchors.centerIn: parent
             }
         }
@@ -40,7 +40,7 @@ Rectangle {
             id: notifClearBtn
             Layout.fillHeight: true
             Layout.preferredWidth: notifTextContainer.height
-            color: notifClearMouse.pressed ? Colors.activeVibrant : Colors.inactiveAccent
+            color: notifClearMouse.pressed ? Colors.surface_variant : Colors.surface_container_high
             radius: width / 2
             clip: true
 
@@ -52,10 +52,11 @@ Rectangle {
             }
 
             Text {
-                color: "white"
+                color: Colors.on_surface
                 anchors.centerIn: parent
                 text: Icons.actionClear
                 font.pixelSize: Variables.dashIconSize
+                font.family: Variables.defaultFontFamily
             }
 
             MouseArea {

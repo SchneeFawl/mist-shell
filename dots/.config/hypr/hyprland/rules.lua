@@ -131,7 +131,7 @@ hl.window_rule({
     match = {
         class = "^(code)$"
     },
-    -- opacity = "0.9 0.82"
+    opacity = "1 0.82"
 })
 
 hl.window_rule({

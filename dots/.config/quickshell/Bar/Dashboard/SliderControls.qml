@@ -27,30 +27,23 @@ ColumnLayout {
             spacing: Variables.dashInnerColSpacing
 
             SliderControlsBtn {
-                Text {
-                    text: Icons.sysVolume; color: "white"; anchors.centerIn: parent
-                    font.pixelSize: Variables.dashIconSize
-                }
+                icon: Icons.sysVolume
                 onClicked: {
                     root.activeOption = 1
                 }
                 active: root.activeOption === 1
             }
+
             SliderControlsBtn {
-                Text {
-                    text: Icons.sysMic; color: "white"; anchors.centerIn: parent
-                    font.pixelSize: Variables.dashIconSize
-                }
+                icon: Icons.sysMic
                 onClicked: {
                     root.activeOption = 2
                 }
                 active: root.activeOption === 2
             }
+
             SliderControlsBtn {
-                Text {
-                    text: Icons.sysBrightness; color: "white"; anchors.centerIn: parent
-                    font.pixelSize: Variables.dashIconSize
-                }
+                icon: Icons.sysBrightness
                 onClicked: {
                     root.activeOption = 3
                 }

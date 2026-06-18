@@ -6,7 +6,7 @@ QtObject {
 
     // Bar elements
     readonly property string barMedia: ""
-    readonly property string barIcon: "󱄅"
+    readonly property string barIcon: "󰣇"
     readonly property string barShortcuts: "󰌌"
 
     // System
@@ -31,6 +31,9 @@ QtObject {
     readonly property string mediaLoopNone: "󰑗"
     readonly property string mediaLoopTrack: "󰑘"
     readonly property string mediaLoopPlaylist: "󰑖"
+
+    // Decorations
+    readonly property string dot: "•"
 
     // DASHBOARD:
     // navPanel

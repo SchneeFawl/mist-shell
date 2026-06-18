@@ -10,10 +10,11 @@ RowLayout {
     Pill {
         BarText {
             text: Icons.barIcon
-            color: Colors.activeAccent
-            font.pixelSize: 18
+            color: Colors.primary
+            font.pixelSize: 16
             Layout.alignment: Qt.AlignCenter
         }
+
         BarText {
             text: "mist"
             Layout.alignment: Qt.AlignCenter
@@ -37,7 +38,7 @@ RowLayout {
                 anchors.centerIn: parent
                 text: Icons.barShortcuts
                 font.pixelSize: 18
-                color: Colors.activeAccent
+                color: Colors.primary
             }
             onClicked: console.log("trigger keybinds help menu")
         }

@@ -13,7 +13,7 @@ Rectangle {
 
     Layout.fillWidth: true
     Layout.fillHeight: true
-    color: Colors.border
+    color: Colors.surface_container_low
     radius: 14
 
     ColumnLayout {
@@ -49,9 +49,9 @@ Rectangle {
                 Text {
                     Layout.fillWidth: true
                     horizontalAlignment: Text.AlignHCenter
-                    color: "white"
+                    color: Colors.on_surface
                     font.pixelSize: 15
-                    font.family: "Maple Mono Normal"
+                    font.family: Variables.defaultFontFamily
                     font.bold: true
 
                     text: {
@@ -78,6 +78,7 @@ Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: 24
             radius: parent.fixedRadius
+            color: Colors.surface_container_high
 
             RowLayout {
                 anchors.fill: parent
@@ -87,45 +88,52 @@ Rectangle {
 
                 Text {
                     text: "S"
-                    font.family: "Maple Mono Normal"
+                    font.family: Variables.defaultFontFamily
                     Layout.fillWidth: true
                     horizontalAlignment: Text.AlignHCenter
+                    color: Colors.on_surface
                 }
                 Text {
                     text: "M"
-                    font.family: "Maple Mono Normal"
+                    font.family: Variables.defaultFontFamily
                     Layout.fillWidth: true
                     horizontalAlignment: Text.AlignHCenter
+                    color: Colors.on_surface
                 }
                 Text {
                     text: "T"
-                    font.family: "Maple Mono Normal"
+                    font.family: Variables.defaultFontFamily
                     Layout.fillWidth: true
                     horizontalAlignment: Text.AlignHCenter
+                    color: Colors.on_surface
                 }
                 Text {
                     text: "W"
-                    font.family: "Maple Mono Normal"
+                    font.family: Variables.defaultFontFamily
                     Layout.fillWidth: true
                     horizontalAlignment: Text.AlignHCenter
+                    color: Colors.on_surface
                 }
                 Text {
                     text: "T"
-                    font.family: "Maple Mono Normal"
+                    font.family: Variables.defaultFontFamily
                     Layout.fillWidth: true
                     horizontalAlignment: Text.AlignHCenter
+                    color: Colors.on_surface
                 }
                 Text {
                     text: "F"
-                    font.family: "Maple Mono Normal"
+                    font.family: Variables.defaultFontFamily
                     Layout.fillWidth: true
                     horizontalAlignment: Text.AlignHCenter
+                    color: Colors.on_surface
                 }
                 Text {
                     text: "S"
-                    font.family: "Maple Mono Normal"
+                    font.family: Variables.defaultFontFamily
                     Layout.fillWidth: true
                     horizontalAlignment: Text.AlignHCenter
+                    color: Colors.on_surface
                 }
             }
         }
@@ -135,6 +143,7 @@ Rectangle {
             Layout.fillWidth: true
             Layout.fillHeight: true
             radius: parent.fixedRadius
+            color: Colors.surface_container_high
 
             GridLayout {
                 anchors.fill: parent
@@ -148,13 +157,15 @@ Rectangle {
                     delegate: Rectangle {
                         Layout.fillHeight: true
                         Layout.fillWidth: true
-                        color: Colors.border
+                        color: Colors.surface_container_high
                         radius: 5
 
                         Text {
                             anchors.centerIn: parent
-                            color: modelData.isCurrentMonth ? Colors.textVibrant : Colors.textSub
+                            color: modelData.isCurrentMonth ? Colors.primary_fixed : Colors.on_surface
                             text: modelData.day
+                            font.family: Variables.defaultFontFamily
+                            font.pixelSize: 14
                         }
                     }
                 }

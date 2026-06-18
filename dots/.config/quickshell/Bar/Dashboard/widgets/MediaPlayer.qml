@@ -68,7 +68,7 @@ ClippingRectangle {
 
                 ShapePath {
                     id: discPath
-                    strokeColor: Colors.activeAccent
+                    strokeColor: Colors.primary
                     strokeWidth: 4
                     fillColor: "transparent"
                     capStyle: ShapePath.RoundCap
@@ -159,7 +159,7 @@ ClippingRectangle {
             Text {
                 id: artistName
                 text: player.activePlayer ? player.activePlayer.trackArtist : "-"
-                color: Colors.textMain
+                color: Colors.primary_fixed
                 font.pixelSize: 13
                 elide: Text.ElideRight
                 Layout.fillWidth: true
@@ -179,7 +179,7 @@ ClippingRectangle {
 
             MediaControlBtn {       // previous btn
                 icon: Icons.mediaPrevious
-                iconColor: Colors.textMain
+                iconColor: Colors.primary_fixed
                 btnSize: 40
                 onClicked: player.activePlayer.canGoPrevious ? player.activePlayer.previous() : null
             }
@@ -188,7 +188,7 @@ ClippingRectangle {
                 icon: player.isPlaying ? Icons.mediaPause : Icons.mediaPlay
                 iconSize: 32 + btnSize - 50
                 btnSize: 58
-                bgColor: Colors.activeAccent
+                bgColor: Colors.primary
                 iconColor: Colors.on_primary
                 onClicked: {
                     if (player.activePlayer && player.isPlaying) {
@@ -201,7 +201,7 @@ ClippingRectangle {
 
             MediaControlBtn {       // next btn
                 icon: Icons.mediaNext
-                iconColor: Colors.textMain
+                iconColor: Colors.primary_fixed
                 btnSize: 40
                 onClicked: player.activePlayer.canGoNext ? player.activePlayer.next() : null
             }
@@ -215,7 +215,7 @@ ClippingRectangle {
                         default: return Icons.mediaLoopNone
                     }
                 }
-                iconColor: Colors.textMain
+                iconColor: Colors.primary_fixed
                 btnSize: 40
 
                 onClicked: {

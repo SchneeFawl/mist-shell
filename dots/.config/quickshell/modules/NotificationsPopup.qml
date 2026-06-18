@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Layouts
 import Quickshell
 import qs.services
 import qs.modules.theme
@@ -70,27 +71,28 @@ PanelWindow {           // qmllint disable uncreatable-type
         }
 
         delegate: Rectangle {
-            implicitHeight: 80
+            implicitHeight: 100
             implicitWidth: notifPopup.width
-            color: Colors.inactiveAccent
+            color: Colors.secondary_container
             border.color: Colors.border
             border.width: 2
             radius: 12
             clip: true
 
-            Column {
+            ColumnLayout {
                 anchors.fill: parent
-                anchors.margins: 7
+                anchors.margins: 8
+                spacing: 4
                 clip: true
 
                 Text {
-                    color: Colors.textVibrant
+                    color: Colors.textMain
                     text: model.notifObject.appName
                     font.pixelSize: 14
                 }
 
                 Text {
-                    color: Colors.textMain
+                    color: Colors.textVibrant
                     text: model.notifObject.summary
                     font.pixelSize: 12
                 }

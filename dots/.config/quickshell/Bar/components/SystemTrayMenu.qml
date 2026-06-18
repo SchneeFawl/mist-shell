@@ -155,7 +155,7 @@ PopupWindow {
                         height: 16
                         width: 16
                         border.width: 1
-                        border.color: modelData ? (modelData.checkState === 0 ? Colors.inactiveAccent : Colors.activeAccent) : ""
+                        border.color: modelData ? (modelData.checkState === 0 ? Colors.inactiveAccent : Colors.primary) : ""
                         radius: 4
                         color: modelData ? (modelData.checkState === 0 ? "transparent" : Colors.border) : ""
 
@@ -163,7 +163,7 @@ PopupWindow {
                             anchors.centerIn: parent
                             visible: modelData ? modelData.checkState !== 0 : false
                             text: modelData ? (modelData.checkState === 1 ? "\u2212" : "\u2713") : ""  // "-" and "{tick}"
-                            color: Colors.activeAccent
+                            color: Colors.primary
                             font.pixelSize: 10
                             font.bold: true
                         }
@@ -178,7 +178,7 @@ PopupWindow {
                         border.width: 1
                         border.color: Colors.border
                         radius: 4
-                        color: modelData ? (modelData.checkState === 2 ? Colors.activeAccent : Colors.inactiveAccent) : ""
+                        color: modelData ? (modelData.checkState === 2 ? Colors.primary : Colors.inactiveAccent) : ""
 
                         Rectangle {
                             visible: modelData ? modelData.checkState === 2 : false

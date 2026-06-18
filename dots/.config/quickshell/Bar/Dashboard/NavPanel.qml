@@ -77,7 +77,7 @@ Rectangle {
             id: settingsBtn
             icon: Icons.sysSettings
             iconSize: Variables.dashIconSize
-            btnBgColor: "#2c3149"
+            btnBgColor: Colors.surface_container_highest
 
             onClicked: {
                 navWrapper.activeTab = 5;

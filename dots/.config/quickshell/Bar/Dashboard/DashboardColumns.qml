@@ -28,7 +28,7 @@ RowLayout {
     // notifications
     ColumnRectangle {
         Layout.fillWidth: true
-        color: Colors.primary_container
+        color: Colors.surface_container_low
 
         NotificationsList { active: dashboardColumnsLayout.active }
     }
@@ -71,7 +71,7 @@ RowLayout {
     // slider controls
     ColumnRectangle {
         Layout.preferredWidth: 50
-        color: Colors.primary_container
+        color: Colors.surface_container_low
 
         SliderControls {}
     }

@@ -11,7 +11,7 @@ Rectangle {
     property bool bluetoothActive: false
     property bool dndActive: false
 
-    color: Colors.border
+    color: Colors.surface_container_low
     implicitHeight: 80
     implicitWidth: rootWidth
     radius: Variables.dashboardRadius - 4
@@ -31,10 +31,8 @@ Rectangle {
         QuickControlsButton {
             implicitHeight: controlsLayout.rectSize
             implicitWidth: controlsLayout.rectSize
-            Text {
-                color: "white"; font.pixelSize: 30; anchors.centerIn: parent
-                text: Icons.sysDnd
-            }
+            iconSize: 30
+            icon: Icons.sysDnd
 
             onClicked: {
                 if (!active) {
@@ -48,10 +46,7 @@ Rectangle {
         QuickControlsButton {
             implicitHeight: controlsLayout.rectSize
             implicitWidth: controlsLayout.rectSize
-            Text {
-                color: "white"; font.pixelSize: 28; anchors.centerIn: parent
-                text: Icons.sysBluetooth
-            }
+            icon: Icons.sysBluetooth
 
             onClicked: {
                 if (!active) {
@@ -65,10 +60,8 @@ Rectangle {
         QuickControlsButton {
             implicitHeight: controlsLayout.rectSize
             implicitWidth: controlsLayout.rectSize
-            Text {
-                anchors.centerIn: parent; color: "white"; font.pixelSize: 32
-                text: Icons.sysGameMode
-            }
+            iconSize: 32
+            icon: Icons.sysGameMode
 
             onClicked: {
                 if (!active) {
@@ -82,10 +75,8 @@ Rectangle {
         QuickControlsButton {
             implicitHeight: controlsLayout.rectSize
             implicitWidth: controlsLayout.rectSize
-            Text {
-                color: "white"; font.pixelSize: 26; anchors.centerIn: parent
-                text: Icons.sysClipboard
-            }
+            iconSize: 26
+            icon: Icons.sysClipboard
         }
     }
 }
