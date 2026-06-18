@@ -21,7 +21,7 @@ Item {
     Rectangle {
         id: bgRect
         anchors.fill: parent
-        color: Colors.background
+        color: Colors.primary_container
         radius: 12
         clip: true
 

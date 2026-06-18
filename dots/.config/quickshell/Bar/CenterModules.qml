@@ -25,7 +25,6 @@ Item {
         BarText {
             id: mediaText
             Layout.alignment: Qt.AlignCenter
-            color: Colors.textMain
             font.pixelSize: 14
             text: activeText
 

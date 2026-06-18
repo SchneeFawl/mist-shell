@@ -45,7 +45,7 @@ ClippingRectangle {
         blurMax: 48
         blur: 1.0
         opacity: 0.8
-        contrast: 0.05
+        brightness: -0.075
     }
 
     ColumnLayout {
@@ -189,7 +189,7 @@ ClippingRectangle {
                 iconSize: 32 + btnSize - 50
                 btnSize: 58
                 bgColor: Colors.activeAccent
-                iconColor: Colors.inactiveAccent
+                iconColor: Colors.on_primary
                 onClicked: {
                     if (player.activePlayer && player.isPlaying) {
                         player.activePlayer.pause();
