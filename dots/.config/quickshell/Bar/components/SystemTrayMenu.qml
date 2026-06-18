@@ -74,7 +74,7 @@ PopupWindow {
 
                         WrapperRectangle {
                             id: submenuItemWrapper
-                            color: Colors.background
+                            color: Colors.surface_container_low
                             border.color: Colors.border
                             border.width: 2
                             width: customSubmenuPopup.visible ? parent.width : 0
@@ -114,7 +114,7 @@ PopupWindow {
                 visible: true
                 opacity: (delegateMouseHandler.containsMouse && !modelData.isSeparator) ? 1.0 : 0
                 anchors.fill: parent
-                color: '#21212d'
+                color: Colors.surface_container_high
                 radius: 8
 
                 Behavior on opacity {
@@ -130,14 +130,14 @@ PopupWindow {
                 anchors.verticalCenter: parent.verticalCenter
                 width: parent.width
                 height: 1
-                color: "#45475a"
+                color: Colors.border_variant
             }
 
             // (icon + text) layout
             Row {
                 id: contentRow
                 spacing: menuItemText.leftPadding
-                leftPadding: 4                      // 4+4=8
+                leftPadding: 4
                 anchors.verticalCenter: parent.verticalCenter
 
                 Item {
@@ -155,9 +155,9 @@ PopupWindow {
                         height: 16
                         width: 16
                         border.width: 1
-                        border.color: modelData ? (modelData.checkState === 0 ? Colors.inactiveAccent : Colors.primary) : ""
+                        border.color: modelData ? (modelData.checkState === 0 ? Colors.inverse_primary : Colors.primary) : ""
                         radius: 4
-                        color: modelData ? (modelData.checkState === 0 ? "transparent" : Colors.border) : ""
+                        color: modelData ? (modelData.checkState === 0 ? "transparent" : Colors.surface_bright) : ""
 
                         Text {
                             anchors.centerIn: parent
@@ -176,7 +176,7 @@ PopupWindow {
                         height: 16
                         width: 16
                         border.width: 1
-                        border.color: Colors.border
+                        border.color: Colors.surface_bright
                         radius: 4
                         color: modelData ? (modelData.checkState === 2 ? Colors.primary : Colors.inactiveAccent) : ""
 
@@ -205,7 +205,7 @@ PopupWindow {
                     anchors.verticalCenter: parent.verticalCenter
                     text: modelData ? modelData.text : ""
                     font.pixelSize: 12
-                    color: Colors.textMain
+                    color: Colors.on_primary_container
                     leftPadding: 4
                 }
             }
@@ -217,7 +217,7 @@ PopupWindow {
                 anchors.rightMargin: 20
                 anchors.verticalCenter: parent.verticalCenter
                 text: "›"
-                color: Colors.textMain
+                color: Colors.on_primary_container
                 font.pixelSize: 18
                 opacity: 0.7
             }
@@ -272,7 +272,7 @@ PopupWindow {
 
     WrapperRectangle {
         id: menuItemWrapper
-        color: Colors.background
+        color: Colors.surface_container_low
         border.color: Colors.border
         border.width: 2
         width: customMenuPopup.visible ? parent.width : 0

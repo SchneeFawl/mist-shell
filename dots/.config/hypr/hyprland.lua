@@ -4,6 +4,7 @@
 -- Below are the related files for configurations
 
 require("hyprland.general")       -- Contains the overall look config
+require("hyprland.colors")        -- Colors for active border etc
 require("hyprland.variables")     -- Default app variables
 require("hyprland.animations")
 require("hyprland.keybinds")
