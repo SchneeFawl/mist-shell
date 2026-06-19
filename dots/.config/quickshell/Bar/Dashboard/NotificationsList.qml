@@ -96,7 +96,7 @@ ColumnLayout {
                     clip: true
 
                     Text {
-                        color: Colors.textMain
+                        color: Colors.primary
                         text: modelData.appName
                         font.pixelSize: 14
                     }

@@ -87,7 +87,7 @@ PanelWindow {           // qmllint disable uncreatable-type
 
                 Text {
                     Layout.fillWidth: true
-                    color: Colors.textMain
+                    color: Colors.primary
                     text: model.notifObject.appName
                     font.pixelSize: 14
                 }

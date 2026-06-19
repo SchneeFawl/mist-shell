@@ -18,7 +18,6 @@ FileView {
         property color border: "#8c9198"
         property color border_variant: "#42474e"
 
-        property color textMain: "#9bcbfb"
         property color textSub: "#b9c8da"
         property color textVibrant: "#cee5ff"
 
@@ -59,7 +58,6 @@ FileView {
     property color border: adapter.border
     property color border_variant: adapter.border_variant
 
-    property color textMain: adapter.textMain
     property color textSub: adapter.textSub
     property color textVibrant: adapter.textVibrant
 

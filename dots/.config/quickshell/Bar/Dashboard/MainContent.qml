@@ -11,7 +11,6 @@ Rectangle {
     property string settingsText: "Settings Placeholder"
 
     anchors.fill: parent
-    // color: Colors.border
     color: "transparent"
 
     MediaPlayer {
