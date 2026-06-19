@@ -3,6 +3,8 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 
+// qmllint disable unqualified
+
 FileView {
     id: stateFile
 
@@ -11,7 +13,7 @@ FileView {
     path: Quickshell.env("HOME") + "/.config/mist/state.json"
     onAdapterUpdated: {
         writeAdapter();
-        Quickshell.execDetached([scriptPath, theme, wallpaper, mode])       // qmllint disable unqualified
+        Quickshell.execDetached([scriptPath, stateAdapter.theme, stateAdapter.wallpaper, stateAdapter.mode])
     }
 
     adapter: JsonAdapter {      // qmllint disable unresolved-type

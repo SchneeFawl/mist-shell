@@ -71,43 +71,46 @@ PanelWindow {           // qmllint disable uncreatable-type
         }
 
         delegate: Rectangle {
-            implicitHeight: 100
+            implicitHeight: 100 + 16
             implicitWidth: notifPopup.width
             color: Colors.secondary_container
             border.color: Colors.border
             border.width: 2
-            radius: 12
+            radius: Variables.pillRadius
             clip: true
 
             ColumnLayout {
                 anchors.fill: parent
                 anchors.margins: 8
-                spacing: 4
+                spacing: 0
                 clip: true
 
                 Text {
+                    Layout.fillWidth: true
                     color: Colors.textMain
                     text: model.notifObject.appName
                     font.pixelSize: 14
                 }
 
                 Text {
+                    Layout.fillWidth: true
                     color: Colors.textVibrant
                     text: model.notifObject.summary
                     font.pixelSize: 12
                 }
 
                 Text {
+                    Layout.fillWidth: true
                     color: Colors.textSub
                     text: model.notifObject.body
                     font.pixelSize: 12
-                    elide: Text.ElideMiddle
+                    elide: Text.ElideRight
                 }
             }
 
             Timer {
-                id: notifTimer
-                interval: 5000
+                id: notifTimeout
+                interval: 7000
                 running: true
                 repeat: false
                 onTriggered: { notifModel.remove(index) }
@@ -127,7 +130,7 @@ PanelWindow {           // qmllint disable uncreatable-type
         target: Notifications
 
         function onNotification(notification) {
-            notifModel.append({ "notifObject" : notification})
+            notifModel.append({ "notifObject" : notification })
         }
     }
 }

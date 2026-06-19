@@ -1,6 +1,7 @@
 tree.txt
 packages.md
 color_theme.json
+examples/
 
 # system trash
 .DS_Store

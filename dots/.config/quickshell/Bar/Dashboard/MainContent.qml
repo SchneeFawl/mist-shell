@@ -6,9 +6,7 @@ Rectangle {
     id: root
 
     property int activeTab
-    // property string mediaText: "Media Mode Placeholder"
     property string systemStatsText: "System Stats Placeholder"
-    property string themeText: "Theme Selector Placeholder"
     property string appSelectorText: "App Selector Placeholder"
     property string settingsText: "Settings Placeholder"
 
@@ -27,11 +25,8 @@ Rectangle {
         text: parent.systemStatsText
     }
 
-    Text {
-        visible: parent.activeTab === 3
-        anchors.centerIn: parent
-        color: "white"
-        text: parent.themeText
+    ThemeSelector {
+        visible: parent.activeTab === 3 
     }
 
     Text {
