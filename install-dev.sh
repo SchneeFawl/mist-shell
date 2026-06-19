@@ -6,12 +6,12 @@ set -e
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_DOTS="$REPO_ROOT/dots"
 
-# dyanmic mapping handler
+# mapping handler
 link_xdg_directory() {
     local source_parent="$1"
     local target_parent="$2"
 
-    # if source folder dont exist in the repo yet, skip it safely
+    # if source folder dont exist, skip it
     if [ ! -d "$source_parent" ]; then
         return
     fi
@@ -19,7 +19,6 @@ link_xdg_directory() {
     mkdir -p "$target_parent"
 
     for item in "$source_parent"/*; do
-        # guard against empty directories
         [ -e "$item" ] || continue
 
         local name=$(basename "$item")
@@ -27,13 +26,13 @@ link_xdg_directory() {
 
         echo "Deploying target: $target_path"
 
-        # backup existing physical directories or files
+        # backup
         if [ -e "$target_path" ] && [ ! -L "$target_path" ]; then
             echo "-> Backup: Moving active config to ${target_path}.bak"
             mv "$target_path" "${target_path}.bak"
         fi
 
-        # clear out any legacy broken or older symlinks
+        # clear out any broken or older symlinks
         if [ -L "$target_path" ] || [ -e "$target_path" ]; then
             rm -rf "$target_path"
         fi

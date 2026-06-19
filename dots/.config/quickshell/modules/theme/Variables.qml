@@ -14,6 +14,7 @@ QtObject {
     // Bar
     readonly property int pillInnerPadding: 12
     readonly property int pillOuterSpacing: 12
+    readonly property int pillRadius: 12
     readonly property int pillHeight: 32
     readonly property int sideMargins: 16
     readonly property int workspaceOuterSize: 24

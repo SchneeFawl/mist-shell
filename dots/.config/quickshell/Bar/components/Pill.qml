@@ -22,7 +22,7 @@ Item {
         id: bgRect
         anchors.fill: parent
         color: Colors.primary_container
-        radius: 12
+        radius: Variables.pillRadius
         clip: true
 
         RowLayout {

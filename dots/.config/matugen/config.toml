@@ -9,6 +9,6 @@ output_path = "~/.config/quickshell/modules/theme/colors.json"
 input_path = "~/.config/matugen/templates/hyprland/colors.lua"
 output_path = "~/.config/hypr/hyprland/colors.lua"
 
-[templates.kitty]
-input_path = "~/.config/matugen/templates/kitty/colors.conf"
-output_path = "~/.config/kitty/colors.conf"
+# [templates.kitty]
+# input_path = "~/.config/matugen/templates/kitty/colors.conf"
+# output_path = "~/.config/kitty/colors.conf"
