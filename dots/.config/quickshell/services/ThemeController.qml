@@ -3,7 +3,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 
-// qmllint disable unresolved-type 
+// qmllint disable unresolved-type
 
 QtObject {
     id: root
@@ -21,10 +21,21 @@ QtObject {
     readonly property var themeList: themesFile.adapter.themes
     readonly property bool isScanning: themeScanner.running
 
+    onThemeChanged: stateFile.writeAdapter()
+    onWallpaperChanged: stateFile.writeAdapter()
+    onModeChanged: {
+        stateFile.writeAdapter();
+        Quickshell.execDetached([scriptPath, theme, wallpaper, mode])
+    }
+
+    Component.onCompleted: {
+        stateFile.reload();
+    }
+
     property FileView stateFile: FileView {
         path: root.stateFilePath
         watchChanges: true
-        preload: true
+        preload: false
 
         adapter: JsonAdapter {
             id: stateAdapter
@@ -33,17 +44,18 @@ QtObject {
             property string mode: "dark"
         }
 
-        onAdapterUpdated: {
-            if (root.theme !== adapter.theme ||
-                root.wallpaper !== adapter.wallpaper ||
-                root.mode !== adapter.mode ) {
+        onLoaded: {
+            root.theme = root.stateFile.adapter.theme;
+            root.wallpaper = root.stateFile.adapter.wallpaper;
+            root.mode = root.stateFile.adapter.mode;
 
-                root.theme = root.stateFile.adapter.theme;
-                root.wallpaper = root.stateFile.adapter.wallpaper;
-                root.mode = root.stateFile.adapter.mode;
+            // DEBUG
+            console.log("[ThemeController] state.json sync complete")
+            console.log("[ThemeController] Active state: theme=" + root.theme + ", wallpaper=" + root.wallpaper + ", mode=" + root.mode)
+        }
 
-                Quickshell.execDetached([root.scriptPath, root.theme, root.wallpaper, root.mode])
-            }
+        onLoadFailed: {
+            console.log("[ThemeController] Failed to load state.json");
         }
     }
 
@@ -55,10 +67,6 @@ QtObject {
         root.stateFile.adapter.theme = newTheme;
         root.stateFile.adapter.wallpaper = newWallpaper;
         root.stateFile.adapter.mode = newMode;
-
-        stateFile.writeAdapter();
-
-        Quickshell.execDetached([root.scriptPath, newTheme, newWallpaper, newMode])
     }
 
     property FileView themesFile: FileView {

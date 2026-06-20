@@ -3,21 +3,21 @@ hl.config({
         col = {
             active_border = {
                 colors = {
-                    "#9bcbfb",
-                    "#b9c8da",
+                    "#89d0ed",
+                    "#b3cad5",
                 },
                 angle = 60,
             },
             inactive_border = {
                 colors = {
-                    "#d3bfe6",
-                    "#8c9198",
+                    "#c4c3eb",
+                    "#8a9296",
                 },
             },
         },
     },
 
     misc = {
-        background_color = "#42474e",
+        background_color = "#40484c",
     },
 })
