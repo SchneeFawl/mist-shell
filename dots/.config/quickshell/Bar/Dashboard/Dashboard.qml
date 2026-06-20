@@ -19,13 +19,13 @@ PopupWindow {
 
     visible: active || (widthAnimation.running && _wasActive)
     color: "transparent"
+    grabFocus: true
 
     anchor {
         item: centerPill
         edges: Edges.Top                            // qmllint disable missing-type
         gravity: Edges.Bottom                       // qmllint disable missing-type
     }
-
     implicitWidth: 1000
     implicitHeight: 400
 

@@ -9,6 +9,7 @@ ClippingRectangle {
     id: root
 
     property string activeMode: ThemeController.mode
+    property alias searchQuery: searchBar.searchQuery
 
     anchors.fill: parent
     color: Colors.surface_container_low
@@ -19,19 +20,8 @@ ClippingRectangle {
         anchors.margins: Variables.dashInnerColSpacing
         spacing: Variables.dashInnerColSpacing
 
-        Rectangle {
+        ThemeSearchBar {
             id: searchBar
-            Layout.fillWidth: true
-            Layout.preferredHeight: 40
-            Layout.fillHeight: false
-            color: Colors.surface_container_high
-            radius: Variables.dashInnerRadius
-
-            Text {
-                anchors.centerIn: parent
-                color: Colors.textSub
-                text: "search bar placeholder"
-            }
         }
 
         RowLayout {

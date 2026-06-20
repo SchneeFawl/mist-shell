@@ -12,12 +12,10 @@ RowLayout {
             text: Icons.barIcon
             color: Colors.primary
             font.pixelSize: 16
-            Layout.alignment: Qt.AlignCenter
         }
 
         BarText {
             text: "mist"
-            Layout.alignment: Qt.AlignCenter
         }
     }
 

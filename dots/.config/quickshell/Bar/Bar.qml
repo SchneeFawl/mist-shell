@@ -29,8 +29,8 @@ PanelWindow {       // qmllint disable
 
     RowLayout {
         anchors.fill: parent
-        anchors.leftMargin: Variables.sideMargins
-        anchors.rightMargin: Variables.sideMargins
+        anchors.leftMargin: Variables.barSideMargins
+        anchors.rightMargin: Variables.barSideMargins
 
         LeftModules {}
 

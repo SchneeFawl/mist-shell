@@ -46,4 +46,5 @@ QtObject {
     readonly property string actionClear: "󰃢"
     readonly property string moonCrescent: "󰽧"
     readonly property string sunBright: "󰃠"
+    readonly property string magnify: "󰍉"
 }
