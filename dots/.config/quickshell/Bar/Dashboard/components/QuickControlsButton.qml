@@ -12,6 +12,7 @@ Rectangle {
 
     radius: Variables.dashColumnRadius
     color: active ? Colors.primary : Colors.surface_container_high
+    clip: true
 
     Text {
         anchors.centerIn: parent

@@ -1,34 +1,75 @@
 import QtQuick
 import QtQuick.Layouts
-import Quickshell
+import Quickshell.Widgets
 import qs.modules.theme
 import qs.services
+import "../components"
 
-FocusScope {
+ClippingRectangle {
     id: root
 
+    property string activeMode: ThemeController.mode
+
     anchors.fill: parent
+    color: Colors.surface_container_low
+    radius: Variables.dashColumnRadius
 
     ColumnLayout {
-        anchors.centerIn: parent
-        spacing: 10
+        anchors.fill: parent
+        anchors.margins: Variables.dashInnerColSpacing
+        spacing: Variables.dashInnerColSpacing
 
-        Text {
-            text: "Theme: " + ThemeController.theme
-            color: Colors.primary
-            font.pixelSize: 18
+        Rectangle {
+            id: searchBar
+            Layout.fillWidth: true
+            Layout.preferredHeight: 40
+            Layout.fillHeight: false
+            color: Colors.surface_container_high
+            radius: Variables.dashInnerRadius
+
+            Text {
+                anchors.centerIn: parent
+                color: Colors.textSub
+                text: "search bar placeholder"
+            }
         }
 
-        Text {
-            text: "Theme: " + ThemeController.mode
-            color: Colors.textSub
-            font.pixelSize: 14
+        RowLayout {
+            id: controlsRow
+            Layout.fillWidth: true
+            Layout.preferredHeight: 36
+            Layout.fillHeight: false
+            spacing: Variables.dashInnerColSpacing
+
+            Rectangle {
+                id: dropdownMenu
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                color: Colors.surface_container_high
+                radius: Variables.dashInnerRadius
+
+                Text {
+                    anchors.centerIn: parent
+                    color: Colors.on_surface
+                    text: "Theme: " + ThemeController.theme
+                }
+            }
+
+            ThemeModeToggle {
+                currentMode: root.activeMode
+            }
         }
 
-        Text {
-            text: "Theme: " + ThemeController.wallpaper
-            color: Colors.textSub
-            font.pixelSize: 14
+        Item {
+            id: wallpaperGrid
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+
+            Text {
+                anchors.centerIn: parent
+                text: "wallpapers grid placeholder"
+                color: Colors.textSub
+            }
         }
     }
 }

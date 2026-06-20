@@ -12,6 +12,7 @@ Rectangle {
 
     anchors.fill: parent
     color: "transparent"
+    clip: true
 
     MediaPlayer {
         visible: parent.activeTab === 1
@@ -25,7 +26,7 @@ Rectangle {
     }
 
     ThemeSelector {
-        visible: parent.activeTab === 3 
+        visible: parent.activeTab === 3
     }
 
     Text {

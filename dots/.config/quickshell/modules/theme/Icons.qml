@@ -44,4 +44,6 @@ QtObject {
 
     // General controls/actions
     readonly property string actionClear: "󰃢"
+    readonly property string moonCrescent: "󰽧"
+    readonly property string sunBright: "󰃠"
 }

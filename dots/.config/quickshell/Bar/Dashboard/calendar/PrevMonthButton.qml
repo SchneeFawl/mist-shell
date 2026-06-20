@@ -20,7 +20,7 @@ Rectangle {
 
     Text {
         text: ""
-        color: "white"
+        color: Colors.on_surface
         anchors.centerIn: parent
     }
 

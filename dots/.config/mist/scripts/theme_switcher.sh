@@ -10,7 +10,7 @@ if [[ -z "$1" || -z "$2" || -z "$3" ]]; then
     echo -e "\033[4mUsage:\033[0m $(basename "$0") <theme-name> <wallpaper-name> <mode>"
     echo "<mode> can be 'dark' or 'light'"
     echo -e "<wallpaper-name> must contain the .png, .jpg etc\n"
-    echo -e "\033[4mExample:\033[0m $(basename "$0") Mist dark"
+    echo -e "\033[4mExample:\033[0m $(basename "$0") Mist tower.png dark"
     exit 1
 fi
 
@@ -18,6 +18,14 @@ if [ ! -d "$THEME_PATH" ]; then
     echo "Error: Theme '$THEME_NAME' does not exist in '$MIST_DIR/themes/'"
     exit 1
 fi
+
+checkMode() {
+    if [ "$MODE" = "light" ]; then
+        echo "less-saturation"
+    else
+        echo "darkness"
+    fi
+}
 
 WALLPAPERS_PATH="$THEME_PATH/wallpapers"
 
@@ -31,7 +39,8 @@ echo "Wallpaper: '$WALLPAPER'"
 
 
 if command -v matugen &> /dev/null; then
-    matugen image "$WALLPAPERS_PATH/$WALLPAPER" --mode "$MODE"
+    PREFER=$(checkMode)
+    matugen image "$WALLPAPERS_PATH/$WALLPAPER" --mode "$MODE" --prefer "$PREFER"
     echo -e "Successfully updated color schemes\n"
 else
     echo -e "Warning: matugen command not found. Did you forget to install it?\n"
@@ -39,11 +48,13 @@ else
 fi
 
 if command -v awww &> /dev/null; then
-    awww img "$WALLPAPERS_PATH/$WALLPAPER"
+    awww img "$WALLPAPERS_PATH/$WALLPAPER" --transition-type center --transition-step 120 --transition-fps 48
     echo -e "Successfully updated wallpaper\n"
 else
     echo -e "Warning: awww ocmmand not found. Did you forget to install it?\n"
     exit
 fi
+
+echo "{\"theme\": \"$THEME_NAME\", \"wallpaper\": \"$WALLPAPER\", \"mode\": \"$MODE\"}" > "$MIST_DIR/state.json"
 
 echo -e "\033[4mTheme swap complete!\033[0m"

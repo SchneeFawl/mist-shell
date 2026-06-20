@@ -162,7 +162,7 @@ Rectangle {
 
                         Text {
                             anchors.centerIn: parent
-                            color: modelData.isCurrentMonth ? Colors.primary_fixed : Colors.on_surface
+                            color: modelData.isCurrentMonth ? Colors.primary : Colors.on_surface
                             text: modelData.day
                             font.family: Variables.defaultFontFamily
                             font.pixelSize: 14
