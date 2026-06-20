@@ -37,7 +37,6 @@ Rectangle {
             onClicked: {
                 navWrapper.activeTab = 2;
                 navWrapper.tabSelected(2);
-                console.log("Clicked Tab 2")
             }
 
             active: navWrapper.activeTab === 2
@@ -51,7 +50,6 @@ Rectangle {
             onClicked: {
                 navWrapper.activeTab = 3;
                 navWrapper.tabSelected(3);
-                console.log("Clicked Tab 3")
             }
 
             active: navWrapper.activeTab === 3
@@ -65,7 +63,6 @@ Rectangle {
             onClicked: {
                 navWrapper.activeTab = 4;
                 navWrapper.tabSelected(4);
-                console.log("Clicked Tab 4")
             }
 
             active: navWrapper.activeTab === 4
@@ -82,7 +79,6 @@ Rectangle {
             onClicked: {
                 navWrapper.activeTab = 5;
                 navWrapper.tabSelected(5);
-                console.log("Clicked Tab 5")
             }
 
             active: navWrapper.activeTab === 5

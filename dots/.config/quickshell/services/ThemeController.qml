@@ -18,6 +18,8 @@ QtObject {
     property string wallpaper: ""
     property string mode: "dark"
 
+    property bool keyboardFocus: false
+
     readonly property var themeList: themesFile.adapter.themes
     readonly property bool isScanning: themeScanner.running
 

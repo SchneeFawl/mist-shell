@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.modules.theme
+import qs.services
 
 Rectangle {
     id: searchBar
@@ -38,6 +39,13 @@ Rectangle {
             clip: true
             onTextChanged: searchBar.searchQuery = text
             enabled: searchBar.visible
+            focus: true
+
+            Keys.onPressed: event => {
+                if (event.key === Qt.Key_Escape) {
+                    ThemeController.keyboardFocus = false
+                }
+            }
 
             Text {
                 id: searchPlaceholder
@@ -47,6 +55,15 @@ Rectangle {
                 text: "Search wallpapers..."
                 visible: searchBar.searchQuery.length === 0
             }
+        }
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        enabled: !ThemeController.keyboardFocus
+        onClicked: {
+            ThemeController.keyboardFocus = true;
+            searchInput.forceActiveFocus();
         }
     }
 }

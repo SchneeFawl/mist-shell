@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.modules.theme
+import qs.services
 import "./Dashboard"
 import "./components"
 
@@ -80,7 +81,9 @@ Item {
         }
         onExited: {
             openTimer.stop();
-            if (centerModulesRoot.dashboardActive) closeTimer.start();
+            if (centerModulesRoot.dashboardActive && !ThemeController.keyboardFocus) {
+                closeTimer.start();
+            }
         }
     }
 

@@ -1,6 +1,8 @@
 import QtQuick
 import Quickshell
+import Quickshell.Hyprland
 import qs.modules.theme
+import qs.services
 
 // qmllint disable unqualified
 
@@ -14,12 +16,16 @@ PopupWindow {
     property bool _wasActive: false
 
     onActiveChanged: {
-        if (active) _wasActive = true;
+        if (active) {
+            _wasActive = true;
+        } else {
+            ThemeController.keyboardFocus = false;
+        }
     }
 
     visible: active || (widthAnimation.running && _wasActive)
     color: "transparent"
-    grabFocus: true
+    grabFocus: false
 
     anchor {
         item: centerPill
@@ -28,6 +34,22 @@ PopupWindow {
     }
     implicitWidth: 1000
     implicitHeight: 400
+
+    HyprlandFocusGrab {
+        active: ThemeController.keyboardFocus && dashboardPopup.visible
+        windows: [ dashboardPopup ]
+        onCleared: ThemeController.keyboardFocus = false
+    }
+
+    Connections {
+        target: ThemeController
+
+        function onKeyboardFocusChanged() {
+            if (!ThemeController.keyboardFocus && !dashboardPopupHover.hovered) {
+                if (closeTimer) closeTimer.start();
+            }
+        }
+    }
 
     Rectangle {
         id: dashboardBg
@@ -73,7 +95,7 @@ PopupWindow {
             onHoveredChanged: {
                 if (hovered && closeTimer) {
                     closeTimer.stop();
-                } else if (!hovered && closeTimer) {
+                } else if (!hovered && closeTimer && !ThemeController.keyboardFocus) {
                     closeTimer.start();
                 }
             }
