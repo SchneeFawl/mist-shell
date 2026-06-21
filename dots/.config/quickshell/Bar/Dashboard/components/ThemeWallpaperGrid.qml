@@ -21,31 +21,34 @@ GridView {
 
     model: filteredWallpapers
     delegate: Item {
+        id: card
+
         required property var modelData
 
         width: wallpaperGrid.cellWidth
         height: wallpaperGrid.cellHeight
 
         Rectangle {
-            id: card
-
             anchors.fill: parent
             anchors.margins: 4
             color: Colors.surface_container_high
             radius: Variables.dashInnerRadius
             border.color: {
-                ThemeController.wallpaper === parent.modelData ? Colors.primary
+                (ThemeController.theme === parent.modelData.theme &&
+                ThemeController.wallpaper === parent.modelData.name) ? Colors.primary
                 : (wallpaperMouseArea.containsMouse ? Colors.border : "transparent")
             }
-            border.width: ThemeController.wallpaper === modelData ? 2 : 1
+            border.width: {
+                (ThemeController.theme === parent.modelData.theme &&
+                ThemeController.wallpaper === parent.modelData.name) ? 2 : 1
+            }
             clip: true
 
             ClippingRectangle {
                 anchors.fill: parent
-                anchors.margins: 4
+                anchors.margins: 6
                 radius: Variables.dashInnerRadius - anchors.margins
                 color: "transparent"
-                clip: true
 
                 Image {
                     id: wallpaperImage
@@ -56,7 +59,7 @@ GridView {
                     visible: true
                     sourceSize: Qt.size(parent.width, parent.height)
                     fillMode: Image.PreserveAspectCrop
-                    source: ThemeController.wallpaperPath + modelData
+                    source: card.modelData.fullPath
                 }
             }
 
@@ -66,7 +69,7 @@ GridView {
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
                 onClicked: {
-                    ThemeController.updateState(ThemeController.theme, modelData, ThemeController.mode)
+                    ThemeController.updateState(card.modelData.theme, card.modelData.name, ThemeController.mode)
                 }
             }
         }

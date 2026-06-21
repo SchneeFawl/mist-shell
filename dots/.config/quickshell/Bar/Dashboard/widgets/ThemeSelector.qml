@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
 import Quickshell.Widgets
 import qs.modules.theme
 import qs.services
@@ -26,8 +27,15 @@ ClippingRectangle {
         if (!wallpapers) return [];
 
         let query = root.searchQuery.trim().toLowerCase();
-        if (query === "") return wallpapers;
-        return wallpapers.filter(w => w.toLowerCase().includes(query));
+        let currentTheme = ThemeController.theme
+        let _list = wallpapers.map( w => ({
+            name: w,
+            theme: ThemeController.theme,
+            fullPath: "file://" + Quickshell.env("HOME") + "/.config/mist/themes/" + currentTheme + "/wallpapers/" + w
+        }));
+
+        if (query === "") return _list;
+        return _list.filter(Item => Item.toLowerCase().includes(query));
     }
 
     anchors.fill: parent
@@ -50,7 +58,6 @@ ClippingRectangle {
             Layout.preferredHeight: 36
             Layout.fillHeight: false
             spacing: Variables.dashInnerColSpacing
-            // z: 100
 
             ThemeDropdown {
                 id: themeDropdown
