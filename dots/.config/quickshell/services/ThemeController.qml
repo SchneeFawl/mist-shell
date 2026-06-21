@@ -27,7 +27,6 @@ QtObject {
     onWallpaperChanged: stateFile.writeAdapter()
     onModeChanged: {
         stateFile.writeAdapter();
-        Quickshell.execDetached([scriptPath, theme, wallpaper, mode])
     }
 
     Component.onCompleted: {
@@ -62,6 +61,10 @@ QtObject {
     }
 
     function updateState(newTheme, newWallpaper, newMode) {
+        let changed = (
+            root.theme !== newTheme || root.wallpaper !== newWallpaper || root.mode !== newMode
+        );
+
         root.theme = newTheme;
         root.wallpaper = newWallpaper;
         root.mode = newMode;
@@ -69,6 +72,11 @@ QtObject {
         root.stateFile.adapter.theme = newTheme;
         root.stateFile.adapter.wallpaper = newWallpaper;
         root.stateFile.adapter.mode = newMode;
+
+        if (changed) {
+            stateFile.writeAdapter();
+            Quickshell.execDetached([scriptPath, newTheme, newWallpaper, newMode])
+        }
     }
 
     property FileView themesFile: FileView {

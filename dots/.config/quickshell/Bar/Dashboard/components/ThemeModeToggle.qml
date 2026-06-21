@@ -18,6 +18,18 @@ Rectangle {
         ColorAnimation { duration: 250 }
     }
 
+    MouseArea {
+        anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
+        onClicked: {
+            ThemeController.updateState(
+                ThemeController.theme,
+                ThemeController.wallpaper,
+                (ThemeController.mode === "dark") ? "light" : "dark"
+            )
+        }
+    }
+
     Rectangle {
         id: thumb
 
@@ -48,18 +60,6 @@ Rectangle {
             Behavior on color {
                 ColorAnimation { duration: 250 }
             }
-        }
-    }
-
-    MouseArea {
-        anchors.fill: parent
-        cursorShape: Qt.PointingHandCursor
-        onClicked: {
-            ThemeController.updateState(
-                ThemeController.theme,
-                ThemeController.wallpaper,
-                (ThemeController.mode === "dark") ? "light" : "dark"
-            )
         }
     }
 }

@@ -1,0 +1,162 @@
+import QtQuick
+// import QtQuick.Layouts
+import Quickshell.Widgets
+import qs.modules.theme
+import qs.services
+
+Rectangle {
+    id: dropdown
+
+    property bool expanded: false
+    property var themeModel: ThemeController.themeList
+
+    color: Colors.surface_container_high
+    radius: Variables.dashInnerRadius
+    focus: true
+
+    ClippingRectangle {
+        id: dropdownMenu
+        anchors.top: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.topMargin: 4
+        visible: height > 0
+        implicitHeight: dropdown.expanded ? 36 * 4 : 0
+        z: 100
+        color: Colors.surface_container_high
+        radius: Variables.dashInnerRadius
+        onVisibleChanged: {
+            if (!visible) {
+                ThemeController.keyboardFocus = false;
+                dropdown.expanded = false;
+            }
+        }
+
+        Behavior on implicitHeight {
+            NumberAnimation {
+                duration: 250
+                easing.type: Easing.OutCubic
+            }
+        }
+
+        ListView {
+            id: themeListView
+            anchors.fill: parent
+            clip: true
+            model: dropdown.themeModel
+
+            delegate: Item {
+                id: themeDelegate
+
+                required property var modelData
+                required property int index
+
+                width: themeListView.width
+                height: 36
+
+                Rectangle {
+                    anchors.fill: parent
+                    anchors.leftMargin: 4
+                    anchors.rightMargin: 4
+                    anchors.topMargin: 4
+                    color: themeDelegate.index === themeListView.currentIndex ? Colors.primary : "transparent"
+                    radius: Variables.dashInnerRadius - 4
+
+                    Behavior on color {
+                        ColorAnimation { duration: 200; easing.type: Easing.OutCubic }
+                    }
+
+                    Text {
+                        anchors.verticalCenter: parent.verticalCenter
+                        leftPadding: 8
+                        color: themeDelegate.index === themeListView.currentIndex ? Colors.on_primary : Colors.on_surface
+                        font.family: Variables.defaultFontFamily
+                        font.pixelSize: 14
+                        text: themeDelegate.modelData.name
+
+                        Behavior on color {
+                            ColorAnimation { duration: 200; easing.type: Easing.OutCubic }
+                        }
+                    }
+
+                    MouseArea {
+                        id: mouseArea
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: {
+                            let targetTheme = themeDelegate.modelData.name;
+                            let targetWallpapers = themeDelegate.modelData.wallpapers;
+                            let firstWallpaper = (targetWallpapers && targetWallpapers.length > 0) ? targetWallpapers[0] : "";
+
+                            ThemeController.updateState(targetTheme, firstWallpaper, ThemeController.mode)
+                            dropdown.expanded = false;
+                        }
+                        onEntered: themeListView.currentIndex = themeDelegate.index
+                    }
+                }
+            }
+        }
+    }
+
+    Text {
+        anchors.verticalCenter: parent.verticalCenter
+        leftPadding: 8 + 4
+        font.family: Variables.defaultFontFamily
+        font.pixelSize: 14
+        color: Colors.on_surface
+        text: ThemeController.theme
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        onClicked: dropdown.expanded = !dropdown.expanded
+    }
+
+    Keys.onPressed: event => {
+        if (!expanded) return;
+
+        if (event.key === Qt.Key_Down) {
+            if (themeListView.currentIndex < themeListView.count - 1) {
+                themeListView.currentIndex++;
+            }
+            event.accepted = true;
+        } else if (event.key === Qt.Key_Up) {
+            if (themeListView.currentIndex > 0) {
+                themeListView.currentIndex--;
+            }
+            event.accepted = true;
+        } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+            let selectedItem = themeModel[themeListView.currentIndex];
+
+            if (selectedItem) {
+                let targetTheme = selectedItem.name;
+                let targetWallpapers = selectedItem.wallpapers;
+                let firstWallpaper = (targetWallpapers && targetWallpapers.length > 0) ? targetWallpapers[0] : "";
+
+                ThemeController.updateState(targetTheme, firstWallpaper, ThemeController.mode);
+            }
+            expanded = false;
+            event.accepted = true;
+        } else if (event.key === Qt.Key_Escape) {
+            expanded = false;
+            event.accepted = true;
+        }
+    }
+
+    onExpandedChanged: {
+        if (expanded) {
+            dropdown.forceActiveFocus();
+            ThemeController.keyboardFocus = true;
+
+            for (let i = 0; i < themeModel.length; i++) {
+                if (themeModel[i].name === ThemeController.theme) {
+                    themeListView.currentIndex = i;
+                    break;
+                }
+            }
+        } else {
+            ThemeController.keyboardFocus = false;
+        }
+    }
+}

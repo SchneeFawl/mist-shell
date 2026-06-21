@@ -25,7 +25,6 @@ PopupWindow {
 
     visible: active || (widthAnimation.running && _wasActive)
     color: "transparent"
-    grabFocus: false
 
     anchor {
         item: centerPill
