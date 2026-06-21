@@ -1,9 +1,8 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Controls
 import qs.modules.theme
 import qs.services
-
-// qmllint disable unqualified
 
 Rectangle {
     id: dropdown
@@ -19,7 +18,7 @@ Rectangle {
         id: dropdownMenu
         y: parent.height + 4         // topMargin = 4
         width: parent.width
-        height: dropdown.expanded ? Math.min(themeModel.length * 36 + 8, 36 * 4) : 0
+        height: dropdown.expanded ? Math.min(dropdown.themeModel.length * 36 + 8, 36 * 4) : 0
         visible: height > 0
 
         onClosed: dropdown.expanded = false
@@ -98,6 +97,7 @@ Rectangle {
                         anchors.fill: parent
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
+
                         onClicked: {
                             let targetTheme = themeDelegate.modelData.name;
                             let targetWallpapers = themeDelegate.modelData.wallpapers;

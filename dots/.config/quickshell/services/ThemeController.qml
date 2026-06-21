@@ -18,6 +18,11 @@ QtObject {
     property string wallpaper: ""
     property string mode: "dark"
 
+    property var wallpaperPath: {
+        let path = "file://" + Quickshell.env("HOME") + "/.config/mist/themes/" + theme + "/wallpapers/"
+        return path
+    }
+
     property bool keyboardFocus: false
 
     readonly property var themeList: themesFile.adapter.themes

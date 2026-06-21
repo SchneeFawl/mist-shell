@@ -23,7 +23,7 @@ ClippingRectangle {
 
     readonly property var filteredWallpapers: {
         let wallpapers = activeThemeObject ? activeThemeObject.wallpapers : [];
-        if (!wallpapers) return null;
+        if (!wallpapers) return [];
 
         let query = root.searchQuery.trim().toLowerCase();
         if (query === "") return wallpapers;
@@ -63,17 +63,10 @@ ClippingRectangle {
             }
         }
 
-        Item {
+        ThemeWallpaperGrid {
             id: wallpaperGrid
-            Layout.fillWidth: true
-            Layout.fillHeight: true
             z: -1
-
-            Text {
-                anchors.centerIn: parent
-                text: "wallpapers grid placeholder"
-                color: Colors.textSub
-            }
+            filteredWallpapers: root.filteredWallpapers
         }
     }
 
