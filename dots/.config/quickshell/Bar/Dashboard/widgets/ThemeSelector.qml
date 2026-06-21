@@ -75,6 +75,13 @@ ClippingRectangle {
             z: -1
             filteredWallpapers: root.filteredWallpapers
         }
+
+        ThemeRefreshBtn {
+            id: refreshBtn
+            Layout.preferredHeight: 36
+            Layout.fillHeight: false
+            Layout.fillWidth: true
+        }
     }
 
     MouseArea {

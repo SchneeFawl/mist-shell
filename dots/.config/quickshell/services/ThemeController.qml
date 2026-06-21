@@ -26,7 +26,6 @@ QtObject {
     property bool keyboardFocus: false
 
     readonly property var themeList: themesFile.adapter.themes
-    readonly property bool isScanning: themeScanner.running
 
     onThemeChanged: stateFile.writeAdapter()
     onWallpaperChanged: stateFile.writeAdapter()
@@ -96,13 +95,13 @@ QtObject {
     }
 
     property Process themeScanner: Process {
-        command: ["python3", root.scanScriptPath]
+        command: [ root.scanScriptPath ]
         running: true           // run on startup
     }
 
     function rescanThemes() {
         if (!root.themeScanner.running) {
-            themeScanner.exec()
+            themeScanner.startDetached()
         }
     }
 }

@@ -47,4 +47,5 @@ QtObject {
     readonly property string moonCrescent: "󰽧"
     readonly property string sunBright: "󰃠"
     readonly property string magnify: "󰍉"
+    readonly property string refresh: "󰑐"
 }
