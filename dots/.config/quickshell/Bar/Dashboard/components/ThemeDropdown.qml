@@ -1,8 +1,9 @@
 import QtQuick
-// import QtQuick.Layouts
-import Quickshell.Widgets
+import QtQuick.Controls
 import qs.modules.theme
 import qs.services
+
+// qmllint disable unqualified
 
 Rectangle {
     id: dropdown
@@ -14,17 +15,21 @@ Rectangle {
     radius: Variables.dashInnerRadius
     focus: true
 
-    ClippingRectangle {
+    Popup {
         id: dropdownMenu
-        anchors.top: parent.bottom
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.topMargin: 4
+        y: parent.height + 4         // topMargin = 4
+        width: parent.width
+        height: dropdown.expanded ? Math.min(themeModel.length * 36 + 8, 36 * 4) : 0
         visible: height > 0
-        implicitHeight: dropdown.expanded ? 36 * 4 : 0
-        z: 100
-        color: Colors.surface_container_high
-        radius: Variables.dashInnerRadius
+
+        onClosed: dropdown.expanded = false
+        closePolicy: Popup.CloseOnPressOutside || Popup.CloseOnPressOutsideParent
+
+        background: Rectangle {
+            color: Colors.surface_container_high
+            radius: Variables.dashInnerRadius
+        }
+
         onVisibleChanged: {
             if (!visible) {
                 ThemeController.keyboardFocus = false;
@@ -32,18 +37,31 @@ Rectangle {
             }
         }
 
-        Behavior on implicitHeight {
+        Behavior on height {
             NumberAnimation {
                 duration: 250
                 easing.type: Easing.OutCubic
             }
         }
 
-        ListView {
+        contentItem: ListView {
             id: themeListView
             anchors.fill: parent
             clip: true
             model: dropdown.themeModel
+
+            highlightFollowsCurrentItem: true
+            highlightMoveDuration: 260
+            highlight: Item {
+                Rectangle {
+                    anchors.fill: parent
+                    anchors.leftMargin: 4
+                    anchors.rightMargin: 4
+                    anchors.topMargin: 4
+                    color: Colors.primary
+                    radius: Variables.dashInnerRadius - 4
+                }
+            }
 
             delegate: Item {
                 id: themeDelegate
@@ -59,12 +77,8 @@ Rectangle {
                     anchors.leftMargin: 4
                     anchors.rightMargin: 4
                     anchors.topMargin: 4
-                    color: themeDelegate.index === themeListView.currentIndex ? Colors.primary : "transparent"
+                    color: "transparent"
                     radius: Variables.dashInnerRadius - 4
-
-                    Behavior on color {
-                        ColorAnimation { duration: 200; easing.type: Easing.OutCubic }
-                    }
 
                     Text {
                         anchors.verticalCenter: parent.verticalCenter
@@ -75,7 +89,7 @@ Rectangle {
                         text: themeDelegate.modelData.name
 
                         Behavior on color {
-                            ColorAnimation { duration: 200; easing.type: Easing.OutCubic }
+                            ColorAnimation { duration: 260; easing.type: Easing.OutCubic }
                         }
                     }
 

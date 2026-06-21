@@ -56,7 +56,6 @@ ClippingRectangle {
                 id: themeDropdown
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                z: 100
             }
 
             ThemeModeToggle {
