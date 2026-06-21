@@ -4,6 +4,7 @@ THEME_NAME=$1
 WALLPAPER=$2
 MODE=$3
 MIST_DIR="$HOME/.config/mist"
+MIST_QS_THEME_DIR="$HOME/.config/quickshell/modules/theme"
 THEME_PATH="$MIST_DIR/themes/$THEME_NAME"
 
 if [[ -z "$1" || -z "$2" || -z "$3" ]]; then
@@ -55,6 +56,13 @@ else
     exit
 fi
 
-echo "{\"theme\": \"$THEME_NAME\", \"wallpaper\": \"$WALLPAPER\", \"mode\": \"$MODE\"}" > "$MIST_DIR/state.json"
+if [ -e "$MIST_QS_THEME_DIR/state.json" ]; then
+    echo "{\"theme\": \"$THEME_NAME\", \"wallpaper\": \"$WALLPAPER\", \"mode\": \"$MODE\"}" > "$MIST_QS_THEME_DIR/state.json"
+else
+    echo "Creating state.json..."
+    touch "$MIST_QS_THEME_DIR/state.json"
+    echo -e "Successfully created state.json at '$MIST_QS_THEME_DIR/state.json'!\n"
+    echo "{\"theme\": \"$THEME_NAME\", \"wallpaper\": \"$WALLPAPER\", \"mode\": \"$MODE\"}" > "$MIST_QS_THEME_DIR/state.json"
+fi
 
 echo -e "\033[4mTheme swap complete!\033[0m"

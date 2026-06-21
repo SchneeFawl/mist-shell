@@ -11,7 +11,7 @@ QtObject {
     property var scriptPath: Quickshell.env("HOME") + "/.config/mist/scripts/theme_switcher.sh"
     property var scanScriptPath: Quickshell.env("HOME") + "/.config/mist/scripts/generate_themes.py"
 
-    property var stateFilePath: Quickshell.env("HOME") + "/.config/mist/state.json"
+    property var stateFilePath: Quickshell.env("HOME") + "/.config/quickshell/modules/theme/state.json"
     property var themesFilePath: Quickshell.env("HOME") + "/.config/mist/themes.json"
 
     property string theme: "Mist"

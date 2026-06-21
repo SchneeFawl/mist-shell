@@ -1,7 +1,12 @@
 tree.txt
 packages.md
-color_theme.json
 examples/
+
+# color related
+color_theme.json
+colors.json
+state.json
+themes.json
 
 # system trash
 .DS_Store
@@ -9,7 +14,7 @@ Thumbs.db
 *.log
 *.bak
 
-# python, fabric and runtime stuff
+# python, fabric (unrelated) and runtime stuff
 __pycache__/
 *.py[cod]
 *$py.class

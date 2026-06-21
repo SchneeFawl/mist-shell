@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 import json
+from pathlib import Path
 
 def main():
     mist_dir = os.path.expanduser("~/.config/mist")
@@ -29,9 +30,11 @@ def main():
                     "wallpapers": wallpapers
                 })
 
-    output_path = os.path.join(mist_dir, "themes.json")
+    output_path = Path(os.path.join(mist_dir, "themes.json"))
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
     try:
-        with open(output_path, "w") as f:
+        with open(output_path, "w", encoding="utf-8") as f:
             json.dump({"themes": themes_list}, f, indent=2)
         print(f"Generated themes.json with {len(themes_list)} themes")
 
