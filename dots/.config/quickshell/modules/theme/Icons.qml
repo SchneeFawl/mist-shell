@@ -21,6 +21,7 @@ QtObject {
     readonly property string sysVolumeLow: "󰕿"
     readonly property string sysVolumeMute: "󰝟"
     readonly property string sysMic: "󰍬"
+    readonly property string sysMicMute: "󰍭"
     readonly property string sysBrightness: "󰃟"
 
     // Media controls

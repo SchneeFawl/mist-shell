@@ -32,17 +32,23 @@ ColumnLayout {
             spacing: Variables.dashInnerColSpacing
 
             SliderControlsBtn {
-                icon: Icons.sysVolume
+                icon: muted ? Icons.sysVolumeMute : Icons.sysVolume
+                muted: Audio.sinkMuted
                 onClicked: {
-                    root.activeOption = 1
+                    if (root.activeOption === 1) {
+                        Audio.sink.audio.muted = !Audio.sink.audio.muted
+                    } else root.activeOption = 1
                 }
                 active: root.activeOption === 1
             }
 
             SliderControlsBtn {
-                icon: Icons.sysMic
+                icon: muted ? Icons.sysMicMute : Icons.sysMic
+                muted: Audio.sourceMuted
                 onClicked: {
-                    root.activeOption = 2
+                    if (root.activeOption === 2) {
+                        Audio.source.audio.muted = !Audio.source.audio.muted
+                    } else root.activeOption = 2
                 }
                 active: root.activeOption === 2
             }
@@ -62,6 +68,7 @@ ColumnLayout {
         id: volumeSlider
         visible: root.activeOption === 1 ? true : false
         value: Audio.sinkValue
+        muted: Audio.sinkMuted
         onSliderMoved: (value) => {
             if (Audio.sink && Audio.sink.audio) {
                 Audio.sink.audio.volume = value;
@@ -73,6 +80,7 @@ ColumnLayout {
         id: micSlider
         visible: root.activeOption === 2 ? true : false
         value: Audio.sourceValue
+        muted: Audio.sourceMuted
         onSliderMoved: (value) => {
             if (Audio.source && Audio.source.audio) {
                 Audio.source.audio.volume = value;

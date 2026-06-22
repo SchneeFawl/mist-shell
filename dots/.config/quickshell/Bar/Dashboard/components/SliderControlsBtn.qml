@@ -6,19 +6,24 @@ Rectangle {
     id: sliderButtonRoot
 
     property string icon: ""
+    property bool muted: false
 
     property int active
     signal clicked()
 
     Layout.fillWidth: true
     Layout.fillHeight: true
-    color: active ? Colors.primary : Colors.surface_container_high
+    color: active ? (muted ? Colors.tertiary : Colors.primary) : Colors.surface_container_high
     radius: Variables.dashInnerRadius
     scale: mouseArea.pressed ? 0.85 : 1.0
 
     Text {
         anchors.centerIn: parent
-        color: sliderButtonRoot.active ? Colors.on_primary : Colors.on_surface
+        color: {
+            sliderButtonRoot.active
+            ? ( sliderButtonRoot.muted ? Colors.on_tertiary : Colors.on_primary)
+            : Colors.on_surface
+        }
         font.pixelSize: Variables.dashIconSize
         text: sliderButtonRoot.icon
 

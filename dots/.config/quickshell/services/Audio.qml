@@ -11,7 +11,7 @@ Singleton {
     readonly property real maxValue: 2.0
 
     property real sinkValue: sink?.audio?.volume ?? 0
-    property bool volumeMuted: sink?.audio?.muted
+    property bool sinkMuted: sink?.audio?.muted
 
     property real sourceValue: source?.audio?.volume ?? 0
     property bool sourceMuted: source?.audio?.muted

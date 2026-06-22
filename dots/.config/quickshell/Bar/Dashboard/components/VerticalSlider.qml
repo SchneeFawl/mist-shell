@@ -5,9 +5,12 @@ import qs.services
 
 // qmllint disable unqualified
 
-// slider container
 Rectangle {
     id: root
+
+    signal sliderMoved(real value)
+    property alias value: sliderRoot.value
+    property bool muted: false
 
     Layout.fillWidth: true
     Layout.fillHeight: true
@@ -19,16 +22,26 @@ Rectangle {
     radius: Variables.dashInnerRadius
     clip: true
 
-    signal sliderMoved(real value)
-    property alias value: sliderRoot.value
+    Text {
+        id: percentText
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+        anchors.topMargin: Variables.dashInnerColSpacing + 2
+        font.family: Variables.defaultFontFamily
+        font.pixelSize: 13
+        color: Colors.textSub
+        text: Math.round(value * 100) + "%"
+    }
 
     Rectangle {
         id: sliderRoot
 
         property real value
 
-        anchors.centerIn: parent
-        implicitHeight: 200
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: (root.width - implicitWidth) / 2
+        implicitHeight: 200 - percentText.height
         implicitWidth: 16
         color: Colors.surface_container_low
         radius: width / 2
@@ -40,7 +53,7 @@ Rectangle {
             height: parent.height * sliderRoot.value
             anchors.bottom: parent.bottom       // fills from bottom
             radius: parent.radius
-            color: Colors.primary
+            color: root.muted ? Colors.inactiveAccent : Colors.primary
         }
 
         MouseArea {
