@@ -16,7 +16,12 @@ Item {
     implicitWidth: contentLayout.implicitWidth + (innerPadding * 2)
     implicitHeight: Variables.pillHeight
 
-    Behavior on implicitWidth { NumberAnimation { duration: 200; easing.type: Easing.OutCubic } }
+    Behavior on implicitWidth {
+        NumberAnimation {
+            duration: 200
+            easing.type: Easing.OutCubic
+        }
+    }
 
     Rectangle {
         id: bgRect

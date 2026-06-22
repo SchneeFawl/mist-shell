@@ -55,8 +55,8 @@ QtObject {
             root.mode = root.stateFile.adapter.mode;
 
             // DEBUG
-            console.log("[ThemeController] state.json sync complete")
-            console.log("[ThemeController] Active state: theme=" + root.theme + ", wallpaper=" + root.wallpaper + ", mode=" + root.mode)
+            // console.log("[ThemeController] state.json sync complete")
+            // console.log("[ThemeController] Active state: theme=" + root.theme + ", wallpaper=" + root.wallpaper + ", mode=" + root.mode)
         }
 
         onLoadFailed: {

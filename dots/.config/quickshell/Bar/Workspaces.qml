@@ -1,12 +1,12 @@
 import Quickshell.Hyprland
 import QtQuick
-import QtQuick.Layouts
 import qs.modules.theme
 
 // qmllint disable unqualified
 
-RowLayout {
-    spacing: 2
+Row {
+    spacing: 6
+    clip: true
 
     Repeater {
         model: Hyprland.workspaces
@@ -15,54 +15,38 @@ RowLayout {
             id: workspaceSlot
             required property var modelData
 
-            implicitWidth: Variables.workspaceOuterSize
-            implicitHeight: Variables.workspaceOuterSize
+            implicitWidth: modelData.active ? Variables.workspaceActiveSize : Variables.workspaceInactiveSize
+            implicitHeight: Variables.workspaceInactiveSize
+            clip: true
 
-            Rectangle {         // outer ring of the Repeater
-                id: outerRing
-                anchors.centerIn: parent
-
-                width: modelData.active ? Variables.workspaceOuterSize : 10
-                height: modelData.active ? Variables.workspaceOuterSize : 10
-                radius: width / 2
-
-                color: Colors.inverse_primary
-
-                opacity: modelData.active ? 1.0 : 0
-
-                // smooth physical scaling adjustments when changing workspaces
-                Behavior on opacity {
-                    NumberAnimation {
-                        duration: 180
-                        easing.type: Easing.OutCubic
-                    }
-                }
-                Behavior on width {
-                    NumberAnimation {
-                        duration: 200
-                        easing.type: Easing.OutCubic
-                    }
-                }
-                Behavior on color {
-                    ColorAnimation {
-                        duration: 200
-                    }
+            Behavior on implicitWidth {
+                NumberAnimation {
+                    duration: 240
+                    easing.type: Easing.OutCubic
                 }
             }
 
-            Rectangle {		// center dot indicator
-                id: centerDot
+            Rectangle {
+                id: workspaceDots
                 anchors.centerIn: parent
+                anchors.fill: parent
 
-                width: Variables.workspaceInnerSize
-                height: Variables.workspaceInnerSize
-                radius: Variables.workspaceInnerSize / 2
+                implicitWidth: modelData.active ? Variables.workspaceActiveSize : Variables.workspaceInactiveSize
+                implicitHeight: Variables.workspaceInactiveSize
+                radius: height / 2
 
-                color: modelData.active ? Colors.activeAccent : Colors.inactiveAccent
+                color: modelData.active ? Colors.primary : Colors.inverse_primary
+
+                Behavior on implicitWidth {
+                    NumberAnimation {
+                        duration: 240
+                        easing.type: Easing.OutCubic
+                    }
+                }
 
                 Behavior on color {
                     ColorAnimation {
-                        duration: 150
+                        duration: 240
                     }
                 }
             }

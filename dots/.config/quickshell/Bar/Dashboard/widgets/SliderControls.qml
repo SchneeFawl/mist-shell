@@ -13,10 +13,6 @@ ColumnLayout {
     spacing: Variables.dashInnerColSpacing
     clip: true
 
-    Component.onCompleted: {
-        console.log("Current volume: " + Audio.sinkValue)
-    }
-
     // buttons
     Rectangle {
         Layout.leftMargin: Variables.dashInnerColSpacing
@@ -35,7 +31,7 @@ ColumnLayout {
                 icon: muted ? Icons.sysVolumeMute : Icons.sysVolume
                 muted: Audio.sinkMuted
                 onClicked: {
-                    if (root.activeOption === 1) {
+                    if (root.activeOption === 1 && Audio.sink && Audio.sink.audio) {
                         Audio.sink.audio.muted = !Audio.sink.audio.muted
                     } else root.activeOption = 1
                 }
@@ -46,7 +42,7 @@ ColumnLayout {
                 icon: muted ? Icons.sysMicMute : Icons.sysMic
                 muted: Audio.sourceMuted
                 onClicked: {
-                    if (root.activeOption === 2) {
+                    if (root.activeOption === 2 && Audio.source && Audio.source.audio) {
                         Audio.source.audio.muted = !Audio.source.audio.muted
                     } else root.activeOption = 2
                 }

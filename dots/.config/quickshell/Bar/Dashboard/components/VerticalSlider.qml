@@ -1,7 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.modules.theme
-import qs.services
 
 // qmllint disable unqualified
 
