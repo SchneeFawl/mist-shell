@@ -1,11 +1,14 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.modules.theme
+import qs.services
 
 // qmllint disable unqualified
 
 // slider container
 Rectangle {
+    id: root
+
     Layout.fillWidth: true
     Layout.fillHeight: true
     Layout.leftMargin: Variables.dashInnerColSpacing
@@ -16,11 +19,13 @@ Rectangle {
     radius: Variables.dashInnerRadius
     clip: true
 
+    signal sliderMoved(real value)
+    property alias value: sliderRoot.value
+
     Rectangle {
         id: sliderRoot
 
-        property real value: 0.5
-        signal sliderMoved(real val)
+        property real value
 
         anchors.centerIn: parent
         implicitHeight: 200
@@ -46,8 +51,7 @@ Rectangle {
                 var val = 1.0 - (mouseY / height);
                 var clamped = Math.max(0.0, Math.min(1.0, val));
 
-                sliderRoot.value = clamped;
-                sliderRoot.sliderMoved(clamped);
+                root.sliderMoved(clamped);
             }
 
             onPressed: (mouse) => {

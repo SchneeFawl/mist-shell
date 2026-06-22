@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import "../components"
 import qs.modules.theme
+import qs.services
 
 ColumnLayout {
     id: root
@@ -11,6 +12,10 @@ ColumnLayout {
     anchors.fill: parent
     spacing: Variables.dashInnerColSpacing
     clip: true
+
+    Component.onCompleted: {
+        console.log("Current volume: " + Audio.sinkValue)
+    }
 
     // buttons
     Rectangle {
@@ -56,11 +61,23 @@ ColumnLayout {
     VerticalSlider {
         id: volumeSlider
         visible: root.activeOption === 1 ? true : false
+        value: Audio.sinkValue
+        onSliderMoved: (value) => {
+            if (Audio.sink && Audio.sink.audio) {
+                Audio.sink.audio.volume = value;
+            }
+        }
     }
 
     VerticalSlider {
         id: micSlider
         visible: root.activeOption === 2 ? true : false
+        value: Audio.sourceValue
+        onSliderMoved: (value) => {
+            if (Audio.source && Audio.source.audio) {
+                Audio.source.audio.volume = value;
+            }
+        }
     }
 
     VerticalSlider {

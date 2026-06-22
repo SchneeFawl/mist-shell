@@ -6,7 +6,6 @@ Rectangle {
     id: sliderButtonRoot
 
     property string icon: ""
-    // property int iconSize: 
 
     property int active
     signal clicked()
@@ -15,6 +14,7 @@ Rectangle {
     Layout.fillHeight: true
     color: active ? Colors.primary : Colors.surface_container_high
     radius: Variables.dashInnerRadius
+    scale: mouseArea.pressed ? 0.85 : 1.0
 
     Text {
         anchors.centerIn: parent
@@ -37,9 +37,17 @@ Rectangle {
         }
     }
 
+    Behavior on scale {
+        NumberAnimation {
+            duration: 180
+            easing.type: Easing.OutCubic
+        }
+    }
+
     clip: true
 
     MouseArea {
+        id: mouseArea
         anchors.fill: parent
         onClicked: sliderButtonRoot.clicked()
     }

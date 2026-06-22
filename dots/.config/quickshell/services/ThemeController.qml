@@ -87,6 +87,7 @@ QtObject {
         path: root.themesFilePath
         watchChanges: true
         preload: true
+        onFileChanged: reload()
 
         adapter: JsonAdapter {
             id: themesAdapter
