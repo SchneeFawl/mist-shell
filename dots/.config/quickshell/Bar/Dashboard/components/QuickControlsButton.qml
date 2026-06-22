@@ -13,6 +13,7 @@ Rectangle {
     radius: Variables.dashColumnRadius
     color: active ? Colors.primary : Colors.surface_container_high
     clip: true
+    scale: mouseArea.pressed ? 0.85 : 1.0
 
     Text {
         anchors.centerIn: parent
@@ -22,7 +23,7 @@ Rectangle {
 
         Behavior on color {
             ColorAnimation {
-                duration: 360
+                duration: 240
                 easing.type: Easing.OutCubic
             }
         }
@@ -30,12 +31,20 @@ Rectangle {
 
     Behavior on color {
         ColorAnimation {
-            duration: 180
+            duration: 240
             easing.type: Easing.OutCubic
         }
     }
 
+    Behavior on scale {
+        NumberAnimation {
+            duration: 120
+            easing.type: Easing.OutQuad
+        }
+    }
+
     MouseArea {
+        id: mouseArea
         anchors.fill: parent
         onClicked: controlsButtonRoot.clicked()
     }

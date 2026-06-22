@@ -43,11 +43,19 @@ Rectangle {
             color: notifClearMouse.pressed ? Colors.surface_variant : Colors.surface_container_high
             radius: width / 2
             clip: true
+            scale: notifClearMouse.pressed ? 0.85 : 1.0
 
             Behavior on color {
                 ColorAnimation {
-                    duration: 150
+                    duration: 240
                     easing.type: Easing.OutCubic
+                }
+            }
+
+            Behavior on scale {
+                NumberAnimation {
+                    duration: 120
+                    easing.type: Easing.OutQuad
                 }
             }
 

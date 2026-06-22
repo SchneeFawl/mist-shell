@@ -17,12 +17,20 @@ Rectangle {
     implicitHeight: 50
     radius: Variables.dashColumnRadius
     color: active ? Colors.primary : btnBgColor
+    scale: mouseArea.pressed ? 0.85 : 1.0
     clip: true
 
     Behavior on color {
         ColorAnimation {
-            duration: 200
+            duration: 240
             easing.type: Easing.OutCubic
+        }
+    }
+
+    Behavior on scale {
+        NumberAnimation {
+            duration: 120
+            easing.type: Easing.OutQuad
         }
     }
 
@@ -34,16 +42,15 @@ Rectangle {
 
         Behavior on color {
             ColorAnimation {
-                duration: 400
+                duration: 240
                 easing.type: Easing.OutCubic
             }
         }
     }
 
     MouseArea {
+        id: mouseArea
         anchors.fill: parent
-        hoverEnabled: true
-
         onClicked: buttonRoot.clicked()
     }
 }

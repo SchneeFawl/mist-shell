@@ -10,11 +10,19 @@ Rectangle {
     implicitWidth: 28
     radius: width / 2
     color: prevHover.hovered ? Colors.surface_container_highest : Colors.surface_container_high
+    scale: mouseArea.pressed ? 0.9 : 1.0
 
     Behavior on color {
         ColorAnimation {
-            duration: 180
+            duration: 240
             easing.type: Easing.OutCubic
+        }
+    }
+
+    Behavior on scale {
+        NumberAnimation {
+            duration: 120
+            easing.type: Easing.OutQuad
         }
     }
 
@@ -27,6 +35,7 @@ Rectangle {
     HoverHandler { id: prevHover }
 
     MouseArea {
+        id: mouseArea
         anchors.fill: parent
         onClicked: prevMonthRoot.clicked()
     }

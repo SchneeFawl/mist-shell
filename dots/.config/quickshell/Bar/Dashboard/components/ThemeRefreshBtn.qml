@@ -9,7 +9,7 @@ Rectangle {
 
     color: mouseArea.containsMouse ? Colors.primary : Colors.surface_container_high
     radius: Variables.dashInnerRadius
-    scale: mouseArea.pressed ? 0.9 : 1.0
+    scale: mouseArea.pressed ? 0.85 : 1.0
 
     Text {
         id: refreshText
