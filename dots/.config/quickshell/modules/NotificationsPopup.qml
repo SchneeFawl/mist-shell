@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Effects
 import Quickshell
 import qs.services
 import qs.modules.theme
@@ -11,6 +12,7 @@ PanelWindow {           // qmllint disable uncreatable-type
 
     required property var modelData
     property var notif
+    property bool active: notifModel.count > 0
 
     anchors {
         right: true
@@ -22,9 +24,11 @@ PanelWindow {           // qmllint disable uncreatable-type
         right: 5
     }
 
-    implicitHeight: Math.min(200, notifListView.contentHeight)
-    implicitWidth: 300
+    // implicitHeight: Math.min(200*4, notifListView.contentHeight)
+    implicitHeight: 800
+    implicitWidth: 340
     color: "transparent"
+    visible: active || exitTimer.running
 
     ListModel {
         id: notifModel
@@ -37,73 +41,138 @@ PanelWindow {           // qmllint disable uncreatable-type
         spacing: 4
         anchors.fill: parent
 
-        add: Transition {
-            NumberAnimation {
-                property: "x"
-                from: notifPopup.width
-                duration: 200
-                easing.type: Easing.OutCubic
-            }
-            NumberAnimation {
-                property: "opacity"
-                from: 0
-                to: 1
-                duration: 200
-                easing.type: Easing.OutCubic
-            }
-        }
-
-        remove: Transition {
-            NumberAnimation {
-                property: "x"
-                to: notifPopup.width
-                duration: 200
-                easing.type: Easing.OutCubic
-            }
-        }
-
         displaced: Transition {
             NumberAnimation {
                 property: "y"
-                duration: 200
+                duration: 240
                 easing.type: Easing.OutQuad
             }
         }
 
-        delegate: Rectangle {
-            implicitHeight: 100 + 16
-            implicitWidth: notifPopup.width
-            color: Colors.secondary_container
-            border.color: Colors.border
-            border.width: 2
-            radius: Variables.pillRadius
-            clip: true
+        delegate: Item {
+            id: notifCard
 
+            height: cardBg.height + 8
+            width: notifPopup.width
+            x: notifPopup.width
+            opacity: 0.0
+
+            Component.onCompleted: entryAnim.start()
+
+            Rectangle {
+                id: cardShadow
+
+                anchors.top: cardBg.top
+                anchors.right: cardBg.right
+                anchors.left: cardBg.left
+                anchors.bottom: cardBg.bottom
+                anchors.topMargin: 8
+                anchors.bottomMargin: -4
+                anchors.rightMargin: -4
+
+                radius: Variables.pillRadius
+                color: "black"
+                opacity: mouseArea.containsMouse ? 0.25 : 0.15
+
+                layer.enabled: true
+                layer.effect: MultiEffect {
+                    blurEnabled: true
+                    blurMax: 24
+                    blur: 1.0
+                }
+
+                Behavior on opacity {
+                    NumberAnimation { duration: 200 }
+                }
+            }
+
+            Rectangle {
+                id: cardBg
+
+                width: 300
+                height: cardContentLayout.implicitHeight + 16
+                anchors.right: parent.right
+                anchors.rightMargin: 20
+
+                radius: Variables.pillRadius
+                color: Colors.secondary_container
+                border.width: 2
+                border.color: Colors.border
+            }
+
+            ParallelAnimation {
+                id: entryAnim
+                NumberAnimation {
+                    target: notifCard
+                    property: "x"
+                    to: 0
+                    duration: 240
+                    easing.type: Easing.OutCubic
+                }
+                NumberAnimation {
+                    target: notifCard
+                    property: "opacity"
+                    to: 1.0
+                    duration: 120
+                }
+            }
+
+            ParallelAnimation {
+                id: exitAnim
+
+                NumberAnimation {
+                    target: notifCard
+                    property: "x"
+                    to: notifPopup.width
+                    duration: 240
+                    easing.type: Easing.OutCubic
+                }
+                NumberAnimation {
+                    target: notifCard
+                    property: "opacity"
+                    to: 0.0
+                    duration: 480
+                }
+                onFinished: notifModel.remove(index)
+            }
+
+            // notif content
             ColumnLayout {
-                anchors.fill: parent
+                id: cardContentLayout
+                anchors.top: cardBg.top
+                anchors.left: cardBg.left
+                anchors.right: cardBg.right
                 anchors.margins: 8
-                spacing: 0
+                spacing: 8
                 clip: true
 
                 Text {
                     Layout.fillWidth: true
                     color: Colors.primary
+                    font.pixelSize: 16
+                    font.family: Variables.defaultFontFamily
+                    renderType: Text.NativeRendering
                     text: model.notifObject.appName
-                    font.pixelSize: 14
                 }
 
                 Text {
                     Layout.fillWidth: true
                     color: Colors.textVibrant
+                    font.pixelSize: 15
+                    font.family: Variables.defaultFontFamily
+                    renderType: Text.NativeRendering
                     text: model.notifObject.summary
-                    font.pixelSize: 12
                 }
 
                 Text {
                     Layout.fillWidth: true
                     color: Colors.textSub
+                    font.pixelSize: 14
+                    font.family: Variables.defaultFontFamily
+                    renderType: Text.NativeRendering
                     text: model.notifObject.body
-                    font.pixelSize: 12
+                    wrapMode: Text.WordWrap
+                    maximumLineCount: 3
                     elide: Text.ElideRight
                 }
             }
@@ -113,18 +182,29 @@ PanelWindow {           // qmllint disable uncreatable-type
                 interval: 7000
                 running: true
                 repeat: false
-                onTriggered: { notifModel.remove(index) }
+                onTriggered: exitAnim.start();
             }
 
             MouseArea {
-                anchors.fill: parent
+                id: mouseArea
+                anchors.fill: cardBg
                 onClicked: {
                     model.notifObject.dismiss();
-                    notifModel.remove(index)
+                    notifTimeout.stop();
+                    exitAnim.start();
                 }
             }
         }
     }
+
+    Timer {
+        id: exitTimer
+        running: false
+        repeat: false
+        interval: 250
+    }
+
+    onActiveChanged: exitTimer.start();
 
     Connections {
         target: Notifications
