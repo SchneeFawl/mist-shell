@@ -7,9 +7,7 @@ Rectangle {
     id: controlsRoot
 
     property int rootWidth: (controlsLayout.rectSize * 4) + (35)
-    property bool dndActive: false
     property bool bluetoothActive: false
-    property bool gameModeActive: false
 
     color: Colors.surface_container_low
     implicitHeight: 80
@@ -28,8 +26,8 @@ Rectangle {
 
         property int rectSize: 60
 
+        // dnd button
         QuickControlsBtn {
-            id: dndBtn
             implicitHeight: controlsLayout.rectSize
             implicitWidth: controlsLayout.rectSize
             iconSize: 30
@@ -37,7 +35,7 @@ Rectangle {
 
             onClicked: {
                 active = !active;
-                Notifications.dndActive = !Notifications.dndActive
+                Notifications.dndActive = !Notifications.dndActive;
             }
         }
 
@@ -50,18 +48,21 @@ Rectangle {
             onClicked: active = !active
         }
 
+        // gamemode button
         QuickControlsBtn {
-            id: gameModeBtn
             implicitHeight: controlsLayout.rectSize
             implicitWidth: controlsLayout.rectSize
             iconSize: 32
             icon: Icons.sysGameMode
 
-            onClicked: active = !active
+            onClicked: {
+                active = !active;
+                GameMode.gameModeActive = !GameMode.gameModeActive
+            }
         }
 
+        // caffeine mode button
         QuickControlsBtn {
-            id: caffeineBtn
             implicitHeight: controlsLayout.rectSize
             implicitWidth: controlsLayout.rectSize
             iconSize: 30
@@ -69,7 +70,7 @@ Rectangle {
 
             onClicked: {
                 Idle.caffeineActive = !Idle.caffeineActive;
-                active = !active
+                active = !active;
             }
         }
     }
