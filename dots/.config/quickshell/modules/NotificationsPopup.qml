@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Effects
 import Quickshell
+import Quickshell.Widgets
 import qs.services
 import qs.modules.theme
 
@@ -52,12 +53,26 @@ PanelWindow {           // qmllint disable uncreatable-type
         delegate: Item {
             id: notifCard
 
+            property real progress: 1.0
+
             height: cardBg.height + 8
             width: notifPopup.width
             x: notifPopup.width
             opacity: 0.0
 
-            Component.onCompleted: entryAnim.start()
+            NumberAnimation {
+                id: progressAnim
+                target: notifCard
+                property: "progress"
+                to: 0.0
+                duration: 7000
+                onFinished: exitAnim.start()
+            }
+
+            Component.onCompleted: {
+                entryAnim.start();
+                progressAnim.start();
+            }
 
             Rectangle {
                 id: cardShadow
@@ -86,11 +101,11 @@ PanelWindow {           // qmllint disable uncreatable-type
                 }
             }
 
-            Rectangle {
+            ClippingRectangle {
                 id: cardBg
 
                 width: 300
-                height: cardContentLayout.implicitHeight + 16
+                height: cardContentLayout.height + 20
                 anchors.right: parent.right
                 anchors.rightMargin: 20
 
@@ -98,6 +113,15 @@ PanelWindow {           // qmllint disable uncreatable-type
                 color: Colors.secondary_container
                 border.width: 2
                 border.color: Colors.border
+
+                Rectangle {
+                    id: progressBar
+                    width: (cardBg.width - 20) * notifCard.progress
+                    height: 2
+                    anchors.top: parent.top
+                    anchors.left: parent.left
+                    color: Colors.primary
+                }
             }
 
             ParallelAnimation {
@@ -142,14 +166,16 @@ PanelWindow {           // qmllint disable uncreatable-type
                 anchors.top: cardBg.top
                 anchors.left: cardBg.left
                 anchors.right: cardBg.right
-                anchors.margins: 8
+                anchors.topMargin: 12
+                anchors.leftMargin: 8
+                anchors.rightMargin: 8
                 spacing: 8
                 clip: true
 
                 Text {
                     Layout.fillWidth: true
                     color: Colors.primary
-                    font.pixelSize: 16
+                    font.pixelSize: 15
                     font.family: Variables.defaultFontFamily
                     renderType: Text.NativeRendering
                     text: model.notifObject.appName
@@ -158,7 +184,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                 Text {
                     Layout.fillWidth: true
                     color: Colors.textVibrant
-                    font.pixelSize: 15
+                    font.pixelSize: 14
                     font.family: Variables.defaultFontFamily
                     renderType: Text.NativeRendering
                     text: model.notifObject.summary
@@ -167,7 +193,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                 Text {
                     Layout.fillWidth: true
                     color: Colors.textSub
-                    font.pixelSize: 14
+                    font.pixelSize: 13
                     font.family: Variables.defaultFontFamily
                     renderType: Text.NativeRendering
                     text: model.notifObject.body
@@ -177,20 +203,12 @@ PanelWindow {           // qmllint disable uncreatable-type
                 }
             }
 
-            Timer {
-                id: notifTimeout
-                interval: 7000
-                running: true
-                repeat: false
-                onTriggered: exitAnim.start();
-            }
-
             MouseArea {
                 id: mouseArea
                 anchors.fill: cardBg
                 onClicked: {
                     model.notifObject.dismiss();
-                    notifTimeout.stop();
+                    progressAnim.stop();
                     exitAnim.start();
                 }
             }
