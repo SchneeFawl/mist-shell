@@ -175,7 +175,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                 ClippingRectangle {
                     id: iconImageContainer
 
-                    Layout.alignment: Qt.AlignTop
+                    Layout.alignment: Qt.AlignVCenter
                     Layout.preferredHeight: visible ? 50 : 0
                     Layout.preferredWidth: visible ? 50 : 0
                     visible: !!notifCard.resolvedIcon
@@ -255,8 +255,10 @@ PanelWindow {           // qmllint disable uncreatable-type
         target: Notifications
 
         function onNotification(notification) {
-            console.log("NOTIF received - appIcon:", notification.appIcon, "| image:", notification.image)
             notifModel.append({ "notifObject" : notification })
+
+            // DEBUG:
+            // console.log("NOTIF received - appIcon:", notification.appIcon, "| image:", notification.image)
         }
     }
 }

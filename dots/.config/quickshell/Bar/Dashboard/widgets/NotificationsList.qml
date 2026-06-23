@@ -14,7 +14,7 @@ ColumnLayout {
 
     anchors.fill: parent
     anchors.margins: Variables.dashInnerColSpacing
-    spacing: Variables.dashInnerColSpacing
+    spacing: Variables.dashInnerColSpacing + 3
 
     NotifListRect {
         onClicked: {
@@ -86,7 +86,7 @@ ColumnLayout {
             delegate: Rectangle {
                 id: card
 
-                readonly property var resolvedIcon: modelData.appIcon || modelData.image || ""
+                readonly property var resolvedIcon: modelData.image || modelData.appIcon || ""
 
                 implicitHeight: cardLayout.implicitHeight + 14 + 12
                 implicitWidth: parentRect.width
@@ -109,7 +109,7 @@ ColumnLayout {
 
                     ClippingRectangle {
                         id: iconContainer
-                        Layout.alignment: Qt.AlignTop
+                        Layout.alignment: Qt.AlignVCenter
                         Layout.preferredHeight: 50
                         Layout.preferredWidth: 50
                         visible: !!card.resolvedIcon
