@@ -93,7 +93,7 @@ ColumnLayout {
                 radius: Variables.dashInnerRadius
                 color: Colors.primary_container
                 border.width: 2
-                border.color: Colors.border
+                border.color: Notifications.getUrgencyColor(modelData.urgency, Colors.error, Colors.border)
                 clip: true
 
                 RowLayout {

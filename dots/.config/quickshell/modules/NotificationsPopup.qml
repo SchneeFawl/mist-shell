@@ -113,7 +113,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                 radius: Variables.pillRadius
                 color: Colors.primary_container
                 border.width: 2
-                border.color: Colors.border
+                border.color: Notifications.getUrgencyColor(model.notifObject.urgency, Colors.error, Colors.border)
 
                 Rectangle {
                     id: progressBar
@@ -121,7 +121,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                     height: 3
                     anchors.top: parent.top
                     anchors.left: parent.left
-                    color: Colors.primary
+                    color: Notifications.getUrgencyColor(model.notifObject.urgency, Colors.on_error_container, Colors.primary)
                     radius: 2
                 }
             }

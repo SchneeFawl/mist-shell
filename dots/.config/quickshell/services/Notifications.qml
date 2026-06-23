@@ -10,4 +10,12 @@ NotificationServer {
     onNotification: notification => {
         notification.tracked = true
     }
+
+    function getUrgencyColor(urgency, criticalColor, fallbackColor) {
+        if (urgency === NotificationUrgency.Critical) {
+            return criticalColor;
+        } else {
+            return fallbackColor;
+        }
+    }
 }
