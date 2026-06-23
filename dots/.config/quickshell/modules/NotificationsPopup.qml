@@ -179,6 +179,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                     Layout.preferredHeight: visible ? 50 : 0
                     Layout.preferredWidth: visible ? 50 : 0
                     visible: !!notifCard.resolvedIcon
+                    color: "transparent"
                     radius: width / 2
 
                     IconImage {

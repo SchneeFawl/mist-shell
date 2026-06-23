@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import Quickshell.Widgets
 import "../components"
 import qs.services
 import qs.modules.theme
@@ -37,22 +38,22 @@ ColumnLayout {
 
         ListView {
             anchors.fill: parent
-            clip: true
             spacing: Variables.dashInnerColSpacing
+            clip: true
             model: Notifications.trackedNotifications
 
             property Transition entryTransition: Transition {
                 NumberAnimation {
                     property: "x"
                     from: -parentRect.width
-                    duration: 200
+                    duration: 240
                     easing.type: Easing.OutCubic
                 }
                 NumberAnimation {
                     property: "opacity"
                     from: 0
                     to: 1
-                    duration: 200
+                    duration: 120
                 }
             }
 
@@ -60,13 +61,13 @@ ColumnLayout {
                 NumberAnimation {
                     property: "x"
                     to: parentRect.width
-                    duration: 200
+                    duration: 240
                     easing.type: Easing.OutCubic
                 }
                 NumberAnimation {
                     property: "opacity"
                     to: 0
-                    duration: 200
+                    duration: 480
                 }
             }
 
@@ -77,41 +78,85 @@ ColumnLayout {
             displaced: Transition {
                 NumberAnimation {
                     property: "y"
-                    duration: 200
+                    duration: 240
                     easing.type: Easing.OutQuad
                 }
             }
 
             delegate: Rectangle {
-                implicitHeight: 100
+                id: card
+
+                readonly property var resolvedIcon: modelData.appIcon || modelData.image || ""
+
+                implicitHeight: cardLayout.implicitHeight + 14 + 12
                 implicitWidth: parentRect.width
-                color: Colors.secondary_container
                 radius: Variables.dashInnerRadius
+                color: Colors.primary_container
+                border.width: 2
+                border.color: Colors.border
                 clip: true
 
-                ColumnLayout {
-                    anchors.fill: parent
-                    anchors.margins: 8
-                    spacing: 4
+                RowLayout {
+                    id: cardLayout
+                    anchors.top: card.top
+                    anchors.left: card.left
+                    anchors.right: card.right
+                    anchors.topMargin: 14
+                    anchors.leftMargin: 12
+                    anchors.rightMargin: 12
+                    spacing: 8
                     clip: true
 
-                    Text {
-                        color: Colors.primary
-                        text: modelData.appName
-                        font.pixelSize: 14
+                    ClippingRectangle {
+                        id: iconContainer
+                        Layout.alignment: Qt.AlignTop
+                        Layout.preferredHeight: 50
+                        Layout.preferredWidth: 50
+                        visible: !!card.resolvedIcon
+                        color: "transparent"
+                        radius: width / 2
+
+                        IconImage {
+                            anchors.fill: parent
+                            mipmap: true
+                            asynchronous: true
+                            source: card.resolvedIcon
+                        }
                     }
 
-                    Text {
-                        color: Colors.textVibrant
-                        text: modelData.summary
-                        font.pixelSize: 12
-                    }
+                    ColumnLayout {
+                        id: contentLayout
+                        Layout.fillWidth: true
+                        spacing: 8
+                        clip: true
 
-                    Text {
-                        color: Colors.textSub
-                        text: modelData.body
-                        font.pixelSize: 12
-                        elide: Text.ElideMiddle
+                        Text {
+                            Layout.fillWidth: true
+                            color: Colors.secondary
+                            font.family: Variables.defaultFontFamily
+                            font.pixelSize: 14
+                            text: modelData.appName
+                        }
+
+                        Text {
+                            Layout.fillWidth: true
+                            color: Colors.on_primary_container
+                            font.family: Variables.defaultFontFamily
+                            font.pixelSize: 15
+                            text: modelData.summary
+                            elide: Text.ElideRight
+                        }
+
+                        Text {
+                            Layout.fillWidth: true
+                            color: Colors.tertiary
+                            font.pixelSize: 13
+                            font.family: Variables.defaultFontFamily
+                            text: modelData.body
+                            wrapMode: Text.WordWrap
+                            maximumLineCount: 3
+                            elide: Text.ElideRight
+                        }
                     }
                 }
 
