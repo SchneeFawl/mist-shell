@@ -4,7 +4,7 @@ import Quickshell
 import Quickshell.Widgets
 import qs.modules.theme
 import qs.services
-import "../components"
+import "../components/Theme"
 
 ClippingRectangle {
     id: root

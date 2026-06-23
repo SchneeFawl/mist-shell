@@ -255,7 +255,7 @@ PanelWindow {           // qmllint disable uncreatable-type
         target: Notifications
 
         function onNotification(notification) {
-            notifModel.append({ "notifObject" : notification })
+            !Notifications.dndActive ? notifModel.append({ "notifObject" : notification }) : null
 
             // DEBUG:
             // console.log("NOTIF received - appIcon:", notification.appIcon, "| image:", notification.image)

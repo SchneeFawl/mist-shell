@@ -12,9 +12,12 @@ QtObject {
     // System
     readonly property string powerIcon: "󰐥"
     readonly property string sysSettings: "󰒓"
-    readonly property string sysDnd: "󰂛"
+    readonly property string sysDndActive: "󰂛"
+    readonly property string sysDndInactive: "󰂚"
     readonly property string sysBluetooth: "󰂯"
     readonly property string sysGameMode: "󰺷"
+    readonly property string sysCaffeineActive: "󰅶"
+    readonly property string sysCaffeineInactive: "󰾪"
     readonly property string sysClipboard: "󰅍"
     readonly property string sysVolume: "󰕾"
     readonly property string sysVolumeMedium: "󰖀"

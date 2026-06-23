@@ -1,15 +1,15 @@
 import QtQuick
 import QtQuick.Layouts
-import "../components"
 import qs.modules.theme
+import qs.services
 
 Rectangle {
-    id: quickControlsRoot
+    id: controlsRoot
 
     property int rootWidth: (controlsLayout.rectSize * 4) + (35)
-    property bool gameModeActive: false
-    property bool bluetoothActive: false
     property bool dndActive: false
+    property bool bluetoothActive: false
+    property bool gameModeActive: false
 
     color: Colors.surface_container_low
     implicitHeight: 80
@@ -28,55 +28,49 @@ Rectangle {
 
         property int rectSize: 60
 
-        QuickControlsButton {
+        QuickControlsBtn {
+            id: dndBtn
             implicitHeight: controlsLayout.rectSize
             implicitWidth: controlsLayout.rectSize
             iconSize: 30
-            icon: Icons.sysDnd
+            icon: active ? Icons.sysDndActive : Icons.sysDndInactive
 
             onClicked: {
-                if (!active) {
-                    active = true
-                } else {
-                    active = false
-                }
+                active = !active;
+                Notifications.dndActive = !Notifications.dndActive
             }
         }
 
-        QuickControlsButton {
+        QuickControlsBtn {
+            id: bluetoothBtn
             implicitHeight: controlsLayout.rectSize
             implicitWidth: controlsLayout.rectSize
             icon: Icons.sysBluetooth
 
-            onClicked: {
-                if (!active) {
-                    active = true
-                } else {
-                    active = false
-                }
-            }
+            onClicked: active = !active
         }
 
-        QuickControlsButton {
+        QuickControlsBtn {
+            id: gameModeBtn
             implicitHeight: controlsLayout.rectSize
             implicitWidth: controlsLayout.rectSize
             iconSize: 32
             icon: Icons.sysGameMode
 
-            onClicked: {
-                if (!active) {
-                    active = true
-                } else {
-                    active = false
-                }
-            }
+            onClicked: active = !active
         }
 
-        QuickControlsButton {
+        QuickControlsBtn {
+            id: caffeineBtn
             implicitHeight: controlsLayout.rectSize
             implicitWidth: controlsLayout.rectSize
-            iconSize: 26
-            icon: Icons.sysClipboard
+            iconSize: 30
+            icon: Idle.caffeineActive ? Icons.sysCaffeineActive : Icons.sysCaffeineInactive
+
+            onClicked: {
+                Idle.caffeineActive = !Idle.caffeineActive;
+                active = !active
+            }
         }
     }
 }

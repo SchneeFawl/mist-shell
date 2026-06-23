@@ -1,6 +1,7 @@
 import QtQuick.Layouts
 import QtQuick
 import "./components"
+import "./components/QuickControls"
 import "./widgets"
 import "./calendar"
 import qs.modules.theme

@@ -5,7 +5,9 @@ import Quickshell.Services.Notifications
 NotificationServer {
     id: notifServer
 
-    keepOnReload: false
+    property bool dndActive: false
+
+    keepOnReload: true
 
     onNotification: notification => {
         notification.tracked = true
