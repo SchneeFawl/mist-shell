@@ -1,10 +1,9 @@
 //@ pragma UseQApplication
+//@ pragma IconTheme Papirus
 import Quickshell
 import QtQuick
 import "./Bar"
-import qs.scripts
 import qs.modules
-// import qs.services
 
 // qmllint disable unqualified
 
@@ -23,13 +22,12 @@ ShellRoot {
         delegate: NotificationsPopup {}
     }
 
-    // screen tracking window instantiation
     Variants {
 	    model: Quickshell.screens
 
         delegate: Component {
             Bar {
-                // pass system model bounds down to individual monitor frames
+                // pass system model bounds down to individual monitor
                 layoutStyle: root.activeBarLayout
             }
         }

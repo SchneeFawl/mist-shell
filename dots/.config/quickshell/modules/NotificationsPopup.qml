@@ -54,6 +54,7 @@ PanelWindow {           // qmllint disable uncreatable-type
             id: notifCard
 
             property real progress: 1.0
+            readonly property var resolvedIcon: model.notifObject.image || model.notifObject.appIcon || ""
 
             height: cardBg.height + 8
             width: notifPopup.width
@@ -104,23 +105,24 @@ PanelWindow {           // qmllint disable uncreatable-type
             ClippingRectangle {
                 id: cardBg
 
-                width: 300
-                height: cardContentLayout.height + 20
+                width: 320
+                height: cardLayout.implicitHeight + 14 + 12
                 anchors.right: parent.right
                 anchors.rightMargin: 20
 
                 radius: Variables.pillRadius
-                color: Colors.secondary_container
+                color: Colors.primary_container
                 border.width: 2
                 border.color: Colors.border
 
                 Rectangle {
                     id: progressBar
                     width: (cardBg.width - 20) * notifCard.progress
-                    height: 2
+                    height: 3
                     anchors.top: parent.top
                     anchors.left: parent.left
                     color: Colors.primary
+                    radius: 2
                 }
             }
 
@@ -160,46 +162,70 @@ PanelWindow {           // qmllint disable uncreatable-type
                 onFinished: notifModel.remove(index)
             }
 
-            // notif content
-            ColumnLayout {
-                id: cardContentLayout
+            RowLayout {
+                id: cardLayout
                 anchors.top: cardBg.top
                 anchors.left: cardBg.left
                 anchors.right: cardBg.right
-                anchors.topMargin: 12
-                anchors.leftMargin: 8
-                anchors.rightMargin: 8
+                anchors.topMargin: 14
+                anchors.leftMargin: 12
+                anchors.rightMargin: 12
                 spacing: 8
-                clip: true
 
-                Text {
-                    Layout.fillWidth: true
-                    color: Colors.primary
-                    font.pixelSize: 15
-                    font.family: Variables.defaultFontFamily
-                    renderType: Text.NativeRendering
-                    text: model.notifObject.appName
+                ClippingRectangle {
+                    id: iconImageContainer
+
+                    Layout.alignment: Qt.AlignTop
+                    Layout.preferredHeight: visible ? 50 : 0
+                    Layout.preferredWidth: visible ? 50 : 0
+                    visible: !!notifCard.resolvedIcon
+                    radius: width / 2
+
+                    IconImage {
+                        anchors.fill: parent
+                        mipmap: true
+                        asynchronous: true
+                        source: notifCard.resolvedIcon
+                    }
                 }
 
-                Text {
+                // notif content
+                ColumnLayout {
+                    id: cardContentLayout
                     Layout.fillWidth: true
-                    color: Colors.textVibrant
-                    font.pixelSize: 14
-                    font.family: Variables.defaultFontFamily
-                    renderType: Text.NativeRendering
-                    text: model.notifObject.summary
-                }
+                    spacing: 8
+                    clip: true
 
-                Text {
-                    Layout.fillWidth: true
-                    color: Colors.textSub
-                    font.pixelSize: 13
-                    font.family: Variables.defaultFontFamily
-                    renderType: Text.NativeRendering
-                    text: model.notifObject.body
-                    wrapMode: Text.WordWrap
-                    maximumLineCount: 3
-                    elide: Text.ElideRight
+                    Text {
+                        Layout.fillWidth: true
+                        color: Colors.secondary
+                        font.pixelSize: 14
+                        font.family: Variables.defaultFontFamily
+                        renderType: Text.NativeRendering
+                        text: model.notifObject.appName
+                    }
+
+                    Text {
+                        Layout.fillWidth: true
+                        color: Colors.on_primary_container
+                        font.pixelSize: 15
+                        font.family: Variables.defaultFontFamily
+                        renderType: Text.NativeRendering
+                        text: model.notifObject.summary
+                        elide: Text.ElideRight
+                    }
+
+                    Text {
+                        Layout.fillWidth: true
+                        color: Colors.tertiary
+                        font.pixelSize: 13
+                        font.family: Variables.defaultFontFamily
+                        renderType: Text.NativeRendering
+                        text: model.notifObject.body
+                        wrapMode: Text.WordWrap
+                        maximumLineCount: 3
+                        elide: Text.ElideRight
+                    }
                 }
             }
 
@@ -228,6 +254,7 @@ PanelWindow {           // qmllint disable uncreatable-type
         target: Notifications
 
         function onNotification(notification) {
+            console.log("NOTIF received - appIcon:", notification.appIcon, "| image:", notification.image)
             notifModel.append({ "notifObject" : notification })
         }
     }
