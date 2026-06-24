@@ -148,13 +148,6 @@ hl.window_rule({
     opacity = "0.92 0.82"
 })
 
-hl.window_rule({
-    match = {
-        class = "^(kitty)$"
-    },
-    opacity = "1 0.8"
-})
-
 -- universal system dialog rule
 hl.window_rule({
     match = {

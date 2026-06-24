@@ -1,0 +1,85 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
+  "logo": {
+    "type": "small",
+    "padding": {
+      "top": 2,
+      "left": 3,
+      "right": 3
+    },
+    "color": {
+      "1": "#eeeeee",
+      "2": "#d7ffff"
+    }
+  },
+
+  "display": {
+    "separator": "  ",
+    "color": "white",
+    "constants": ["\u001b[37m", "\u001b[38;5;218m", "\u001b[38;5;38m", "\u001b[38;5;12m", "\u001b[38;5;248m"]
+  },
+
+  "modules": [
+    {
+      "type": "title",
+      "format": "  {$2}{$1} {$2}{user-name>10}{$1}"
+    },
+    {
+        "type": "custom",
+        "key": "╭───────────────────────────────────╮"
+    },
+    {
+      "type": "os",
+      "key": "│ {$4}󰌽 distro{$1}",
+      "format": "{$5}{pretty-name>23}{$1} │"
+    },
+    {
+      "type": "kernel",
+      "key": "│ {$3}󰒓 kernel{$1}",
+      "format": "{$5}{release>23}{$1} │"
+    },
+    {
+      "type": "wm",
+      "key": "│ {$4}󰖯 wm{$1}",
+      "format": "{$5}{2>27}{$1} │"
+    },
+    {
+      "type": "shell",
+      "key": "│ {$2}󰆍 shell{$1}",
+      "format": "{pretty-name>24} │"
+    },
+    {
+      "type": "display",
+      "key": "│ {$2}󰍹 display{$1}",
+      "format": "{1>11}x{2} @ {3}Hz │"
+    },
+    {
+      "type": "gpu",
+      "key": "│ {$3}󰇺 gpu{$1}",
+      "format": "{$5}{2>26}{$1} │"
+    },
+    {
+      "type": "command",
+      "key": "│ {$4}󰍛 ram{$1}",
+      "text": "free -m | awk 'NR==2{printf \"%.2f GiB / %.2f GiB\",$3/1024,$2/1024}'",
+      "format": "{$5}{>26}{$1} │"
+    },
+    {
+      "type": "disk",
+      "key": "│ {$3}󰒋 disk{$1}",
+      "folders": "/",
+      "format": "{1>13} / {2} │"
+    },
+    {
+      "type": "command",
+      "key": "│ {$2}󱎫 uptime{$1}",
+      "text": "uptime -p | cut -d ' ' -f 2-",
+      "format": "{>23} │"
+    },
+    {
+      "type": "custom",
+      "key": "╰───────────────────────────────────╯"
+    },
+    "break"
+  ]
+}
