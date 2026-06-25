@@ -39,6 +39,7 @@ Rectangle {
             }
         }
 
+        // bluetooth button
         QuickControlsBtn {
             id: bluetoothBtn
             implicitHeight: controlsLayout.rectSize

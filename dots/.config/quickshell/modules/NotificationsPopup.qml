@@ -88,17 +88,13 @@ PanelWindow {           // qmllint disable uncreatable-type
 
                 radius: Variables.pillRadius
                 color: "black"
-                opacity: mouseArea.containsMouse ? 0.25 : 0.15
+                opacity: 0.20
 
-                layer.enabled: true
+                layer.enabled: !(entryAnim.running || exitAnim.running)
                 layer.effect: MultiEffect {
                     blurEnabled: true
                     blurMax: 24
                     blur: 1.0
-                }
-
-                Behavior on opacity {
-                    NumberAnimation { duration: 200 }
                 }
             }
 

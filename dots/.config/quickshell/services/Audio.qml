@@ -11,10 +11,10 @@ Singleton {
     readonly property real maxValue: 2.0
 
     property real sinkValue: sink?.audio?.volume ?? 0
-    property bool sinkMuted: sink?.audio?.muted
+    property bool sinkMuted: sink?.audio?.muted ?? false
 
     property real sourceValue: source?.audio?.volume ?? 0
-    property bool sourceMuted: source?.audio?.muted
+    property bool sourceMuted: source?.audio?.muted ?? false
 
     PwObjectTracker {
         objects: [ root.sink, root.source ]

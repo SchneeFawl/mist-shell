@@ -18,7 +18,18 @@ ClippingRectangle {
     property var mediaCover: (activePlayer && activePlayer.trackArtUrl) ? activePlayer.trackArtUrl : ""
 
     property real progress: 0
-    onActivePlayerChanged: progress = 0
+    property real currentPosition: 0
+    onActivePlayerChanged: {
+        currentPosition = activePlayer ? activePlayer.position : 0;
+        progress = (activePlayer && activePlayer.length > 0) ? (currentPosition / activePlayer.length) : 0;
+    }
+    onIsPlayingChanged: {
+        if (!isPlaying && activePlayer && activePlayer.playbackState === MprisPlaybackState.Paused) {
+            if (activePlayer.position !== undefined) {
+                currentPosition = activePlayer.position;
+            }
+        }
+    }
 
     anchors.fill: parent
     color: blurEffect.visible ? "transparent" : Colors.surface_container_low
@@ -123,7 +134,7 @@ ClippingRectangle {
             Text {
                 id: songProgress
                 text: player.activePlayer ?
-                    (formatTime(player.activePlayer.position) + " / " + formatTime(player.activePlayer.length))
+                    (formatTime(player.currentPosition) + " / " + formatTime(player.activePlayer.length))
                     : "--:--"
                 color: Colors.textSub
                 font.pixelSize: 10
@@ -242,7 +253,9 @@ ClippingRectangle {
             let active = player.activePlayer;
 
             if (active && Mpris.players.values.includes(active) && active.length > 0) {
-                progress = active.position / active.length;
+                // 33ms = 0.033s
+                player.currentPosition = Math.min(player.currentPosition + 0.033, active.length)
+                progress = player.currentPosition / active.length;
             } else {
                 progress = 0;
             }
@@ -258,7 +271,9 @@ ClippingRectangle {
             let active = player.activePlayer
 
             if (active && Mpris.players.values.includes(active)) {
-                player.activePlayer.positionChanged();
+                if (active.position !== undefined) {
+                    player.currentPosition = active.position;
+                }
             }
         }
     }

@@ -35,7 +35,7 @@ Item {
         onObjectRemoved: controllerRoot.updateTrackedPlayer()
 
         delegate: Connections {
-            target: modelData
+            target: modelData ? modelData : null
             function onPlaybackStateChanged() {
                 controllerRoot.updateTrackedPlayer();
             }

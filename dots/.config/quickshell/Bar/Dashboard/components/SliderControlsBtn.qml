@@ -13,7 +13,7 @@ Rectangle {
 
     Layout.fillWidth: true
     Layout.fillHeight: true
-    color: active ? (muted ? Colors.tertiary : Colors.primary) : Colors.surface_container_high
+    color: active ? (muted ? Colors.error : Colors.primary) : Colors.surface_container_high
     radius: Variables.dashInnerRadius
     scale: mouseArea.pressed ? 0.85 : 1.0
 

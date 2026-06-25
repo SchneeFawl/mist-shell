@@ -52,7 +52,7 @@ Rectangle {
             height: parent.height * sliderRoot.value
             anchors.bottom: parent.bottom       // fills from bottom
             radius: parent.radius
-            color: root.muted ? Colors.inactiveAccent : Colors.primary
+            color: root.muted ? Colors.error : Colors.primary
         }
 
         MouseArea {
