@@ -3,7 +3,7 @@ import "./widgets"
 // import qs.modules.theme
 
 Rectangle {
-    id: root
+    id: contentRoot
 
     property int activeTab
     property string systemStatsText: "System Stats Placeholder"
@@ -14,8 +14,12 @@ Rectangle {
     color: "transparent"
     clip: true
 
-    MediaPlayer {
-        visible: parent.activeTab === 1
+    Loader {
+        active: parent.activeTab === 1
+        anchors.fill: parent
+        sourceComponent: Component {
+            MediaPlayer {}
+        }
     }
 
     Text {
@@ -25,8 +29,12 @@ Rectangle {
         text: parent.systemStatsText
     }
 
-    ThemeSelector {
-        visible: parent.activeTab === 3
+    Loader {
+        active: parent.activeTab === 3
+        anchors.fill: parent
+        sourceComponent: Component {
+            ThemeSelector {}
+        }
     }
 
     Text {

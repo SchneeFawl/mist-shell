@@ -100,6 +100,12 @@ PopupWindow {
             }
         }
 
-        DashboardColumns { active: dashboardPopup.active }
+        Loader {
+            active: dashboardPopup.active || dashboardPopup._wasActive
+            anchors.fill: parent
+            sourceComponent: Component {
+                DashboardColumns { active: dashboardPopup.active }
+            }
+        }
     }
 }
