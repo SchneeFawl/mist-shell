@@ -19,20 +19,20 @@ ClippingRectangle {
         anchors.margins: Variables.dashInnerColSpacing
         spacing: Variables.dashInnerColSpacing
 
-        // header
-        RowLayout {
+        Row {
             Layout.preferredHeight: 36
             Layout.fillWidth: true
+            // spacing: Variables.dashInnerColSpacing
 
             BtButton {
                 id: backButton
+                anchors.left: parent.left
                 icon: Icons.chevronLeft
                 onClicked: btMenuRoot.backClicked()
             }
 
             Text {
-                Layout.fillWidth: true
-                Layout.alignment: Text.AlignHCenter
+                anchors.centerIn: parent
                 font.family: Variables.defaultFontFamily
                 font.pixelSize: 16
                 font.weight: Variables.defaultFontWeight
@@ -42,6 +42,7 @@ ClippingRectangle {
 
             BtButton {
                 id: scanButton
+                anchors.right: parent.right
                 icon: Icons.refresh
                 onClicked: {
                     if (Bluetooth.defaultAdapter.enabled && !Bluetooth.defaultAdapter.discovering) {

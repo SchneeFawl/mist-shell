@@ -138,6 +138,7 @@ ClippingRectangle {
                     : "--:--"
                 color: Colors.textSub
                 font.pixelSize: 10
+                font.family: Variables.defaultFontFamily
                 Layout.fillWidth: true
                 horizontalAlignment: Text.AlignHCenter
 
@@ -162,6 +163,7 @@ ClippingRectangle {
                 color: Colors.textVibrant
                 font.bold: true
                 font.pixelSize: 18
+                font.family: Variables.defaultFontFamily
                 elide: Text.ElideRight
                 Layout.fillWidth: true
                 horizontalAlignment: Text.AlignHCenter
@@ -172,6 +174,7 @@ ClippingRectangle {
                 text: player.activePlayer ? player.activePlayer.trackArtist : "-"
                 color: Colors.primary_fixed
                 font.pixelSize: 13
+                font.family: Variables.defaultFontFamily
                 elide: Text.ElideRight
                 Layout.fillWidth: true
                 horizontalAlignment: Text.AlignHCenter
@@ -197,7 +200,7 @@ ClippingRectangle {
 
             MediaControlBtn {       // play/pause btn
                 icon: player.isPlaying ? Icons.mediaPause : Icons.mediaPlay
-                iconSize: 32 + btnSize - 50
+                iconSize: 34
                 btnSize: 58
                 bgColor: Colors.primary
                 iconColor: Colors.on_primary
@@ -218,6 +221,7 @@ ClippingRectangle {
             }
 
             MediaControlBtn {       // loop btn
+                iconSize: 28
                 icon: {
                     if (!player.activePlayer) return Icons.mediaLoopNone;
                     switch (player.activePlayer.loopState) {

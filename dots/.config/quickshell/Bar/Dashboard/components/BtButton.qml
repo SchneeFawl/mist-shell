@@ -8,8 +8,8 @@ Rectangle {
     property string icon: ""
     signal clicked()
 
-    Layout.preferredHeight: 36
-    Layout.preferredWidth: 36
+    height: 36
+    width: 36
     color: backMouseArea.pressed ? Colors.surface_container_highest : Colors.surface_container_high
     radius: Variables.dashInnerRadius
     scale: backMouseArea.pressed ? 0.85 : 1.0

@@ -19,7 +19,7 @@ Rectangle {
         NavButton {
             id: mediaModeBtn
             icon: Icons.navMusic
-            iconSize: Variables.dashIconSize - 4
+            iconSize: Variables.dashIconSize
 
             onClicked: {
                 navWrapper.activeTab = 1;
@@ -32,7 +32,7 @@ Rectangle {
         NavButton {
             id: systemInfoBtn
             icon: Icons.navSystemInfo
-            iconSize: Variables.dashIconSize
+            iconSize: Variables.dashIconSize - 2
 
             onClicked: {
                 navWrapper.activeTab = 2;
@@ -58,7 +58,7 @@ Rectangle {
         NavButton {
             id: appSelectBtn
             icon: Icons.navApps
-            iconSize: Variables.dashIconSize - 2
+            iconSize: Variables.dashIconSize
 
             onClicked: {
                 navWrapper.activeTab = 4;

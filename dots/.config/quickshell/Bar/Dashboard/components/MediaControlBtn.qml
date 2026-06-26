@@ -52,6 +52,7 @@ Rectangle {
         anchors.centerIn: parent
         text: mediaContBtn.icon
         font.pixelSize: mediaContBtn.iconSize
+        font.family: Variables.defaultFontFamily
         color: mediaContBtn.iconColor
         opacity: mediaContBtn.showSecondIcon ? 0.0 : 1.0
         scale: mediaContBtn.showSecondIcon ? 0.6 : 1.0
@@ -65,6 +66,7 @@ Rectangle {
         anchors.centerIn: parent
         text: mediaContBtn.icon
         font.pixelSize: mediaContBtn.iconSize
+        font.family: Variables.defaultFontFamily
         color: mediaContBtn.iconColor
         opacity: mediaContBtn.showSecondIcon ? 1.0 : 0.0
         scale: mediaContBtn.showSecondIcon ? 1.0 : 0.6

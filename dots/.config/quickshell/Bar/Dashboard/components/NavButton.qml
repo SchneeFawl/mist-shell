@@ -37,6 +37,7 @@ Rectangle {
     Text {
         text: buttonRoot.icon
         font.pixelSize: buttonRoot.iconSize
+        font.family: Variables.defaultFontFamily
         color: buttonRoot.active ? Colors.on_primary : Colors.on_surface
         anchors.centerIn: parent
 

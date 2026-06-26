@@ -63,9 +63,9 @@ Rectangle {
             Text {
                 color: Colors.on_surface
                 anchors.centerIn: parent
-                text: Icons.actionClear
                 font.pixelSize: Variables.dashIconSize
                 font.family: Variables.defaultFontFamily
+                text: Icons.actionClear
             }
 
             MouseArea {

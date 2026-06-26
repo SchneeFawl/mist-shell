@@ -26,5 +26,5 @@ QtObject {
     readonly property int dashColumnRadius: 14      // half of dashboardRadius
     readonly property int dashInnerColSpacing: 5
     readonly property int dashInnerRadius: 9    // dashColumnRadius - dashInnerColSpacing
-    readonly property int dashIconSize: 24
+    readonly property int dashIconSize: 20
 }
