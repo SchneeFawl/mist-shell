@@ -46,25 +46,64 @@ RowLayout {
         }
     }
 
-    // quick controls + calendar
+    // quick controls
     ColumnRectangle {
+        id: quickControls
         Layout.preferredWidth: 280
         color: "transparent"
 
-        ColumnLayout {
-            anchors.fill: parent
-            spacing: Variables.dashInnerColSpacing
+        property string columnState: "default"
 
-            Rectangle {
-                Layout.fillWidth: true
-                Layout.preferredHeight: 80      // only one row of controls
-                color: "transparent"
-                QuickControls {}
+        // container
+        Item {
+            anchors.fill: parent
+            clip: true
+
+            // quick control btns + calendar
+            ColumnLayout {
+                width: parent.width
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                spacing: Variables.dashInnerColSpacing
+                x: quickControls.columnState === "default" ? 0 : -parent.width
+
+                Behavior on x {
+                    NumberAnimation {
+                        duration: 280
+                        easing.type: Easing.OutCubic
+                    }
+                }
+
+                Rectangle {
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 80
+                    color: "transparent"
+
+                    QuickControls {
+                        onBluetoothRightClicked: quickControls.columnState = "bluetooth"
+                    }
+                }
+
+                Calendar {
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                }
             }
 
-            Calendar {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
+            BluetoothPanel {
+                width: parent.width
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                x: quickControls.columnState === "bluetooth" ? 0 : parent.width
+
+                onBackClicked: quickControls.columnState = "default"
+
+                Behavior on x {
+                    NumberAnimation {
+                        duration: 280
+                        easing.type: Easing.OutCubic
+                    }
+                }
             }
         }
     }

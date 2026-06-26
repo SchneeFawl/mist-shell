@@ -5,17 +5,18 @@ import qs.modules.theme
 Rectangle {
     id: btButtonRoot
 
+    property string icon: ""
     signal clicked()
 
-    Layout.fillHeight: true
-    Layout.preferredWidth: height
-    color: backMouseArea.pressed ? Colors.primary : Colors.surface_container_high
+    Layout.preferredHeight: 36
+    Layout.preferredWidth: 36
+    color: backMouseArea.pressed ? Colors.surface_container_highest : Colors.surface_container_high
     radius: Variables.dashInnerRadius
     scale: backMouseArea.pressed ? 0.85 : 1.0
 
     Behavior on scale {
         NumberAnimation {
-            duration: 240
+            duration: 120
             easing.type: Easing.OutCubic
         }
     }
@@ -30,17 +31,9 @@ Rectangle {
     Text {
         anchors.centerIn: parent
         font.family: Variables.defaultFontFamily
-        font.pixelSize: 12
-        renderType: Text.NativeRendering
-        color: backMouseArea ? Colors.on_primary : Colors.on_surface
-        text: Icons.chevronLeft
-
-        Behavior on color {
-            ColorAnimation {
-                duration: 240
-                easing.type: Easing.OutCubic
-            }
-        }
+        font.pixelSize: 20
+        color: Colors.on_surface
+        text: btButtonRoot.icon
     }
 
     MouseArea {

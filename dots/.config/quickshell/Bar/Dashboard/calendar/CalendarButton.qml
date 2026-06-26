@@ -30,7 +30,8 @@ Rectangle {
     Text {
         anchors.centerIn: parent
         color: mouseArea.pressed ? Colors.on_primary : Colors.on_surface
-        font.pixelSize: 12
+        font.family: Variables.defaultFontFamily
+        font.pixelSize: 20
         text: calendarButton.icon
 
         Behavior on color {

@@ -28,11 +28,12 @@ Rectangle {
             clip: true
 
             Text {
-                color: Colors.on_surface
-                text: "Notifications"
+                anchors.centerIn: parent
                 font.pixelSize: 16
                 font.family: Variables.defaultFontFamily
-                anchors.centerIn: parent
+                font.weight: Variables.defaultFontWeight
+                color: Colors.on_surface
+                text: "Notifications"
             }
         }
 

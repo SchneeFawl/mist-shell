@@ -36,7 +36,7 @@ QtObject {
     readonly property string mediaLoopTrack: "󰑘"
     readonly property string mediaLoopPlaylist: "󰑖"
 
-    // Menus/decoration
+    // Menu elements
     readonly property string dot: "•"
     readonly property string chevronLeft: "󰅁"
     readonly property string chevronRight: "󰅂"
