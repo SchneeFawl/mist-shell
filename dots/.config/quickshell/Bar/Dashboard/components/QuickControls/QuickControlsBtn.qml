@@ -9,6 +9,7 @@ Rectangle {
 
     property bool active: false
     signal clicked()
+    signal rightClicked()
 
     radius: Variables.dashColumnRadius
     color: active ? Colors.primary : Colors.surface_container_high
@@ -46,6 +47,13 @@ Rectangle {
     MouseArea {
         id: mouseArea
         anchors.fill: parent
-        onClicked: controlsButtonRoot.clicked()
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
+        onClicked: (mouse) => {
+            if (mouse.button === Qt.LeftButton) {
+                controlsButtonRoot.clicked();
+            } else {
+                controlsButtonRoot.rightClicked();
+            }
+        }
     }
 }

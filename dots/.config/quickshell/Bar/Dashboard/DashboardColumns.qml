@@ -67,7 +67,6 @@ RowLayout {
                 Layout.fillWidth: true
             }
         }
-
     }
 
     // slider controls

@@ -59,10 +59,10 @@ RowLayout {
                 acceptedButtons: Qt.LeftButton | Qt.RightButton
 
                 onClicked: mouse => {
-                    if (mouse.button == Qt.LeftButton) {
+                    if (mouse.button === Qt.LeftButton) {
                         modelData.activate();
                     }
-                    if (mouse.button == Qt.RightButton) {
+                    if (mouse.button === Qt.RightButton) {
                         if (modelData.hasMenu) {
                             // closing the previous popup if a diff one is clicked
                             if (trayRoot.activePopup && trayRoot.activePopup !== customMenuPopup) {

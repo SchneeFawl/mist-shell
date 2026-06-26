@@ -34,7 +34,8 @@ Rectangle {
                 anchors.leftMargin: 10
                 anchors.rightMargin: 10
 
-                PrevMonthButton {
+                CalendarButton {
+                    icon: Icons.chevronLeft
                     onClicked: {
                         if (root.currentMonth === 0) {
                             root.currentMonth = 11;
@@ -60,7 +61,8 @@ Rectangle {
                     }
                 }
 
-                NextMonthButton {
+                CalendarButton {
+                    icon: Icons.chevronRight
                     onClicked: {
                         if (root.currentMonth === 11) {
                             root.currentMonth = 0;

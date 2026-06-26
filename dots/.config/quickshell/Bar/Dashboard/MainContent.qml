@@ -1,5 +1,4 @@
 import QtQuick
-import "./widgets"
 // import qs.modules.theme
 
 Rectangle {

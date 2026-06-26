@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import Quickshell.Bluetooth
 import qs.modules.theme
 import qs.services
 
@@ -7,7 +8,7 @@ Rectangle {
     id: controlsRoot
 
     property int rootWidth: (controlsLayout.rectSize * 4) + (35)
-    property bool bluetoothActive: false
+    signal bluetoothRightClicked()
 
     color: Colors.surface_container_low
     implicitHeight: 80
@@ -39,15 +40,24 @@ Rectangle {
             }
         }
 
+        // qmllint disable
         // bluetooth button
         QuickControlsBtn {
             id: bluetoothBtn
             implicitHeight: controlsLayout.rectSize
             implicitWidth: controlsLayout.rectSize
             icon: Icons.sysBluetooth
+            active: Bluetooth.defaultAdapter ? Bluetooth.defaultAdapter.enabled : false
 
-            onClicked: active = !active
+            onClicked: {
+                if (Bluetooth.defaultAdapter) {
+                    Bluetooth.defaultAdapter.enabled = !Bluetooth.defaultAdapter.enabled;
+                }
+            }
+
+            onRightClicked: controlsRoot.bluetoothRightClicked()
         }
+        // qmllint enable
 
         // gamemode button
         QuickControlsBtn {

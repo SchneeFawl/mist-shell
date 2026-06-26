@@ -162,9 +162,9 @@ PopupWindow {
                         Text {
                             anchors.centerIn: parent
                             visible: modelData ? modelData.checkState !== 0 : false
-                            text: modelData ? (modelData.checkState === 1 ? "\u2212" : "\u2713") : ""  // "-" and "{tick}"
+                            text: modelData ? (modelData.checkState === 1 ? Icons.minus : Icons.checkMark) : ""
                             color: Colors.primary
-                            font.pixelSize: 10
+                            font.pixelSize: 12
                             font.bold: true
                         }
                     }
@@ -216,9 +216,9 @@ PopupWindow {
                 anchors.right: parent.right
                 anchors.rightMargin: 20
                 anchors.verticalCenter: parent.verticalCenter
-                text: "›"
+                text: Icons.chevronRight
                 color: Colors.on_primary_container
-                font.pixelSize: 18
+                font.pixelSize: 12
                 opacity: 0.7
             }
 
@@ -239,9 +239,9 @@ PopupWindow {
                 hoverEnabled: true
                 acceptedButtons: Qt.LeftButton
 
-                onClicked: mouse => {
+                onClicked: (mouse) => {
                     if (modelData.isSeparator) {
-                        /* do noting */
+                        /* do nothing */
                     } else if (!modelData.isSeparator && modelData.hasChildren && modelData.buttonType === QsMenuButtonType.None) {
                         modelData.triggered();
                     } else if (!modelData.isSeparator && !modelData.hasChildren && modelData.buttonType === QsMenuButtonType.None) {

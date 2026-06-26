@@ -36,10 +36,16 @@ QtObject {
     readonly property string mediaLoopTrack: "󰑘"
     readonly property string mediaLoopPlaylist: "󰑖"
 
-    // Decorations
+    // Menus/decoration
     readonly property string dot: "•"
+    readonly property string chevronLeft: "󰅁"
+    readonly property string chevronRight: "󰅂"
+    readonly property string chevronDown: "󰅀"
+    readonly property string chevronUp: "󰅃"
+    readonly property string minus: "󰍴"
+    readonly property string checkMark: "󰄬"
 
-    // DASHBOARD:
+    /*  DASHBOARD  */
     // navPanel
     readonly property string navApps: "󰀻"
     readonly property string navSystemInfo: ""
