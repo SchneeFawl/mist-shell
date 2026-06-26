@@ -17,9 +17,7 @@ Rectangle {
     Loader {
         active: parent.activeTab === 1
         anchors.fill: parent
-        sourceComponent: Component {
-            MediaPlayer {}
-        }
+        source: "widgets/MediaPlayer.qml"
     }
 
     Text {
@@ -32,9 +30,7 @@ Rectangle {
     Loader {
         active: parent.activeTab === 3
         anchors.fill: parent
-        sourceComponent: Component {
-            ThemeSelector {}
-        }
+        source: "widgets/ThemeSelector.qml"
     }
 
     Text {

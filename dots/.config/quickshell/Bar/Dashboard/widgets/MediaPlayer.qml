@@ -262,12 +262,11 @@ ClippingRectangle {
         }
     }
 
-    Timer {
-        id: lengthTimer
-        interval: 1000
-        running: player.activePlayer && player.isPlaying
-        repeat: true
-        onTriggered: {
+    Connections {
+        target: Time
+        enabled: player.activePlayer && player.isPlaying
+
+        function onTick() {
             let active = player.activePlayer
 
             if (active && Mpris.players.values.includes(active)) {

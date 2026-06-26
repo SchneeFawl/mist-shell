@@ -73,6 +73,7 @@ PopupWindow {
                 onRunningChanged: {
                     if (!running && !dashboardPopup.active) {
                         dashboardPopup._wasActive = false;
+                        gc();
                     }
                 }
             }
@@ -101,10 +102,15 @@ PopupWindow {
         }
 
         Loader {
+            id: dashLoader
             active: dashboardPopup.active || dashboardPopup._wasActive
             anchors.fill: parent
-            sourceComponent: Component {
-                DashboardColumns { active: dashboardPopup.active }
+            source: "DashboardColumns.qml"
+
+            Binding {
+                target: dashLoader.item
+                property: "active"
+                value: dashboardPopup.active
             }
         }
     }

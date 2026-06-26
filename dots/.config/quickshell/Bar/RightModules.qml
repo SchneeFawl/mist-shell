@@ -11,43 +11,11 @@ RowLayout {
     Pill {
         visible: sysTray.implicitWidth > 0
         innerPadding: visible ? Variables.pillInnerPadding : 0
-        SystemTray {
-            id: sysTray
-        }
+        SystemTray { id: sysTray }
     }
 
     // clock display widget
-    Pill {
-        innerPadding: Variables.pillInnerPadding
-        pillSpacing: 6
-
-        Timer {
-            interval: 1000
-            running: true
-            repeat: true
-            triggeredOnStart: true
-            onTriggered: {
-                var d = new Date();
-                timeDisplay.text = d.toLocaleTimeString(Qt.locale(), "hh:mm AP");
-                dayDisplay.text = Qt.formatDate(d, "dddd");
-                dateDisplay.text = Qt.formatDate(d, "dd/M");
-            }
-        }
-
-        BarText {
-            id: timeDisplay
-        }
-
-        BarText {
-            id: dayDisplay
-            isSubText: true
-        }
-
-        BarText {
-            id: dateDisplay
-            isSubText: true
-        }
-    }
+    BarTime {}
 
     // desktop feature
     Pill {
@@ -65,7 +33,7 @@ RowLayout {
                 color: Colors.primary
                 font.pixelSize: 18
             }
-            onClicked: Quickshell.execDetached(["sh", "-c", "pavucontrol"]);
+            onClicked: Quickshell.execDetached(["pavucontrol"]);
         }
 
         MouseArea {     // power actions

@@ -8,14 +8,21 @@ RowLayout {
 
     // custom logo
     Pill {
-        BarText {
-            text: Icons.barIcon
-            color: Colors.primary
-            font.pixelSize: 16
-        }
+        Row {
+            Layout.fillHeight: true
+            spacing: 8
 
-        BarText {
-            text: "mist"
+            BarText {
+                text: Icons.barIcon
+                color: Colors.primary
+                font.pixelSize: 16
+                anchors.verticalCenter: parent.verticalCenter
+            }
+
+            BarText {
+                text: "mist"
+                anchors.verticalCenter: parent.verticalCenter
+            }
         }
     }
 
