@@ -1,3 +1,4 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Widgets
@@ -6,6 +7,7 @@ import qs.modules.theme
 import "../components"
 
 // qmllint disable unresolved-type
+
 ClippingRectangle {
     id: btMenuRoot
 
@@ -19,10 +21,10 @@ ClippingRectangle {
         anchors.margins: Variables.dashInnerColSpacing
         spacing: Variables.dashInnerColSpacing
 
-        Row {
+        // header
+        Item {
             Layout.preferredHeight: 36
             Layout.fillWidth: true
-            // spacing: Variables.dashInnerColSpacing
 
             BtButton {
                 id: backButton
@@ -52,8 +54,21 @@ ClippingRectangle {
             }
         }
 
-        Rectangle {
+        BtListView {}
+
+        // placeholder
+        Item {
             Layout.fillHeight: true
+            Layout.fillWidth: true
+            visible: !Bluetooth.defaultAdapter || !Bluetooth.defaultAdapter.enabled
+            Text {
+                anchors.centerIn: parent
+                Layout.alignment: Text.AlignHCenter
+                font.family: Variables.defaultFontFamily
+                font.pixelSize: 14
+                color: Colors.on_surface
+                text: "Bluetooth is turned off"
+            }
         }
     }
 }

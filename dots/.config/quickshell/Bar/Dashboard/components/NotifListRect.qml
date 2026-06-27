@@ -42,7 +42,7 @@ Rectangle {
             Layout.fillHeight: true
             Layout.preferredWidth: notifTextContainer.height
             color: notifClearMouse.pressed ? Colors.surface_variant : Colors.surface_container_high
-            radius: width / 2
+            radius: Variables.dashInnerRadius
             clip: true
             scale: notifClearMouse.pressed ? 0.85 : 1.0
 

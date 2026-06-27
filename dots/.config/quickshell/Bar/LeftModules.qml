@@ -41,7 +41,7 @@ RowLayout {
             BarText {
                 id: keybindText
                 anchors.centerIn: parent
-                text: Icons.barShortcuts
+                text: Icons.keyboard
                 font.pixelSize: 18
                 color: Colors.primary
             }
