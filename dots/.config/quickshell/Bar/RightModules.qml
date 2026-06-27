@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import qs.modules.theme
+import qs.services
 import "./components"
 
 RowLayout {
@@ -17,10 +18,39 @@ RowLayout {
     // clock display widget
     BarTime {}
 
+    // battery indicator (!! NOT TESTED !!)
+    Loader {
+        active: Battery.hasBattery
+        visible: Battery.hasBattery
+        sourceComponent: Component {
+            Pill {
+                innerPadding: visible ? Variables.pillInnerPadding : 0
+
+                BarText {
+                    Layout.fillHeight: true
+                    font.pixelSize: 14
+                    text: {
+                        let batteryIcon = Battery.getBatteryIcon(Battery.batPercentage)
+                        if (Battery.hasBattery && !Battery.isCharging) {
+                            return batteryIcon + " " + Battery.batPercentage + "%"
+                        } else if (Battery.hasBattery && Battery.isCharging) {
+                            return Icons.batteryCharging + " " + Battery.batPercentage + "%"
+                        }
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                    }
+                }
+            }
+        }
+    }
+
     // desktop feature
     Pill {
         innerPadding: 4
-        pillSpacing: 2
+        pillSpacing: 0
 
         MouseArea {     // audio control
             implicitWidth: 30

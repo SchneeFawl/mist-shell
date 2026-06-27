@@ -186,7 +186,10 @@ PanelWindow {           // qmllint disable uncreatable-type
                             let icon = notifCard.resolvedIcon;
                             if (!icon) return "";
 
-                            if (icon.startsWith("/") || icon.startsWith("file://") || icon.startsWith("qrc:/")) {
+                            if (
+                                icon.startsWith("/") || icon.startsWith("file://") ||
+                                icon.startsWith("qrc:/") || icon.startsWith("image://")
+                            ) {
                                 return icon;
                             }
 

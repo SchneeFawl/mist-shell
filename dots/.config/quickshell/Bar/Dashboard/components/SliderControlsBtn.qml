@@ -16,6 +16,7 @@ Rectangle {
     color: active ? (muted ? Colors.error : Colors.primary) : Colors.surface_container_high
     radius: Variables.dashInnerRadius
     scale: mouseArea.pressed ? 0.85 : 1.0
+    clip: true
 
     Text {
         anchors.centerIn: parent
@@ -24,7 +25,7 @@ Rectangle {
             ? ( sliderButtonRoot.muted ? Colors.on_tertiary : Colors.on_primary)
             : Colors.on_surface
         }
-        font.pixelSize: Variables.dashIconSize
+        font.pixelSize: Variables.dashIconSize + 4
         text: sliderButtonRoot.icon
 
         Behavior on color {
@@ -48,8 +49,6 @@ Rectangle {
             easing.type: Easing.OutCubic
         }
     }
-
-    clip: true
 
     MouseArea {
         id: mouseArea

@@ -125,7 +125,10 @@ ColumnLayout {
                                 let icon = card.resolvedIcon;
                                 if (!icon) return "";
 
-                                if (icon.startsWith("/") || icon.startsWith("file://") || icon.startsWith("qrc:/")) {
+                                if (
+                                    icon.startsWith("/") || icon.startsWith("file://") ||
+                                    icon.startsWith("qrc:/") || icon.startsWith("image://")
+                                ) {
                                     return icon;
                                 }
 
