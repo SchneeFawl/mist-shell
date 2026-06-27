@@ -7,7 +7,7 @@ NotificationServer {
 
     property bool dndActive: false
 
-    keepOnReload: false
+    keepOnReload: true
 
     onNotification: notification => {
         notification.tracked = true

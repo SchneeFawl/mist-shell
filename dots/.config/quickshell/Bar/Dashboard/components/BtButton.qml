@@ -5,6 +5,7 @@ Rectangle {
     id: btButtonRoot
 
     property string icon: ""
+    property bool rotationAnim: false
     signal clicked()
 
     height: 36
@@ -28,16 +29,31 @@ Rectangle {
     }
 
     Text {
+        id: iconText
         anchors.centerIn: parent
         font.family: Variables.defaultFontFamily
         font.pixelSize: 20
         color: Colors.on_surface
         text: btButtonRoot.icon
+
+        NumberAnimation on rotation {
+            id: refreshRotation
+            running: false
+            from: 0
+            to: 360
+            duration: 1500
+        }
     }
 
     MouseArea {
         id: backMouseArea
         anchors.fill: parent
-        onClicked: btButtonRoot.clicked()
+        onClicked: {
+            btButtonRoot.clicked();
+            if (btButtonRoot.rotationAnim) {
+                refreshRotation.start()
+                btButtonRoot.rotationAnim = !btButtonRoot.rotationAnim
+            }
+        }
     }
 }

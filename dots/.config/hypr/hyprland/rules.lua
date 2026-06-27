@@ -74,11 +74,26 @@ hl.window_rule({
     center = true,
     border_size = 3,
     size = { 800, 600 },
-    opacity = "0.8 0.7"
 })
 
 hl.window_rule({
     match = { title = "^(nm-applet)$" },
+    float = true,
+    center = true,
+    border_size = 3,
+    size = { 800, 600 }
+})
+
+hl.window_rule({
+    match = { title = "^(blueman-applet)$" },
+    float = true,
+    center = true,
+    border_size = 3,
+    size = { 800, 600 }
+})
+
+hl.window_rule({
+    match = { class = "^(blueman-manager)$" },
     float = true,
     center = true,
     border_size = 3,

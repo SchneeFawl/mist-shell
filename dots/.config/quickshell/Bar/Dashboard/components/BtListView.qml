@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
 import Quickshell.Bluetooth
 import qs.services
 import qs.modules.theme
@@ -16,7 +17,11 @@ ListView {
     clip: true
     spacing: Variables.dashInnerColSpacing
 
-    model: Bluetooth.defaultAdapter ? Bluetooth.defaultAdapter.devices : null
+    // model: Bluetooth.defaultAdapter ? Bluetooth.defaultAdapter.devices : null
+    model: ScriptModel {
+        values: BluetoothStatus.sortedDevices
+    }
+
     delegate: Rectangle {
         id: card
 
@@ -38,7 +43,8 @@ ListView {
         RowLayout {
             id: cardLayout
             anchors.fill: parent
-            anchors.margins: 12
+            anchors.leftMargin: 12
+            anchors.rightMargin: 12
             spacing: 0
             clip: true
 
@@ -52,6 +58,7 @@ ListView {
 
             ColumnLayout {
                 Layout.fillHeight: true
+                Layout.fillWidth: true
                 Layout.leftMargin: 8
 
                 Text {
@@ -73,36 +80,26 @@ ListView {
 
             Item { Layout.fillWidth: true }     // filler
 
-            // connect/disconnect button
-            Rectangle {
-                Layout.preferredHeight: 30
-                Layout.preferredWidth: 82
-                radius: Variables.dashInnerRadius
-                color: card.modelData.connected ? Colors.surface_container_highest : Colors.primary
-                border.color: Colors.primary
-                border.width: card.modelData.connected ? 1 : 0
-                scale: btnMouseArea.pressed ? 0.85 : 1.0
+            ColumnLayout {
+                Layout.fillHeight: true
+                spacing: 4
 
-                Behavior on scale {
-                    NumberAnimation {
-                        duration: 240
-                        easing.type: Easing.OutCubic
+                // connect/disconnect button
+                Rectangle {
+                    Layout.preferredHeight: 30
+                    Layout.preferredWidth: 86
+                    radius: Variables.dashInnerRadius
+                    color: card.modelData.connected ? Colors.surface_container_highest : Colors.primary
+                    border.color: Colors.primary
+                    border.width: card.modelData.connected ? 1 : 0
+                    scale: btnMouseArea.pressed ? 0.85 : 1.0
+
+                    Behavior on scale {
+                        NumberAnimation {
+                            duration: 240
+                            easing.type: Easing.OutCubic
+                        }
                     }
-                }
-
-                Behavior on color {
-                    ColorAnimation {
-                        duration: 240
-                        easing.type: Easing.OutCubic
-                    }
-                }
-
-                Text {
-                    anchors.centerIn: parent
-                    font.family: Variables.defaultFontFamily
-                    font.pixelSize: card.modelData.connected ? 11 : 12
-                    color: card.modelData.connected ? Colors.on_surface : Colors.on_primary
-                    text: card.modelData.connected ? "Disconnect" : "Connect"
 
                     Behavior on color {
                         ColorAnimation {
@@ -110,17 +107,79 @@ ListView {
                             easing.type: Easing.OutCubic
                         }
                     }
+
+                    Text {
+                        anchors.centerIn: parent
+                        font.family: Variables.defaultFontFamily
+                        font.pixelSize: card.modelData.connected ? 11 : 12
+                        color: card.modelData.connected ? Colors.on_surface : Colors.on_primary
+                        text: card.modelData.connected ? "Disconnect" : "Connect"
+
+                        Behavior on color {
+                            ColorAnimation {
+                                duration: 240
+                                easing.type: Easing.OutCubic
+                            }
+                        }
+                    }
+
+                    MouseArea {
+                        id: btnMouseArea
+                        anchors.fill: parent
+                        onClicked: {
+                            if (card.modelData.connected) {
+                                card.modelData.disconnect()
+                            } else {
+                                card.modelData.connect()
+                            }
+                        }
+                    }
                 }
 
-                MouseArea {
-                    id: btnMouseArea
-                    anchors.fill: parent
-                    onClicked: {
-                        if (card.modelData.connected) {
-                            card.modelData.disconnect()
-                        } else {
-                            card.modelData.connect()
+                // unpair/forget button
+                Rectangle {
+                    Layout.preferredHeight: 30
+                    Layout.preferredWidth: 86
+                    radius: Variables.dashInnerRadius
+                    color: Colors.surface_container_highest
+                    border.color: Colors.primary
+                    border.width: 1
+                    scale: unpairMouseArea.pressed ? 0.85 : 1.0
+                    visible: card.modelData.paired
+
+                    Behavior on scale {
+                        NumberAnimation {
+                            duration: 240
+                            easing.type: Easing.OutCubic
                         }
+                    }
+
+                    Behavior on color {
+                        ColorAnimation {
+                            duration: 240
+                            easing.type: Easing.OutCubic
+                        }
+                    }
+
+                    Text {
+                        anchors.centerIn: parent
+                        font.family: Variables.defaultFontFamily
+                        font.pixelSize: 12
+                        color: Colors.on_surface
+                        text: "Forget"
+
+                        Behavior on color {
+                            ColorAnimation {
+                                duration: 240
+                                easing.type: Easing.OutCubic
+                            }
+                        }
+                    }
+
+                    MouseArea {
+                        id: unpairMouseArea
+                        anchors.fill: parent
+                        onClicked: card.modelData.forget()
                     }
                 }
             }

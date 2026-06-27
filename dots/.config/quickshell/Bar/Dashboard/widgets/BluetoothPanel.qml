@@ -50,6 +50,7 @@ ClippingRectangle {
                     if (Bluetooth.defaultAdapter.enabled && !Bluetooth.defaultAdapter.discovering) {
                         Bluetooth.defaultAdapter.discovering = !Bluetooth.defaultAdapter.discovering
                     }
+                    rotationAnim = true
                 }
             }
         }
@@ -61,6 +62,7 @@ ClippingRectangle {
             Layout.fillHeight: true
             Layout.fillWidth: true
             visible: !Bluetooth.defaultAdapter || !Bluetooth.defaultAdapter.enabled
+
             Text {
                 anchors.centerIn: parent
                 Layout.alignment: Text.AlignHCenter

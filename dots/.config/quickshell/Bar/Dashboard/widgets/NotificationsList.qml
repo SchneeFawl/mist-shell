@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
 import Quickshell.Widgets
 import "../components"
 import qs.services
@@ -120,7 +121,16 @@ ColumnLayout {
                             anchors.fill: parent
                             mipmap: true
                             asynchronous: true
-                            source: card.resolvedIcon
+                            source: {
+                                let icon = card.resolvedIcon;
+                                if (!icon) return "";
+
+                                if (icon.startsWith("/") || icon.startsWith("file://") || icon.startsWith("qrc:/")) {
+                                    return icon;
+                                }
+
+                                return Quickshell.iconPath(icon);
+                            }
                         }
                     }
 
