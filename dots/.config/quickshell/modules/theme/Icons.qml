@@ -65,6 +65,7 @@ QtObject {
     readonly property string keyboard: "󰌌"
     readonly property string laptop: "󰌢"
     readonly property string television: "󰔂"
+    readonly property string phone: "󰏲"
 
     // Battery
     readonly property string batteryCharging: "󰂄"

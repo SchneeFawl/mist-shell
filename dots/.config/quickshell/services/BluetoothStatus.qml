@@ -14,18 +14,19 @@ Singleton {
     readonly property bool connected: Bluetooth.devices.values.some(d => d.connected)
 
     function getDeviceIcon(iconName) {
-        if (!iconName) return Icons.sysBluetooth;
-        if (iconName.includes("keyboard")) return Icons.keyboard;
-        if (iconName.includes("mouse")) return Icons.mouse;
-        if (iconName.includes("tv") || iconName.includes("television")) return Icons.television;
-        if (
-            iconName.includes("headphone") || iconName.includes("headphones") ||
-            iconName.includes("audio") || iconName.includes("buds")
-        ) return Icons.headphones;
-        if (iconName.includes("headset")) return Icons.headset;
-        if (
-            iconName.includes("pc") || iconName.includes("desktop") || iconName.includes("laptop")
-        ) return Icons.laptop;
+        if (iconName.includes("keyboard"))
+            return Icons.keyboard;
+        if (iconName.includes("mouse"))
+            return Icons.mouse;
+        if (iconName.includes("tv") || iconName.includes("television"))
+            return Icons.television;
+        if (iconName.includes("headphones"))
+            return Icons.headphones;
+        if (iconName.includes("headset"))
+            return Icons.headset;
+        if (iconName.includes("phone"))
+            return Icons.phone;
+        return Icons.sysBluetooth;
     }
 
     function getStatus(device) {
