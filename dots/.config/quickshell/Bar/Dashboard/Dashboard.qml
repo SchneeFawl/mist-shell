@@ -67,8 +67,9 @@ PopupWindow {
         Behavior on implicitWidth {
             NumberAnimation {
                 id: widthAnimation
-                duration: 250
-                easing.type: Easing.OutCubic
+                duration: Variables.durationSlow
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.standardCurve
 
                 onRunningChanged: {
                     if (!running && !dashboardPopup.active) {
@@ -81,13 +82,14 @@ PopupWindow {
 
         Behavior on implicitHeight {
             NumberAnimation {
-                duration: 250
-                easing.type: Easing.OutCubic
+                duration: Variables.durationSlow
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.standardCurve
             }
         }
 
         Behavior on radius {
-            NumberAnimation { duration: 250 }
+            NumberAnimation { duration: 300 }
         }
 
         HoverHandler {

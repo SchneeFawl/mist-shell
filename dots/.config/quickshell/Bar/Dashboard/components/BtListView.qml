@@ -17,7 +17,6 @@ ListView {
     clip: true
     spacing: Variables.dashInnerColSpacing
 
-    // model: Bluetooth.defaultAdapter ? Bluetooth.defaultAdapter.devices : null
     model: ScriptModel {
         values: BluetoothStatus.sortedDevices
     }

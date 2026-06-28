@@ -284,17 +284,17 @@ PopupWindow {
 
         Behavior on height {
             NumberAnimation {
-                duration: 150
+                duration: Variables.durationMedium
                 easing.type: Easing.Bezier
-                easing.bezierCurve: Variables.muiCurve  // material ui curve
+                easing.bezierCurve: Variables.standardCurve
             }
         }
 
         Behavior on width {
             NumberAnimation {
-                duration: 150
+                duration: Variables.durationMedium
                 easing.type: Easing.Bezier
-                easing.bezierCurve: Variables.muiCurve
+                easing.bezierCurve: Variables.standardCurve
             }
         }
 

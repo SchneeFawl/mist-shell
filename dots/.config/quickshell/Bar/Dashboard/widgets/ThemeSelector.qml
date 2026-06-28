@@ -35,7 +35,7 @@ ClippingRectangle {
         }));
 
         if (query === "") return _list;
-        return _list.filter(Item => Item.toLowerCase().includes(query));
+        return _list.filter(item => item.name.toLowerCase().includes(query));
     }
 
     anchors.fill: parent
