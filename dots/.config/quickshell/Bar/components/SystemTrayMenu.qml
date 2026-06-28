@@ -32,8 +32,8 @@ PopupWindow {
         Item {
             id: menuItemContainer
             Layout.fillWidth: true
-            implicitWidth: (modelData ? modelData.isSeparator : false) ? 0 : contentRow.implicitWidth + 20
-            implicitHeight: (modelData ? modelData.isSeparator : false) ? 6 : 28
+            implicitWidth: (modelData?.isSeparator ?? false) ? 0 : contentRow.implicitWidth + 20
+            implicitHeight: (modelData?.isSeparator ?? false) ? 6 : 28
 
             property bool submenuOpen: false
             property var parentMenu: null
@@ -126,7 +126,7 @@ PopupWindow {
             }
 
             Rectangle {     // separator line
-                visible: modelData ? modelData.isSeparator : false
+                visible: modelData?.isSeparator ?? false
                 anchors.verticalCenter: parent.verticalCenter
                 width: parent.width
                 height: 1
@@ -143,26 +143,26 @@ PopupWindow {
                 Item {
                     // modelData.buttonType [ None = 0, checkbox = 1, radiobutton = 2 ]
                     // Qt.Checkstate (modelData.checkState) [ unchecked = 0, partially = 1, checked = 2 ]
-                    visible: modelData ? (modelData.buttonType > 0) : false
+                    visible: modelData?.buttonType > 0 ?? false
                     anchors.verticalCenter: parent.verticalCenter
                     height: 16
                     width: 16
 
                     // CheckBox
                     Rectangle {
-                        visible: modelData ? (modelData.buttonType === 1) : false
+                        visible: modelData?.buttonType === 1 ?? false
                         anchors.verticalCenter: parent.verticalCenter
                         height: 16
                         width: 16
                         border.width: 1
-                        border.color: modelData ? (modelData.checkState === 0 ? Colors.inverse_primary : Colors.primary) : ""
+                        border.color: modelData?.checkState === 0 ? Colors.inverse_primary : Colors.primary ?? ""
                         radius: 4
-                        color: modelData ? (modelData.checkState === 0 ? "transparent" : Colors.surface_bright) : ""
+                        color: modelData?.checkState === 0 ? "transparent" : Colors.surface_bright ?? ""
 
                         Text {
                             anchors.centerIn: parent
-                            visible: modelData ? modelData.checkState !== 0 : false
-                            text: modelData ? (modelData.checkState === 1 ? Icons.minus : Icons.checkMark) : ""
+                            visible: modelData?.checkState !== 0 ?? false
+                            text: modelData?.checkState === 1 ? Icons.minus : Icons.checkMark ?? ""
                             color: Colors.primary
                             font.pixelSize: 12
                             font.bold: true
@@ -171,17 +171,17 @@ PopupWindow {
 
                     // RadioButton
                     Rectangle {
-                        visible: modelData ? modelData.buttonType === 2 : false
+                        visible: modelData?.buttonType === 2 ?? false
                         anchors.verticalCenter: parent.verticalCenter
                         height: 16
                         width: 16
                         border.width: 1
                         border.color: Colors.surface_bright
                         radius: 4
-                        color: modelData ? (modelData.checkState === 2 ? Colors.primary : Colors.inactiveAccent) : ""
+                        color: modelData?.checkState === 2 ? Colors.primary : Colors.inactiveAccent ?? ""
 
                         Rectangle {
-                            visible: modelData ? modelData.checkState === 2 : false
+                            visible: modelData?.checkState === 2 ?? false
                             height: 12
                             width: 12
                             radius: 4
@@ -192,8 +192,8 @@ PopupWindow {
 
                 IconImage {
                     id: menuItemIcon
-                    source: modelData ? modelData.icon : ""
-                    visible: modelData ? modelData.icon : false
+                    source: modelData?.icon ?? ""
+                    visible: modelData?.icon ?? false
                     implicitSize: 14
                     anchors.verticalCenter: parent.verticalCenter
                 }
@@ -201,9 +201,9 @@ PopupWindow {
                 // menu item text
                 Text {
                     id: menuItemText
-                    visible: modelData ? !modelData.isSeparator : false
+                    visible: !modelData?.isSeparator ?? false
                     anchors.verticalCenter: parent.verticalCenter
-                    text: modelData ? modelData.text : ""
+                    text: modelData?.text ?? ""
                     font.pixelSize: 12
                     color: Colors.on_primary_container
                     leftPadding: 4

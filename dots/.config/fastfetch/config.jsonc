@@ -49,6 +49,11 @@
       "format": "{pretty-name>24} │"
     },
     {
+      "type": "custom",
+      "key": "{$1}│                  {$1}",
+      "format": "{$1}               │{$1}"
+    },
+    {
       "type": "display",
       "key": "│ {$2}󰍹 display{$1}",
       "format": "{1>11}x{2} @ {3}Hz │"

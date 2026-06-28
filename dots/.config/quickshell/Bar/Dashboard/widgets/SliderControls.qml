@@ -62,7 +62,7 @@ ColumnLayout {
     // slider (placeholder)
     VerticalSlider {
         id: volumeSlider
-        visible: root.activeOption === 1 ? true : false
+        visible: root.activeOption === 1
         value: Audio.sinkValue
         muted: Audio.sinkMuted
         onSliderMoved: (value) => {

@@ -20,7 +20,7 @@ ClippingRectangle {
     property real progress: 0
     property real currentPosition: 0
     onActivePlayerChanged: {
-        currentPosition = activePlayer ? activePlayer.position : 0;
+        currentPosition = activePlayer?.position ?? 0;
         progress = (activePlayer && activePlayer.length > 0) ? (currentPosition / activePlayer.length) : 0;
     }
     onIsPlayingChanged: {
@@ -159,7 +159,7 @@ ClippingRectangle {
 
             Text {
                 id: songTitle
-                text: player.activePlayer ? player.activePlayer.trackTitle : "No media playing"
+                text: player.activePlayer?.trackTitle ?? "No media playing"
                 color: Colors.textVibrant
                 font.bold: true
                 font.pixelSize: 18
@@ -171,7 +171,7 @@ ClippingRectangle {
 
             Text {
                 id: artistName
-                text: player.activePlayer ? player.activePlayer.trackArtist : "-"
+                text: player.activePlayer?.trackArtist ?? "-"
                 color: Colors.primary_fixed
                 font.pixelSize: 13
                 font.family: Variables.defaultFontFamily
@@ -252,7 +252,7 @@ ClippingRectangle {
         id: progressTimer
         interval: 33            // 1000 / 33.33 = ~30 fps
         repeat: true
-        running: player.activePlayer && player.isPlaying
+        running: player.activePlayer && player.isPlaying && player.visible
         onTriggered: {
             let active = player.activePlayer;
 

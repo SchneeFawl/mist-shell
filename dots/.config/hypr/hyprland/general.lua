@@ -39,6 +39,8 @@ hl.config({
         allow_tearing    = false,
 
         layout           = "dwindle",
+
+        snap = { enabled = true }
     },
 
     decoration = {
@@ -67,7 +69,6 @@ hl.config({
             offset       = {0, 0},
             scale        = 1,
         },
-
     },
 
     animations = {
@@ -77,7 +78,7 @@ hl.config({
     dwindle = {
         preserve_split = true,
         smart_resizing = false
-    }
+    },
 })
 
 -- INPUT CONFIG
