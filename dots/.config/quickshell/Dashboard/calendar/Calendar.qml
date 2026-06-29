@@ -3,7 +3,6 @@ import QtQuick.Layouts
 import "calendar.js" as CalendarLogic
 import qs.modules.theme
 
-// qmllint disable unqualified
 
 Rectangle {
     id: root
@@ -92,6 +91,7 @@ Rectangle {
                     model: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
 
                     delegate: Text {
+                        required property string modelData
                         font.family: Variables.defaultFontFamily
                         Layout.fillWidth: true
                         horizontalAlignment: Text.AlignHCenter
@@ -118,16 +118,17 @@ Rectangle {
 
                 Repeater {
                     model: CalendarLogic.getDaysForGrid(root.currentYear, root.currentMonth)
-                    delegate: Rectangle {
+                    delegate: Item {
+                        id: dateContainer
+                        required property var modelData
+
                         Layout.fillHeight: true
                         Layout.fillWidth: true
-                        color: Colors.surface_container_high
-                        radius: 5
 
                         Text {
                             anchors.centerIn: parent
-                            color: modelData.isCurrentMonth ? Colors.primary : Colors.on_surface
-                            text: modelData.day
+                            color: dateContainer.modelData.isCurrentMonth ? Colors.primary : Colors.on_surface
+                            text: dateContainer.modelData.day
                             font.family: Variables.defaultFontFamily
                             font.pixelSize: 14
                         }

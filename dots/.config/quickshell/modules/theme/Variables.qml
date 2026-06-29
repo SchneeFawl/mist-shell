@@ -9,13 +9,15 @@ QtObject {
     readonly property int defaultFontWeight: 500
 
     // Animations
-    readonly property var muiCurve: [0.38, 0.8, 0.22, 1.0, 1, 1]    // material ui curve
-    readonly property var standardCurve: [0.3, 0.9, 0.4, 1.0, 1, 1]
-    readonly property var overshootCurve: [0.33, 1.25, 0.76, 1.12, 1, 1]
+    readonly property var muiCurve:       [0.38, 0.80, 0.22, 1.0, 1, 1]    // material ui curve
+    readonly property var standardCurve:  [0.30, 0.90, 0.40, 1.0, 1, 1]
+    readonly property var overshootCurve: [0.18, 1.1, 0.7, 1.10, 1, 1]
+    readonly property var entranceCurve:  [0, 0, 0.2, 1.0, 1, 1]
+    readonly property var exitCurve:      [0.10, 0.80, 0.60, 1.0, 1, 1]
 
-    readonly property int durationFast: 170
+    readonly property int durationFast: 160
     readonly property int durationMedium: 240
-    readonly property int durationSlow: 320
+    readonly property int durationSlow: 300
 
     // Bar
     readonly property int pillInnerPadding: 12

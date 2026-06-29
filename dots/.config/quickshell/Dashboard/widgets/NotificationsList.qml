@@ -1,12 +1,10 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
-import Quickshell
 import Quickshell.Widgets
 import "../components"
 import qs.services
 import qs.modules.theme
-
-// qmllint disable unqualified
 
 ColumnLayout {
     id: notifListRoot
@@ -47,8 +45,9 @@ ColumnLayout {
                 NumberAnimation {
                     property: "x"
                     from: -parentRect.width
-                    duration: 240
-                    easing.type: Easing.OutCubic
+                    duration: Variables.durationMedium
+                    easing.type: Easing.Bezier
+                    easing.bezierCurve: Variables.entranceCurve
                 }
                 NumberAnimation {
                     property: "opacity"
@@ -62,8 +61,9 @@ ColumnLayout {
                 NumberAnimation {
                     property: "x"
                     to: parentRect.width
-                    duration: 240
-                    easing.type: Easing.OutCubic
+                    duration: Variables.durationFast
+                    easing.type: Easing.Bezier
+                    easing.bezierCurve: Variables.exitCurve
                 }
                 NumberAnimation {
                     property: "opacity"
@@ -72,21 +72,23 @@ ColumnLayout {
                 }
             }
 
-            add: active ? entryTransition : null
+            add: notifListRoot.active ? entryTransition : null
 
-            remove: active ? exitTransition : null
+            remove: notifListRoot.active ? exitTransition : null
 
             displaced: Transition {
                 NumberAnimation {
                     property: "y"
                     duration: 240
-                    easing.type: Easing.OutQuad
+                    easing.type: Easing.Bezier
+                    easing.bezierCurve: Variables.standardCurve
                 }
             }
 
             delegate: Rectangle {
                 id: card
 
+                required property var modelData
                 readonly property var resolvedIcon: modelData.image || modelData.appIcon || ""
 
                 implicitHeight: cardLayout.implicitHeight + 14 + 12
@@ -136,7 +138,7 @@ ColumnLayout {
                             color: Colors.secondary
                             font.family: Variables.defaultFontFamily
                             font.pixelSize: 14
-                            text: modelData.appName
+                            text: card.modelData.appName
                         }
 
                         Text {
@@ -144,7 +146,7 @@ ColumnLayout {
                             color: Colors.on_primary_container
                             font.family: Variables.defaultFontFamily
                             font.pixelSize: 15
-                            text: modelData.summary
+                            text: card.modelData.summary
                             elide: Text.ElideRight
                         }
 
@@ -153,7 +155,7 @@ ColumnLayout {
                             color: Colors.tertiary
                             font.pixelSize: 13
                             font.family: Variables.defaultFontFamily
-                            text: modelData.body
+                            text: card.modelData.body
                             wrapMode: Text.WordWrap
                             maximumLineCount: 3
                             elide: Text.ElideRight
@@ -163,7 +165,7 @@ ColumnLayout {
 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: modelData.dismiss()
+                    onClicked: card.modelData.dismiss()
                 }
             }
         }

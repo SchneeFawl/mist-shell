@@ -8,8 +8,6 @@ import qs.services
 import qs.modules.theme
 import "../components"
 
-// qmllint disable unqualified
-
 ClippingRectangle {
     id: player
 
@@ -258,9 +256,9 @@ ClippingRectangle {
             if (active && Mpris.players.values.includes(active) && active.length > 0) {
                 // 33ms = 0.033s
                 player.currentPosition = Math.min(player.currentPosition + 0.033, active.length)
-                progress = player.currentPosition / active.length;
+                player.progress = player.currentPosition / active.length;
             } else {
-                progress = 0;
+                player.progress = 0;
             }
         }
     }

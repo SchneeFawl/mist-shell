@@ -1,8 +1,7 @@
 pragma Singleton
+pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell.Services.Mpris
-
-// qmllint disable unqualified
 
 Item {
     id: controllerRoot
@@ -35,6 +34,8 @@ Item {
         onObjectRemoved: controllerRoot.updateTrackedPlayer()
 
         delegate: Connections {
+            required property var modelData
+
             target: modelData ? modelData : null
             function onPlaybackStateChanged() {
                 controllerRoot.updateTrackedPlayer();

@@ -1,3 +1,4 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Effects
@@ -5,8 +6,6 @@ import Quickshell
 import Quickshell.Widgets
 import qs.services
 import qs.modules.theme
-
-// qmllint disable unqualified
 
 PanelWindow {           // qmllint disable uncreatable-type
     id: notifPopup
@@ -20,14 +19,14 @@ PanelWindow {           // qmllint disable uncreatable-type
         top: true
     }
 
-    margins {       // qmllint disable unresolved-type
+    margins {       // qmllint disable unresolved-type unqualified
         top: 5
         right: 5
     }
 
     // implicitHeight: Math.min(200*4, notifListView.contentHeight)
     implicitHeight: 800
-    implicitWidth: 340
+    implicitWidth: 360
     color: "transparent"
     visible: active || exitTimer.running
 
@@ -46,13 +45,15 @@ PanelWindow {           // qmllint disable uncreatable-type
             NumberAnimation {
                 property: "y"
                 duration: 240
-                easing.type: Easing.OutQuad
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.standardCurve
             }
         }
 
         delegate: Item {
             id: notifCard
 
+            required property var model
             property real progress: 1.0
             readonly property var resolvedIcon: model.notifObject.image || model.notifObject.appIcon || ""
 
@@ -109,7 +110,9 @@ PanelWindow {           // qmllint disable uncreatable-type
                 radius: Variables.pillRadius
                 color: Colors.primary_container
                 border.width: 2
-                border.color: Notifications.getUrgencyColor(model.notifObject.urgency, Colors.error, Colors.border)
+                border.color: Notifications.getUrgencyColor(
+                    notifCard.model.notifObject.urgency, Colors.error, Colors.border
+                )
 
                 Rectangle {
                     id: progressBar
@@ -117,7 +120,9 @@ PanelWindow {           // qmllint disable uncreatable-type
                     height: 3
                     anchors.top: parent.top
                     anchors.left: parent.left
-                    color: Notifications.getUrgencyColor(model.notifObject.urgency, Colors.on_error_container, Colors.primary)
+                    color: Notifications.getUrgencyColor(
+                        notifCard.model.notifObject.urgency, Colors.on_error_container, Colors.primary
+                    )
                     radius: 2
                 }
             }
@@ -128,8 +133,9 @@ PanelWindow {           // qmllint disable uncreatable-type
                     target: notifCard
                     property: "x"
                     to: 0
-                    duration: 240
-                    easing.type: Easing.OutCubic
+                    duration: Variables.durationMedium
+                    easing.type: Easing.Bezier
+                    easing.bezierCurve: Variables.overshootCurve
                 }
                 NumberAnimation {
                     target: notifCard
@@ -146,8 +152,9 @@ PanelWindow {           // qmllint disable uncreatable-type
                     target: notifCard
                     property: "x"
                     to: notifPopup.width
-                    duration: 240
-                    easing.type: Easing.OutCubic
+                    duration: Variables.durationFast
+                    easing.type: Easing.Bezier
+                    easing.bezierCurve: Variables.exitCurve
                 }
                 NumberAnimation {
                     target: notifCard
@@ -155,7 +162,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                     to: 0.0
                     duration: 480
                 }
-                onFinished: notifModel.remove(index)
+                onFinished: notifModel.remove(notifModel.index)
             }
 
             RowLayout {
@@ -199,7 +206,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                         font.pixelSize: 14
                         font.family: Variables.defaultFontFamily
                         renderType: Text.NativeRendering
-                        text: model.notifObject.appName
+                        text: notifCard.model.notifObject.appName
                     }
 
                     Text {
@@ -208,7 +215,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                         font.pixelSize: 15
                         font.family: Variables.defaultFontFamily
                         renderType: Text.NativeRendering
-                        text: model.notifObject.summary
+                        text: notifCard.model.notifObject.summary
                         elide: Text.ElideRight
                     }
 
@@ -218,7 +225,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                         font.pixelSize: 13
                         font.family: Variables.defaultFontFamily
                         renderType: Text.NativeRendering
-                        text: model.notifObject.body
+                        text: notifCard.model.notifObject.body
                         wrapMode: Text.WordWrap
                         maximumLineCount: 3
                         elide: Text.ElideRight
@@ -230,7 +237,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                 id: mouseArea
                 anchors.fill: cardBg
                 onClicked: {
-                    model.notifObject.dismiss();
+                    notifCard.model.notifObject.dismiss();
                     progressAnim.stop();
                     exitAnim.start();
                 }

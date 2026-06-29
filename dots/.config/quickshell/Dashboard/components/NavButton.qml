@@ -1,8 +1,6 @@
 import QtQuick
 import qs.modules.theme
 
-// qmllint disable unqualified
-
 Rectangle {
     id: buttonRoot
 

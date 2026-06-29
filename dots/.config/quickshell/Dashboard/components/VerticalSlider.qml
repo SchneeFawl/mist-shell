@@ -2,8 +2,6 @@ import QtQuick
 import QtQuick.Layouts
 import qs.modules.theme
 
-// qmllint disable unqualified
-
 Rectangle {
     id: root
 
@@ -29,7 +27,7 @@ Rectangle {
         font.family: Variables.defaultFontFamily
         font.pixelSize: 13
         color: Colors.textSub
-        text: Math.round(value * 100) + "%"
+        text: Math.round(root.value * 100) + "%"
     }
 
     Rectangle {

@@ -1,11 +1,10 @@
+pragma ComponentBehavior: Bound
 import QtQml
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Services.SystemTray
 import Quickshell.Widgets
 import Quickshell.Hyprland
-
-// qmllint disable unqualified
 
 RowLayout {
     id: trayRoot
@@ -36,6 +35,8 @@ RowLayout {
 
         delegate: IconImage {
             id: trayIcon
+            required property var modelData
+
             source: modelData.icon
             implicitSize: modelData.status != "Passive" ? 18 : 0
             visible: modelData.status != "Passive" ? true : false
@@ -49,7 +50,7 @@ RowLayout {
             SystemTrayMenu {
                 id: customMenuPopup
                 trayIcon: trayIcon
-                trayModelData: modelData
+                trayModelData: trayIcon.modelData
             }
 
             MouseArea {
@@ -60,10 +61,10 @@ RowLayout {
 
                 onClicked: mouse => {
                     if (mouse.button === Qt.LeftButton) {
-                        modelData.activate();
+                        trayIcon.modelData.activate();
                     }
                     if (mouse.button === Qt.RightButton) {
-                        if (modelData.hasMenu) {
+                        if (trayIcon.modelData.hasMenu) {
                             // closing the previous popup if a diff one is clicked
                             if (trayRoot.activePopup && trayRoot.activePopup !== customMenuPopup) {
                                 trayRoot.activePopup.visible = false;

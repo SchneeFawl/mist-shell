@@ -4,8 +4,6 @@ import Quickshell.Hyprland
 import qs.modules.theme
 import qs.services
 
-// qmllint disable unqualified
-
 PopupWindow {
     id: dashboardPopup
 
@@ -23,7 +21,7 @@ PopupWindow {
         }
     }
 
-    visible: active || (widthAnimation.running && _wasActive)
+    visible: active || _wasActive
     color: "transparent"
 
     anchor {
@@ -45,13 +43,16 @@ PopupWindow {
 
         function onKeyboardFocusChanged() {
             if (!ThemeController.keyboardFocus && !dashboardPopupHover.hovered) {
-                if (closeTimer) closeTimer.start();
+                if (dashboardPopup.closeTimer) dashboardPopup.closeTimer.start();
             }
         }
     }
 
     Rectangle {
         id: dashboardBg
+
+        property alias centerPill: dashboardPopup.centerPill
+        property alias active: dashboardPopup.active
 
         implicitWidth: centerPill ? (active ? dashboardPopup.implicitWidth : centerPill.width) : 0
         implicitHeight: centerPill ? (active ? dashboardPopup.implicitHeight : centerPill.height) : 0
@@ -64,41 +65,68 @@ PopupWindow {
         border.width: 1
         clip: true
 
-        Behavior on implicitWidth {
-            NumberAnimation {
-                id: widthAnimation
-                duration: Variables.durationSlow
-                easing.type: Easing.Bezier
-                easing.bezierCurve: Variables.standardCurve
+        states: [
+            State {
+                name: "active"
+                when: dashboardPopup.active
+                PropertyChanges {
+                    dashboardBg.implicitWidth: dashboardPopup.implicitWidth
+                    dashboardBg.implicitHeight: dashboardPopup.implicitHeight
+                }
+            },
+            State {
+                name: "inactive"
+                when: !dashboardPopup.active
+                PropertyChanges {
+                    dashboardBg.implicitWidth: centerPill?.width ?? 0
+                    dashboardBg.implicitHeight: centerPill?.height ?? 0
+                }
+            }
+        ]
 
-                onRunningChanged: {
-                    if (!running && !dashboardPopup.active) {
-                        dashboardPopup._wasActive = false;
-                        gc();
+        transitions: [
+            Transition {
+                from: "inactive"; to: "active"
+                NumberAnimation {
+                    properties: "implicitWidth,implicitHeight"
+                    duration: Variables.durationSlow
+                    easing.type: Easing.Bezier
+                    easing.bezierCurve: Variables.entranceCurve
+                }
+            },
+
+            Transition {
+                from: "active"; to: "inactive"
+
+                SequentialAnimation {
+
+                    NumberAnimation {
+                        properties: "implicitWidth,implicitHeight"
+                        duration: Variables.durationMedium
+                        easing.type: Easing.Bezier
+                        easing.bezierCurve: Variables.exitCurve
+                    }
+                    ScriptAction {
+                        script: {
+                            dashboardPopup._wasActive = false;
+                            gc();
+                        }
                     }
                 }
             }
-        }
-
-        Behavior on implicitHeight {
-            NumberAnimation {
-                duration: Variables.durationSlow
-                easing.type: Easing.Bezier
-                easing.bezierCurve: Variables.standardCurve
-            }
-        }
+        ]
 
         Behavior on radius {
-            NumberAnimation { duration: 300 }
+            NumberAnimation { duration: Variables.durationMedium }
         }
 
         HoverHandler {
             id: dashboardPopupHover
             onHoveredChanged: {
-                if (hovered && closeTimer) {
-                    closeTimer.stop();
-                } else if (!hovered && closeTimer && !ThemeController.keyboardFocus) {
-                    closeTimer.start();
+                if (hovered && dashboardPopup.closeTimer) {
+                    dashboardPopup.closeTimer.stop();
+                } else if (!hovered && dashboardPopup.closeTimer && !ThemeController.keyboardFocus) {
+                    dashboardPopup.closeTimer.start();
                 }
             }
         }

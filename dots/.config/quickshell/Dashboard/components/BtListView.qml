@@ -13,7 +13,7 @@ ListView {
     Layout.fillHeight: true
     Layout.fillWidth: true
     Layout.topMargin: 3
-    visible: Bluetooth.defaultAdapter.enabled
+    visible: Bluetooth.defaultAdapter?.enabled ?? false
     clip: true
     spacing: Variables.dashInnerColSpacing
 

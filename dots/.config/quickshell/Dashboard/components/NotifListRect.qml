@@ -2,8 +2,6 @@ import QtQuick
 import QtQuick.Layouts
 import qs.modules.theme
 
-// qmllint disable unqualified
-
 Rectangle {
     id: notifRectRoot
 

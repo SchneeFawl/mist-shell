@@ -2,8 +2,6 @@ import Quickshell.Hyprland
 import QtQuick
 import qs.modules.theme
 
-// qmllint disable unqualified
-
 Row {
     spacing: 6
     clip: true
@@ -32,11 +30,11 @@ Row {
                 anchors.centerIn: parent
                 anchors.fill: parent
 
-                implicitWidth: modelData.active ? Variables.workspaceActiveSize : Variables.workspaceInactiveSize
+                implicitWidth: workspaceSlot.modelData.active ? Variables.workspaceActiveSize : Variables.workspaceInactiveSize
                 implicitHeight: Variables.workspaceInactiveSize
                 radius: height / 2
 
-                color: modelData.active ? Colors.primary : Colors.inverse_primary
+                color: workspaceSlot.modelData.active ? Colors.primary : Colors.inverse_primary
 
                 Behavior on implicitWidth {
                     NumberAnimation {
@@ -58,7 +56,7 @@ Row {
                 cursorShape: Qt.PointingHandCursor
                 hoverEnabled: true
                 onClicked: {
-                    modelData.activate();
+                    workspaceSlot.modelData.activate();
                 }
             }
         }
