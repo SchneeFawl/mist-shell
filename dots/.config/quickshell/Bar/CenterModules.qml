@@ -23,7 +23,7 @@ Item {
         opacity: centerModulesRoot.dashboardActive ? 0 : 1
         Behavior on opacity { NumberAnimation { duration: 500; easing.type: Easing.OutCubic } }
 
-        BarText {
+        MediaText {
             id: mediaText
             Layout.alignment: Qt.AlignCenter
             font.pixelSize: 14

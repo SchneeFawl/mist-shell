@@ -25,7 +25,6 @@ PopupWindow {
 
     property var activeSubmenu: null
 
-    // resuable component
     Component {
         id: menuItemDelegate
 

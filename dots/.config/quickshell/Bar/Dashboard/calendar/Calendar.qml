@@ -88,54 +88,16 @@ Rectangle {
                 anchors.margins: 4
                 spacing: 4
 
-                Text {
-                    text: "S"
-                    font.family: Variables.defaultFontFamily
-                    Layout.fillWidth: true
-                    horizontalAlignment: Text.AlignHCenter
-                    color: Colors.on_surface
-                }
-                Text {
-                    text: "M"
-                    font.family: Variables.defaultFontFamily
-                    Layout.fillWidth: true
-                    horizontalAlignment: Text.AlignHCenter
-                    color: Colors.on_surface
-                }
-                Text {
-                    text: "T"
-                    font.family: Variables.defaultFontFamily
-                    Layout.fillWidth: true
-                    horizontalAlignment: Text.AlignHCenter
-                    color: Colors.on_surface
-                }
-                Text {
-                    text: "W"
-                    font.family: Variables.defaultFontFamily
-                    Layout.fillWidth: true
-                    horizontalAlignment: Text.AlignHCenter
-                    color: Colors.on_surface
-                }
-                Text {
-                    text: "T"
-                    font.family: Variables.defaultFontFamily
-                    Layout.fillWidth: true
-                    horizontalAlignment: Text.AlignHCenter
-                    color: Colors.on_surface
-                }
-                Text {
-                    text: "F"
-                    font.family: Variables.defaultFontFamily
-                    Layout.fillWidth: true
-                    horizontalAlignment: Text.AlignHCenter
-                    color: Colors.on_surface
-                }
-                Text {
-                    text: "S"
-                    font.family: Variables.defaultFontFamily
-                    Layout.fillWidth: true
-                    horizontalAlignment: Text.AlignHCenter
-                    color: Colors.on_surface
+                Repeater {
+                    model: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
+
+                    delegate: Text {
+                        font.family: Variables.defaultFontFamily
+                        Layout.fillWidth: true
+                        horizontalAlignment: Text.AlignHCenter
+                        color: Colors.on_surface
+                        text: modelData
+                    }
                 }
             }
         }

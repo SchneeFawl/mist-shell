@@ -7,7 +7,6 @@ import qs.modules.theme
 Item {
     id: pillRoot
 
-    // anything inside Pill will go into contentLayout
     default property alias pillContent: contentLayout.data
     property color customBorderColor: Colors.border
     property int innerPadding: Variables.pillInnerPadding

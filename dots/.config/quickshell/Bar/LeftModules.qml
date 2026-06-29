@@ -6,7 +6,6 @@ import "./components"
 RowLayout {
     spacing: Variables.pillOuterSpacing
 
-    // custom logo
     Pill {
         Row {
             Layout.fillHeight: true

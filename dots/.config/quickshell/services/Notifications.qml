@@ -1,13 +1,12 @@
 pragma Singleton
 import QtQuick
+import Quickshell
 import Quickshell.Services.Notifications
 
 NotificationServer {
     id: notifServer
 
     property bool dndActive: false
-
-    keepOnReload: true
 
     onNotification: notification => {
         notification.tracked = true
@@ -19,5 +18,16 @@ NotificationServer {
         } else {
             return fallbackColor;
         }
+    }
+
+    function resolvedIcon(icon) {
+        if (!icon) return "";
+
+        if (icon.startsWith("/") || icon.startsWith("file://") ||
+            icon.startsWith("qrc:/") || icon.startsWith("image://")) {
+            return icon;
+        }
+
+        return Quickshell.iconPath(icon);
     }
 }

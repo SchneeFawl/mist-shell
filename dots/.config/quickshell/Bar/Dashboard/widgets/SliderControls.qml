@@ -74,7 +74,7 @@ ColumnLayout {
 
     VerticalSlider {
         id: micSlider
-        visible: root.activeOption === 2 ? true : false
+        visible: root.activeOption === 2
         value: Audio.sourceValue
         muted: Audio.sourceMuted
         onSliderMoved: (value) => {
@@ -86,6 +86,6 @@ ColumnLayout {
 
     VerticalSlider {
         id: brightnessSlider
-        visible: root.activeOption === 3 ? true : false
+        visible: root.activeOption === 3
     }
 }

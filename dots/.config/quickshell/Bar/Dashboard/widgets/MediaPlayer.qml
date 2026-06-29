@@ -142,7 +142,6 @@ ClippingRectangle {
                 Layout.fillWidth: true
                 horizontalAlignment: Text.AlignHCenter
 
-                // helper func to format media length into mins and secs
                 function formatTime(seconds) {
                     const totalSeconds = Math.floor(seconds);
                     const hours = Math.floor(totalSeconds / 3600);

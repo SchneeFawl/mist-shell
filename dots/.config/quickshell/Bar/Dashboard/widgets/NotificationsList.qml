@@ -121,19 +121,7 @@ ColumnLayout {
                             anchors.fill: parent
                             mipmap: true
                             asynchronous: true
-                            source: {
-                                let icon = card.resolvedIcon;
-                                if (!icon) return "";
-
-                                if (
-                                    icon.startsWith("/") || icon.startsWith("file://") ||
-                                    icon.startsWith("qrc:/") || icon.startsWith("image://")
-                                ) {
-                                    return icon;
-                                }
-
-                                return Quickshell.iconPath(icon);
-                            }
+                            source: Notifications.resolvedIcon(card.resolvedIcon)
                         }
                     }
 

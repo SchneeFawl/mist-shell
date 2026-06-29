@@ -182,19 +182,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                         anchors.fill: parent
                         mipmap: true
                         asynchronous: true
-                        source: {
-                            let icon = notifCard.resolvedIcon;
-                            if (!icon) return "";
-
-                            if (
-                                icon.startsWith("/") || icon.startsWith("file://") ||
-                                icon.startsWith("qrc:/") || icon.startsWith("image://")
-                            ) {
-                                return icon;
-                            }
-
-                            return Quickshell.iconPath(icon);
-                        }
+                        source: Notifications.resolvedIcon(notifCard.resolvedIcon)
                     }
                 }
 
