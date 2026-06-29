@@ -21,7 +21,11 @@ Rectangle {
         opacity: btnRoot.showRefreshedText ? 0.0 : 1.
 
         Behavior on opacity {
-            NumberAnimation { duration: 150; easing.type: Easing.OutCubic }
+            NumberAnimation {
+                duration: Variables.durationFast
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.standardCurve
+            }
         }
     }
 
@@ -35,21 +39,27 @@ Rectangle {
         opacity: btnRoot.showRefreshedText ? 1.0 : 0.0
 
         Behavior on opacity {
-            NumberAnimation { duration: 150; easing.type: Easing.OutCubic }
+            NumberAnimation {
+                duration: Variables.durationFast
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.standardCurve
+            }
         }
     }
 
     Behavior on color {
         ColorAnimation {
-            duration: 260
-            easing.type: Easing.OutCubic
+            duration: Variables.durationMedium
+            easing.type: Easing.Bezier
+            easing.bezierCurve: Variables.standardCurve
         }
     }
 
     Behavior on scale {
         NumberAnimation {
-            duration: 150
-            easing.type: Easing.OutBack
+            duration: Variables.durationFast
+            easing.type: Easing.Bezier
+            easing.bezierCurve: Variables.exitCurve
         }
     }
 

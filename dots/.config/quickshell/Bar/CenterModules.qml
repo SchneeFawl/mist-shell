@@ -18,10 +18,22 @@ Item {
 
         anchors.fill: parent
         implicitWidth: mediaText.width + Variables.pillInnerPadding * 2
-        Behavior on implicitWidth { NumberAnimation { duration: 230; easing.type: Easing.OutCubic } }
+        Behavior on implicitWidth {
+            NumberAnimation {
+                duration: Variables.durationMedium
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.standardCurve
+            }
+        }
 
         opacity: centerModulesRoot.dashboardActive ? 0 : 1
-        Behavior on opacity { NumberAnimation { duration: 500; easing.type: Easing.OutCubic } }
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 500
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.standardCurve
+            }
+        }
 
         MediaText {
             id: mediaText

@@ -54,7 +54,7 @@ Item {
                     id: submenuItemWrapper
                     color: Colors.surface_container_low
                     border.color: Colors.border
-                    border.width: 2
+                    border.width: 1
                     width: customSubmenuPopup.visible ? parent.width : 0
                     height: customSubmenuPopup.visible ? parent.height : 0
                     radius: 8
@@ -100,7 +100,8 @@ Item {
         Behavior on opacity {
             NumberAnimation {
                 duration: 100
-                easing.type: Easing.OutCubic
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.standardCurve
             }
         }
     }

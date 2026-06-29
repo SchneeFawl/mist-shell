@@ -42,7 +42,7 @@ PopupWindow {
         id: menuItemWrapper
         color: Colors.surface_container_low
         border.color: Colors.border
-        border.width: 2
+        border.width: 1
         width: customMenuPopup.visible ? parent.width : 0
         height: customMenuPopup.visible ? parent.height : 0
         radius: 8

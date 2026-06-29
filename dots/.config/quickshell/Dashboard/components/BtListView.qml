@@ -95,15 +95,17 @@ ListView {
 
                     Behavior on scale {
                         NumberAnimation {
-                            duration: 240
-                            easing.type: Easing.OutCubic
+                            duration: Variables.durationFast
+                            easing.type: Easing.Bezier
+                            easing.bezierCurve: Variables.exitCurve
                         }
                     }
 
                     Behavior on color {
                         ColorAnimation {
-                            duration: 240
-                            easing.type: Easing.OutCubic
+                            duration: Variables.durationMedium
+                            easing.type: Easing.Bezier
+                            easing.bezierCurve: Variables.standardCurve
                         }
                     }
 
@@ -116,8 +118,9 @@ ListView {
 
                         Behavior on color {
                             ColorAnimation {
-                                duration: 240
-                                easing.type: Easing.OutCubic
+                                duration: Variables.durationMedium
+                                easing.type: Easing.Bezier
+                                easing.bezierCurve: Variables.standardCurve
                             }
                         }
                     }
@@ -148,15 +151,9 @@ ListView {
 
                     Behavior on scale {
                         NumberAnimation {
-                            duration: 240
-                            easing.type: Easing.OutCubic
-                        }
-                    }
-
-                    Behavior on color {
-                        ColorAnimation {
-                            duration: 240
-                            easing.type: Easing.OutCubic
+                            duration: Variables.durationFast
+                            easing.type: Easing.Bezier
+                            easing.bezierCurve: Variables.exitCurve
                         }
                     }
 
@@ -166,13 +163,6 @@ ListView {
                         font.pixelSize: 12
                         color: Colors.on_surface
                         text: "Forget"
-
-                        Behavior on color {
-                            ColorAnimation {
-                                duration: 240
-                                easing.type: Easing.OutCubic
-                            }
-                        }
                     }
 
                     MouseArea {

@@ -53,8 +53,9 @@ Text {
             target: mediaLabel
             property: "opacity"
             to: 0.0
-            duration: 150
-            easing.type: Easing.OutQuad
+            duration: Variables.durationFast
+            easing.type: Easing.Bezier
+            easing.bezierCurve: Variables.standardCurve
         }
 
         ScriptAction {
@@ -65,8 +66,9 @@ Text {
             target: mediaLabel
             property: "opacity"
             to: 1.0
-            duration: 150
-            easing.type: Easing.OutQuad
+            duration: Variables.durationFast
+            easing.type: Easing.Bezier
+            easing.bezierCurve: Variables.standardCurve
         }
     }
 

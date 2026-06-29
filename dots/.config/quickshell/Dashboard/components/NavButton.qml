@@ -18,17 +18,19 @@ Rectangle {
     scale: mouseArea.pressed ? 0.85 : 1.0
     clip: true
 
-    Behavior on color {
-        ColorAnimation {
-            duration: 240
-            easing.type: Easing.OutCubic
+    Behavior on scale {
+        NumberAnimation {
+            duration: Variables.durationFast
+            easing.type: Easing.Bezier
+            easing.bezierCurve: Variables.exitCurve
         }
     }
 
-    Behavior on scale {
-        NumberAnimation {
-            duration: 120
-            easing.type: Easing.OutQuad
+    Behavior on color {
+        ColorAnimation {
+            duration: Variables.durationMedium
+            easing.type: Easing.Bezier
+            easing.bezierCurve: Variables.standardCurve
         }
     }
 
@@ -41,8 +43,9 @@ Rectangle {
 
         Behavior on color {
             ColorAnimation {
-                duration: 240
-                easing.type: Easing.OutCubic
+                duration: Variables.durationMedium
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.standardCurve
             }
         }
     }

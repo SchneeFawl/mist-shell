@@ -24,23 +24,26 @@ Rectangle {
 
         Behavior on color {
             ColorAnimation {
-                duration: 240
-                easing.type: Easing.OutCubic
+                duration: Variables.durationMedium
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.standardCurve
             }
-        }
-    }
-
-    Behavior on color {
-        ColorAnimation {
-            duration: 240
-            easing.type: Easing.OutCubic
         }
     }
 
     Behavior on scale {
         NumberAnimation {
-            duration: 120
-            easing.type: Easing.OutQuad
+            duration: Variables.durationFast
+            easing.type: Easing.Bezier
+            easing.bezierCurve: Variables.exitCurve
+        }
+    }
+
+    Behavior on color {
+        ColorAnimation {
+            duration: Variables.durationMedium
+            easing.type: Easing.Bezier
+            easing.bezierCurve: Variables.standardCurve
         }
     }
 

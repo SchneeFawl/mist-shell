@@ -69,8 +69,9 @@ RowLayout {
 
                 Behavior on x {
                     NumberAnimation {
-                        duration: 280
-                        easing.type: Easing.OutCubic
+                        duration: Variables.durationMedium
+                        easing.type: Easing.Bezier
+                        easing.bezierCurve: Variables.standardCurve
                     }
                 }
 
@@ -100,8 +101,9 @@ RowLayout {
 
                 Behavior on x {
                     NumberAnimation {
-                        duration: 280
-                        easing.type: Easing.OutCubic
+                        duration: Variables.durationMedium
+                        easing.type: Easing.Bezier
+                        easing.bezierCurve: Variables.standardCurve
                     }
                 }
             }

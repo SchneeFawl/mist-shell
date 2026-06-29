@@ -38,8 +38,9 @@ Rectangle {
 
         Behavior on height {
             NumberAnimation {
-                duration: 250
-                easing.type: Easing.OutCubic
+                duration: Variables.durationMedium
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.standardCurve
             }
         }
 
@@ -88,7 +89,11 @@ Rectangle {
                         text: themeDelegate.modelData.name
 
                         Behavior on color {
-                            ColorAnimation { duration: 260; easing.type: Easing.OutCubic }
+                            ColorAnimation {
+                                duration: Variables.durationFast
+                                easing.type: Easing.Bezier
+                                easing.bezierCurve: Variables.standardCurve
+                            }
                         }
                     }
 

@@ -15,8 +15,9 @@ Item {
 
     Behavior on implicitWidth {
         NumberAnimation {
-            duration: 200
-            easing.type: Easing.OutCubic
+            duration: Variables.durationMedium
+            easing.type: Easing.Bezier
+            easing.bezierCurve: Variables.standardCurve
         }
     }
 

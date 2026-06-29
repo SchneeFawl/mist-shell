@@ -30,23 +30,26 @@ Rectangle {
 
         Behavior on color {
             ColorAnimation {
-                duration: 360
-                easing.type: Easing.OutCubic
+                duration: Variables.durationMedium
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.standardCurve
             }
         }
     }
 
     Behavior on color {
         ColorAnimation {
-            duration: 180
-            easing.type: Easing.OutCubic
+            duration: Variables.durationMedium
+            easing.type: Easing.Bezier
+            easing.bezierCurve: Variables.standardCurve
         }
     }
 
     Behavior on scale {
         NumberAnimation {
-            duration: 180
-            easing.type: Easing.OutCubic
+            duration: Variables.durationFast
+            easing.type: Easing.Bezier
+            easing.bezierCurve: Variables.exitCurve
         }
     }
 
