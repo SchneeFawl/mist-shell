@@ -12,11 +12,12 @@ Text {
     onPlayerChanged: updateDisplayText()
 
     font.family: Variables.defaultFontFamily
-    font.pixelSize: 13
+    font.pixelSize: 14
     font.weight: Variables.defaultFontWeight
     color: Colors.primary
     renderType: Text.NativeRendering
     verticalAlignment: Text.AlignVCenter
+    text: activeText
     opacity: 1.0
 
     Connections {
@@ -43,6 +44,32 @@ Text {
         }
     }
 
+    onDisplayedTextChanged: textSwapAnim.restart()
+
+    SequentialAnimation {
+        id: textSwapAnim
+
+        NumberAnimation {
+            target: mediaLabel
+            property: "opacity"
+            to: 0.0
+            duration: 150
+            easing.type: Easing.OutQuad
+        }
+
+        ScriptAction {
+            script: mediaLabel.activeText = mediaLabel.displayedText
+        }
+
+        NumberAnimation {
+            target: mediaLabel
+            property: "opacity"
+            to: 1.0
+            duration: 150
+            easing.type: Easing.OutQuad
+        }
+    }
+
     function updateDisplayText() {
         let active = MprisController.activePlayer
 
@@ -65,10 +92,10 @@ Text {
             return;
         }
 
-        let actualText = artist ? (title + " " + Icons.dot + " " + artist) : title;
+        let actualText = artist ? (Icons.barMedia + "  " + title + " " + Icons.dot + " " + artist) : title;
         let maxChars = Variables.maxBarMediaChars
 
-        if (actualText.length() > maxChars) {
+        if (actualText.length > maxChars) {
             actualText = actualText.substring(0, maxChars) + " ...";
         }
 

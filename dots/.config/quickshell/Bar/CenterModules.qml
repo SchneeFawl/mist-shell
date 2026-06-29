@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import qs.modules.theme
 import qs.services
-import "./Dashboard"
+import "../Dashboard"
 import "./components"
 
 Item {
@@ -26,34 +26,6 @@ Item {
         MediaText {
             id: mediaText
             Layout.alignment: Qt.AlignCenter
-            font.pixelSize: 14
-            text: activeText
-
-            onDisplayedTextChanged: textSwapAnim.restart()
-
-            SequentialAnimation {
-                id: textSwapAnim
-
-                NumberAnimation {
-                    target: mediaText
-                    property: "opacity"
-                    to: 0.0
-                    duration: 150
-                    easing.type: Easing.OutQuad
-                }
-
-                ScriptAction {
-                    script: mediaText.activeText = mediaText.displayedText
-                }
-
-                NumberAnimation {
-                    target: mediaText
-                    property: "opacity"
-                    to: 1.0
-                    duration: 150
-                    easing.type: Easing.OutQuad
-                }
-            }
         }
     }
 
