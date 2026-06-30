@@ -21,7 +21,7 @@ RowLayout {
                 trayRoot.activePopup = null;
             }
         }
-        
+
         function onActiveToplevelChanged() {
             if (trayRoot.activePopup !== null) {
                 trayRoot.activePopup.visible = false;
@@ -38,12 +38,12 @@ RowLayout {
             required property var modelData
 
             source: modelData.icon
-            implicitSize: modelData.status != "Passive" ? 18 : 0
-            visible: modelData.status != "Passive" ? true : false
+            implicitSize: modelData.status !== "Passive" ? 18 : 0
+            visible: modelData.status !== "Passive" ? true : false
 
             HyprlandFocusGrab {
                 active: customMenuPopup.visible
-                windows: [ customMenuPopup ]
+                windows: customMenuPopup.menuWindows
                 onCleared: customMenuPopup.visible = false
             }
 

@@ -12,10 +12,10 @@ Item {
     implicitHeight: (modelData?.isSeparator ?? false) ? 6 : 28
 
     required property var customMenuPopup
-    required property var menuItemDelegate
+    // readonly property var submenuWindow: submenuLoader.item
     property bool submenuOpen: false
     property var parentMenu: null
-    property var modelData: null
+    required property var modelData
 
     Connections {
         target: menuItem.parentMenu
@@ -28,74 +28,14 @@ Item {
         }
     }
 
-    Loader {
-        active: menuItem.modelData ? (menuItem.modelData.hasChildren && menuItem.submenuOpen) : false
-        sourceComponent: Component {
-            // tray items submenu popup
-            PopupWindow {
-                id: customSubmenuPopup
-                visible: menuItem.submenuOpen
-                color: "transparent"
-                grabFocus: true
-                anchor {
-                    item: menuItem
-                    edges: Edges.Left | Edges.Top              // qmllint disable missing-type
-                    gravity: Edges.Left | Edges.Bottom         // qmllint disable missing-type
-                }
-                implicitHeight: submenuItemsColumn.implicitHeight + 16
-                implicitWidth: submenuItemsColumn.implicitWidth + 16
-
-                QsMenuOpener {
-                    id: submenuOpener
-                    menu: menuItem.modelData
-                }
-
-                WrapperRectangle {
-                    id: submenuItemWrapper
-                    color: Colors.surface_container_low
-                    border.color: Colors.border
-                    border.width: 1
-                    width: customSubmenuPopup.visible ? parent.width : 0
-                    height: customSubmenuPopup.visible ? parent.height : 0
-                    radius: 8
-                    anchors.left: parent.left
-                    anchors.top: parent.top
-                    clip: true
-
-                    ColumnLayout {
-                        id: submenuItemsColumn
-                        anchors.fill: parent
-                        anchors.margins: 8
-                        spacing: 2
-
-                        Repeater {
-                            model: submenuOpener.children
-
-                            delegate: Loader {
-                                required property var modelData
-
-                                sourceComponent: menuItem.menuItemDelegate
-                                Layout.fillWidth: true
-                                onLoaded: {
-                                    item.parentMenu = customSubmenuPopup;
-                                    item.modelData = modelData;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     // hover rectangle
     Rectangle {
         id: menuItemRect
-        visible: true
-        opacity: (delegateMouseHandler.containsMouse && !menuItem.modelData.isSeparator) ? 1.0 : 0
         anchors.fill: parent
         color: Colors.surface_container_high
         radius: 8
+        visible: true
+        opacity: (delegateMouseHandler.containsMouse && !menuItem.modelData.isSeparator) ? 1.0 : 0
 
         Behavior on opacity {
             NumberAnimation {
@@ -106,7 +46,8 @@ Item {
         }
     }
 
-    Rectangle {     // separator line
+    // separator line
+    Rectangle {
         visible: menuItem.modelData?.isSeparator ?? false
         anchors.verticalCenter: parent.verticalCenter
         width: parent.width
@@ -203,16 +144,6 @@ Item {
         opacity: 0.7
     }
 
-    Timer {
-        id: submenuHoverTimer
-        interval: 150
-        repeat: false
-        onTriggered: {
-            menuItem.submenuOpen = true;
-            menuItem.parentMenu.activeSubmenu = menuItem;
-        }
-    }
-
     // move events handler for the menu items
     MouseArea {
         id: delegateMouseHandler
@@ -224,25 +155,25 @@ Item {
             let menuData = menuItem.modelData
 
             if (menuData.isSeparator) {
-                /* do nothing */
-            } else if (!menuData.isSeparator && menuData.hasChildren && menuData.buttonType === QsMenuButtonType.None) {
-                menuData.triggered();
-            } else if (!menuData.isSeparator && !menuData.hasChildren && menuData.buttonType === QsMenuButtonType.None) {
-                menuData.triggered();
-                menuItem.customMenuPopup.visible = false;
-            } else if (!menuData.isSeparator && menuData.buttonType > QsMenuButtonType.None) {
-                menuData.triggered();
+                return;
             }
+
+            if (menuData.hasChildren) {
+                menuItem.customMenuPopup.openSubmenu(menuData);
+                return;
+            }
+
+            menuData.triggered();
+            menuItem.customMenuPopup.close();
         }
 
         onEntered: {
             if (menuItem.parentMenu.activeSubmenu && menuItem.parentMenu.activeSubmenu !== menuItem) {
                 menuItem.parentMenu.activeSubmenu.submenuOpen = false;
             }
-            if (menuItem.modelData.hasChildren) {
-                submenuHoverTimer.start();
-            }
+            // if (menuItem.modelData.hasChildren) {
+            //     submenuHoverTimer.start();
+            // }
         }
-        onExited: menuItem.modelData.hasChildren ? submenuHoverTimer.stop() : null
     }
 }

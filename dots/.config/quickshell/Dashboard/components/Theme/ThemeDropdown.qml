@@ -16,10 +16,13 @@ Rectangle {
 
     Popup {
         id: dropdownMenu
+
+        readonly property int targetHeight: Math.min(dropdown.themeModel.length * 36 + 8, 36 * 4)
+
         y: parent.height + 4         // topMargin = 4
         width: parent.width
-        height: dropdown.expanded ? Math.min(dropdown.themeModel.length * 36 + 8, 36 * 4) : 0
-        visible: height > 0
+        height: Math.min(dropdown.themeModel.length * 36 + 8, 36 * 4)
+        opacity: dropdown.expanded ? 1.0 : 0.0
 
         onClosed: dropdown.expanded = false
         closePolicy: Popup.CloseOnPressOutside || Popup.CloseOnPressOutsideParent
@@ -36,11 +39,37 @@ Rectangle {
             }
         }
 
-        Behavior on height {
+        enter: Transition {
             NumberAnimation {
+                property: "height"
+                from: 0; to: dropdownMenu.targetHeight
                 duration: Variables.durationMedium
                 easing.type: Easing.Bezier
-                easing.bezierCurve: Variables.standardCurve
+                easing.bezierCurve: Variables.entranceCurve
+            }
+            NumberAnimation {
+                property: "opacity"
+                duration: Variables.durationMedium
+                from: 0; to: 1.0
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.entranceCurve
+            }
+        }
+
+        exit: Transition {
+            NumberAnimation {
+                property: "height"
+                to: 0
+                duration: Variables.durationFast
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.exitCurve
+            }
+            NumberAnimation {
+                property: "opacity"
+                duration: Variables.durationFast
+                to: 0
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.exitCurve
             }
         }
 
@@ -165,6 +194,7 @@ Rectangle {
 
     onExpandedChanged: {
         if (expanded) {
+            dropdownMenu.open();
             dropdown.forceActiveFocus();
             ThemeController.keyboardFocus = true;
 
@@ -175,6 +205,7 @@ Rectangle {
                 }
             }
         } else {
+            dropdownMenu.close();
             ThemeController.keyboardFocus = false;
         }
     }
