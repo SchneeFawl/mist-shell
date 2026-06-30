@@ -1,14 +1,13 @@
 pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
-import Quickshell
 import Quickshell.Widgets
 import qs.modules.theme
 
 Item {
     id: menuItem
     Layout.fillWidth: true
-    implicitWidth: (modelData?.isSeparator ?? false) ? 0 : contentRow.implicitWidth + 20
+    implicitWidth: (modelData?.isSeparator ?? false) ? 0 : contentRow.childrenRect.width + contentRow.leftPadding + 20
     implicitHeight: (modelData?.isSeparator ?? false) ? 6 : 28
 
     required property var customMenuPopup

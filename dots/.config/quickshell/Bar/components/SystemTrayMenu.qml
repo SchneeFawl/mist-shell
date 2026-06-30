@@ -25,8 +25,8 @@ PopupWindow {
     }
     visible: false
     color: "transparent"
-    implicitWidth: menuItemWrapper.width
-    implicitHeight: menuItemWrapper.height
+    implicitWidth: menuItemWrapper.targetWidth
+    implicitHeight: menuItemWrapper.targetHeight
     grabFocus: true
 
     property var activeSubmenu: null
@@ -93,6 +93,8 @@ PopupWindow {
 
             component SubMenu: ColumnLayout {
                 id: submenu
+                width: stackView.width
+                height: stackView.height
                 spacing: 2
 
                 required property var handle
@@ -104,6 +106,7 @@ PopupWindow {
                 }
 
                 Repeater {
+                    id: repeater
                     model: submenuOpener.children
                     delegate: SystemTrayMenuItem {
                         customMenuPopup: customMenuPopup
