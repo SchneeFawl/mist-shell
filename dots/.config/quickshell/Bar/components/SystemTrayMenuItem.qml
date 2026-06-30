@@ -11,7 +11,6 @@ Item {
     implicitHeight: (modelData?.isSeparator ?? false) ? 6 : 28
 
     required property var customMenuPopup
-    // readonly property var submenuWindow: submenuLoader.item
     property bool submenuOpen: false
     property var parentMenu: null
     required property var modelData
@@ -32,7 +31,7 @@ Item {
         id: menuItemRect
         anchors.fill: parent
         color: Colors.surface_container_high
-        radius: 8
+        radius: Variables.pillRadius - 8
         visible: true
         opacity: (delegateMouseHandler.containsMouse && !menuItem.modelData.isSeparator) ? 1.0 : 0
 
@@ -62,12 +61,13 @@ Item {
         anchors.verticalCenter: parent.verticalCenter
 
         Item {
-            // modelData.buttonType [ None = 0, checkbox = 1, radiobutton = 2 ]
-            // Qt.Checkstate (modelData.checkState) [ unchecked = 0, partially = 1, checked = 2 ]
             visible: menuItem.modelData?.buttonType > 0 ?? false
             anchors.verticalCenter: parent.verticalCenter
             height: 16
             width: 16
+
+            // modelData.buttonType [ None = 0, checkbox = 1, radiobutton = 2 ]
+            // Qt.Checkstate (modelData.checkState) [ unchecked = 0, partially = 1, checked = 2 ]
 
             // CheckBox
             Rectangle {

@@ -25,8 +25,8 @@ PopupWindow {
     }
     visible: false
     color: "transparent"
-    implicitWidth: menuItemWrapper.targetWidth
-    implicitHeight: menuItemWrapper.targetHeight
+    implicitWidth: menuItemWrapper.width
+    implicitHeight: menuItemWrapper.height
     grabFocus: true
 
     property var activeSubmenu: null
@@ -54,7 +54,7 @@ PopupWindow {
         width: customMenuPopup.visible ? targetWidth : 1
         height: customMenuPopup.visible ? targetHeight : 1
         color: Colors.surface_container_low
-        radius: 8
+        radius: Variables.pillRadius
         border.color: Colors.border
         border.width: 1
         clip: true
@@ -82,10 +82,46 @@ PopupWindow {
             anchors.fill: parent
             anchors.margins: 8
 
-            pushEnter: Transition { NumberAnimation { duration: 0 } }
-            pushExit: Transition { NumberAnimation { duration: 0 } }
-            popEnter: Transition { NumberAnimation { duration: 0 } }
-            popExit: Transition { NumberAnimation { duration: 0 } }
+            pushEnter: Transition {
+                NumberAnimation {
+                    properties: "x"
+                    from: menuItemWrapper.targetWidth
+                    to: 0
+                    duration: Variables.durationMedium
+                    easing.type: Easing.Bezier
+                    easing.bezierCurve: Variables.entranceCurve
+                }
+            }
+            pushExit: Transition {
+                NumberAnimation {
+                    properties: "x"
+                    from: 0
+                    to: -menuItemWrapper.targetWidth
+                    duration: Variables.durationMedium
+                    easing.type: Easing.Bezier
+                    easing.bezierCurve: Variables.exitCurve
+                }
+            }
+            popEnter: Transition {
+                NumberAnimation {
+                    properties: "x"
+                    from: -menuItemWrapper.targetWidth
+                    to: 0
+                    duration: Variables.durationMedium
+                    easing.type: Easing.Bezier
+                    easing.bezierCurve: Variables.entranceCurve
+                }
+            }
+            popExit: Transition {
+                NumberAnimation {
+                    properties: "x"
+                    from: 0
+                    to: menuItemWrapper.targetWidth
+                    duration: Variables.durationMedium
+                    easing.type: Easing.Bezier
+                    easing.bezierCurve: Variables.exitCurve
+                }
+            }
 
             initialItem: SubMenu {
                 handle: customMenuPopup.trayModelData?.menu ?? null
@@ -95,7 +131,7 @@ PopupWindow {
                 id: submenu
                 width: stackView.width
                 height: stackView.height
-                spacing: 2
+                spacing: 4
 
                 required property var handle
                 property bool isSubMenu: false
@@ -103,6 +139,83 @@ PopupWindow {
                 QsMenuOpener {
                     id: submenuOpener
                     menu: submenu.handle
+                }
+
+                Rectangle {
+                    id: backButton
+                    visible: submenu.isSubMenu
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 28
+                    radius: Variables.pillRadius - 8
+                    color: backBtnMouse.pressed ? Colors.primary : Colors.surface_container_high
+                    scale: backBtnMouse.pressed ? 0.85 : 1.0
+
+                    Behavior on color {
+                        ColorAnimation {
+                            duration: Variables.durationMedium
+                            easing.type: Easing.Bezier
+                            easing.bezierCurve: Variables.standardCurve
+                        }
+                    }
+
+                    Behavior on scale {
+                        NumberAnimation {
+                            duration: Variables.durationFast
+                            easing.type: Easing.Bezier
+                            easing.bezierCurve: Variables.exitCurve
+                        }
+                    }
+
+                    Row {
+                        leftPadding: 8
+                        anchors.verticalCenter: parent.verticalCenter
+
+                        Text {
+                            anchors.verticalCenter: parent.verticalCenter
+                            font.family: Variables.defaultFontFamily
+                            font.pixelSize: 13
+                            color: backBtnMouse.pressed ? Colors.on_primary : Colors.on_surface
+                            text: Icons.chevronLeft
+
+                            Behavior on color {
+                                ColorAnimation {
+                                    duration: Variables.durationMedium
+                                    easing.type: Easing.Bezier
+                                    easing.bezierCurve: Variables.standardCurve
+                                }
+                            }
+                        }
+
+                        Text {
+                            anchors.verticalCenter: parent.verticalCenter
+                            leftPadding: 4
+                            font.family: Variables.defaultFontFamily
+                            font.pixelSize: 13
+                            color: backBtnMouse.pressed ? Colors.on_primary : Colors.on_surface
+                            text: "Back"
+
+                            Behavior on color {
+                                ColorAnimation {
+                                    duration: Variables.durationMedium
+                                    easing.type: Easing.Bezier
+                                    easing.bezierCurve: Variables.standardCurve
+                                }
+                            }
+                        }
+                    }
+
+                    MouseArea {
+                        id: backBtnMouse
+                        anchors.fill: parent
+                        onClicked: stackView.pop()
+                    }
+                }
+
+                Rectangle {
+                    visible: submenu.isSubMenu
+                    Layout.fillWidth: true
+                    color: Colors.border_variant
+                    Layout.preferredHeight: 1
                 }
 
                 Repeater {
