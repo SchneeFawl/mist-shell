@@ -6,17 +6,18 @@ import qs.modules.theme
 
 Item {
     id: menuItem
-    Layout.fillWidth: true
-    implicitWidth: (modelData?.isSeparator ?? false) ? 0 : contentRow.childrenRect.width + contentRow.leftPadding + 20
-    implicitHeight: (modelData?.isSeparator ?? false) ? 6 : 28
 
     required property var customMenuPopup
+    required property var modelData
     required property int index
     readonly property bool isHighlighted: parentMenu && parentMenu.highlightedIndex === index
     property bool submenuOpen: false
     property var parentMenu: null
-    required property var modelData
     signal popped()
+
+    Layout.fillWidth: true
+    implicitWidth: (modelData?.isSeparator ?? false) ? 0 : contentRow.childrenRect.width + contentRow.leftPadding + 20
+    implicitHeight: (modelData?.isSeparator ?? false) ? 6 : 28
 
     Connections {
         target: menuItem.parentMenu
@@ -39,8 +40,8 @@ Item {
         }
 
         menuData.triggered();
-        menuData.popped();
-        menuData.customMenuPopup.close();
+        menuItem.popped();
+        menuItem.customMenuPopup.close();
     }
 
     // hover rectangle

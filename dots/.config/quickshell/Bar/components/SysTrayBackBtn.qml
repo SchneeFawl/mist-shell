@@ -14,7 +14,9 @@ Rectangle {
     Layout.preferredHeight: 28
     radius: Variables.pillRadius - 8
     color: backBtnMouse.pressed ? Colors.primary : (
-        (backBtnMouse.containsMouse || highlighted) ? Colors.surface_container_high : "transparent" )
+        (backBtnMouse.containsMouse || highlighted)
+            ? Colors.surface_container_highest : Colors.surface_container_high
+    )
     scale: backBtnMouse.pressed ? 0.85 : 1.0
 
     Behavior on color {

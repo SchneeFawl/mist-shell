@@ -12,6 +12,7 @@ PopupWindow {
     required property var trayIcon
     property var trayModelData
     property bool expanded: false
+    property var activeSubmenu: null
 
     function openSubmenu(handle) {
         stackView.push(subMenuComponent.createObject(null, { handle: handle, isSubMenu: true }))
@@ -46,11 +47,10 @@ PopupWindow {
     }
     visible: false
     color: "transparent"
-    implicitWidth: menuItemWrapper.width
-    implicitHeight: menuItemWrapper.height
+    implicitWidth: menuItemWrapper.targetWidth
+    implicitHeight: menuItemWrapper.targetHeight
     grabFocus: true
 
-    property var activeSubmenu: null
     readonly property var menuWindows: {
         let list = [ customMenuPopup ];
         let current = customMenuPopup;
@@ -64,32 +64,10 @@ PopupWindow {
         return list;
     }
 
-    Keys.onPressed: (event) => {
-        if (event.key === Qt.Key_Escape) {
-            customMenuPopup.close();
-            event.accepted = true;
-            return;
-        }
-
-        let currentSubmenu = stackView.currentItem;
-        if (!currentSubmenu) return;
-
-        if (event.key === Qt.Key_Down) {
-            currentSubmenu.navigateDown();
-            event.accepted = true;
-        } else if (event.key === Qt.Key_Up) {
-            currentSubmenu.navigateUp();
-            event.accepted = true;
-        } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-            currentSubmenu.triggerActive();
-            event.accepted = true;
-        }
-    }
-
     WrapperRectangle {
         id: menuItemWrapper
 
-        readonly property int targetHeight: stackView.currentItem ? stackView.currentItem.implicitHeight + 16 : 0
+        readonly property int targetHeight: stackView.currentItem?.implicitHeight + 16 ?? 0
         readonly property int targetWidth: stackView.currentItem?.implicitWidth + 16 ?? 0
 
         anchors.left: parent.left
@@ -124,6 +102,7 @@ PopupWindow {
             id: stackView
             anchors.fill: parent
             anchors.margins: 8
+            focus: true
 
             pushEnter: Transition {
                 NumberAnimation {
@@ -159,7 +138,7 @@ PopupWindow {
                 NumberAnimation {
                     properties: "x"
                     from: 0
-                    to: menuItemWrapper.width
+                    to: menuItemWrapper.targetWidth
                     duration: Variables.durationMedium
                     easing.type: Easing.Bezier
                     easing.bezierCurve: Variables.exitCurve
@@ -178,7 +157,7 @@ PopupWindow {
 
                 required property var handle
                 property bool isSubMenu: false
-                property int highlightedIndex: isSubMenu ? -1 : 0
+                property int highlightedIndex: -1
 
                 QsMenuOpener {
                     id: submenuOpener
@@ -223,7 +202,7 @@ PopupWindow {
                         }
 
                         let item = repeater.itemAt(idx);
-                        if (item && !item.modelData.isSeparator) {
+                        if (item && !item.modelData.isSeparator) {          // qmllint disable missing-property
                             highlightedIndex = idx;
                             return;
                         }
@@ -245,7 +224,7 @@ PopupWindow {
                         }
 
                         let item = repeater.itemAt(idx);
-                        if (item && !item.modelData.isSeparator) {
+                        if (item && !item.modelData.isSeparator) {              // qmllint disable missing-property
                             highlightedIndex = idx;
                             return;
                         }
@@ -257,8 +236,31 @@ PopupWindow {
                         stackView.pop();
                     } else if (highlightedIndex >= 0 && highlightedIndex < repeater.count) {
                         let item = repeater.itemAt(highlightedIndex);
-                        if (item) item.triggerItem();
+                        if (item) item.triggerItem();               // qmllint disable missing-property
                     }
+                }
+            }
+
+            Keys.onPressed: (event) => {
+                if (event.key === Qt.Key_Escape) {
+                    customMenuPopup.close();
+                    event.accepted = true;
+                    return;
+                }
+
+                let currentSubmenu = stackView.currentItem;
+                if (!currentSubmenu) return;
+
+                if (event.key === Qt.Key_Down) {
+                    currentSubmenu.navigateDown();      // qmllint disable missing-property
+                    event.accepted = true;
+                } else if (event.key === Qt.Key_Up) {
+                    currentSubmenu.navigateUp();        // qmllint disable missing-property
+                    event.accepted = true;
+                } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+                    // Qt.callLater(() => { currentSubmenu.triggerActive(); });
+                    currentSubmenu.triggerActive();     // qmllint disable missing-property
+                    event.accepted = true;
                 }
             }
         }
