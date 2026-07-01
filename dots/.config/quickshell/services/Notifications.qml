@@ -23,9 +23,11 @@ NotificationServer {
     function resolvedIcon(icon) {
         if (!icon) return "";
 
-        if (icon.startsWith("/") || icon.startsWith("file://") ||
-            icon.startsWith("qrc:/") || icon.startsWith("image://")) {
+        if (icon.startsWith("file://") || icon.startsWith("image://")) {
             return icon;
+        }
+        if (icon.startsWith("qrc:/") || icon.startsWith("/")) {
+            return "file://" + icon;
         }
 
         return Quickshell.iconPath(icon);
