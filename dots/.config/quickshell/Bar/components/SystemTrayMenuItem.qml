@@ -11,9 +11,12 @@ Item {
     implicitHeight: (modelData?.isSeparator ?? false) ? 6 : 28
 
     required property var customMenuPopup
+    required property int index
+    readonly property bool isHighlighted: parentMenu && parentMenu.highlightedIndex === index
     property bool submenuOpen: false
     property var parentMenu: null
     required property var modelData
+    signal popped()
 
     Connections {
         target: menuItem.parentMenu
@@ -26,6 +29,20 @@ Item {
         }
     }
 
+    function triggerItem() {
+        let menuData = menuItem.modelData;
+        if (menuData.isSeparator) return;
+
+        if (menuData.hasChildren) {
+            menuItem.customMenuPopup.openSubmenu(menuData);
+            return;
+        }
+
+        menuData.triggered();
+        menuData.popped();
+        menuData.customMenuPopup.close();
+    }
+
     // hover rectangle
     Rectangle {
         id: menuItemRect
@@ -33,7 +50,9 @@ Item {
         color: Colors.surface_container_high
         radius: Variables.pillRadius - 8
         visible: true
-        opacity: (delegateMouseHandler.containsMouse && !menuItem.modelData.isSeparator) ? 1.0 : 0
+        opacity: (
+            (delegateMouseHandler.containsMouse || menuItem.isHighlighted) && !menuItem.modelData.isSeparator
+            ) ? 1.0 : 0
 
         Behavior on opacity {
             NumberAnimation {
@@ -163,6 +182,7 @@ Item {
             }
 
             menuData.triggered();
+            menuItem.popped();
             menuItem.customMenuPopup.close();
         }
 

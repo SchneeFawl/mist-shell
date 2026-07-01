@@ -17,14 +17,14 @@ RowLayout {
 
         function onFocusedWorkspaceChanged() {
             if (trayRoot.activePopup !== null) {
-                trayRoot.activePopup.visible = false;
+                trayRoot.activePopup.close();
                 trayRoot.activePopup = null;
             }
         }
 
         function onActiveToplevelChanged() {
             if (trayRoot.activePopup !== null) {
-                trayRoot.activePopup.visible = false;
+                trayRoot.activePopup.close();
                 trayRoot.activePopup = null;
             }
         }
@@ -44,7 +44,7 @@ RowLayout {
             HyprlandFocusGrab {
                 active: customMenuPopup.visible
                 windows: customMenuPopup.menuWindows
-                onCleared: customMenuPopup.visible = false
+                onCleared: customMenuPopup.close()
             }
 
             SystemTrayMenu {
@@ -67,13 +67,17 @@ RowLayout {
                         if (trayIcon.modelData.hasMenu) {
                             // closing the previous popup if a diff one is clicked
                             if (trayRoot.activePopup && trayRoot.activePopup !== customMenuPopup) {
-                                trayRoot.activePopup.visible = false;
+                                trayRoot.activePopup.close();
                             }
 
-                            customMenuPopup.visible = !customMenuPopup.visible;
+                            if (customMenuPopup.visible) {
+                                customMenuPopup.close();
+                            } else {
+                                customMenuPopup.open();
+                            }
 
                             // tracking the currently active popup
-                            if (customMenuPopup.visible) {
+                            if (customMenuPopup.expanded) {
                                 trayRoot.activePopup = customMenuPopup;
                             } else {
                                 trayRoot.activePopup = null;

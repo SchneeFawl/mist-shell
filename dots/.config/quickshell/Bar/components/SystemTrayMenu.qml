@@ -11,12 +11,33 @@ PopupWindow {
 
     required property var trayIcon
     property var trayModelData
+    property bool expanded: false
 
     function openSubmenu(handle) {
         stackView.push(subMenuComponent.createObject(null, { handle: handle, isSubMenu: true }))
     }
 
-    function close() { visible = false; }
+    function open() {
+        closeTimer.stop();
+        visible = true;
+        expanded = true;
+    }
+
+    function close() {
+        expanded = false;
+        closeTimer.start();
+    }
+
+    Timer {
+        id: closeTimer
+        interval: Variables.durationMedium
+        onTriggered: {
+            customMenuPopup.visible = false;
+            while (stackView.depth > 1) {
+                stackView.pop();
+            }
+        }
+    }
 
     anchor {
         item: trayIcon
@@ -43,16 +64,38 @@ PopupWindow {
         return list;
     }
 
+    Keys.onPressed: (event) => {
+        if (event.key === Qt.Key_Escape) {
+            customMenuPopup.close();
+            event.accepted = true;
+            return;
+        }
+
+        let currentSubmenu = stackView.currentItem;
+        if (!currentSubmenu) return;
+
+        if (event.key === Qt.Key_Down) {
+            currentSubmenu.navigateDown();
+            event.accepted = true;
+        } else if (event.key === Qt.Key_Up) {
+            currentSubmenu.navigateUp();
+            event.accepted = true;
+        } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+            currentSubmenu.triggerActive();
+            event.accepted = true;
+        }
+    }
+
     WrapperRectangle {
         id: menuItemWrapper
 
         readonly property int targetHeight: stackView.currentItem ? stackView.currentItem.implicitHeight + 16 : 0
-        readonly property int targetWidth: stackView.currentItem ? stackView.currentItem.implicitWidth + 16 : 0
+        readonly property int targetWidth: stackView.currentItem?.implicitWidth + 16 ?? 0
 
         anchors.left: parent.left
         anchors.top: parent.top
-        width: customMenuPopup.visible ? targetWidth : 1
-        height: customMenuPopup.visible ? targetHeight : 1
+        width: customMenuPopup.expanded ? targetWidth : 1
+        height: customMenuPopup.expanded ? targetHeight : 1
         color: Colors.surface_container_low
         radius: Variables.pillRadius
         border.color: Colors.border
@@ -116,7 +159,7 @@ PopupWindow {
                 NumberAnimation {
                     properties: "x"
                     from: 0
-                    to: menuItemWrapper.targetWidth
+                    to: menuItemWrapper.width
                     duration: Variables.durationMedium
                     easing.type: Easing.Bezier
                     easing.bezierCurve: Variables.exitCurve
@@ -135,80 +178,17 @@ PopupWindow {
 
                 required property var handle
                 property bool isSubMenu: false
+                property int highlightedIndex: isSubMenu ? -1 : 0
 
                 QsMenuOpener {
                     id: submenuOpener
                     menu: submenu.handle
                 }
 
-                Rectangle {
-                    id: backButton
-                    visible: submenu.isSubMenu
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 28
-                    radius: Variables.pillRadius - 8
-                    color: backBtnMouse.pressed ? Colors.primary : Colors.surface_container_high
-                    scale: backBtnMouse.pressed ? 0.85 : 1.0
-
-                    Behavior on color {
-                        ColorAnimation {
-                            duration: Variables.durationMedium
-                            easing.type: Easing.Bezier
-                            easing.bezierCurve: Variables.standardCurve
-                        }
-                    }
-
-                    Behavior on scale {
-                        NumberAnimation {
-                            duration: Variables.durationFast
-                            easing.type: Easing.Bezier
-                            easing.bezierCurve: Variables.exitCurve
-                        }
-                    }
-
-                    Row {
-                        leftPadding: 8
-                        anchors.verticalCenter: parent.verticalCenter
-
-                        Text {
-                            anchors.verticalCenter: parent.verticalCenter
-                            font.family: Variables.defaultFontFamily
-                            font.pixelSize: 13
-                            color: backBtnMouse.pressed ? Colors.on_primary : Colors.on_surface
-                            text: Icons.chevronLeft
-
-                            Behavior on color {
-                                ColorAnimation {
-                                    duration: Variables.durationMedium
-                                    easing.type: Easing.Bezier
-                                    easing.bezierCurve: Variables.standardCurve
-                                }
-                            }
-                        }
-
-                        Text {
-                            anchors.verticalCenter: parent.verticalCenter
-                            leftPadding: 4
-                            font.family: Variables.defaultFontFamily
-                            font.pixelSize: 13
-                            color: backBtnMouse.pressed ? Colors.on_primary : Colors.on_surface
-                            text: "Back"
-
-                            Behavior on color {
-                                ColorAnimation {
-                                    duration: Variables.durationMedium
-                                    easing.type: Easing.Bezier
-                                    easing.bezierCurve: Variables.standardCurve
-                                }
-                            }
-                        }
-                    }
-
-                    MouseArea {
-                        id: backBtnMouse
-                        anchors.fill: parent
-                        onClicked: stackView.pop()
-                    }
+                SysTrayBackBtn {
+                    visibility: submenu.isSubMenu
+                    onClicked: stackView.pop()
+                    highlighted: submenu.highlightedIndex === -1
                 }
 
                 Rectangle {
@@ -224,6 +204,60 @@ PopupWindow {
                     delegate: SystemTrayMenuItem {
                         customMenuPopup: customMenuPopup
                         parentMenu: submenu
+                        onPopped: stackView.pop()
+                    }
+                }
+
+                function navigateDown() {
+                    let count = repeater.count;
+                    let idx = highlightedIndex;
+                    let startIdx = submenu.isSubMenu ? -1 : 0;
+
+                    for (let i = 0; i < count + 1; i++) {
+                        idx += 1;
+                        if (idx >= count) idx = startIdx;
+
+                        if (idx === -1) {
+                            highlightedIndex = -1;
+                            return;
+                        }
+
+                        let item = repeater.itemAt(idx);
+                        if (item && !item.modelData.isSeparator) {
+                            highlightedIndex = idx;
+                            return;
+                        }
+                    }
+                }
+
+                function navigateUp() {
+                    let count = repeater.count;
+                    let idx = highlightedIndex;
+                    let startIdx = submenu.isSubMenu ? -1 : 0;
+
+                    for (let i = 0; i < count + 1; i++) {
+                        idx -= 1;
+                        if (idx >= count) idx = count - 1;
+
+                        if (idx === -1) {
+                            highlightedIndex = -1;
+                            return;
+                        }
+
+                        let item = repeater.itemAt(idx);
+                        if (item && !item.modelData.isSeparator) {
+                            highlightedIndex = idx;
+                            return;
+                        }
+                    }
+                }
+
+                function triggerActive() {
+                    if (highlightedIndex === -1 && submenu.isSubMenu) {
+                        stackView.pop();
+                    } else if (highlightedIndex >= 0 && highlightedIndex < repeater.count) {
+                        let item = repeater.itemAt(highlightedIndex);
+                        if (item) item.triggerItem();
                     }
                 }
             }
