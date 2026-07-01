@@ -9,7 +9,7 @@ PopupWindow {
 
     required property bool active
     required property var centerPill
-    required property var closeTimer
+    property bool hovered: false
 
     property bool _wasActive: false
 
@@ -36,16 +36,6 @@ PopupWindow {
         active: ThemeController.keyboardFocus && dashboardPopup.visible
         windows: [ dashboardPopup ]
         onCleared: ThemeController.keyboardFocus = false
-    }
-
-    Connections {
-        target: ThemeController
-
-        function onKeyboardFocusChanged() {
-            if (!ThemeController.keyboardFocus && !dashboardPopupHover.hovered) {
-                if (dashboardPopup.closeTimer) dashboardPopup.closeTimer.start();
-            }
-        }
     }
 
     Rectangle {
@@ -123,11 +113,8 @@ PopupWindow {
         HoverHandler {
             id: dashboardPopupHover
             onHoveredChanged: {
-                if (hovered && dashboardPopup.closeTimer) {
-                    dashboardPopup.closeTimer.stop();
-                } else if (!hovered && dashboardPopup.closeTimer && !ThemeController.keyboardFocus) {
-                    dashboardPopup.closeTimer.start();
-                }
+                dashboardPopup.hovered = hovered;
+                // console.log("[Dashboard] Popup hover changed:", hovered)
             }
         }
 

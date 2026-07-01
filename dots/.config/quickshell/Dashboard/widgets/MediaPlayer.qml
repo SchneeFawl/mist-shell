@@ -21,13 +21,6 @@ ClippingRectangle {
         currentPosition = activePlayer?.position ?? 0;
         progress = (activePlayer && activePlayer.length > 0) ? (currentPosition / activePlayer.length) : 0;
     }
-    onIsPlayingChanged: {
-        if (!isPlaying && activePlayer && activePlayer.playbackState === MprisPlaybackState.Paused) {
-            if (activePlayer.position !== undefined) {
-                currentPosition = activePlayer.position;
-            }
-        }
-    }
 
     anchors.fill: parent
     color: blurEffect.visible ? "transparent" : Colors.surface_container_low
@@ -188,14 +181,16 @@ ClippingRectangle {
             Layout.alignment: Qt.AlignHCenter
             spacing: 8
 
-            MediaControlBtn {       // previous btn
+            // previous btn
+            MediaControlBtn {
                 icon: Icons.mediaPrevious
                 iconColor: Colors.primary_fixed
                 btnSize: 40
                 onClicked: player.activePlayer.canGoPrevious ? player.activePlayer.previous() : null
             }
 
-            MediaControlBtn {       // play/pause btn
+            // play/pause btn
+            MediaControlBtn {
                 icon: player.isPlaying ? Icons.mediaPause : Icons.mediaPlay
                 iconSize: 34
                 btnSize: 58
@@ -210,14 +205,16 @@ ClippingRectangle {
                 }
             }
 
-            MediaControlBtn {       // next btn
+            // next btn
+            MediaControlBtn {
                 icon: Icons.mediaNext
                 iconColor: Colors.primary_fixed
                 btnSize: 40
                 onClicked: player.activePlayer.canGoNext ? player.activePlayer.next() : null
             }
 
-            MediaControlBtn {       // loop btn
+            // loop btn
+            MediaControlBtn {
                 iconSize: 28
                 icon: {
                     if (!player.activePlayer) return Icons.mediaLoopNone;
@@ -269,12 +266,18 @@ ClippingRectangle {
 
         function onTick() {
             let active = player.activePlayer
+            if (!active) return;
 
-            if (active && Mpris.players.values.includes(active)) {
-                if (active.position !== undefined) {
-                    player.currentPosition = active.position;
-                }
+            // sync if paused or skipped seconds 
+            if (!player.isPlaying || Math.abs(active.position - player.currentPosition) > 2.0) {
+                player.currentPosition = active.position;
             }
+
+            // if (active && Mpris.players.values.includes(active)) {
+            //     if (active.position !== undefined) {
+            //         player.currentPosition = active.position;
+            //     }
+            // }
         }
     }
 }
