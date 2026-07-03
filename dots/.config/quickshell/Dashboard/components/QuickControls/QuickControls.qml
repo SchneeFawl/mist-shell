@@ -65,10 +65,11 @@ Rectangle {
             implicitWidth: controlsLayout.rectSize
             iconSize: 32
             icon: Icons.sysGameMode
+            active: GameMode.gameModeActive
 
             onClicked: {
-                active = !active;
-                GameMode.gameModeActive = !GameMode.gameModeActive
+                GameMode.activate();
+                active = GameMode.gameModeActive;
             }
         }
 
@@ -78,10 +79,10 @@ Rectangle {
             implicitWidth: controlsLayout.rectSize
             iconSize: 30
             icon: Idle.caffeineActive ? Icons.sysCaffeineActive : Icons.sysCaffeineInactive
+            active: Idle.caffeineActive
 
             onClicked: {
                 Idle.caffeineActive = !Idle.caffeineActive;
-                active = !active;
             }
         }
     }

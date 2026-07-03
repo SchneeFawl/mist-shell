@@ -6,7 +6,8 @@ import Quickshell.Io
 Singleton {
     id: gameModeRoot
 
-    property bool gameModeActive
+    property bool gameModeActive: false
+    signal activate()
 
     property Process gameModeEnabler: Process {
         command: [
@@ -34,7 +35,13 @@ Singleton {
         command: ["hyprctl", "reload"]
     }
 
-    onGameModeActiveChanged: {
-        gameModeActive ? gameModeEnabler.startDetached() : gameModeDisabler.startDetached();
+    onActivate: {
+        if (!gameModeActive) {
+            gameModeActive = true;
+            gameModeEnabler.startDetached();
+        } else {
+            gameModeActive = false;
+            gameModeDisabler.startDetached();
+        }
     }
 }
