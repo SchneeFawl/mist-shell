@@ -31,10 +31,11 @@ manage_dependencies() {
 
     # packages (arch)
     local deps_pacman=(
-        "hyprland" "kitty" "zsh" "playerctl" "networkmanager" "network-manager-applet" "pavucontrol" 
-        "pipewire" "pipewire-pulse" "wireplumber" "bluez" "bluez-utils" "blueman" 
+        "hyprland" "kitty" "zsh" "playerctl" "networkmanager" "network-manager-applet" "pavucontrol"
+        "pipewire" "pipewire-pulse" "wireplumber" "bluez" "bluez-utils" "blueman"
         "awww" "matugen" "rofi" "papirus-icon-theme" "starship"
-        "qt" "qt6-declarative" "qt6" "qt6-base" "qt6-wayland" "qt6-svg" "libpipewire"
+        "qt6-declarative" "qt6-base" "qt6-wayland" "qt6-svg" "qt6-multimedia" "qt6-multimedia-ffmpeg"
+        "qt6-imageformats" "qt6-shadertools" "qt6-positioning" "qt6-webengine" "libpipewire"
     )
     local deps_aur=(
         "otf-geist-mono-nerd" "quickshell-git"
@@ -55,15 +56,15 @@ manage_dependencies() {
             log_warning "Missing commands: ${missing[*]}"
 
             # install pacman packages
-            echo -ne "${YELLOW}Do you want to install pacman dependencies?{$NC} (y/N): "
+            echo -ne "${YELLOW}Do you want to install pacman dependencies?${NC} (y/N): "
             read -r response
             if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
-                sudo pacman -S --needed "${deps_pacman[@]}"
+                sudo pacman -S "${deps_pacman[@]}" --needed
             fi
 
             # install aur packagess
             if command -v yay &> /dev/null; then
-                echo -ne "${YELLOW}Do you want to install AUR dependencies via yay?{$NC} (y/N): "
+                echo -ne "${YELLOW}Do you want to install AUR dependencies via yay?${NC} (y/N): "
                 read -r response
                 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
                     yay -S --needed "${deps_aur[@]}"
