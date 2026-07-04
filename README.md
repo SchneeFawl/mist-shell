@@ -108,7 +108,15 @@ Mist-shell is a desktop shell with dotfiles specifically made for Arch Linux. Th
 
 <h2 align="center">Why I made this</h2>
 
+<div align="center">
 
+I found that most desktop shells based on Quickshell use a lot of system resources by default. Since I have 4gb ram in my PC, I really don't like high ram usage but I do enjoy aesthetics.
+
+I made this project with a lot of performance aspects in my mind to use the absolute bare minimum system resources. The optimizations in the shell may not be good because I am a beginner to QML and JS overall.
+
+If you want to reach out to me, you can add me on Discord - `schneefawl`. I really want to learn about linux and QML in general.
+
+</div>
 
 <h2 align="center">Support</h2>
 
