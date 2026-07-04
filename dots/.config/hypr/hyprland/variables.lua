@@ -3,5 +3,5 @@
 Terminal    = "kitty"
 FileManager = "dolphin"
 Menu        = "rofi -show run"
-Browser	    = "zen-browser"
+Browser	    = "firefox"         -- Change this to the browser you use
 Editor 	    = "code"
