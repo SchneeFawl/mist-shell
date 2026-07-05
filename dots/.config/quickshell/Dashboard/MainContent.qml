@@ -6,7 +6,6 @@ Rectangle {
 
     property int activeTab
     property string systemStatsText: "System Stats Placeholder"
-    property string recordText: "Record Placeholder"
     property string settingsText: "Settings Placeholder"
 
     anchors.fill: parent
