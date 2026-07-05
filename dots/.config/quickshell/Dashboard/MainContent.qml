@@ -1,5 +1,5 @@
 import QtQuick
-import "./widgets/mainContent"      // qmllint disable unused-imports
+import "./widgets/MainContent"      // qmllint disable unused-imports
 
 Rectangle {
     id: contentRoot
@@ -16,7 +16,7 @@ Rectangle {
     Loader {
         active: parent.activeTab === 1
         anchors.fill: parent
-        source: "widgets/mainContent/MediaPlayer.qml"
+        source: "widgets/MainContent/MediaPlayer.qml"
     }
 
     Text {
@@ -29,13 +29,13 @@ Rectangle {
     Loader {
         active: parent.activeTab === 3
         anchors.fill: parent
-        source: "widgets/mainContent/ThemeSelector.qml"
+        source: "widgets/MainContent/ThemeSelector.qml"
     }
 
     Loader {
         active: parent.activeTab === 4
         anchors.fill: parent
-        source: "widgets/mainContent/ScreenRecord.qml"
+        source: "widgets/MainContent/ScreenRecord.qml"
     }
 
     Text {
