@@ -6,7 +6,7 @@ import Quickshell.Widgets
 import Quickshell.Services.Mpris
 import qs.services
 import qs.modules.theme
-import "../components"
+import "../../components"
 
 ClippingRectangle {
     id: player

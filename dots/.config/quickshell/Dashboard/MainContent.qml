@@ -1,12 +1,12 @@
 import QtQuick
-// import qs.modules.theme
+import "./widgets/mainContent"      // qmllint disable unused-imports
 
 Rectangle {
     id: contentRoot
 
     property int activeTab
     property string systemStatsText: "System Stats Placeholder"
-    property string appSelectorText: "App Selector Placeholder"
+    property string recordText: "Record Placeholder"
     property string settingsText: "Settings Placeholder"
 
     anchors.fill: parent
@@ -16,7 +16,7 @@ Rectangle {
     Loader {
         active: parent.activeTab === 1
         anchors.fill: parent
-        source: "widgets/MediaPlayer.qml"
+        source: "widgets/mainContent/MediaPlayer.qml"
     }
 
     Text {
@@ -29,14 +29,13 @@ Rectangle {
     Loader {
         active: parent.activeTab === 3
         anchors.fill: parent
-        source: "widgets/ThemeSelector.qml"
+        source: "widgets/mainContent/ThemeSelector.qml"
     }
 
-    Text {
-        visible: parent.activeTab === 4
-        anchors.centerIn: parent
-        color: "white"
-        text: parent.appSelectorText
+    Loader {
+        active: parent.activeTab === 4
+        anchors.fill: parent
+        source: "widgets/mainContent/ScreenRecord.qml"
     }
 
     Text {

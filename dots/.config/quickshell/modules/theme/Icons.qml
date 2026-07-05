@@ -46,7 +46,7 @@ QtObject {
 
     /*  DASHBOARD  */
     // navPanel
-    readonly property string navApps: "󰀻"
+    readonly property string navRecord: "󰑋"
     readonly property string navSystemInfo: ""
     readonly property string navMusic: "󰽴"
     readonly property string navTheme: "󰏘"
