@@ -10,6 +10,7 @@ Singleton {
     property int elapsedSeconds: 0
     property int replayDuration: 60
     property bool recordAudio: true
+    property string quality: "very_high"
 
     property string scriptPath: Quickshell.env("HOME") + "/.config/mist/scripts/screen_record/"
 

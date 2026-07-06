@@ -18,14 +18,13 @@ Item {
 
             // back btn
             ScreenRecordBtn {
-                Layout.fillHeight: true
                 icon: Icons.chevronLeft
                 onClicked: recSettingsRoot.StackView.view.pop()
             }
 
             // header
             Rectangle {
-                Layout.fillHeight: true
+                Layout.preferredHeight: parent.height
                 Layout.fillWidth: true
                 color: Colors.surface_container_high
                 radius: Variables.dashInnerRadius
@@ -48,5 +47,7 @@ Item {
             color: Colors.on_surface
             text: "Replay duration (seconds)"
         }
+
+        Item { Layout.fillHeight: true }            // filler
     }
 }

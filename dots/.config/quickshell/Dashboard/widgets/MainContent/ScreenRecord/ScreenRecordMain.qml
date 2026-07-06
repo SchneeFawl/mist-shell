@@ -27,9 +27,10 @@ Item {
         RowLayout {
             Layout.fillWidth: true
             Layout.preferredHeight: 36
+            spacing: Variables.dashInnerColSpacing
 
             Rectangle {
-                Layout.fillHeight: true
+                Layout.preferredHeight: parent.height
                 Layout.fillWidth: true
                 color: Colors.surface_container_high
                 radius: Variables.dashInnerRadius
@@ -44,7 +45,7 @@ Item {
             }
 
             ScreenRecordBtn {
-                Layout.fillHeight: true
+                id: headerText
                 icon: Icons.sysSettings
                 onClicked: recMainRoot.StackView.view.push("ScreenRecordSettings.qml")
             }
@@ -57,5 +58,7 @@ Item {
             color: Colors.on_surface
             text: "Test"
         }
+
+        Item { Layout.fillHeight: true }        // filler
     }
 }
