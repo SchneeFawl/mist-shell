@@ -6,34 +6,47 @@ import qs.modules.theme
 Item {
     id: recSettingsRoot
 
-    RowLayout {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.top
+    ColumnLayout {
+        anchors.fill: parent
         anchors.margins: Variables.dashInnerColSpacing
-        implicitWidth: parent.width
-        implicitHeight: 36
         spacing: Variables.dashInnerColSpacing
 
-        ScreenRecordBtn {
-            icon: Icons.chevronLeft
-            onClicked: recSettingsRoot.StackView.view.pop()
+        RowLayout {
+            id: headerContainer
+            Layout.fillWidth: true
+            Layout.preferredHeight: 36
+
+            // back btn
+            ScreenRecordBtn {
+                Layout.fillHeight: true
+                icon: Icons.chevronLeft
+                onClicked: recSettingsRoot.StackView.view.pop()
+            }
+
+            // header
+            Rectangle {
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                color: Colors.surface_container_high
+                radius: Variables.dashInnerRadius
+
+                Text {
+                    anchors.centerIn: parent
+                    font.family: Variables.defaultFontFamily
+                    font.pixelSize: 16
+                    color: Colors.on_surface
+                    text: "Screen Recorder"
+                }
+            }
         }
 
-        Rectangle {
-            id: headerTextContainer
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            color: Colors.surface_container_high
-            radius: Variables.dashInnerRadius
-
-            Text {
-                anchors.centerIn: parent
-                font.family: Variables.defaultFontFamily
-                font.pixelSize: 16
-                color: Colors.on_surface
-                text: "Screen Recorder"
-            }
+        Text {
+            id: recordAudioText
+            verticalAlignment: Text.AlignVCenter
+            font.family: Variables.defaultFontFamily
+            font.pixelSize: 13
+            color: Colors.on_surface
+            text: "Replay duration (seconds)"
         }
     }
 }

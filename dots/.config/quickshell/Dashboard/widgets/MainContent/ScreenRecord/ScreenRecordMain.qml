@@ -19,34 +19,43 @@ Item {
         }
     }
 
-    RowLayout {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.top
+    ColumnLayout {
+        anchors.fill: parent
         anchors.margins: Variables.dashInnerColSpacing
-        implicitWidth: parent.width
-        implicitHeight: 36
         spacing: Variables.dashInnerColSpacing
 
-        Rectangle {
-            id: headerTextContainer
-            Layout.fillHeight: true
+        RowLayout {
             Layout.fillWidth: true
-            color: Colors.surface_container_high
-            radius: Variables.dashInnerRadius
+            Layout.preferredHeight: 36
 
-            Text {
-                anchors.centerIn: parent
-                font.family: Variables.defaultFontFamily
-                font.pixelSize: 16
-                color: Colors.on_surface
-                text: "Screen Recorder"
+            Rectangle {
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                color: Colors.surface_container_high
+                radius: Variables.dashInnerRadius
+
+                Text {
+                    anchors.centerIn: parent
+                    font.family: Variables.defaultFontFamily
+                    font.pixelSize: 16
+                    color: Colors.on_surface
+                    text: "Screen Recorder"
+                }
+            }
+
+            ScreenRecordBtn {
+                Layout.fillHeight: true
+                icon: Icons.sysSettings
+                onClicked: recMainRoot.StackView.view.push("ScreenRecordSettings.qml")
             }
         }
 
-        ScreenRecordBtn {
-            icon: Icons.sysSettings
-            onClicked: recMainRoot.StackView.view.push("ScreenRecordSettings.qml")
+        Text {
+            verticalAlignment: Text.AlignVCenter
+            font.family: Variables.defaultFontFamily
+            font.pixelSize: 13
+            color: Colors.on_surface
+            text: "Test"
         }
     }
 }
