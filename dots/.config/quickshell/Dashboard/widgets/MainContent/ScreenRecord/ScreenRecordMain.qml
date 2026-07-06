@@ -27,6 +27,8 @@ Item {
         RowLayout {
             Layout.fillWidth: true
             Layout.preferredHeight: 36
+            Layout.bottomMargin: Variables.dashInnerColSpacing
+            implicitWidth: parent.width
             spacing: Variables.dashInnerColSpacing
 
             Rectangle {
@@ -35,12 +37,10 @@ Item {
                 color: Colors.surface_container_high
                 radius: Variables.dashInnerRadius
 
-                Text {
+                ScreenRecordText {
                     anchors.centerIn: parent
-                    font.family: Variables.defaultFontFamily
-                    font.pixelSize: 16
-                    color: Colors.on_surface
                     text: "Screen Recorder"
+                    size: 16
                 }
             }
 
@@ -51,12 +51,9 @@ Item {
             }
         }
 
-        Text {
-            verticalAlignment: Text.AlignVCenter
-            font.family: Variables.defaultFontFamily
-            font.pixelSize: 13
-            color: Colors.on_surface
+        ScreenRecordText {
             text: "Test"
+            leftPadding: Variables.dashInnerColSpacing
         }
 
         Item { Layout.fillHeight: true }        // filler

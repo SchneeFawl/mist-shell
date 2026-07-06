@@ -15,6 +15,7 @@ Item {
             id: headerContainer
             Layout.fillWidth: true
             Layout.preferredHeight: 36
+            Layout.bottomMargin: Variables.dashInnerColSpacing
 
             // back btn
             ScreenRecordBtn {
@@ -29,23 +30,31 @@ Item {
                 color: Colors.surface_container_high
                 radius: Variables.dashInnerRadius
 
-                Text {
+                ScreenRecordText {
                     anchors.centerIn: parent
-                    font.family: Variables.defaultFontFamily
-                    font.pixelSize: 16
-                    color: Colors.on_surface
                     text: "Screen Recorder"
+                    size: 16
                 }
             }
         }
 
-        Text {
+        ScreenRecordText {
             id: recordAudioText
-            verticalAlignment: Text.AlignVCenter
-            font.family: Variables.defaultFontFamily
-            font.pixelSize: 13
-            color: Colors.on_surface
             text: "Replay duration (seconds)"
+            leftPadding: Variables.dashInnerColSpacing
+        }
+
+        RowLayout {
+            Layout.fillWidth: true
+            Layout.preferredHeight: 38
+
+            Rectangle {
+                Layout.fillWidth: true
+                Layout.preferredHeight: parent.height
+                color: Colors.surface_container_highest
+                radius: Variables.dashInnerRadius
+                clip: true
+            }
         }
 
         Item { Layout.fillHeight: true }            // filler
