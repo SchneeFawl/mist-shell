@@ -7,8 +7,6 @@ import qs.modules.theme
 Item {
     id: recMainRoot
 
-    anchors.fill: parent
-
     function formatTime(seconds) {
         const totalSeconds = Math.floor(seconds);
         const mins = Math.floor(totalSeconds / 60)
@@ -30,15 +28,20 @@ Item {
         implicitHeight: 36
         spacing: Variables.dashInnerColSpacing
 
-        Text {
-            Layout.fillWidth: true
+        Rectangle {
+            id: headerTextContainer
             Layout.fillHeight: true
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-            font.family: Variables.defaultFontFamily
-            font.pixelSize: 16
-            color: Colors.on_surface
-            text: "Screen Recorder"
+            Layout.fillWidth: true
+            color: Colors.surface_container_high
+            radius: Variables.dashInnerRadius
+
+            Text {
+                anchors.centerIn: parent
+                font.family: Variables.defaultFontFamily
+                font.pixelSize: 16
+                color: Colors.on_surface
+                text: "Screen Recorder"
+            }
         }
 
         ScreenRecordBtn {
