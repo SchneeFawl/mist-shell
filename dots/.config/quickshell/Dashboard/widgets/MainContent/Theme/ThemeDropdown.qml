@@ -34,7 +34,7 @@ Rectangle {
 
         onVisibleChanged: {
             if (!visible) {
-                ThemeController.keyboardFocus = false;
+                DashboardController.keyboardFocus = false;
                 dropdown.expanded = false;
             }
         }
@@ -196,7 +196,7 @@ Rectangle {
         if (expanded) {
             dropdownMenu.open();
             dropdown.forceActiveFocus();
-            ThemeController.keyboardFocus = true;
+            DashboardController.keyboardFocus = true;
 
             for (let i = 0; i < themeModel.length; i++) {
                 if (themeModel[i].name === ThemeController.theme) {
@@ -206,7 +206,7 @@ Rectangle {
             }
         } else {
             dropdownMenu.close();
-            ThemeController.keyboardFocus = false;
+            DashboardController.keyboardFocus = false;
         }
     }
 }

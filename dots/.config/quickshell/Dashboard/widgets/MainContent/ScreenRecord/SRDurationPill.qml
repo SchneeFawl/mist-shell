@@ -60,6 +60,20 @@ Rectangle {
                 easing.bezierCurve: Variables.standardCurve
             }
         }
+
+        Keys.onPressed: (event) => {
+            if (event.key === Qt.Key_Escape) {
+                DashboardController.keyboardFocus = false;
+                textInput.focus = false;
+                event.accepted = true;
+            }
+        }
+
+        onActiveFocusChanged:  {
+            if (!activeFocus) {
+                DashboardController.keyboardFocus = false;
+            }
+        }
     }
 
     ScreenRecordText {
@@ -84,6 +98,7 @@ Rectangle {
         onClicked: {
             if (durationPillRoot.editable) {
                 textInput.forceActiveFocus();
+                DashboardController.keyboardFocus = true;
             } else {
                 durationPillRoot.clicked()
             }
