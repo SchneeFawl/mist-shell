@@ -1,7 +1,8 @@
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls         // qmllint disable unused-imports
 import QtQuick.Layouts
 import qs.modules.theme
+import qs.services
 
 Item {
     id: recSettingsRoot
@@ -44,33 +45,105 @@ Item {
             leftPadding: Variables.dashInnerColSpacing
         }
 
-        RowLayout {
+        Item {
+            id: durationContainer
             Layout.fillWidth: true
             Layout.preferredHeight: 36
 
-            SRDurationPill {
-                editable: false
-                staticText: "60s"
+            Rectangle {
+                id: slidingHighlight
+
+                property var hoveredPill: {
+                    pill1.isHovered ? pill1 : (
+                        pill2.isHovered ? pill2 : (
+                            pill3.isHovered ? pill3 : (
+                                pill4.isHovered ? pill4 : null
+                            )
+                        )
+                    )
+                }
+                property var activePill: {
+                    (ScreenRecordService.replayDuration) === 60 ? pill1 : (
+                        (ScreenRecordService.replayDuration === 90) ? pill2 : (
+                            (ScreenRecordService.replayDuration === 120) ? pill3 : pill4
+                        )
+                    )
+                }
+                property var targetPill: hoveredPill ? hoveredPill : activePill
+
+                height: parent.height
+                width: targetPill?.width ?? 0
+                x: targetPill?.x ?? 0
+                radius: Variables.dashInnerRadius
+                color: Colors.primary
+                opacity: targetPill ? 1.0 : 0
+
+                Behavior on x {
+                    NumberAnimation {
+                        duration: Variables.durationMedium
+                        easing.type: Easing.Bezier
+                        easing.bezierCurve: Variables.standardCurve
+                    }
+                }
+
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: Variables.durationFast
+                        easing.type: Easing.Bezier
+                        easing.bezierCurve: Variables.standardCurve
+                    }
+                }
             }
 
-            SRDurationPill {
-                editable: false
-                staticText: "90s"
-            }
+            RowLayout {
+                id: durationPillRow
+                anchors.fill: parent
+                spacing: 0
 
-            SRDurationPill {
-                editable: false
-                staticText: "120s"
-            }
+                SRDurationPill {
+                    id: pill1
+                    editable: false
+                    staticText: "60s"
+                    active: ScreenRecordService.replayDuration === 60
+                    highlighted: slidingHighlight.targetPill === pill1
+                    onClicked: ScreenRecordService.replayDuration = 60
+                }
 
-            SRDurationPill {
-                editable: true
-            }
+                SRDurationPill {
+                    id: pill2
+                    editable: false
+                    staticText: "90s"
+                    active: ScreenRecordService.replayDuration === 90
+                    highlighted: slidingHighlight.targetPill === pill2
+                    onClicked: ScreenRecordService.replayDuration = 90
+                }
 
-            ScreenRecordBtn {
-                icon: Icons.checkMark
-                pressedColor: Colors.primary
-                textColor2: Colors.on_primary
+                SRDurationPill {
+                    id: pill3
+                    editable: false
+                    staticText: "120s"
+                    active: ScreenRecordService.replayDuration === 120
+                    highlighted: slidingHighlight.targetPill === pill3
+                    onClicked: ScreenRecordService.replayDuration = 120
+                }
+
+                Item { Layout.preferredWidth: Variables.dashInnerColSpacing - 2 }      // filler
+
+                SRDurationPill {
+                    id: pill4
+                    editable: true
+                    highlighted: slidingHighlight.targetPill === pill4
+                    active: ![60, 90, 120].includes(ScreenRecordService.replayDuration)
+                }
+
+                Item { Layout.preferredWidth: Variables.dashInnerColSpacing }      // filler
+
+                ScreenRecordBtn {
+                    icon: Icons.checkMark
+                    pressedColor: Colors.primary
+                    textColor2: Colors.on_primary
+                    onClicked: ScreenRecordService.replayDuration = parseInt(pill4.inputText)
+                }
             }
         }
 

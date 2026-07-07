@@ -3,6 +3,8 @@ import QtQuick.Layouts
 import qs.modules.theme
 import qs.services
 
+// qmllint disable unqualified
+
 Rectangle {
     id: durationPillRoot
 
@@ -11,41 +13,45 @@ Rectangle {
     property bool editable: false
     property bool active: false
     property string staticText: "60s"
+    property alias inputText: textInput.text
+    property bool highlighted: false
+
+    property var hoveredPill: {
+        pill1.isHovered ? pill1 : (
+            pill2.isHovered ? pill2 : (
+                pill3.isHovered ? pill3 : (
+                    pill4.isHovered ? pill4 : null
+                )
+            )
+        )
+    }
+    property var activePill: {
+        (ScreenRecordService.replayDuration) === 60 ? pill1 : (
+            (ScreenRecordService.replayDuration === 90) ? pill2 : (
+                (ScreenRecordService.replayDuration === 120) ? pill3 : pill4
+            )
+        )
+    }
+    property var targetPill: hoveredPill ? hoveredPill : activePill
 
     Layout.preferredHeight: parent.height
     Layout.fillWidth: true
     radius: Variables.dashInnerRadius
-    color: active ? Colors.primary : Colors.surface_container_highest
+    color: "transparent"
     border.color: Colors.border
     border.width: editable ? 1 : 0
-    scale: mouseArea.pressed ? 0.85 : 1.0
-
-    Behavior on scale {
-        NumberAnimation {
-            duration: Variables.durationFast
-            easing.type: Easing.Bezier
-            easing.bezierCurve: Variables.exitCurve
-        }
-    }
-
-    Behavior on color {
-        ColorAnimation {
-            duration: Variables.durationMedium
-            easing.type: Easing.Bezier
-            easing.bezierCurve: Variables.standardCurve
-        }
-    }
 
     TextInput {
+        id: textInput
         anchors.centerIn: parent
         visible: durationPillRoot.editable
-        color: durationPillRoot.active ? Colors.on_primary : Colors.on_surface
+        color: durationPillRoot.highlighted ? Colors.on_primary : Colors.on_surface
         font.family: Variables.defaultFontFamily
         font.pixelSize: 14
-        cursorVisible: true
         clip: true
         validator: IntValidator { bottom: 10; top: 3600 }
         text: ScreenRecordService.replayDuration.toString()
+        cursorVisible: activeFocus
 
         Behavior on color {
             ColorAnimation {
@@ -59,7 +65,7 @@ Rectangle {
     ScreenRecordText {
         anchors.centerIn: parent
         visible: !durationPillRoot.editable
-        color: durationPillRoot.active ? Colors.on_primary : Colors.on_surface
+        color: durationPillRoot.highlighted ? Colors.on_primary : Colors.on_surface
         text: durationPillRoot.staticText
 
         Behavior on color {
@@ -75,6 +81,12 @@ Rectangle {
         id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
-        onClicked: durationPillRoot.clicked()
+        onClicked: {
+            if (durationPillRoot.editable) {
+                textInput.forceActiveFocus();
+            } else {
+                durationPillRoot.clicked()
+            }
+        }
     }
 }
