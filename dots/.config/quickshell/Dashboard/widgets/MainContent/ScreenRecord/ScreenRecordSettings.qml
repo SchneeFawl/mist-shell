@@ -147,6 +147,17 @@ Item {
             }
         }
 
+        ScreenRecordText {
+            id: selectQualityText
+            Layout.topMargin: Variables.dashInnerColSpacing
+            text: "Select recording quality:"
+            leftPadding: Variables.dashInnerColSpacing
+        }
+
+        SRQualityDropdown {
+            
+        }
+
         Item { Layout.fillHeight: true }            // filler
     }
 }

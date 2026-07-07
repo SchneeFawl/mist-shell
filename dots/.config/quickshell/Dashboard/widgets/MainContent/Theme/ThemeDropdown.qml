@@ -5,7 +5,7 @@ import qs.modules.theme
 import qs.services
 
 Rectangle {
-    id: dropdown
+    id: themeDropdown
 
     property bool expanded: false
     property var themeModel: ThemeController.themeList
@@ -17,14 +17,14 @@ Rectangle {
     Popup {
         id: dropdownMenu
 
-        readonly property int targetHeight: Math.min(dropdown.themeModel.length * 36 + 8, 36 * 4)
+        readonly property int targetHeight: Math.min(themeDropdown.themeModel.length * 36 + 8, 36 * 4)
 
         y: parent.height + 4         // topMargin = 4
         width: parent.width
-        height: Math.min(dropdown.themeModel.length * 36 + 8, 36 * 4)
-        opacity: dropdown.expanded ? 1.0 : 0.0
+        height: targetHeight
+        opacity: themeDropdown.expanded ? 1.0 : 0.0
 
-        onClosed: dropdown.expanded = false
+        onClosed: themeDropdown.expanded = false
         closePolicy: Popup.CloseOnPressOutside || Popup.CloseOnPressOutsideParent
 
         background: Rectangle {
@@ -35,7 +35,7 @@ Rectangle {
         onVisibleChanged: {
             if (!visible) {
                 DashboardController.keyboardFocus = false;
-                dropdown.expanded = false;
+                themeDropdown.expanded = false;
             }
         }
 
@@ -77,7 +77,7 @@ Rectangle {
             id: themeListView
             anchors.fill: parent
             clip: true
-            model: dropdown.themeModel
+            model: themeDropdown.themeModel
 
             highlightFollowsCurrentItem: true
             highlightMoveDuration: 260
@@ -138,7 +138,7 @@ Rectangle {
                             let firstWallpaper = (targetWallpapers && targetWallpapers.length > 0) ? targetWallpapers[0] : "";
 
                             ThemeController.updateState(targetTheme, firstWallpaper, ThemeController.mode)
-                            dropdown.expanded = false;
+                            themeDropdown.expanded = false;
                         }
                         onEntered: themeListView.currentIndex = themeDelegate.index
                     }
@@ -158,7 +158,7 @@ Rectangle {
 
     MouseArea {
         anchors.fill: parent
-        onClicked: dropdown.expanded = !dropdown.expanded
+        onClicked: themeDropdown.expanded = !themeDropdown.expanded
     }
 
     Keys.onPressed: event => {
@@ -195,7 +195,7 @@ Rectangle {
     onExpandedChanged: {
         if (expanded) {
             dropdownMenu.open();
-            dropdown.forceActiveFocus();
+            themeDropdown.forceActiveFocus();
             DashboardController.keyboardFocus = true;
 
             for (let i = 0; i < themeModel.length; i++) {

@@ -16,24 +16,6 @@ Rectangle {
     property alias inputText: textInput.text
     property bool highlighted: false
 
-    property var hoveredPill: {
-        pill1.isHovered ? pill1 : (
-            pill2.isHovered ? pill2 : (
-                pill3.isHovered ? pill3 : (
-                    pill4.isHovered ? pill4 : null
-                )
-            )
-        )
-    }
-    property var activePill: {
-        (ScreenRecordService.replayDuration) === 60 ? pill1 : (
-            (ScreenRecordService.replayDuration === 90) ? pill2 : (
-                (ScreenRecordService.replayDuration === 120) ? pill3 : pill4
-            )
-        )
-    }
-    property var targetPill: hoveredPill ? hoveredPill : activePill
-
     Layout.preferredHeight: parent.height
     Layout.fillWidth: true
     radius: Variables.dashInnerRadius
