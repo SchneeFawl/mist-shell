@@ -46,14 +46,31 @@ Item {
 
         RowLayout {
             Layout.fillWidth: true
-            Layout.preferredHeight: 38
+            Layout.preferredHeight: 36
 
-            Rectangle {
-                Layout.fillWidth: true
-                Layout.preferredHeight: parent.height
-                color: Colors.surface_container_highest
-                radius: Variables.dashInnerRadius
-                clip: true
+            SRDurationPill {
+                editable: false
+                staticText: "60s"
+            }
+
+            SRDurationPill {
+                editable: false
+                staticText: "90s"
+            }
+
+            SRDurationPill {
+                editable: false
+                staticText: "120s"
+            }
+
+            SRDurationPill {
+                editable: true
+            }
+
+            ScreenRecordBtn {
+                icon: Icons.checkMark
+                pressedColor: Colors.primary
+                textColor2: Colors.on_primary
             }
         }
 
