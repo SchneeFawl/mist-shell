@@ -32,13 +32,6 @@ Rectangle {
             radius: Variables.dashInnerRadius
         }
 
-        onVisibleChanged: {
-            if (!visible) {
-                DashboardController.keyboardFocus = false;
-                themeDropdown.expanded = false;
-            }
-        }
-
         enter: Transition {
             NumberAnimation {
                 property: "height"
@@ -80,7 +73,7 @@ Rectangle {
             model: themeDropdown.themeModel
 
             highlightFollowsCurrentItem: true
-            highlightMoveDuration: 260
+            highlightMoveDuration: Variables.durationMedium
             highlight: Item {
                 Rectangle {
                     anchors.fill: parent
