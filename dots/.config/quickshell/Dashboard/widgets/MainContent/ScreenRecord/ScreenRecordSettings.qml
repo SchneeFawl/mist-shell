@@ -40,7 +40,7 @@ Item {
         }
 
         ScreenRecordText {
-            id: recordAudioText
+            id: replayDurationText
             text: "Replay duration (seconds)"
             leftPadding: Variables.dashInnerColSpacing
         }
@@ -149,13 +149,31 @@ Item {
 
         ScreenRecordText {
             id: selectQualityText
-            Layout.topMargin: Variables.dashInnerColSpacing
+            Layout.topMargin: Variables.dashInnerColSpacing + 2
             text: "Select recording quality:"
             leftPadding: Variables.dashInnerColSpacing
         }
 
-        SRQualityDropdown {
-            
+        SRQualityDropdown {}
+
+        RowLayout {
+            Layout.fillWidth: true
+            Layout.preferredHeight: 38
+            Layout.topMargin: Variables.dashInnerColSpacing - 2
+
+            ScreenRecordText {
+                id: recordAudioText
+                Layout.fillWidth: true
+                text: "Record audio:"
+                leftPadding: Variables.dashInnerColSpacing
+            }
+
+            ScreenRecordToggle {
+                Layout.preferredHeight: parent.height - 4
+                Layout.preferredWidth: parent.height + 20
+                Layout.alignment: Qt.AlignVCenter
+                Layout.rightMargin: 6
+            }
         }
 
         Item { Layout.fillHeight: true }            // filler

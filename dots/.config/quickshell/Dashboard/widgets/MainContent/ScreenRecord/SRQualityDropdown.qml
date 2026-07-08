@@ -165,13 +165,37 @@ Rectangle {
 
     MouseArea {
         anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
         onClicked: qualityDropdown.expanded = !qualityDropdown.expanded
+    }
+
+    Keys.onPressed: (event) => {
+        if (!expanded) return;
+
+        if (event.key === Qt.Key_Up) {
+            if (qualityView.currentIndex > 0) {
+                qualityView.currentIndex--;
+            }
+            event.accepted = true;
+        } else if (event.key === Qt.Key_Down) {
+            if (qualityView.currentIndex < qualityView.count - 1) {
+                qualityView.currentIndex++;
+            }
+            event.accepted = true;
+        } else if ([Qt.Key_Enter, Qt.Key_Return].includes(event.key)) {
+            ScreenRecordService.quality = qualityView.model[qualityView.currentIndex];
+            qualityDropdown.expanded = false;
+            event.accepted = true;
+        } else if (event.key === Qt.Key_Escape) {
+            qualityDropdown.expanded = false;
+            event.accepted = true;
+        }
     }
 
     onExpandedChanged: {
         if (expanded) {
             qualityMenu.open();
-            qualityMenu.forceActiveFocus();
+            qualityDropdown.forceActiveFocus();
             DashboardController.keyboardFocus = true;
         } else {
             qualityMenu.close();

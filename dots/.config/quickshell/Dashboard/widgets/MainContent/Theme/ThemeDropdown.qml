@@ -151,6 +151,7 @@ Rectangle {
 
     MouseArea {
         anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
         onClicked: themeDropdown.expanded = !themeDropdown.expanded
     }
 

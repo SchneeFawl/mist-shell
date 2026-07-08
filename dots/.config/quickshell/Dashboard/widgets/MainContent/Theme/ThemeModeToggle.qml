@@ -15,7 +15,11 @@ Rectangle {
     clip: true
 
     Behavior on color {
-        ColorAnimation { duration: 250 }
+        ColorAnimation {
+            duration: Variables.durationSlow
+            easing.type: Easing.Bezier
+            easing.bezierCurve: Variables.standardCurve
+        }
     }
 
     MouseArea {
@@ -45,8 +49,9 @@ Rectangle {
 
         Behavior on x {
             NumberAnimation {
-                duration: 250
-                easing.type: Easing.InOutQuad
+                duration: Variables.durationSlow
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.standardCurve
             }
         }
 
@@ -58,7 +63,11 @@ Rectangle {
             text: track.currentMode === "dark" ? Icons.moonCrescent : Icons.sunBright
 
             Behavior on color {
-                ColorAnimation { duration: 250 }
+                ColorAnimation {
+                    duration: Variables.durationSlow
+                    easing.type: Easing.Bezier
+                    easing.bezierCurve: Variables.standardCurve
+                }
             }
         }
     }
