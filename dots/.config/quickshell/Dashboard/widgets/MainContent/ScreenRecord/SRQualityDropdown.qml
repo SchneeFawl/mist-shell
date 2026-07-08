@@ -26,9 +26,11 @@ Rectangle {
     Popup {
         id: qualityMenu
 
+        readonly property int targetHeight: (36 * 4) + 4
+
         y: parent.height + 4
         width: parent.width
-        height: (36 * 4) + 4
+        height: targetHeight
         opacity: qualityDropdown.expanded ? 1.0 : 0
 
         closePolicy: Popup.CloseOnPressOutside || Popup.CloseOnPressOutsideParent
@@ -97,8 +99,46 @@ Rectangle {
                         cursorShape: Qt.PointingHandCursor
 
                         onEntered: qualityView.currentIndex = content.index
+                        onClicked: {
+                            ScreenRecordService.quality = content.modelData;
+                            qualityDropdown.expanded = false;
+                        }
                     }
                 }
+            }
+        }
+
+        enter: Transition {
+            NumberAnimation {
+                property: "height"
+                from: 0; to: qualityMenu.targetHeight
+                duration: Variables.durationMedium
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.entranceCurve
+            }
+            NumberAnimation {
+                property: "opacity"
+                from: 0; to: 1.0
+                duration: Variables.durationMedium
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.entranceCurve
+            }
+        }
+
+        exit: Transition {
+            NumberAnimation {
+                property: "height"
+                to: 0
+                duration: Variables.durationFast
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.exitCurve
+            }
+            NumberAnimation {
+                property: "opacity"
+                to: 0
+                duration: Variables.durationFast
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.exitCurve
             }
         }
     }
