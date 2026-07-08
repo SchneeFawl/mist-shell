@@ -9,7 +9,8 @@ import qs.modules.theme
 RowLayout {
     id: dashboardColumnsLayout
 
-    property int activeTab: 1           // defaults to media mode
+    // property int activeTab: 1           // defaults to media mode
+    property int activeTab: 4           // for dev purposes
     property bool active: false
 
     spacing: Variables.dashInnerColSpacing
@@ -71,7 +72,7 @@ RowLayout {
                     NumberAnimation {
                         duration: Variables.durationMedium
                         easing.type: Easing.Bezier
-                        easing.bezierCurve: Variables.standardCurve
+                        easing.bezierCurve: Variables.exitCurve
                     }
                 }
 
@@ -103,7 +104,7 @@ RowLayout {
                     NumberAnimation {
                         duration: Variables.durationMedium
                         easing.type: Easing.Bezier
-                        easing.bezierCurve: Variables.standardCurve
+                        easing.bezierCurve: Variables.entranceCurve
                     }
                 }
             }
