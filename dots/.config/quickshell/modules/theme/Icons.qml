@@ -43,6 +43,7 @@ QtObject {
     readonly property string chevronUp: "󰅃"
     readonly property string minus: "󰍴"
     readonly property string checkMark: "󰄬"
+    readonly property string close: "󰅖"
 
     /*  DASHBOARD  */
     // navPanel
@@ -60,7 +61,8 @@ QtObject {
     readonly property string recording: "󰻃"
     readonly property string record: "󰑊"
     readonly property string replay: "󰑙"
-    readonly property string stop: "󰓛"
+    readonly property string stopRecording: "󰙧"
+    readonly property string save: "󰆓"
 
     // Devices
     readonly property string headphones: "󰋋"
