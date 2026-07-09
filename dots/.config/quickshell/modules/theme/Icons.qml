@@ -57,6 +57,9 @@ QtObject {
     readonly property string sunBright: "󰃠"
     readonly property string magnify: "󰍉"
     readonly property string refresh: "󰑐"
+    readonly property string recording: "󰻃"
+    readonly property string record: "󰑊"
+    readonly property string replay: "󰑙"
 
     // Devices
     readonly property string headphones: "󰋋"
