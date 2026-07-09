@@ -54,6 +54,7 @@ FileView {
         property color surface_container_highest: "#323539"
 
         property color error: "#ffb4ab"
+        property color on_error: "#690005"
         property color error_container: "#93000a"
         property color on_error_container: "#ffdad6"
     }
@@ -97,6 +98,7 @@ FileView {
     property color surface_container_highest: adapter.surface_container_highest
 
     property color error: adapter.error
+    property color on_error: adapter.on_error
     property color error_container: adapter.error_container
     property color on_error_container: adapter.on_error_container
 }
