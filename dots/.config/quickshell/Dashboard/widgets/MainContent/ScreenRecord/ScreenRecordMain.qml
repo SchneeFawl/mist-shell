@@ -103,6 +103,22 @@ Item {
                             duration: 1000
                         }
                     }
+
+                    Behavior on color {
+                        ColorAnimation {
+                            duration: Variables.durationSlow
+                            easing.type: Easing.Bezier
+                            easing.bezierCurve: Variables.standardCurve
+                        }
+                    }
+
+                    Behavior on border.color {
+                        ColorAnimation {
+                            duration: Variables.durationSlow
+                            easing.type: Easing.Bezier
+                            easing.bezierCurve: Variables.standardCurve
+                        }
+                    }
                 }
 
                 ScreenRecordText {
@@ -129,72 +145,137 @@ Item {
             }
         }
 
-
-        RowLayout {
+        Item {
             Layout.fillWidth: true
             Layout.preferredHeight: 36
-            Layout.leftMargin: Variables.dashInnerColSpacing
-            Layout.rightMargin: Variables.dashInnerColSpacing
-            visible: ScreenRecordService.status === "idle"
-            spacing: Variables.dashInnerColSpacing
+            clip: true
 
-            ScreenRecordBtn {
-                fillWidth: true
-                text: "Record"
-                icon: Icons.record
-                onClicked: ScreenRecordService.startRecording()
+            RowLayout {
+                id: idleRow
+                width: parent.width
+                height: parent.height
+                x: 0
+                Layout.leftMargin: Variables.dashInnerColSpacing
+                Layout.rightMargin: Variables.dashInnerColSpacing
+                visible: ScreenRecordService.status === "idle"
+                spacing: Variables.dashInnerColSpacing
+                y: ScreenRecordService.status === "idle" ? 0 : 36
+                opacity: ScreenRecordService.status === "idle" ? 1 : 0
+
+                Behavior on y {
+                    NumberAnimation {
+                        duration: Variables.durationSlow
+                        easing.type: Easing.Bezier
+                        easing.bezierCurve: Variables.standardCurve
+                    }
+                }
+
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: Variables.durationSlow
+                        easing.type: Easing.Bezier
+                        easing.bezierCurve: Variables.standardCurve
+                    }
+                }
+
+                ScreenRecordBtn {
+                    fillWidth: true
+                    text: "Record"
+                    icon: Icons.record
+                    onClicked: ScreenRecordService.startRecording()
+                }
+
+                ScreenRecordBtn {
+                    fillWidth: true
+                    text: "Replay"
+                    icon: Icons.replay
+                    onClicked: ScreenRecordService.startReplay()
+                }
             }
 
-            ScreenRecordBtn {
-                fillWidth: true
-                text: "Replay"
-                icon: Icons.replay
-                onClicked: ScreenRecordService.startReplay()
-            }
-        }
+            RowLayout {
+                id: recordingRow
+                width: parent.width
+                height: parent.height
+                x: 0
+                Layout.leftMargin: Variables.dashInnerColSpacing
+                Layout.rightMargin: Variables.dashInnerColSpacing
+                visible: ScreenRecordService.status === "recording"
+                spacing: Variables.dashInnerColSpacing
+                y: ScreenRecordService.status === "recording" ? 0 : 36
+                opacity: ScreenRecordService.status === "recording" ? 1 : 0
 
-        RowLayout {
-            Layout.fillWidth: true
-            Layout.preferredHeight: 36
-            Layout.leftMargin: Variables.dashInnerColSpacing
-            Layout.rightMargin: Variables.dashInnerColSpacing
-            visible: ScreenRecordService.status !== "idle" && ScreenRecordService.status !== "replay"
-            spacing: Variables.dashInnerColSpacing
+                Behavior on y {
+                    NumberAnimation {
+                        duration: Variables.durationSlow
+                        easing.type: Easing.Bezier
+                        easing.bezierCurve: Variables.standardCurve
+                    }
+                }
 
-            ScreenRecordBtn {
-                fillWidth: true
-                text: "Stop Recording"
-                icon: Icons.stopRecording
-                textColor1: Colors.on_error
-                textColor2: Colors.on_error_container
-                color: mouseArea.pressed ? Colors.error_container : Colors.error
-                onClicked: ScreenRecordService.stopRecording()
-            }
-        }
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: Variables.durationSlow
+                        easing.type: Easing.Bezier
+                        easing.bezierCurve: Variables.standardCurve
+                    }
+                }
 
-        RowLayout {
-            Layout.fillWidth: true
-            Layout.preferredHeight: 36
-            Layout.leftMargin: Variables.dashInnerColSpacing
-            Layout.rightMargin: Variables.dashInnerColSpacing
-            visible: ScreenRecordService.status === "replay"
-            spacing: Variables.dashInnerColSpacing
-
-            ScreenRecordBtn {
-                fillWidth: true
-                text: "Save Clip"
-                icon: Icons.save
-                textColor1: Colors.on_primary
-                textColor2: Colors.on_primary_container
-                color: mouseArea.pressed ? Colors.primary_container : Colors.primary
-                onClicked: ScreenRecordService.saveReplay()
+                ScreenRecordBtn {
+                    fillWidth: true
+                    text: "Stop Recording"
+                    icon: Icons.stopRecording
+                    textColor1: Colors.on_error
+                    textColor2: Colors.on_error_container
+                    color: mouseArea.pressed ? Colors.error_container : Colors.error
+                    onClicked: ScreenRecordService.stopRecording()
+                }
             }
 
-            ScreenRecordBtn {
-                fillWidth: true
-                text: "Stop Replay"
-                icon: Icons.close
-                onClicked: ScreenRecordService.stopReplay()
+            RowLayout {
+                id: replayRow
+                width: parent.width
+                height: parent.height
+                x: 0
+                Layout.leftMargin: Variables.dashInnerColSpacing
+                Layout.rightMargin: Variables.dashInnerColSpacing
+                visible: ScreenRecordService.status === "replay"
+                spacing: Variables.dashInnerColSpacing
+                y: ScreenRecordService.status === "replay" ? 0 : 36
+                opacity: ScreenRecordService.status === "replay" ? 1 : 0
+
+                Behavior on y {
+                    NumberAnimation {
+                        duration: Variables.durationSlow
+                        easing.type: Easing.Bezier
+                        easing.bezierCurve: Variables.standardCurve
+                    }
+                }
+
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: Variables.durationSlow
+                        easing.type: Easing.Bezier
+                        easing.bezierCurve: Variables.standardCurve
+                    }
+                }
+
+                ScreenRecordBtn {
+                    fillWidth: true
+                    text: "Save Clip"
+                    icon: Icons.save
+                    textColor1: Colors.on_primary
+                    textColor2: Colors.on_primary_container
+                    color: mouseArea.pressed ? Colors.primary_container : Colors.primary
+                    onClicked: ScreenRecordService.saveReplay()
+                }
+
+                ScreenRecordBtn {
+                    fillWidth: true
+                    text: "Stop Replay"
+                    icon: Icons.close
+                    onClicked: ScreenRecordService.stopReplay()
+                }
             }
         }
 
