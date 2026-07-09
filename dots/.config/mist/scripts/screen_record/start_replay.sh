@@ -8,7 +8,7 @@ OUTPUT_DIR="$HOME/Videos"
 mkdir -p "$OUTPUT_DIR"
 
 if [ "$RECORD_AUDIO" == "true" ]; then
-    gpu-screen-recorder -w screen -f 60 -q "$QUALITY" -a default_output -r "$REPLAY_TIME" -o "$OUTPUT_DIR" &
+    gpu-screen-recorder -w screen -f 60 -q "$QUALITY" -a default_output -c mp4 -r "$REPLAY_TIME" -o "$OUTPUT_DIR" &
 else
     gpu-screen-recorder -w screen -f 60 -q "$QUALITY" -r "$REPLAY_TIME" -o "$OUTPUT_DIR" &
 fi

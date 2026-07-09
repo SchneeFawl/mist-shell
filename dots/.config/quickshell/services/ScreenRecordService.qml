@@ -80,12 +80,23 @@ Singleton {
 
     Process {
         id: startReplayProc
-        command: ["bash", recordService.scriptPath + "start_replay.sh", recordService.recordAudio, recordService.quality]
+        command: [
+            "bash",
+            recordService.scriptPath + "start_replay.sh",
+            recordService.recordAudio ? "true" : "false",
+            recordService.replayDuration.toString(),
+            recordService.quality
+        ]
     }
 
     Process {
         id: saveReplayProc
         command: ["bash", recordService.scriptPath + "save_replay.sh"]
+    }
+
+    Process {
+        id: stopReplayProc
+        command: ["bash", recordService.scriptPath + "stop_replay.sh"]
     }
 
     function startRecording() {
@@ -113,7 +124,7 @@ Singleton {
     }
 
     function stopReplay() {
-        stopRecordProc.startDetached();
+        stopReplayProc.startDetached();
         recordService.status = "idle";
     }
 }
