@@ -76,15 +76,34 @@ Item {
                         (ScreenRecordService.status === "replay") ? Colors.error_container : Colors.border
                     )
 
-                    ScreenRecordText {
+                    ScreenRecordText {      // idle icon
                         anchors.centerIn: parent
                         size: 50
-                        color: ScreenRecordService.status === "recording" ? Colors.on_error : (
-                            (ScreenRecordService.status === "replay") ? Colors.on_error : Colors.error
-                        )
-                        text: ScreenRecordService.status === "recording" ? Icons.recording : (
-                            (ScreenRecordService.status === "replay") ? Icons.replay : Icons.record
-                        )
+                        color: Colors.error
+                        text: Icons.record
+                        opacity: ScreenRecordService.status === "idle" ? 1 : 0
+                        visible: opacity > 0
+                        Behavior on opacity { NumberAnimation { duration: Variables.durationSlow } }
+                    }
+
+                    ScreenRecordText {      // recording icon
+                        anchors.centerIn: parent
+                        size: 50
+                        color: Colors.on_error
+                        text: Icons.recording
+                        opacity: ScreenRecordService.status === "recording" ? 1 : 0
+                        visible: opacity > 0
+                        Behavior on opacity { NumberAnimation { duration: Variables.durationSlow } }
+                    }
+
+                    ScreenRecordText {      // replay icon
+                        anchors.centerIn: parent
+                        size: 50
+                        color: Colors.on_error
+                        text: Icons.replay
+                        opacity: ScreenRecordService.status === "replay" ? 1 : 0
+                        visible: opacity > 0
+                        Behavior on opacity { NumberAnimation { duration: Variables.durationSlow } }
                     }
 
                     SequentialAnimation {
@@ -157,7 +176,7 @@ Item {
                 x: 0
                 Layout.leftMargin: Variables.dashInnerColSpacing
                 Layout.rightMargin: Variables.dashInnerColSpacing
-                visible: ScreenRecordService.status === "idle"
+                visible: opacity > 0
                 spacing: Variables.dashInnerColSpacing
                 y: ScreenRecordService.status === "idle" ? 0 : 36
                 opacity: ScreenRecordService.status === "idle" ? 1 : 0
@@ -200,7 +219,7 @@ Item {
                 x: 0
                 Layout.leftMargin: Variables.dashInnerColSpacing
                 Layout.rightMargin: Variables.dashInnerColSpacing
-                visible: ScreenRecordService.status === "recording"
+                visible: opacity > 0
                 spacing: Variables.dashInnerColSpacing
                 y: ScreenRecordService.status === "recording" ? 0 : 36
                 opacity: ScreenRecordService.status === "recording" ? 1 : 0
@@ -239,7 +258,7 @@ Item {
                 x: 0
                 Layout.leftMargin: Variables.dashInnerColSpacing
                 Layout.rightMargin: Variables.dashInnerColSpacing
-                visible: ScreenRecordService.status === "replay"
+                visible: opacity > 0
                 spacing: Variables.dashInnerColSpacing
                 y: ScreenRecordService.status === "replay" ? 0 : 36
                 opacity: ScreenRecordService.status === "replay" ? 1 : 0
