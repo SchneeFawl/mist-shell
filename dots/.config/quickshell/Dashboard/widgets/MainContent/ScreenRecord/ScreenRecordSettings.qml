@@ -7,6 +7,11 @@ import qs.services
 Item {
     id: recSettingsRoot
 
+    MouseArea {
+        anchors.fill: parent
+        onClicked: recSettingsRoot.forceActiveFocus()
+    }
+
     ColumnLayout {
         anchors.fill: parent
         anchors.margins: Variables.dashInnerColSpacing
@@ -244,6 +249,33 @@ Item {
                     highlighted: colorRangeHighlight.targetPill === colorFullPill
                     onClicked: ScreenRecordService.colorRange = "full"
                 }
+            }
+        }
+
+        RowLayout {
+            Layout.fillWidth: true
+            Layout.preferredHeight: 36
+            Layout.topMargin: Variables.dashInnerColSpacing - 2
+            spacing: Variables.dashInnerColSpacing
+
+            ScreenRecordText {
+                id: fpsText
+                Layout.preferredWidth: 120
+                text: "Framerate:"
+                leftPadding: Variables.dashInnerColSpacing
+            }
+
+            SRPill {
+                id: fpsPill
+                editable: true
+                valueText: ScreenRecordService.fps.toString()
+            }
+
+            ScreenRecordBtn {
+                icon: Icons.checkMark
+                pressedColor: Colors.primary
+                textColor2: Colors.on_primary
+                onClicked: ScreenRecordService.fps = parseInt(fpsPill.inputText)
             }
         }
 
