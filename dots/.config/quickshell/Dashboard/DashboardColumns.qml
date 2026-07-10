@@ -9,8 +9,7 @@ import qs.modules.theme
 RowLayout {
     id: dashboardColumnsLayout
 
-    // property int activeTab: 1           // defaults to media mode
-    property int activeTab: 4           // for dev purposes
+    property int activeTab: 1           // defaults to media mode
     property bool active: false
 
     spacing: Variables.dashInnerColSpacing

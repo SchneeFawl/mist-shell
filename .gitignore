@@ -12,6 +12,7 @@ colors.lua
 
 # others
 screen_record.json
+variables.lua
 
 # system trash
 .DS_Store
