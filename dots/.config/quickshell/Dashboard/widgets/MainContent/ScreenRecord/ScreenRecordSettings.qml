@@ -100,7 +100,7 @@ Item {
                 anchors.fill: parent
                 spacing: 0
 
-                SRDurationPill {
+                SRPill {
                     id: pill1
                     editable: false
                     staticText: "60s"
@@ -109,7 +109,7 @@ Item {
                     onClicked: ScreenRecordService.replayDuration = 60
                 }
 
-                SRDurationPill {
+                SRPill {
                     id: pill2
                     editable: false
                     staticText: "90s"
@@ -118,7 +118,7 @@ Item {
                     onClicked: ScreenRecordService.replayDuration = 90
                 }
 
-                SRDurationPill {
+                SRPill {
                     id: pill3
                     editable: false
                     staticText: "120s"
@@ -129,9 +129,10 @@ Item {
 
                 Item { Layout.preferredWidth: Variables.dashInnerColSpacing - 2 }      // filler
 
-                SRDurationPill {
+                SRPill {
                     id: pill4
                     editable: true
+                    valueText: ScreenRecordService.replayDuration.toString()
                     highlighted: slidingHighlight.targetPill === pill4
                     active: ![60, 90, 120].includes(ScreenRecordService.replayDuration)
                 }
@@ -173,6 +174,37 @@ Item {
                 Layout.preferredWidth: parent.height + 20
                 Layout.alignment: Qt.AlignVCenter
                 Layout.rightMargin: 6
+            }
+        }
+
+        RowLayout {
+            Layout.fillWidth: true
+            Layout.preferredHeight: 36
+            Layout.topMargin: Variables.dashInnerColSpacing - 2
+
+            ScreenRecordText {
+                id: colorModeText
+                Layout.fillWidth: false
+                text: "Color mode:"
+                leftPadding: Variables.dashInnerColSpacing
+            }
+
+            SRPill {
+                id: colorLimitedPill
+                editable: false
+                staticText: "Limited"
+                // active: {}
+                highlighted: slidingHighlight.targetPill === colorLimitedPill
+                // onClicked: {}
+            }
+
+            SRPill {
+                id: colorFullPill
+                editable: false
+                staticText: "Full"
+                // active: {}
+                highlighted: slidingHighlight.targetPill === colorFullPill
+                // onClicked: {}
             }
         }
 

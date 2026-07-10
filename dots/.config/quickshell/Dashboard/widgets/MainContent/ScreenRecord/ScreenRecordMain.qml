@@ -167,6 +167,8 @@ Item {
         Item {
             Layout.fillWidth: true
             Layout.preferredHeight: 36
+            Layout.rightMargin: Variables.dashInnerColSpacing
+            Layout.leftMargin: Variables.dashInnerColSpacing
             clip: true
 
             RowLayout {

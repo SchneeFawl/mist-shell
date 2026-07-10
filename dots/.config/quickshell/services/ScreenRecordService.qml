@@ -14,6 +14,8 @@ Singleton {
     property int replayDuration: 60
     property bool recordAudio: true
     property string quality: "very_high"
+    property string colorRange: "limited"   // range: "limited" (default), "full" (may cause issues!!)
+    property int fps: 60
     property bool isReady: false
 
     property string scriptPath: Quickshell.env("HOME") + "/.config/mist/scripts/screen_record/"
@@ -22,6 +24,8 @@ Singleton {
     onReplayDurationChanged: writeConfig()
     onRecordAudioChanged: writeConfig()
     onQualityChanged: writeConfig()
+    onColorRangeChanged: writeConfig()
+    onFpsChanged: writeConfig()
 
     property FileView configFile: FileView {
         path: recordService.configPath
@@ -33,12 +37,16 @@ Singleton {
             property int replayDuration: 60
             property bool recordAudio: true
             property string quality: "very_high"
+            property string colorRange: "limited"
+            property int fps: 60
         }
 
         onLoadFailed: {
             recordService.configFile.adapter.replayDuration = recordService.replayDuration;
             recordService.configFile.adapter.recordAudio = recordService.recordAudio;
             recordService.configFile.adapter.quality = recordService.quality;
+            recordService.configFile.adapter.colorRange = recordService.colorRange;
+            recordService.configFile.adapter.fps = recordService.fps
             Qt.callLater(recordService.configFile.writeAdapter);
             recordService.isReady = true;
         }
@@ -47,6 +55,8 @@ Singleton {
             recordService.replayDuration = recordService.configFile.adapter.replayDuration;
             recordService.recordAudio = recordService.configFile.adapter.recordAudio;
             recordService.quality = recordService.configFile.adapter.quality;
+            recordService.colorRange = recordService.configFile.adapter.colorRange ?? "limited";
+            recordService.fps = recordService.configFile.adapter.fps ?? 60;
             recordService.isReady = true;
         }
     }
@@ -58,6 +68,8 @@ Singleton {
         configFile.adapter.replayDuration = replayDuration;
         configFile.adapter.recordAudio = recordAudio;
         configFile.adapter.quality = quality;
+        configFile.adapter.colorRange = colorRange;
+        configFile.adapter.fps = fps;
         configFile.writeAdapter();
     }
 
