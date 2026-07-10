@@ -177,34 +177,73 @@ Item {
             }
         }
 
-        RowLayout {
+        Item {
+            id: colorRangeContainer
             Layout.fillWidth: true
             Layout.preferredHeight: 36
             Layout.topMargin: Variables.dashInnerColSpacing - 2
 
-            ScreenRecordText {
-                id: colorModeText
-                Layout.fillWidth: false
-                text: "Color mode:"
-                leftPadding: Variables.dashInnerColSpacing
+            Rectangle {
+                id: colorRangeHighlight
+
+                property var hoveredPill: colorLimitedPill.isHovered ? colorLimitedPill : (
+                    colorFullPill.isHovered ? colorFullPill : null
+                )
+                property var activePill: ScreenRecordService.colorRange === "limited" ? colorLimitedPill : colorFullPill
+                property var targetPill: hoveredPill ? hoveredPill : activePill
+
+                height: parent.height
+                width: targetPill?.width ?? 0
+                x: targetPill?.x ?? 0
+                radius: Variables.dashInnerRadius
+                color: Colors.primary
+                opacity: targetPill ? 1 : 0
+
+                Behavior on x {
+                    NumberAnimation {
+                        duration: Variables.durationMedium
+                        easing.type: Easing.Bezier
+                        easing.bezierCurve: Variables.standardCurve
+                    }
+                }
+
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: Variables.durationFast
+                        easing.type: Easing.Bezier
+                        easing.bezierCurve: Variables.standardCurve
+                    }
+                }
             }
 
-            SRPill {
-                id: colorLimitedPill
-                editable: false
-                staticText: "Limited"
-                // active: {}
-                highlighted: slidingHighlight.targetPill === colorLimitedPill
-                // onClicked: {}
-            }
+            RowLayout {
+                anchors.fill: parent
+                spacing: 0
 
-            SRPill {
-                id: colorFullPill
-                editable: false
-                staticText: "Full"
-                // active: {}
-                highlighted: slidingHighlight.targetPill === colorFullPill
-                // onClicked: {}
+                ScreenRecordText {
+                    id: colorModeText
+                    Layout.preferredWidth: 120
+                    text: "Color mode:"
+                    leftPadding: Variables.dashInnerColSpacing
+                }
+
+                SRPill {
+                    id: colorLimitedPill
+                    editable: false
+                    staticText: "Limited"
+                    active: ScreenRecordService.colorRange === "limited"
+                    highlighted: colorRangeHighlight.targetPill === colorLimitedPill
+                    onClicked: ScreenRecordService.colorRange = "limited"
+                }
+
+                SRPill {
+                    id: colorFullPill
+                    editable: false
+                    staticText: "Full"
+                    active: ScreenRecordService.colorRange === "full"
+                    highlighted: colorRangeHighlight.targetPill === colorFullPill
+                    onClicked: ScreenRecordService.colorRange = "full"
+                }
             }
         }
 
