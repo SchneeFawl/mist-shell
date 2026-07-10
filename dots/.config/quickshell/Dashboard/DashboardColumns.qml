@@ -71,7 +71,7 @@ RowLayout {
                     NumberAnimation {
                         duration: Variables.durationMedium
                         easing.type: Easing.Bezier
-                        easing.bezierCurve: Variables.standardCurve
+                        easing.bezierCurve: Variables.exitCurve
                     }
                 }
 
@@ -103,7 +103,7 @@ RowLayout {
                     NumberAnimation {
                         duration: Variables.durationMedium
                         easing.type: Easing.Bezier
-                        easing.bezierCurve: Variables.standardCurve
+                        easing.bezierCurve: Variables.entranceCurve
                     }
                 }
             }

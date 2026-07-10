@@ -23,8 +23,6 @@ QtObject {
         return path
     }
 
-    property bool keyboardFocus: false
-
     readonly property var themeList: themesFile.adapter.themes
 
     onThemeChanged: stateFile.writeAdapter()

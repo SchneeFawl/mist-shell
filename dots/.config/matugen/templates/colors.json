@@ -37,6 +37,7 @@
   "surface_container_highest": "{{colors.surface_container_highest.default.hex}}",
 
   "error": "{{colors.error.default.hex}}",
+  "on_error": "{{colors.on_error.default.hex}}",
   "error_container": "{{colors.error_container.default.hex}}",
   "on_error_container": "{{colors.on_error_container.default.hex}}"
 }

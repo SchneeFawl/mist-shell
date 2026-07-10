@@ -2,12 +2,17 @@ info.md
 packages.md
 examples/
 
+# -- SHELL --
 # color related
 color_theme.json
 colors.json
 state.json
 themes.json
 colors.lua
+
+# others
+screen_record.json
+variables.lua
 
 # system trash
 .DS_Store

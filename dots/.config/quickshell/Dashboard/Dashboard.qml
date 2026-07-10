@@ -17,7 +17,7 @@ PopupWindow {
         if (active) {
             _wasActive = true;
         } else {
-            ThemeController.keyboardFocus = false;
+            DashboardController.keyboardFocus = false;
         }
     }
 
@@ -33,9 +33,9 @@ PopupWindow {
     implicitHeight: 400
 
     HyprlandFocusGrab {
-        active: ThemeController.keyboardFocus && dashboardPopup.visible
+        active: DashboardController.keyboardFocus && dashboardPopup.visible
         windows: [ dashboardPopup ]
-        onCleared: ThemeController.keyboardFocus = false
+        onCleared: DashboardController.keyboardFocus = false
     }
 
     Rectangle {

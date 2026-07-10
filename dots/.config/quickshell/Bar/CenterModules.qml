@@ -15,7 +15,7 @@ Item {
 
     property bool dashboardActive: false
     readonly property bool isHovered: pillHoverHandler.hovered || dashboard.hovered
-    state: (isHovered || ThemeController.keyboardFocus) ? "active" : "inactive"
+    state: (isHovered || DashboardController.keyboardFocus) ? "active" : "inactive"
 
     Pill {
         id: centerMediaPill
@@ -106,6 +106,6 @@ Item {
     //                 "| isHovered:", isHovered,
     //                 "| pillHover:", pillHoverHandler.hovered,
     //                 "| dashHover:", dashboard.hovered,
-    //                 "| kbFocus:", ThemeController.keyboardFocus)
+    //                 "| kbFocus:", DashboardController.keyboardFocus)
     // }
 }

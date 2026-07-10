@@ -1,3 +1,4 @@
+
 import QtQuick
 import QtQuick.Layouts
 import "../components"
@@ -56,9 +57,9 @@ Rectangle {
         }
 
         NavButton {
-            id: appSelectBtn
-            icon: Icons.navApps
-            iconSize: Variables.dashIconSize
+            id: recordBtn
+            icon: Icons.navRecord
+            iconSize: Variables.dashIconSize + 6
 
             onClicked: {
                 navWrapper.activeTab = 4;

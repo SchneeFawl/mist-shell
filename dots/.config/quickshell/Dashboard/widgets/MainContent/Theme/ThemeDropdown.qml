@@ -5,7 +5,7 @@ import qs.modules.theme
 import qs.services
 
 Rectangle {
-    id: dropdown
+    id: themeDropdown
 
     property bool expanded: false
     property var themeModel: ThemeController.themeList
@@ -17,26 +17,19 @@ Rectangle {
     Popup {
         id: dropdownMenu
 
-        readonly property int targetHeight: Math.min(dropdown.themeModel.length * 36 + 8, 36 * 4)
+        readonly property int targetHeight: Math.min(themeDropdown.themeModel.length * 36 + 8, 36 * 4)
 
         y: parent.height + 4         // topMargin = 4
         width: parent.width
-        height: Math.min(dropdown.themeModel.length * 36 + 8, 36 * 4)
-        opacity: dropdown.expanded ? 1.0 : 0.0
+        height: targetHeight
+        opacity: themeDropdown.expanded ? 1.0 : 0.0
 
-        onClosed: dropdown.expanded = false
+        onClosed: themeDropdown.expanded = false
         closePolicy: Popup.CloseOnPressOutside || Popup.CloseOnPressOutsideParent
 
         background: Rectangle {
             color: Colors.surface_container_high
             radius: Variables.dashInnerRadius
-        }
-
-        onVisibleChanged: {
-            if (!visible) {
-                ThemeController.keyboardFocus = false;
-                dropdown.expanded = false;
-            }
         }
 
         enter: Transition {
@@ -77,10 +70,10 @@ Rectangle {
             id: themeListView
             anchors.fill: parent
             clip: true
-            model: dropdown.themeModel
+            model: themeDropdown.themeModel
 
             highlightFollowsCurrentItem: true
-            highlightMoveDuration: 260
+            highlightMoveDuration: Variables.durationMedium
             highlight: Item {
                 Rectangle {
                     anchors.fill: parent
@@ -138,7 +131,7 @@ Rectangle {
                             let firstWallpaper = (targetWallpapers && targetWallpapers.length > 0) ? targetWallpapers[0] : "";
 
                             ThemeController.updateState(targetTheme, firstWallpaper, ThemeController.mode)
-                            dropdown.expanded = false;
+                            themeDropdown.expanded = false;
                         }
                         onEntered: themeListView.currentIndex = themeDelegate.index
                     }
@@ -158,7 +151,8 @@ Rectangle {
 
     MouseArea {
         anchors.fill: parent
-        onClicked: dropdown.expanded = !dropdown.expanded
+        cursorShape: Qt.PointingHandCursor
+        onClicked: themeDropdown.expanded = !themeDropdown.expanded
     }
 
     Keys.onPressed: event => {
@@ -195,8 +189,8 @@ Rectangle {
     onExpandedChanged: {
         if (expanded) {
             dropdownMenu.open();
-            dropdown.forceActiveFocus();
-            ThemeController.keyboardFocus = true;
+            themeDropdown.forceActiveFocus();
+            DashboardController.keyboardFocus = true;
 
             for (let i = 0; i < themeModel.length; i++) {
                 if (themeModel[i].name === ThemeController.theme) {
@@ -206,7 +200,7 @@ Rectangle {
             }
         } else {
             dropdownMenu.close();
-            ThemeController.keyboardFocus = false;
+            DashboardController.keyboardFocus = false;
         }
     }
 }

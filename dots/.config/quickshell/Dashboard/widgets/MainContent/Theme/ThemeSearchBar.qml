@@ -43,7 +43,7 @@ Rectangle {
 
             Keys.onPressed: event => {
                 if (event.key === Qt.Key_Escape) {
-                    ThemeController.keyboardFocus = false
+                    DashboardController.keyboardFocus = false
                 }
             }
 
@@ -60,9 +60,9 @@ Rectangle {
 
     MouseArea {
         anchors.fill: parent
-        enabled: !ThemeController.keyboardFocus
+        enabled: !DashboardController.keyboardFocus
         onClicked: {
-            ThemeController.keyboardFocus = true;
+            DashboardController.keyboardFocus = true;
             searchInput.forceActiveFocus();
         }
     }

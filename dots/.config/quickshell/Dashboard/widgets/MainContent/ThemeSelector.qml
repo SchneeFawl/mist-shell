@@ -4,7 +4,7 @@ import Quickshell
 import Quickshell.Widgets
 import qs.modules.theme
 import qs.services
-import "../components/Theme"
+import "./Theme"
 
 ClippingRectangle {
     id: root
@@ -41,6 +41,7 @@ ClippingRectangle {
     anchors.fill: parent
     color: Colors.surface_container_low
     radius: Variables.dashColumnRadius
+    clip: true
 
     ColumnLayout {
         anchors.fill: parent
