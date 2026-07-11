@@ -5,12 +5,13 @@ import "./components/QuickControls"
 import "./widgets"
 import "./calendar"
 import qs.modules.theme
+import qs.services
 
 RowLayout {
     id: dashboardColumnsLayout
 
-    property int activeTab: 1           // defaults to media mode
-    property bool active: false
+    property int activeTab: DashboardController.activeTab
+    property bool active: DashboardController.active
 
     spacing: Variables.dashInnerColSpacing
     anchors.margins: 16
