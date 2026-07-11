@@ -54,6 +54,20 @@ while true; do
         cpu_temp=$(( cpu_temp / 1000 ))
     fi
 
-    echo "{\"username\": \"$USER_NAME\", \"hostname:\": \"$HOST_NAME\", \"os\": \"$OS_NAME\", \"cpu\": $cpu_pct, \"temp\": $cpu_temp}"
+    # ram usage (in GB)
+    total_mem=0
+    read -r total_mem _ used_mem < <(awk '
+        $1 == "MemTotal:" { total=$2 / 1024 / 1024 }
+        $1 == "MemAvailable:" { avail=$2 / 1024 / 1024 }
+        END {
+            printf "%.2f %.2f %.2f", total, avail, total - avail
+        }
+    ' /proc/meminfo)
 
+    # disk usage for root partition (in GB)
+    read -r disk_total disk_used < <(df / | awk 'NR==2 {printf "%.1f %.1f", $2/1024/1024, $3/1024/1024}')
+    disk_total=${disk_total%}
+    disk_used=${disk_used%}
+
+    echo "{\"username\": \"$USER_NAME\", \"hostname:\": \"$HOST_NAME\", \"os\": \"$OS_NAME\", \"cpu\": $cpu_pct, \"temp\": $cpu_temp, \"ram_used\": $used_mem, \"ram_total\": $total_mem, \"disk_used\": $disk_used, \"disk_total\": $disk_total}"
 done
