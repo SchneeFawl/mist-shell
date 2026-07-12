@@ -33,12 +33,12 @@ manage_dependencies() {
     local deps_pacman=(
         "hyprland" "kitty" "zsh" "playerctl" "networkmanager" "network-manager-applet" "pavucontrol"
         "pipewire" "pipewire-pulse" "wireplumber" "bluez" "bluez-utils" "blueman"
-        "awww" "matugen" "rofi" "papirus-icon-theme" "starship"
+        "awww" "matugen" "rofi" "papirus-icon-theme" "starship" "gpu-screen-recorder"
         "qt6-declarative" "qt6-base" "qt6-wayland" "qt6-svg" "qt6-multimedia" "qt6-multimedia-ffmpeg"
         "qt6-imageformats" "qt6-shadertools" "qt6-positioning" "qt6-webengine" "libpipewire"
     )
     local deps_aur=(
-        "otf-geist-mono-nerd" "quickshell-git"
+        "otf-geist-mono-nerd" "ttf-cascadia-code-nerd" "ttf-cascadia-mono-nerd" "quickshell-git"
     )
 
     log_info "Checking system commands... "
@@ -170,7 +170,7 @@ deploy_config() {
 
 main() {
     echo -e "${CYAN}█▀▄▀█ █ █▀ ▀█▀   █▀ █ █ █▀▀ █   █${NC}"
-    echo -e "${CYAN}█░▀░█ █ ▄█  █    ▄█ █▀█ ██▄ █▄▄ █▄▄${NC}"
+    echo -e "${CYAN}█░▀░█ █ ▄█  █    ▄█ █▀█ ██▄ █▄▄ █▄▄${NC}\n"
     echo -e "${YELLOW}-- Now Installing --${NC}\n"
 
     manage_dependencies

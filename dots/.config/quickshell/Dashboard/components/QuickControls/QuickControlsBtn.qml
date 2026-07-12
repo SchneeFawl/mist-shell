@@ -5,7 +5,7 @@ Rectangle {
     id: controlsButtonRoot
 
     property string icon: ""
-    property int iconSize: 28
+    property int iconSize: 22
 
     property bool active: false
     signal clicked()

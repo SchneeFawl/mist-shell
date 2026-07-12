@@ -31,7 +31,6 @@ Rectangle {
         QuickControlsBtn {
             implicitHeight: controlsLayout.rectSize
             implicitWidth: controlsLayout.rectSize
-            iconSize: 30
             icon: active ? Icons.sysDndActive : Icons.sysDndInactive
 
             onClicked: {
@@ -63,7 +62,6 @@ Rectangle {
         QuickControlsBtn {
             implicitHeight: controlsLayout.rectSize
             implicitWidth: controlsLayout.rectSize
-            iconSize: 32
             icon: Icons.sysGameMode
             active: GameMode.gameModeActive
 
@@ -77,7 +75,6 @@ Rectangle {
         QuickControlsBtn {
             implicitHeight: controlsLayout.rectSize
             implicitWidth: controlsLayout.rectSize
-            iconSize: 30
             icon: Idle.caffeineActive ? Icons.sysCaffeineActive : Icons.sysCaffeineInactive
             active: Idle.caffeineActive
 
