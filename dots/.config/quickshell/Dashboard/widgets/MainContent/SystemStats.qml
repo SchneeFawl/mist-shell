@@ -10,4 +10,9 @@ Rectangle {
     color: Colors.surface_container_low
     radius: Variables.dashColumnRadius
     clip: true
+
+    StatProgressBar {
+        title: "CPU"
+        progress: SystemStatsService.cpuUsed / 100
+    }
 }
