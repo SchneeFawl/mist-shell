@@ -4,6 +4,7 @@ USER_NAME=$USER
 HOST_NAME=$(cat /etc/hostname 2>/dev/null || hostname)
 
 if [ -f /etc/os-release ]; then
+    # shellcheck source=/dev/null
 	source /etc/os-release
 	OS_NAME=$PRETTY_NAME
 else
@@ -14,7 +15,7 @@ read -r _ user nice system idle iowait irq softirq steal guest guest_nice _ < /p
 prev_active=$((user + nice + system + irq + softirq + steal + guest + guest_nice))
 prev_total=$((user + nice + system + idle + iowait + irq + softirq + steal + guest + guest_nice))
 
-echo "{\"username\": \"$USER_NAME\", \"hostname:\": \"$HOST_NAME\", \"os\": \"$OS_NAME\", \"cpu\": 0, \"temp\": 0, \"ram_used\": 0, \"ram_total\": 0, \"disk_used\": 0, \"disk_total\": 0}"
+echo "{\"username\": \"$USER_NAME\", \"hostname\": \"$HOST_NAME\", \"os\": \"$OS_NAME\", \"cpu\": 0, \"temp\": 0, \"ram_used\": 0, \"ram_total\": 0, \"disk_used\": 0, \"disk_total\": 0}"
 
 while true; do
     sleep 2
@@ -69,5 +70,5 @@ while true; do
     disk_total=${disk_total%}
     disk_used=${disk_used%}
 
-    echo "{\"username\": \"$USER_NAME\", \"hostname:\": \"$HOST_NAME\", \"os\": \"$OS_NAME\", \"cpu\": $cpu_pct, \"temp\": $cpu_temp, \"ram_used\": $used_mem, \"ram_total\": $total_mem, \"disk_used\": $disk_used, \"disk_total\": $disk_total}"
+    echo "{\"username\": \"$USER_NAME\", \"hostname\": \"$HOST_NAME\", \"os\": \"$OS_NAME\", \"cpu\": $cpu_pct, \"temp\": $cpu_temp, \"ram_used\": $used_mem, \"ram_total\": $total_mem, \"disk_used\": $disk_used, \"disk_total\": $disk_total}"
 done
