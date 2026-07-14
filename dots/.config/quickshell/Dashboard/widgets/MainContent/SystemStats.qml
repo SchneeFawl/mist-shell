@@ -1,5 +1,5 @@
 import QtQuick
-import QtQuick.Layouts
+// import QtQuick.Layouts
 import qs.modules.theme
 import qs.services
 
@@ -14,5 +14,7 @@ Rectangle {
     StatProgressBar {
         title: "CPU"
         progress: SystemStatsService.cpuUsed / 100
+        leftSubText: ""
+        rightSubText: ""
     }
 }
