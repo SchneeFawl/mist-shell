@@ -86,4 +86,14 @@ QtObject {
     readonly property string battery70: "󰂀"
     readonly property string battery80: "󰂁"
     readonly property string battery90: "󰂂"
+
+    // Thermometer/Temps
+    property string thermometer: "󰔏"
+    property string thermometerLow: "󱃃"
+    property string thermometerHigh: "󱃂"
+    property string thermometerAlert: "󰸁"
+    property string tempCelsius: "󰔄"
+
+    readonly property string cpu: ""
+    readonly property string ram: ""
 }

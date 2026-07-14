@@ -10,15 +10,13 @@ ColumnLayout {
     property string leftSubText: ""
     property string rightSubText: ""
 
-    anchors.left: parent.left
-    anchors.right: parent.right
-    anchors.rightMargin: Variables.dashInnerColSpacing
-    height: 50
+    Layout.fillWidth: true
+    Layout.preferredHeight: 50
     spacing: Variables.dashInnerColSpacing
 
     RowLayout {
-        Layout.preferredWidth: parent.width
-        Layout.preferredHeight: parent.height
+        Layout.fillWidth: true
+        Layout.fillHeight: true
         Layout.leftMargin: Variables.dashInnerColSpacing
         spacing: Variables.dashInnerColSpacing
 
@@ -27,14 +25,14 @@ ColumnLayout {
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
             font.family: Variables.defaultFontFamily
-            font.pixelSize: 14
+            font.pixelSize: 15
             color: Colors.on_surface
             text: statProgBarRoot.title
         }
 
         Rectangle {
             id: sliderRoot
-            Layout.preferredWidth: parent.width - titleText.width - (Variables.dashInnerColSpacing * 2)
+            Layout.fillWidth: true
             Layout.preferredHeight: 18
             Layout.alignment: Qt.AlignHCenter
             color: Colors.surface_container_high
@@ -69,6 +67,7 @@ ColumnLayout {
         Text {
             id: leftText
             Layout.fillWidth: true
+            Layout.leftMargin: Variables.dashInnerColSpacing + 2
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignLeft
             font.family: Variables.defaultFontFamily
@@ -81,6 +80,7 @@ ColumnLayout {
         Text {
             id: rightText
             Layout.fillWidth: true
+            Layout.rightMargin: Variables.dashInnerColSpacing + 2
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignRight
             font.family: Variables.defaultFontFamily
