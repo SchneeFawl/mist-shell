@@ -10,6 +10,12 @@ ColumnLayout {
     property string leftSubText: ""
     property string rightSubText: ""
 
+    property color progressColor: Colors.primary
+    property color leftSubTextColor: Colors.on_surface
+    property color rightSubTextColor: Colors.on_surface
+    property string rightIcon: ""
+    property color rightIconColor: Colors.on_surface
+
     Layout.fillWidth: true
     Layout.preferredHeight: 50
     spacing: Variables.dashInnerColSpacing
@@ -31,7 +37,7 @@ ColumnLayout {
         }
 
         Rectangle {
-            id: sliderRoot
+            id: progressRoot
             Layout.fillWidth: true
             Layout.preferredHeight: 18
             Layout.alignment: Qt.AlignHCenter
@@ -41,10 +47,10 @@ ColumnLayout {
             radius: Variables.dashInnerRadius
 
             Rectangle {
-                id: sliderFill
+                id: progressFill
                 width: parent.width * statProgBarRoot.progress
                 height: parent.height - ((parent.border.width + 2) * 2)
-                color: Colors.primary
+                color: statProgBarRoot.progressColor
                 radius: parent.radius
                 x: parent.border.width + 2
                 y: parent.border.width + 2
@@ -62,30 +68,47 @@ ColumnLayout {
 
     RowLayout {
         id: subTextLayout
-        Layout.preferredWidth: parent.width
+        Layout.fillWidth: true
 
         Text {
             id: leftText
-            Layout.fillWidth: true
             Layout.leftMargin: Variables.dashInnerColSpacing + 2
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignLeft
             font.family: Variables.defaultFontFamily
             font.pixelSize: 14
-            color: Colors.on_surface
+            color: statProgBarRoot.leftSubTextColor
             text: statProgBarRoot.leftSubText
             visible: statProgBarRoot.leftSubText !== ""
         }
 
+        Rectangle {
+            Layout.preferredHeight: 2
+            Layout.fillWidth: true
+            color: Colors.surface_container_highest
+            radius: Variables.dashInnerRadius
+        }
+
+        Text {
+            id: rightIcon
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignRight
+            rightPadding: -Variables.dashInnerColSpacing
+            font.family: Variables.defaultFontFamily
+            font.pixelSize: 15
+            color: statProgBarRoot.rightIconColor
+            text: statProgBarRoot.rightIcon
+            visible: statProgBarRoot.rightIcon !== ""
+        }
+
         Text {
             id: rightText
-            Layout.fillWidth: true
             Layout.rightMargin: Variables.dashInnerColSpacing + 2
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignRight
             font.family: Variables.defaultFontFamily
             font.pixelSize: 14
-            color: Colors.on_surface
+            color: statProgBarRoot.rightSubTextColor
             text: statProgBarRoot.rightSubText
             visible: statProgBarRoot.rightSubText !== ""
         }
