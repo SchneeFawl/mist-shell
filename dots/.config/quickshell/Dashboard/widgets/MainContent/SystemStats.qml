@@ -11,6 +11,9 @@ Rectangle {
     radius: Variables.dashColumnRadius
     clip: true
 
+    Component.onCompleted: SystemStatsService.active = true
+    Component.onDestruction: SystemStatsService.active = false
+
     function getUsageColor(percentage) {
         if (percentage >= 90) return Colors.error_container;
         if (percentage >= 75) return Colors.error;

@@ -6,7 +6,8 @@ import Quickshell.Io
 Singleton {
     id: sysStatsRoot
 
-    property string scripPath: Quickshell.env("HOME") + "/.config/mist/scripts/system_stats.sh"
+    property string scriptPath: Quickshell.env("HOME") + "/.config/mist/scripts/system_stats.sh"
+    property bool active: false
 
     property string username: ""
     property string hostname: ""
@@ -19,8 +20,8 @@ Singleton {
     property var diskTotal: 0
 
     Process {
-        running: true
-        command: ["bash", sysStatsRoot.scripPath]
+        running: sysStatsRoot.active || suspendTimer.running
+        command: ["bash", sysStatsRoot.scriptPath]
         stdout: SplitParser {
             onRead: (data) => {
                 try {
@@ -40,6 +41,17 @@ Singleton {
                 }
             }
         }
+    }
+
+    Timer {
+        id: suspendTimer
+        interval: 180000    // 3 mins
+        repeat: false
+    }
+
+    onActiveChanged: {
+        if (active) suspendTimer.stop();
+        else suspendTimer.start();
     }
 
     // Component.onCompleted: console.log("[SystemStatsService] Initialized successfully")
