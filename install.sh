@@ -33,7 +33,7 @@ manage_dependencies() {
     local deps_pacman=(
         "hyprland" "kitty" "zsh" "playerctl" "networkmanager" "network-manager-applet" "pavucontrol"
         "pipewire" "pipewire-pulse" "wireplumber" "bluez" "bluez-utils" "blueman"
-        "awww" "matugen" "rofi" "papirus-icon-theme" "starship" "gpu-screen-recorder"
+        "awww" "matugen" "rofi" "papirus-icon-theme" "starship" "gpu-screen-recorder" "dolphin"
         "qt6-declarative" "qt6-base" "qt6-wayland" "qt6-svg" "qt6-multimedia" "qt6-multimedia-ffmpeg"
         "qt6-imageformats" "qt6-shadertools" "qt6-positioning" "qt6-webengine" "libpipewire"
     )
@@ -83,31 +83,6 @@ manage_dependencies() {
         fi
     fi
 }
-
-# backup_config() {
-#     local target="$HOME/.config/quickshell"
-
-#     if [ -L "$target" ]; then
-#         log_info "Removing existing sym-link at $target..."
-#         rm "$target"
-#     elif [ -d "$target" ]; then
-#         if [ "$(ls -A "$target")" ]; then
-#             local backup_name="${target}.bak"
-#             local counter=1
-
-#             while [ -e "$backup_name" ]; do
-#                 backup_name="${target}.bak.${counter}"
-#                 counter=$(( counter + 1 ))
-#             done
-
-#             log_warning "Existing config folder has files. Backing up to: '$backup_name'"
-#             mv "$target" "$backup_name"
-#         else
-#             log_info "Empty config folder found at $target. Removing..."
-#             rmdir "$target"
-#         fi
-#     fi
-# }
 
 deploy_config() {
     local script_dir

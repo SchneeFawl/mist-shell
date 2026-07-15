@@ -107,6 +107,7 @@ Item {
                     color: Colors.primary
                     font.pixelSize: 12
                     font.bold: true
+                    font.family: Variables.defaultFontFamily
                 }
             }
 
@@ -146,6 +147,7 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             text: menuItem.modelData?.text ?? ""
             font.pixelSize: 12
+            font.family: Variables.defaultFontFamily
             color: Colors.on_primary_container
             leftPadding: 4
         }
@@ -160,6 +162,7 @@ Item {
         text: Icons.chevronRight
         color: Colors.on_primary_container
         font.pixelSize: 12
+        font.family: Variables.defaultFontFamily
         opacity: 0.7
     }
 
