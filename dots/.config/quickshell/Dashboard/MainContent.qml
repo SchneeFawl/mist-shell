@@ -5,8 +5,6 @@ Rectangle {
     id: contentRoot
 
     property int activeTab
-    property string systemStatsText: "System Stats Placeholder"
-    property string settingsText: "Settings Placeholder"
 
     anchors.fill: parent
     color: "transparent"
@@ -18,11 +16,10 @@ Rectangle {
         source: "widgets/MainContent/MediaPlayer.qml"
     }
 
-    Text {
-        visible: parent.activeTab === 2
-        anchors.centerIn: parent
-        color: "white"
-        text: parent.systemStatsText
+    Loader {
+        active: parent.activeTab === 2
+        anchors.fill: parent
+        source: "widgets/MainContent/SystemStats.qml"
     }
 
     Loader {
@@ -41,6 +38,6 @@ Rectangle {
         visible: parent.activeTab === 5
         anchors.centerIn: parent
         color: "white"
-        text: parent.settingsText
+        text: "Settings Placeholder"
     }
 }
