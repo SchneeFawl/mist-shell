@@ -18,6 +18,7 @@ QtObject {
     readonly property string sysCaffeineActive: "󰅶"
     readonly property string sysCaffeineInactive: "󰾪"
     readonly property string sysClipboard: "󰅍"
+
     readonly property string sysVolume: "󰕾"
     readonly property string sysVolumeMedium: "󰖀"
     readonly property string sysVolumeLow: "󰕿"
@@ -25,6 +26,9 @@ QtObject {
     readonly property string sysMic: "󰍬"
     readonly property string sysMicMute: "󰍭"
     readonly property string sysBrightness: "󰃟"
+
+    readonly property string at: "󰁥"
+    readonly property string account: "󰀄"
 
     // Media controls
     readonly property string mediaPlay: ""
@@ -91,9 +95,11 @@ QtObject {
     property string thermometer: "󰔏"
     property string thermometerLow: "󱃃"
     property string thermometerHigh: "󱃂"
-    property string thermometerAlert: "󰸁"
+    property string thermometerAlert: "󰸁"   // >90 C
     property string tempCelsius: "󰔄"
 
     readonly property string cpu: ""
     readonly property string ram: ""
+    readonly property string database: "󰆼"
+    readonly property string databaseAlert: "󱘺"
 }
