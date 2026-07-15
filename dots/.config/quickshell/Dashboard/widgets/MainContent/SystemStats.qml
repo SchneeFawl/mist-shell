@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import qs.modules.theme
 import qs.services
+import "./SystemStats"
 
 Rectangle {
     id: statsRoot
@@ -19,20 +20,27 @@ Rectangle {
 
     ColumnLayout {
         anchors.fill: parent
+        anchors.topMargin: Variables.dashInnerColSpacing * 3
         anchors.rightMargin: Variables.dashInnerColSpacing * 2
         anchors.leftMargin: Variables.dashInnerColSpacing * 2
-        spacing: Variables.dashInnerColSpacing * 2
+        spacing: Variables.dashInnerColSpacing * 2 + 2
 
-        Text {
-            id: usernameText
-            Layout.fillWidth: true
-            Layout.preferredHeight: 20
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-            font.family: Variables.defaultFontFamily
-            font.pixelSize: 14
-            color: Colors.on_surface
+        StatHeader  {
             text: SystemStatsService.username
+            icon: Icons.account
+            iconColor: Colors.primary
+        }
+
+        StatHeader  {
+            text: SystemStatsService.hostname
+            icon: Icons.at
+            iconColor: Colors.secondary
+        }
+
+        StatHeader  {
+            text: SystemStatsService.os
+            icon: Icons.archLinux
+            iconColor: Colors.tertiary
         }
 
         // separator

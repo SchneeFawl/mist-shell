@@ -10,6 +10,7 @@ QtObject {
 
     // System
     readonly property string powerIcon: "󰐥"
+    readonly property string archLinux: "󰣇"
     readonly property string sysSettings: "󰒓"
     readonly property string sysDndActive: "󰂛"
     readonly property string sysDndInactive: "󰂚"
