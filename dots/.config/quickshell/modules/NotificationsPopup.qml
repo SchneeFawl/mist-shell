@@ -12,9 +12,10 @@ PanelWindow {           // qmllint disable uncreatable-type
 
     required property var modelData
     property var notif
-    property bool active: activeNotifications.length > 0
+    property bool active: notifModel.count > 0
 
     property var activeNotifications: []
+    property var activeNotificationsMap: ({})
 
     anchors {
         right: true
@@ -32,10 +33,14 @@ PanelWindow {           // qmllint disable uncreatable-type
     color: "transparent"
     visible: active || exitTimer.running
 
+    ListModel {
+        id: notifModel
+    }
+
     ListView {
         id: notifListView
 
-        model: notifPopup.activeNotifications
+        model: notifModel
         spacing: 4
         anchors.fill: parent
 
@@ -48,13 +53,33 @@ PanelWindow {           // qmllint disable uncreatable-type
             }
         }
 
+        remove: Transition {
+            ParallelAnimation {
+                id: exitAnim
+                NumberAnimation {
+                    property: "x"
+                    to: notifPopup.width
+                    duration: Variables.durationFast
+                    easing.type: Easing.Bezier
+                    easing.bezierCurve: Variables.exitCurve
+                }
+                NumberAnimation {
+                    property: "opacity"
+                    to: 0.0
+                    duration: 480
+                }
+            }
+        }
+
         delegate: Item {
             id: notifCard
 
-            required property var modelData
+            required property int notifId
+            property var notifObject: notifPopup.activeNotificationsMap[notifId]
             required property var index
+
             property real progress: 1.0
-            readonly property var resolvedIcon: modelData.image || modelData.appIcon || ""
+            readonly property var resolvedIcon: notifObject ? (notifObject.image || notifObject.appIcon || "") : ""
 
             height: cardBg.height + 8
             width: notifPopup.width
@@ -67,7 +92,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                 property: "progress"
                 to: 0.0
                 duration: 7000
-                onFinished: notifCard.modelData.dismiss()
+                onFinished: notifCard.notifObject.dismiss()
             }
 
             Component.onCompleted: {
@@ -90,7 +115,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                 color: "black"
                 opacity: 0.20
 
-                layer.enabled: !(entryAnim.running || exitAnim.running)
+                layer.enabled: entryAnim.running
                 layer.effect: MultiEffect {
                     blurEnabled: true
                     blurMax: 24
@@ -109,19 +134,19 @@ PanelWindow {           // qmllint disable uncreatable-type
                 radius: Variables.pillRadius
                 color: Colors.primary_container
                 border.width: 2
-                border.color: Notifications.getUrgencyColor(
-                    notifCard.modelData.urgency, Colors.error, Colors.border
-                )
+                border.color: notifCard.notifObject ? Notifications.getUrgencyColor(
+                    notifCard.notifObject.urgency, Colors.error, Colors.border
+                ) : Colors.border
 
                 Rectangle {
                     id: progressBar
-                    width: (cardBg.width - 20) * notifCard.progress
+                    width: notifCard.notifObject ? (cardBg.width - 20) * notifCard.progress : 0
                     height: 3
                     anchors.top: parent.top
                     anchors.left: parent.left
-                    color: Notifications.getUrgencyColor(
-                        notifCard.modelData.urgency, Colors.on_error_container, Colors.primary
-                    )
+                    color: notifCard.notifObject ? Notifications.getUrgencyColor(
+                        notifCard.notifObject.urgency, Colors.on_error_container, Colors.primary
+                    ) : Colors.primary
                     radius: 2
                 }
             }
@@ -141,24 +166,6 @@ PanelWindow {           // qmllint disable uncreatable-type
                     property: "opacity"
                     to: 1.0
                     duration: 120
-                }
-            }
-
-            ParallelAnimation {
-                id: exitAnim
-                NumberAnimation {
-                    target: notifCard
-                    property: "x"
-                    to: notifPopup.width
-                    duration: Variables.durationFast
-                    easing.type: Easing.Bezier
-                    easing.bezierCurve: Variables.exitCurve
-                }
-                NumberAnimation {
-                    target: notifCard
-                    property: "opacity"
-                    to: 0.0
-                    duration: 480
                 }
             }
 
@@ -203,7 +210,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                         font.pixelSize: 14
                         font.family: Variables.defaultFontFamily
                         renderType: Text.NativeRendering
-                        text: notifCard.modelData.appName
+                        text: notifCard.notifObject?.appName ?? ""
                     }
 
                     Text {
@@ -212,7 +219,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                         font.pixelSize: 15
                         font.family: Variables.defaultFontFamily
                         renderType: Text.NativeRendering
-                        text: notifCard.modelData.summary
+                        text: notifCard.notifObject?.summary ?? ""
                         elide: Text.ElideRight
                     }
 
@@ -222,7 +229,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                         font.pixelSize: 13
                         font.family: Variables.defaultFontFamily
                         renderType: Text.NativeRendering
-                        text: notifCard.modelData.body
+                        text: notifCard.notifObject?.body ?? ""
                         wrapMode: Text.WordWrap
                         maximumLineCount: 3
                         elide: Text.ElideRight
@@ -234,9 +241,8 @@ PanelWindow {           // qmllint disable uncreatable-type
                 id: mouseArea
                 anchors.fill: cardBg
                 onClicked: {
-                    notifCard.modelData.dismiss();
+                    notifCard.notifObject.dismiss();
                     progressAnim.stop();
-                    exitAnim.start();
                 }
             }
         }
@@ -256,21 +262,21 @@ PanelWindow {           // qmllint disable uncreatable-type
 
         function onNotification(notification) {
             if (!Notifications.dndActive) {
-                // let list = notifPopup.activeNotifications;
-                // list.push(notification);
-                // notifPopup.activeNotifications = list;
-                notifPopup.activeNotifications = [...notifPopup.activeNotifications, notification];
+                notifPopup.activeNotificationsMap[notification.id] = notification;
+                notifPopup.activeNotificationsMapChanged();
+
+                notifModel.append({ "notifId": notification.id });
             }
 
             notification.closed.connect(() => {
-                // let current = notifPopup.activeNotifications;
-                // let idx = current.indexOf(notification);
-
-                // if (idx !== -1) {
-                //     current.splice(idx, 1);
-                //     notifPopup.activeNotifications = current;
-                // }
-                notifPopup.activeNotifications = notifPopup.activeNotifications.filter(n => n !== notification);
+                for (let i = 0; i < notifModel.count; i++) {
+                    if (notifModel.get(i).notifId === notification.id) {
+                        notifModel.remove(i);
+                        break;
+                    }
+                }
+                delete notifPopup.activeNotificationsMap[notification.id];
+                notifPopup.activeNotificationsMapChanged();
             });
 
             // DEBUG:
