@@ -75,11 +75,14 @@ PanelWindow {           // qmllint disable uncreatable-type
             id: notifCard
 
             required property int notifId
-            property var notifObject: notifPopup.activeNotificationsMap[notifId]
             required property var index
-
             property real progress: 1.0
-            readonly property var resolvedIcon: notifObject ? (notifObject.image || notifObject.appIcon || "") : ""
+
+            property string appName: ""
+            property string summary: ""
+            property string body: ""
+            property string resolvedIcon: ""
+            property int urgency: 0
 
             height: cardBg.height + 8
             width: notifPopup.width
@@ -92,10 +95,21 @@ PanelWindow {           // qmllint disable uncreatable-type
                 property: "progress"
                 to: 0.0
                 duration: 7000
-                onFinished: notifCard.notifObject.dismiss()
+                onFinished: {
+                    let obj = notifPopup.activeNotificationsMap[notifCard.notifId];
+                    if (obj) obj.dismiss();
+                }
             }
 
             Component.onCompleted: {
+                let obj = notifPopup.activeNotificationsMap[notifId];
+                if (obj) {
+                    appName = obj.appName || "";
+                    summary = obj.summary || "";
+                    body = obj.body || "";
+                    resolvedIcon = obj.image || obj.appIcon || "";
+                    appName = obj.appName || 0;
+                }
                 entryAnim.start();
                 progressAnim.start();
             }
@@ -134,19 +148,15 @@ PanelWindow {           // qmllint disable uncreatable-type
                 radius: Variables.pillRadius
                 color: Colors.primary_container
                 border.width: 2
-                border.color: notifCard.notifObject ? Notifications.getUrgencyColor(
-                    notifCard.notifObject.urgency, Colors.error, Colors.border
-                ) : Colors.border
+                border.color: Notifications.getUrgencyColor(notifCard.urgency, Colors.error, Colors.border)
 
                 Rectangle {
                     id: progressBar
-                    width: notifCard.notifObject ? (cardBg.width - 20) * notifCard.progress : 0
+                    width: notifCard ? (cardBg.width - 20) * notifCard.progress : 0
                     height: 3
                     anchors.top: parent.top
                     anchors.left: parent.left
-                    color: notifCard.notifObject ? Notifications.getUrgencyColor(
-                        notifCard.notifObject.urgency, Colors.on_error_container, Colors.primary
-                    ) : Colors.primary
+                    color: Notifications.getUrgencyColor(notifCard.urgency, Colors.on_error_container, Colors.primary)
                     radius: 2
                 }
             }
@@ -210,7 +220,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                         font.pixelSize: 14
                         font.family: Variables.defaultFontFamily
                         renderType: Text.NativeRendering
-                        text: notifCard.notifObject?.appName ?? ""
+                        text: notifCard.appName
                     }
 
                     Text {
@@ -219,7 +229,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                         font.pixelSize: 15
                         font.family: Variables.defaultFontFamily
                         renderType: Text.NativeRendering
-                        text: notifCard.notifObject?.summary ?? ""
+                        text: notifCard.summary
                         elide: Text.ElideRight
                     }
 
@@ -229,7 +239,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                         font.pixelSize: 13
                         font.family: Variables.defaultFontFamily
                         renderType: Text.NativeRendering
-                        text: notifCard.notifObject?.body ?? ""
+                        text: notifCard.body
                         wrapMode: Text.WordWrap
                         maximumLineCount: 3
                         elide: Text.ElideRight
@@ -241,7 +251,8 @@ PanelWindow {           // qmllint disable uncreatable-type
                 id: mouseArea
                 anchors.fill: cardBg
                 onClicked: {
-                    notifCard.notifObject.dismiss();
+                    let obj = notifPopup.activeNotificationsMap[notifCard.notifId];
+                    if (obj) obj.dismiss();
                     progressAnim.stop();
                 }
             }
