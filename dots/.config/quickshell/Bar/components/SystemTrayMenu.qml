@@ -1,8 +1,9 @@
 pragma ComponentBehavior: Bound
-import Quickshell
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import Quickshell
+import Quickshell.Hyprland
 import Quickshell.Widgets
 import qs.modules.theme
 
@@ -29,6 +30,13 @@ PopupWindow {
         closeTimer.start();
     }
 
+    onVisibleChanged: {
+        if (!visible && expanded) {
+            visible = true;
+            close();
+        }
+    }
+
     Timer {
         id: closeTimer
         interval: Variables.durationMedium
@@ -49,7 +57,7 @@ PopupWindow {
     color: "transparent"
     implicitWidth: menuItemWrapper.targetWidth
     implicitHeight: menuItemWrapper.targetHeight
-    grabFocus: true
+    grabFocus: false
 
     readonly property var menuWindows: {
         let list = [ customMenuPopup ];
@@ -62,6 +70,14 @@ PopupWindow {
             } else break;
         }
         return list;
+    }
+
+    HyprlandFocusGrab {
+        id: focusGrab
+        windows: customMenuPopup.menuWindows
+        active: customMenuPopup.visible && customMenuPopup.expanded
+
+        onCleared: customMenuPopup.close()
     }
 
     WrapperRectangle {
