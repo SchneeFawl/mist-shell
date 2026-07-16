@@ -12,7 +12,9 @@ PanelWindow {           // qmllint disable uncreatable-type
 
     required property var modelData
     property var notif
-    property bool active: notifModel.count > 0
+    property bool active: activeNotifications.length > 0
+
+    property var activeNotifications: []
 
     anchors {
         right: true
@@ -30,14 +32,10 @@ PanelWindow {           // qmllint disable uncreatable-type
     color: "transparent"
     visible: active || exitTimer.running
 
-    ListModel {
-        id: notifModel
-    }
-
     ListView {
         id: notifListView
 
-        model: notifModel
+        model: notifPopup.activeNotifications
         spacing: 4
         anchors.fill: parent
 
@@ -53,9 +51,10 @@ PanelWindow {           // qmllint disable uncreatable-type
         delegate: Item {
             id: notifCard
 
-            required property var model
+            required property var modelData
+            required property var index
             property real progress: 1.0
-            readonly property var resolvedIcon: model.notifObject.image || model.notifObject.appIcon || ""
+            readonly property var resolvedIcon: modelData.image || modelData.appIcon || ""
 
             height: cardBg.height + 8
             width: notifPopup.width
@@ -68,7 +67,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                 property: "progress"
                 to: 0.0
                 duration: 7000
-                onFinished: exitAnim.start()
+                onFinished: notifCard.modelData.dismiss()
             }
 
             Component.onCompleted: {
@@ -111,7 +110,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                 color: Colors.primary_container
                 border.width: 2
                 border.color: Notifications.getUrgencyColor(
-                    notifCard.model.notifObject.urgency, Colors.error, Colors.border
+                    notifCard.modelData.urgency, Colors.error, Colors.border
                 )
 
                 Rectangle {
@@ -121,7 +120,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                     anchors.top: parent.top
                     anchors.left: parent.left
                     color: Notifications.getUrgencyColor(
-                        notifCard.model.notifObject.urgency, Colors.on_error_container, Colors.primary
+                        notifCard.modelData.urgency, Colors.on_error_container, Colors.primary
                     )
                     radius: 2
                 }
@@ -147,7 +146,6 @@ PanelWindow {           // qmllint disable uncreatable-type
 
             ParallelAnimation {
                 id: exitAnim
-
                 NumberAnimation {
                     target: notifCard
                     property: "x"
@@ -162,7 +160,6 @@ PanelWindow {           // qmllint disable uncreatable-type
                     to: 0.0
                     duration: 480
                 }
-                onFinished: notifModel.remove(notifModel.index)
             }
 
             RowLayout {
@@ -206,7 +203,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                         font.pixelSize: 14
                         font.family: Variables.defaultFontFamily
                         renderType: Text.NativeRendering
-                        text: notifCard.model.notifObject.appName
+                        text: notifCard.modelData.appName
                     }
 
                     Text {
@@ -215,7 +212,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                         font.pixelSize: 15
                         font.family: Variables.defaultFontFamily
                         renderType: Text.NativeRendering
-                        text: notifCard.model.notifObject.summary
+                        text: notifCard.modelData.summary
                         elide: Text.ElideRight
                     }
 
@@ -225,7 +222,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                         font.pixelSize: 13
                         font.family: Variables.defaultFontFamily
                         renderType: Text.NativeRendering
-                        text: notifCard.model.notifObject.body
+                        text: notifCard.modelData.body
                         wrapMode: Text.WordWrap
                         maximumLineCount: 3
                         elide: Text.ElideRight
@@ -237,7 +234,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                 id: mouseArea
                 anchors.fill: cardBg
                 onClicked: {
-                    notifCard.model.notifObject.dismiss();
+                    notifCard.modelData.dismiss();
                     progressAnim.stop();
                     exitAnim.start();
                 }
@@ -258,7 +255,23 @@ PanelWindow {           // qmllint disable uncreatable-type
         target: Notifications
 
         function onNotification(notification) {
-            !Notifications.dndActive ? notifModel.append({ "notifObject" : notification }) : null
+            if (!Notifications.dndActive) {
+                // let list = notifPopup.activeNotifications;
+                // list.push(notification);
+                // notifPopup.activeNotifications = list;
+                notifPopup.activeNotifications = [...notifPopup.activeNotifications, notification];
+            }
+
+            notification.closed.connect(() => {
+                // let current = notifPopup.activeNotifications;
+                // let idx = current.indexOf(notification);
+
+                // if (idx !== -1) {
+                //     current.splice(idx, 1);
+                //     notifPopup.activeNotifications = current;
+                // }
+                notifPopup.activeNotifications = notifPopup.activeNotifications.filter(n => n !== notification);
+            });
 
             // DEBUG:
             // console.log("NOTIF received - appIcon:", notification.appIcon, "| image:", notification.image)
