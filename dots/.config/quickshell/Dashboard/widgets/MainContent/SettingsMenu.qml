@@ -15,12 +15,36 @@ Rectangle {
 
     ColumnLayout {
         anchors.fill: parent
-        anchors.bottomMargin: Variables.dashInnerColSpacing
-        anchors.topMargin: Variables.dashInnerColSpacing
-        anchors.leftMargin: Variables.dashInnerColSpacing * 2
-        anchors.rightMargin: Variables.dashInnerColSpacing * 2
+        anchors.margins: Variables.dashInnerColSpacing
         spacing: Variables.dashInnerColSpacing
 
+        SettingsHeader {}
+
+        SettingsText { text: "Scale factor:" }
+
+        RowLayout {
+            id: scaleContainer
+            Layout.preferredHeight: 36
+            Layout.fillWidth: true
+            spacing: 0
+
+            SettingsPill {
+                text: "1.0"
+                onClicked: SettingsService.scaleFactor = 1.0
+            }
+            SettingsPill {
+                text: "1.25"
+                onClicked: SettingsService.scaleFactor = 1.25
+            }
+            SettingsPill {
+                text: "1.50"
+                onClicked: SettingsService.scaleFactor = 1.50
+            }
+            SettingsPill {
+                text: "2.0"
+                onClicked: SettingsService.scaleFactor = 2.0
+            }
+        }
 
         Item { Layout.fillHeight: true }    // filler
     }

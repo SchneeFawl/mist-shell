@@ -11,11 +11,11 @@ Rectangle {
     property bool highlighted: false
     property bool active: false
 
-    Layout.fillHeight: true
+    Layout.preferredHeight: parent.height
     Layout.fillWidth: true
     radius: Variables.dashInnerRadius
     color: "transparent"
-    border.color: Colors.border
+    border.color: highlighted ? Colors.border : "transparent"
 
     Text {
         id: optionText
