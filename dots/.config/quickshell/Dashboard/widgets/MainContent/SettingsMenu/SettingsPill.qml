@@ -10,12 +10,12 @@ Rectangle {
     property string text: ""
     property bool highlighted: false
     property bool active: false
+    property bool isHovered: mouseArea.containsMouse
 
     Layout.preferredHeight: parent.height
     Layout.fillWidth: true
     radius: Variables.dashInnerRadius
     color: "transparent"
-    border.color: highlighted ? Colors.border : "transparent"
 
     Text {
         id: optionText
