@@ -11,7 +11,7 @@ QtObject {
     // Text
     readonly property string defaultFontFamily: "GeistMono Nerd Font"
     readonly property int defaultFontWeight: 500
-    readonly property int defaultFontSize: 14
+    readonly property int defaultFontSize: Math.round(14 * scaleFactor)
 
     // Animations
     readonly property var standardCurve:  [0.30, 0.90, 0.40, 1.0, 1, 1]

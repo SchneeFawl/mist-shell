@@ -17,7 +17,7 @@ Rectangle {
         anchors.margins: Variables.dashInnerColSpacing
         spacing: Variables.dashInnerColSpacing
 
-        SettingsHeader {}
+        SettingsHeader { Layout.bottomMargin: Variables.dashInnerColSpacing }
 
         SettingsText { text: "Scale factor:" }
 
