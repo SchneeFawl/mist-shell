@@ -12,6 +12,7 @@ colors.lua
 
 # others
 screen_record.json
+settings.json
 variables.lua
 
 # system trash

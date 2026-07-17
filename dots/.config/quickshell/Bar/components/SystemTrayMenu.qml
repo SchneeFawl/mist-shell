@@ -30,13 +30,6 @@ PopupWindow {
         closeTimer.start();
     }
 
-    onVisibleChanged: {
-        if (!visible && expanded) {
-            visible = true;
-            close();
-        }
-    }
-
     Timer {
         id: closeTimer
         interval: Variables.durationMedium
