@@ -1,15 +1,17 @@
 pragma Singleton
 import QtQuick
+import qs.services
 
 QtObject {
     id: variables
+
+    readonly property real scaleFactor: SettingsService.scaleFactor
 
     // General
     readonly property string defaultFontFamily: "GeistMono Nerd Font"
     readonly property int defaultFontWeight: 500
 
     // Animations
-    readonly property var muiCurve:       [0.38, 0.80, 0.22, 1.0, 1, 1]    // material ui curve
     readonly property var standardCurve:  [0.30, 0.90, 0.40, 1.0, 1, 1]
     readonly property var overshootCurve: [0.18, 1.1, 0.7, 1.10, 1, 1]
     readonly property var entranceCurve:  [0, 0, 0.2, 1.0, 1, 1]

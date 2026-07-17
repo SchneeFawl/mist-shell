@@ -34,10 +34,9 @@ Rectangle {
         source: "widgets/MainContent/ScreenRecord.qml"
     }
 
-    Text {
-        visible: parent.activeTab === 5
-        anchors.centerIn: parent
-        color: "white"
-        text: "Settings Placeholder"
+    Loader {
+        active: parent.activeTab === 5
+        anchors.fill: parent
+        source: "widgets/MainContent/SettingsMenu.qml"
     }
 }

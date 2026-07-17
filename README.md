@@ -98,8 +98,8 @@ Mist-shell is a desktop shell with dotfiles specifically made for Arch Linux. Th
 - [ ] Idle inhibitor/Caffeine mode (half complete)
 - [x] Volume control (dashboard)
 - [ ] Brightness control (dashboard)
-- [ ] Screen recorder
-- [ ] System stats (dashboard)
+- [x] Screen recorder
+- [x] System stats (dashboard)
 - [ ] Power menu
 - [ ] Screenshot
 - [x] Multi-monitor support (not tested)
