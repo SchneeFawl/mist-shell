@@ -50,7 +50,7 @@ ListView {
             Text {
                 id: deviceIcon
                 font.family: Variables.defaultFontFamily
-                font.pixelSize: 20
+                font.pixelSize: Variables.fontLarge
                 color: Colors.on_surface
                 text: BluetoothStatus.getDeviceIcon(card.modelData.icon)
             }
@@ -63,7 +63,7 @@ ListView {
                 Text {
                     id: deviceName
                     font.family: Variables.defaultFontFamily
-                    font.pixelSize: 12
+                    font.pixelSize: Variables.fontSmall
                     color: Colors.on_surface
                     text: card.fixedDevName
                 }
@@ -71,7 +71,7 @@ ListView {
                 Text {
                     id: deviceStatus
                     font.family: Variables.defaultFontFamily
-                    font.pixelSize: 11
+                    font.pixelSize: Variables.fontSmall - 1
                     color: Colors.inactiveAccent
                     text: BluetoothStatus.getStatus(card.modelData)
                 }
@@ -112,7 +112,7 @@ ListView {
                     Text {
                         anchors.centerIn: parent
                         font.family: Variables.defaultFontFamily
-                        font.pixelSize: card.modelData.connected ? 11 : 12
+                        font.pixelSize: card.modelData.connected ? Variables.fontSmall - 1 : Variables.fontSmall
                         color: card.modelData.connected ? Colors.on_surface : Colors.on_primary
                         text: card.modelData.connected ? "Disconnect" : "Connect"
 
@@ -160,7 +160,7 @@ ListView {
                     Text {
                         anchors.centerIn: parent
                         font.family: Variables.defaultFontFamily
-                        font.pixelSize: 12
+                        font.pixelSize: Variables.fontSmall
                         color: Colors.on_surface
                         text: "Forget"
                     }

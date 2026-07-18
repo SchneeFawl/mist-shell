@@ -27,7 +27,7 @@ Rectangle {
 
             Text {
                 anchors.centerIn: parent
-                font.pixelSize: 16
+                font.pixelSize: Variables.fontMedium
                 font.family: Variables.defaultFontFamily
                 font.weight: Variables.defaultFontWeight
                 color: Colors.on_surface

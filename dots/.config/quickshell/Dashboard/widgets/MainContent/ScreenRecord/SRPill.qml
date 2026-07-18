@@ -30,7 +30,7 @@ Rectangle {
         visible: srPillRoot.editable
         color: srPillRoot.highlighted ? Colors.on_primary : Colors.on_surface
         font.family: Variables.defaultFontFamily
-        font.pixelSize: 14
+        font.pixelSize: Variables.fontNormal
         clip: true
         validator: IntValidator { bottom: 10; top: 3600 }
         text: srPillRoot.valueText

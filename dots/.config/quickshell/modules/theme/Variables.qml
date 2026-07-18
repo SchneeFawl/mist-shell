@@ -11,7 +11,11 @@ QtObject {
     // Text
     readonly property string defaultFontFamily: "GeistMono Nerd Font"
     readonly property int defaultFontWeight: 500
-    readonly property int defaultFontSize: Math.round(14 * scaleFactor)
+    readonly property int fontSmall: Math.round(12 * scaleFactor)
+    readonly property int fontNormal: Math.round(14 * scaleFactor)
+    readonly property int fontMedium: Math.round(16 * scaleFactor)
+    readonly property int fontLarge: Math.round(20 * scaleFactor)
+    readonly property int fontLargest: Math.round(24 * scaleFactor)
 
     // Animations
     readonly property var standardCurve:  [0.30, 0.90, 0.40, 1.0, 1, 1]
@@ -32,7 +36,7 @@ QtObject {
     readonly property int pillRadius:            Math.round(12 * scaleFactor)
     readonly property int pillInnerPadding:      Math.round(12 * scaleFactor)
     readonly property int pillOuterSpacing:      Math.round(12 * scaleFactor)
-    readonly property int barSideMargins:        Math.round(16 * scaleFactor)
+    readonly property int barSideMargins:        barHeight - pillHeight - 2
     readonly property int workspaceActiveSize:   Math.round(32 * scaleFactor)
     readonly property int workspaceInactiveSize: Math.round(16 * scaleFactor)
     readonly property int maxBarMediaChars:      Math.round(48 * scaleFactor)

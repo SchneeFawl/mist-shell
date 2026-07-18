@@ -137,7 +137,7 @@ ColumnLayout {
                             Layout.fillWidth: true
                             color: Colors.secondary
                             font.family: Variables.defaultFontFamily
-                            font.pixelSize: 14
+                            font.pixelSize: Variables.fontNormal
                             text: card.modelData.appName
                         }
 
@@ -145,7 +145,7 @@ ColumnLayout {
                             Layout.fillWidth: true
                             color: Colors.on_primary_container
                             font.family: Variables.defaultFontFamily
-                            font.pixelSize: 15
+                            font.pixelSize: Variables.fontMedium - 1
                             text: card.modelData.summary
                             elide: Text.ElideRight
                         }
@@ -153,7 +153,7 @@ ColumnLayout {
                         Text {
                             Layout.fillWidth: true
                             color: Colors.tertiary
-                            font.pixelSize: 13
+                            font.pixelSize: Variables.fontSmall
                             font.family: Variables.defaultFontFamily
                             text: card.modelData.body
                             wrapMode: Text.WordWrap

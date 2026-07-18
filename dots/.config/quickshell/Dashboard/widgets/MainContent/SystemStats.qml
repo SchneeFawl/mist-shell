@@ -75,7 +75,7 @@ Rectangle {
             leftSubText: SystemStatsService.cpuUsed + " %"
             rightIcon: getCpuTempIcon(SystemStatsService.cpuTemp)
             rightIconColor: getCpuTempIconColor(SystemStatsService.cpuTemp)
-            rightSubText: SystemStatsService.cpuTemp + Icons.tempCelsius
+            rightSubText: SystemStatsService.cpuTemp + " " + Icons.tempCelsius
         }
 
         StatProgressBar {   // ram stats

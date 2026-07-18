@@ -18,7 +18,7 @@ RowLayout {
         SettingsText {
             anchors.centerIn: parent
             text: "Settings"
-            size: 16
+            size: Variables.fontMedium
         }
     }
 }

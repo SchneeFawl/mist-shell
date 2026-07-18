@@ -105,7 +105,7 @@ Item {
                     visible: menuItem.modelData?.checkState !== 0 ?? false
                     text: menuItem.modelData?.checkState === 1 ? Icons.minus : Icons.checkMark ?? ""
                     color: Colors.primary
-                    font.pixelSize: 12
+                    font.pixelSize: Variables.fontSmall
                     font.bold: true
                     font.family: Variables.defaultFontFamily
                 }
@@ -146,7 +146,7 @@ Item {
             visible: !menuItem.modelData?.isSeparator ?? false
             anchors.verticalCenter: parent.verticalCenter
             text: menuItem.modelData?.text ?? ""
-            font.pixelSize: 12
+            font.pixelSize: Variables.fontSmall
             font.family: Variables.defaultFontFamily
             color: Colors.on_primary_container
             leftPadding: 4
@@ -161,7 +161,7 @@ Item {
         anchors.verticalCenter: parent.verticalCenter
         text: Icons.chevronRight
         color: Colors.on_primary_container
-        font.pixelSize: 12
+        font.pixelSize: Variables.fontSmall
         font.family: Variables.defaultFontFamily
         opacity: 0.7
     }

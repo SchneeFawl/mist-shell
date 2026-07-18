@@ -36,7 +36,7 @@ ClippingRectangle {
             Text {
                 anchors.centerIn: parent
                 font.family: Variables.defaultFontFamily
-                font.pixelSize: 16
+                font.pixelSize: Variables.fontMedium
                 font.weight: Variables.defaultFontWeight
                 color: Colors.on_surface
                 text: "Bluetooth"
@@ -67,7 +67,7 @@ ClippingRectangle {
                 anchors.centerIn: parent
                 Layout.alignment: Text.AlignHCenter
                 font.family: Variables.defaultFontFamily
-                font.pixelSize: 14
+                font.pixelSize: Variables.fontNormal
                 color: Colors.on_surface
                 text: "Bluetooth is turned off"
             }

@@ -217,7 +217,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                     Text {
                         Layout.fillWidth: true
                         color: Colors.secondary
-                        font.pixelSize: 14
+                        font.pixelSize: Variables.fontNormal
                         font.family: Variables.defaultFontFamily
                         renderType: Text.NativeRendering
                         text: notifCard.appName
@@ -226,7 +226,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                     Text {
                         Layout.fillWidth: true
                         color: Colors.on_primary_container
-                        font.pixelSize: 15
+                        font.pixelSize: Variables.fontMedium - 1
                         font.family: Variables.defaultFontFamily
                         renderType: Text.NativeRendering
                         text: notifCard.summary
@@ -236,7 +236,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                     Text {
                         Layout.fillWidth: true
                         color: Colors.tertiary
-                        font.pixelSize: 13
+                        font.pixelSize: Variables.fontSmall
                         font.family: Variables.defaultFontFamily
                         renderType: Text.NativeRendering
                         text: notifCard.body

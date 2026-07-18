@@ -42,7 +42,7 @@ Rectangle {
         Text {
             anchors.verticalCenter: parent.verticalCenter
             font.family: Variables.defaultFontFamily
-            font.pixelSize: 13
+            font.pixelSize: Variables.fontNormal
             color: backBtnMouse.pressed ? Colors.on_primary : Colors.on_surface
             text: Icons.chevronLeft
 

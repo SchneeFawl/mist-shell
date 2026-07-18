@@ -18,7 +18,7 @@ RowLayout {
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
         font.family: Variables.defaultFontFamily
-        font.pixelSize: 16
+        font.pixelSize: Variables.fontMedium
         color: statHeaderRoot.iconColor
         text: statHeaderRoot.icon
     }
@@ -27,7 +27,7 @@ RowLayout {
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
         font.family: Variables.defaultFontFamily
-        font.pixelSize: 15
+        font.pixelSize: Variables.fontMedium - 1
         color: Colors.on_surface
         text: statHeaderRoot.text
     }

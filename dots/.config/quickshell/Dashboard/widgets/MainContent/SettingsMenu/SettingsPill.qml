@@ -21,7 +21,7 @@ Rectangle {
         id: optionText
         anchors.centerIn: parent
         font.family: Variables.defaultFontFamily
-        font.pixelSize: Variables.defaultFontSize
+        font.pixelSize: Variables.fontNormal
         color: stngPillRoot.highlighted ? Colors.on_primary : Colors.on_surface
         text: stngPillRoot.text
 

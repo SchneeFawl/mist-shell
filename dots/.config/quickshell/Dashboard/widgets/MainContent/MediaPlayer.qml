@@ -128,7 +128,7 @@ ClippingRectangle {
                     (formatTime(player.currentPosition) + " / " + formatTime(player.activePlayer.length))
                     : "--:--"
                 color: Colors.textSub
-                font.pixelSize: 10
+                font.pixelSize: Variables.fontSmall
                 font.family: Variables.defaultFontFamily
                 Layout.fillWidth: true
                 horizontalAlignment: Text.AlignHCenter
@@ -152,7 +152,7 @@ ClippingRectangle {
                 text: player.activePlayer?.trackTitle ?? "No media playing"
                 color: Colors.textVibrant
                 font.bold: true
-                font.pixelSize: 18
+                font.pixelSize: Variables.fontLarge - 2
                 font.family: Variables.defaultFontFamily
                 elide: Text.ElideRight
                 Layout.fillWidth: true
@@ -163,7 +163,7 @@ ClippingRectangle {
                 id: artistName
                 text: player.activePlayer?.trackArtist ?? "-"
                 color: Colors.primary_fixed
-                font.pixelSize: 13
+                font.pixelSize: Variables.fontNormal
                 font.family: Variables.defaultFontFamily
                 elide: Text.ElideRight
                 Layout.fillWidth: true
@@ -219,9 +219,9 @@ ClippingRectangle {
                 icon: {
                     if (!player.activePlayer) return Icons.mediaLoopNone;
                     switch (player.activePlayer.loopState) {
-                        case MprisLoopState.Playlist: return Icons.mediaLoopPlaylist
-                        case MprisLoopState.Track: return Icons.mediaLoopTrack
-                        default: return Icons.mediaLoopNone
+                        case MprisLoopState.Playlist: return Icons.mediaLoopPlaylist;
+                        case MprisLoopState.Track: return Icons.mediaLoopTrack;
+                        default: return Icons.mediaLoopNone;
                     }
                 }
                 iconColor: Colors.primary_fixed
@@ -268,7 +268,7 @@ ClippingRectangle {
             let active = player.activePlayer
             if (!active) return;
 
-            // sync if paused or skipped seconds 
+            // sync if paused or skipped seconds
             if (!player.isPlaying || Math.abs(active.position - player.currentPosition) > 2.0) {
                 player.currentPosition = active.position;
             }

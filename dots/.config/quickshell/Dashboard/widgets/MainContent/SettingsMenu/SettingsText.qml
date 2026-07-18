@@ -2,7 +2,7 @@ import QtQuick
 import qs.modules.theme
 
 Text {
-    property int size: Variables.defaultFontSize
+    property int size: Variables.fontNormal
 
     verticalAlignment: Text.AlignVCenter
     leftPadding: Variables.dashInnerColSpacing

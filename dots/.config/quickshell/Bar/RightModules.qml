@@ -28,7 +28,7 @@ RowLayout {
 
                 BarText {
                     Layout.fillHeight: true
-                    font.pixelSize: 14
+                    font.pixelSize: Variables.fontNormal
                     text: {
                         let batteryIcon = Battery.getBatteryIcon(Battery.batPercentage)
                         if (Battery.hasBattery && !Battery.isCharging) {
@@ -61,7 +61,7 @@ RowLayout {
                 anchors.centerIn: parent
                 text: Icons.sysVolume
                 color: Colors.primary
-                font.pixelSize: 18
+                font.pixelSize: Variables.fontMedium
             }
             onClicked: Quickshell.execDetached(["pavucontrol"]);
         }
@@ -75,7 +75,7 @@ RowLayout {
                 anchors.centerIn: parent
                 text: Icons.powerIcon
                 color: "#F7768E"
-                font.pixelSize: 18
+                font.pixelSize: Variables.fontMedium
             }
             onClicked: console.log("trigger custom power actions")
         }

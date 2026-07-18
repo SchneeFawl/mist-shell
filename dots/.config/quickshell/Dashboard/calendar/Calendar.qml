@@ -50,7 +50,7 @@ Rectangle {
                     Layout.fillWidth: true
                     horizontalAlignment: Text.AlignHCenter
                     color: Colors.on_surface
-                    font.pixelSize: 15
+                    font.pixelSize: Variables.fontMedium
                     font.family: Variables.defaultFontFamily
                     font.bold: true
 
@@ -130,7 +130,7 @@ Rectangle {
                             color: dateContainer.modelData.isCurrentMonth ? Colors.primary : Colors.on_surface
                             text: dateContainer.modelData.day
                             font.family: Variables.defaultFontFamily
-                            font.pixelSize: 14
+                            font.pixelSize: Variables.fontNormal
                         }
                     }
                 }

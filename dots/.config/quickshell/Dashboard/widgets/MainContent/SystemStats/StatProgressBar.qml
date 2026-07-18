@@ -76,7 +76,7 @@ ColumnLayout {
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignLeft
             font.family: Variables.defaultFontFamily
-            font.pixelSize: 14
+            font.pixelSize: Variables.fontNormal
             color: statProgBarRoot.leftSubTextColor
             text: statProgBarRoot.leftSubText
             visible: statProgBarRoot.leftSubText !== ""
@@ -95,7 +95,7 @@ ColumnLayout {
             horizontalAlignment: Text.AlignRight
             rightPadding: -Variables.dashInnerColSpacing
             font.family: Variables.defaultFontFamily
-            font.pixelSize: 15
+            font.pixelSize: Variables.fontMedium
             color: statProgBarRoot.rightIconColor
             text: statProgBarRoot.rightIcon
             visible: statProgBarRoot.rightIcon !== ""
@@ -107,7 +107,7 @@ ColumnLayout {
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignRight
             font.family: Variables.defaultFontFamily
-            font.pixelSize: 14
+            font.pixelSize: Variables.fontNormal
             color: statProgBarRoot.rightSubTextColor
             text: statProgBarRoot.rightSubText
             visible: statProgBarRoot.rightSubText !== ""

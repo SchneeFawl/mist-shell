@@ -46,7 +46,7 @@ Rectangle {
         Text {
             visible: recBtnRoot.icon !== ""
             font.family: Variables.defaultFontFamily
-            font.pixelSize: 20
+            font.pixelSize: Variables.fontLarge
             color: mouseArea.pressed ? recBtnRoot.textColor2 : recBtnRoot.textColor1
             text: recBtnRoot.icon
 
@@ -62,7 +62,7 @@ Rectangle {
         Text {
             visible: recBtnRoot.text !== ""
             font.family: Variables.defaultFontFamily
-            font.pixelSize: 14
+            font.pixelSize: Variables.fontNormal
             color: mouseArea.pressed ? recBtnRoot.textColor2 : recBtnRoot.textColor1
             text: recBtnRoot.text
 

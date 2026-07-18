@@ -12,7 +12,7 @@ Text {
     onPlayerChanged: updateDisplayText()
 
     font.family: Variables.defaultFontFamily
-    font.pixelSize: 14
+    font.pixelSize: Variables.fontNormal
     font.weight: Variables.defaultFontWeight
     color: Colors.primary
     renderType: Text.NativeRendering

@@ -34,7 +34,7 @@ Rectangle {
         id: iconText
         anchors.centerIn: parent
         font.family: Variables.defaultFontFamily
-        font.pixelSize: 20
+        font.pixelSize: Variables.fontLarge
         color: Colors.on_surface
         text: btButtonRoot.icon
 

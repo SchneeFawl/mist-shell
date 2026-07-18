@@ -14,7 +14,7 @@ RowLayout {
             BarText {
                 text: Icons.barIcon
                 color: Colors.primary
-                font.pixelSize: 16
+                font.pixelSize: Variables.fontMedium
                 anchors.verticalCenter: parent.verticalCenter
             }
 
@@ -41,7 +41,7 @@ RowLayout {
                 id: keybindText
                 anchors.centerIn: parent
                 text: Icons.keyboard
-                font.pixelSize: 18
+                font.pixelSize: Variables.fontMedium
                 color: Colors.primary
             }
             onClicked: console.log("trigger keybinds help menu")
@@ -54,4 +54,3 @@ RowLayout {
         Workspaces {}
     }
 }
-

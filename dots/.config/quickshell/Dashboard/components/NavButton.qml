@@ -5,7 +5,7 @@ Rectangle {
     id: buttonRoot
 
     property string icon: ""
-    property int iconSize: 20
+    property int iconSize: Variables.fontLargest
     property color btnBgColor: Colors.surface_container_low
     property bool active: false
 
