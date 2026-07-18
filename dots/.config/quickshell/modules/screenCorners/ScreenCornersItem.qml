@@ -1,27 +1,58 @@
 import QtQuick
+import QtQuick.Shapes
 import qs.modules.theme
 
 Item {
     id: cornerRoot
 
-    // 0: TopLeft, 1: TopRight, 2: BottomLeft, 3: BottomRight
-    property int corner: 0
-    property color color: "black"
+    enum CornerEnum { TopLeft, TopRight, BottomLeft, BottomRight }
+    property var corner: ScreenCornersItem.CornerEnum.TopLeft
+    property color color: Colors.primary_container
     property int radius: Variables.screenCornerRadius
 
     implicitHeight: radius
     implicitWidth: radius
     clip: true
 
-    Rectangle {
-        width: cornerRoot.radius * 2
-        height: cornerRoot.radius * 2
-        color: "transparent"
-        radius: cornerRoot.radius
-        border.width: cornerRoot.radius
-        border.color: cornerRoot.color
+    Shape {
+        anchors.fill: parent
+        layer.enabled: true
+        layer.smooth: true
+        preferredRendererType: Shape.CurveRenderer
 
-        x: (cornerRoot.corner === 1 || cornerRoot.corner === 3) ? -cornerRoot.radius : 0
-        y: (cornerRoot.corner === 2 || cornerRoot.corner === 3) ? -cornerRoot.radius: 0
+        ShapePath {
+            id: shapePath
+            strokeWidth: 0
+            fillColor: cornerRoot.color
+            startX: {
+                if (cornerRoot.corner === ScreenCornersItem.CornerEnum.TopRight ||
+                    cornerRoot.corner === ScreenCornersItem.CornerEnum.BottomRight) return cornerRoot.radius;
+                return 0;
+            }
+            startY: {
+                if (cornerRoot.corner === ScreenCornersItem.CornerEnum.BottomLeft ||
+                    cornerRoot.corner === ScreenCornersItem.CornerEnum.BottomRight) return cornerRoot.radius;
+                return 0;
+            }
+
+            PathAngleArc {
+                moveToStart: false
+                centerX: cornerRoot.radius - shapePath.startX
+                centerY: cornerRoot.radius - shapePath.startY
+                radiusX: cornerRoot.radius; radiusY: cornerRoot.radius
+                startAngle: switch (cornerRoot.corner) {
+                    case ScreenCornersItem.CornerEnum.TopLeft: return 180;
+                    case ScreenCornersItem.CornerEnum.TopRight: return -90;
+                    case ScreenCornersItem.CornerEnum.BottomLeft: return 90;
+                    case ScreenCornersItem.CornerEnum.BottomRight: return 0;
+                }
+                sweepAngle: 90
+            }
+
+            PathLine {
+                x: shapePath.startX
+                y: shapePath.startY
+            }
+        }
     }
 }
