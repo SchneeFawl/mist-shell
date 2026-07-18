@@ -17,8 +17,8 @@ PanelWindow {       // qmllint disable
         right: true
     }
 
-    implicitHeight: 40
-    exclusiveZone: 40
+    implicitHeight: Variables.barHeight
+    exclusiveZone: Variables.barHeight
     color: "transparent"
 
     // wayland config bounds

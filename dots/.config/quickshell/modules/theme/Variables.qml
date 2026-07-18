@@ -23,11 +23,15 @@ QtObject {
     readonly property int durationMedium: 240
     readonly property int durationSlow: 300
 
+    // Common
+    readonly property int screenCornerRadius: (barHeight - pillHeight) + pillRadius
+
     // Bar
+    readonly property int barHeight:             Math.round(40 * scaleFactor)
+    readonly property int pillHeight:            Math.round(32 * scaleFactor)
+    readonly property int pillRadius:            Math.round(12 * scaleFactor)
     readonly property int pillInnerPadding:      Math.round(12 * scaleFactor)
     readonly property int pillOuterSpacing:      Math.round(12 * scaleFactor)
-    readonly property int pillRadius:            Math.round(12 * scaleFactor)
-    readonly property int pillHeight:            Math.round(32 * scaleFactor)
     readonly property int barSideMargins:        Math.round(16 * scaleFactor)
     readonly property int workspaceActiveSize:   Math.round(32 * scaleFactor)
     readonly property int workspaceInactiveSize: Math.round(16 * scaleFactor)
