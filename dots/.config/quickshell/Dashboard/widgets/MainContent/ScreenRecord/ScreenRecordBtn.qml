@@ -16,8 +16,8 @@ Rectangle {
     property var mouseArea: mouseArea
     signal clicked()
 
-    Layout.preferredHeight: 36
-    Layout.preferredWidth: fillWidth ? -1 : 36
+    Layout.preferredHeight: Variables.buttonHeight
+    Layout.preferredWidth: fillWidth ? -1 : Variables.buttonHeight
     Layout.fillWidth: fillWidth
     radius: Variables.dashInnerRadius
     color: mouseArea.pressed ? pressedColor : unpressedColor

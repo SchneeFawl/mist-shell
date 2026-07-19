@@ -29,8 +29,8 @@ PopupWindow {
         edges: Edges.Top                            // qmllint disable missing-type
         gravity: Edges.Bottom                       // qmllint disable missing-type
     }
-    implicitWidth: 1000
-    implicitHeight: 400
+    implicitWidth: 1000 * Variables.scaleFactor
+    implicitHeight: 400 * Variables.scaleFactor
 
     HyprlandFocusGrab {
         active: DashboardController.keyboardFocus && dashboardPopup.visible

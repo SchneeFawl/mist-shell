@@ -23,7 +23,7 @@ ClippingRectangle {
 
         // header
         Item {
-            Layout.preferredHeight: 36
+            Layout.preferredHeight: Variables.buttonHeight
             Layout.fillWidth: true
 
             BtButton {

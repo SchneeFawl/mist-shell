@@ -20,7 +20,7 @@ Item {
         RowLayout {
             id: headerContainer
             Layout.fillWidth: true
-            Layout.preferredHeight: 36
+            Layout.preferredHeight: Variables.buttonHeight
             Layout.bottomMargin: Variables.dashInnerColSpacing
 
             // back btn
@@ -53,7 +53,7 @@ Item {
         Item {
             id: durationContainer
             Layout.fillWidth: true
-            Layout.preferredHeight: 36
+            Layout.preferredHeight: Variables.buttonHeight
 
             Rectangle {
                 id: slidingHighlight
@@ -185,7 +185,7 @@ Item {
         Item {
             id: colorRangeContainer
             Layout.fillWidth: true
-            Layout.preferredHeight: 36
+            Layout.preferredHeight: Variables.buttonHeight
             Layout.topMargin: Variables.dashInnerColSpacing - 2
 
             Rectangle {
@@ -254,7 +254,7 @@ Item {
 
         RowLayout {
             Layout.fillWidth: true
-            Layout.preferredHeight: 36
+            Layout.preferredHeight: Variables.buttonHeight
             Layout.topMargin: Variables.dashInnerColSpacing - 2
             spacing: Variables.dashInnerColSpacing
 

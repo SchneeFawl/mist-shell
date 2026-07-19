@@ -24,7 +24,7 @@ Rectangle {
         // month container
         Rectangle {
             Layout.fillWidth: true
-            Layout.preferredHeight: 36
+            Layout.preferredHeight: Variables.buttonHeight
             radius: parent.fixedRadius
             color: "transparent"
 

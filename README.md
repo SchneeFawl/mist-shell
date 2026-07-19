@@ -85,7 +85,7 @@ Mist-shell is a desktop shell with dotfiles specifically made for Arch Linux. Th
 
 <h2 align="center">Features</h2>
 
-- [x] Dashboard (half complete)
+- [x] Dashboard
 - [x] Theme selector (dashboard)
 - [x] Wallpapers
 - [x] Bluetooth
@@ -94,7 +94,7 @@ Mist-shell is a desktop shell with dotfiles specifically made for Arch Linux. Th
 - [x] Media control (dashboard)
 - [x] Game mode (dashboard)
 - [x] DND mode (dashboard)
-- [x] Calendar (will be upgrading)
+- [x] Calendar
 - [ ] Idle inhibitor/Caffeine mode (half complete)
 - [x] Volume control (dashboard)
 - [ ] Brightness control (dashboard)

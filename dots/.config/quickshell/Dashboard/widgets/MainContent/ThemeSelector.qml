@@ -56,7 +56,7 @@ ClippingRectangle {
         RowLayout {
             id: controlsRow
             Layout.fillWidth: true
-            Layout.preferredHeight: 36
+            Layout.preferredHeight: Variables.buttonHeight
             Layout.fillHeight: false
             spacing: Variables.dashInnerColSpacing
 
@@ -79,7 +79,7 @@ ClippingRectangle {
 
         ThemeRefreshBtn {
             id: refreshBtn
-            Layout.preferredHeight: 36
+            Layout.preferredHeight: Variables.buttonHeight
             Layout.fillHeight: false
             Layout.fillWidth: true
         }

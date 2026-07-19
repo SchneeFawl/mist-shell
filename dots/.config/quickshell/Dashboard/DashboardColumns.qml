@@ -50,7 +50,7 @@ RowLayout {
     // quick controls
     ColumnRectangle {
         id: quickControls
-        Layout.preferredWidth: 280
+        Layout.preferredWidth: 280 * Variables.scaleFactor
         color: "transparent"
 
         property string columnState: "default"
@@ -113,7 +113,7 @@ RowLayout {
 
     // slider controls
     ColumnRectangle {
-        Layout.preferredWidth: 50
+        Layout.preferredWidth: 50 * Variables.scaleFactor
         color: Colors.surface_container_low
 
         SliderControls {}

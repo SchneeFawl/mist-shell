@@ -17,7 +17,8 @@ Rectangle {
     Popup {
         id: dropdownMenu
 
-        readonly property int targetHeight: Math.min(themeDropdown.themeModel.length * 36 + 8, 36 * 4)
+        readonly property int btnHeight: Variables.buttonHeight
+        readonly property int targetHeight: Math.min(themeDropdown.themeModel.length * btnHeight + 8, btnHeight * 4)
 
         y: parent.height + 4         // topMargin = 4
         width: parent.width
@@ -92,7 +93,7 @@ Rectangle {
                 required property int index
 
                 width: themeListView.width
-                height: 36
+                height: Variables.buttonHeight
 
                 Rectangle {
                     anchors.fill: parent

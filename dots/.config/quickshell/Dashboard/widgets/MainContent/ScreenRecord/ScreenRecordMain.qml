@@ -27,7 +27,7 @@ Item {
         RowLayout {
             id: headerContainer
             Layout.fillWidth: true
-            Layout.preferredHeight: 36
+            Layout.preferredHeight: Variables.buttonHeight
             Layout.bottomMargin: Variables.dashInnerColSpacing
             implicitWidth: parent.width
             spacing: Variables.dashInnerColSpacing
@@ -166,7 +166,7 @@ Item {
 
         Item {
             Layout.fillWidth: true
-            Layout.preferredHeight: 36
+            Layout.preferredHeight: Variables.buttonHeight
             Layout.rightMargin: Variables.dashInnerColSpacing
             Layout.leftMargin: Variables.dashInnerColSpacing
             clip: true
@@ -180,7 +180,7 @@ Item {
                 Layout.rightMargin: Variables.dashInnerColSpacing
                 visible: opacity > 0
                 spacing: Variables.dashInnerColSpacing
-                y: ScreenRecordService.status === "idle" ? 0 : 36
+                y: ScreenRecordService.status === "idle" ? 0 : Variables.buttonHeight
                 opacity: ScreenRecordService.status === "idle" ? 1 : 0
 
                 Behavior on y {
@@ -223,7 +223,7 @@ Item {
                 Layout.rightMargin: Variables.dashInnerColSpacing
                 visible: opacity > 0
                 spacing: Variables.dashInnerColSpacing
-                y: ScreenRecordService.status === "recording" ? 0 : 36
+                y: ScreenRecordService.status === "recording" ? 0 : Variables.buttonHeight
                 opacity: ScreenRecordService.status === "recording" ? 1 : 0
 
                 Behavior on y {
@@ -262,7 +262,7 @@ Item {
                 Layout.rightMargin: Variables.dashInnerColSpacing
                 visible: opacity > 0
                 spacing: Variables.dashInnerColSpacing
-                y: ScreenRecordService.status === "replay" ? 0 : 36
+                y: ScreenRecordService.status === "replay" ? 0 : Variables.buttonHeight
                 opacity: ScreenRecordService.status === "replay" ? 1 : 0
 
                 Behavior on y {

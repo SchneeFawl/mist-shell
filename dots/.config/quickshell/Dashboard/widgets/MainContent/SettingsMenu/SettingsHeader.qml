@@ -5,7 +5,7 @@ import qs.modules.theme
 RowLayout {
     id: headerContainer
     Layout.fillWidth: true
-    Layout.preferredHeight: 36
+    Layout.preferredHeight: Variables.buttonHeight
     Layout.bottomMargin: Variables.dashInnerColSpacing
 
     // header

@@ -8,8 +8,8 @@ Rectangle {
     property bool rotationAnim: false
     signal clicked()
 
-    height: 36
-    width: 36
+    height: Variables.buttonHeight
+    width: height
     color: backMouseArea.pressed ? Colors.surface_container_highest : Colors.surface_container_high
     radius: Variables.dashInnerRadius
     scale: backMouseArea.pressed ? 0.85 : 1.0

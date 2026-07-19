@@ -24,7 +24,7 @@ Rectangle {
         Item {
             id: scaleContainer
             Layout.fillWidth: true
-            Layout.preferredHeight: 36
+            Layout.preferredHeight: Variables.buttonHeight
 
             Rectangle {
                 id: scaleHighlight

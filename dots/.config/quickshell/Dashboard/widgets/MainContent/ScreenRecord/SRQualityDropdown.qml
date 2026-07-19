@@ -11,7 +11,7 @@ Rectangle {
     property bool expanded: false
 
     Layout.fillWidth: true
-    Layout.preferredHeight: 36
+    Layout.preferredHeight: Variables.buttonHeight
     Layout.leftMargin: Variables.dashInnerColSpacing
     Layout.rightMargin: Variables.dashInnerColSpacing
     color: Colors.surface_container_high
@@ -26,7 +26,7 @@ Rectangle {
     Popup {
         id: qualityMenu
 
-        readonly property int targetHeight: (36 * 4) + 4
+        readonly property int targetHeight: (Variables.buttonHeight * 4) + 4
 
         y: parent.height + 4
         width: parent.width
@@ -65,7 +65,7 @@ Rectangle {
                 required property var modelData
                 required property int index
 
-                height: 36
+                height: Variables.buttonHeight
                 width: qualityMenu.width
 
                 Rectangle {

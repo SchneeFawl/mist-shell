@@ -2,7 +2,6 @@ import QtQuick
 import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Wayland
-import qs.modules.theme
 
 Variants {
     model: Quickshell.screens
