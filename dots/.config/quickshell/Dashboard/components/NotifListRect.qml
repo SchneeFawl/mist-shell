@@ -63,7 +63,7 @@ Rectangle {
             Text {
                 color: Colors.on_surface
                 anchors.centerIn: parent
-                font.pixelSize: Variables.dashIconSize
+                font.pixelSize: Variables.iconNormal
                 font.family: Variables.defaultFontFamily
                 text: Icons.actionClear
             }

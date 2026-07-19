@@ -41,7 +41,7 @@ Item {
                 ScreenRecordText {
                     anchors.centerIn: parent
                     text: "Screen Recorder"
-                    size: 16
+                    size: Variables.fontMedium
                 }
             }
 
@@ -62,8 +62,8 @@ Item {
 
                 Rectangle {
                     id: recordIndicator
-                    Layout.preferredHeight: 80
-                    Layout.preferredWidth: 80
+                    Layout.preferredHeight: 80 * Variables.scaleFactor
+                    Layout.preferredWidth: 80 * Variables.scaleFactor
                     Layout.alignment: Qt.AlignHCenter
                     radius: Variables.dashInnerRadius + 10
                     color: ScreenRecordService.status === "recording" ? Colors.error : (
@@ -78,7 +78,7 @@ Item {
 
                     ScreenRecordText {      // idle icon
                         anchors.centerIn: parent
-                        size: 50
+                        size: 50 * Variables.scaleFactor
                         color: Colors.error
                         text: Icons.record
                         opacity: ScreenRecordService.status === "idle" ? 1 : 0
@@ -88,7 +88,7 @@ Item {
 
                     ScreenRecordText {      // recording icon
                         anchors.centerIn: parent
-                        size: 50
+                        size: 50 * Variables.scaleFactor
                         color: Colors.on_error
                         text: Icons.recording
                         opacity: ScreenRecordService.status === "recording" ? 1 : 0
@@ -98,7 +98,7 @@ Item {
 
                     ScreenRecordText {      // replay icon
                         anchors.centerIn: parent
-                        size: 50
+                        size: 50 * Variables.scaleFactor
                         color: Colors.on_error
                         text: Icons.replay
                         opacity: ScreenRecordService.status === "replay" ? 1 : 0
@@ -144,7 +144,7 @@ Item {
                     Layout.alignment: Qt.AlignHCenter
                     Layout.fillWidth: true
                     horizontalAlignment: Text.AlignHCenter
-                    size: 15
+                    size: Variables.fontMedium
                     color: Colors.on_surface
                     text: ScreenRecordService.status === "recording" ? "Recording screen" : (
                         (ScreenRecordService.status === "replay") ? "Replay Buffer active" : "Ready"
@@ -155,7 +155,7 @@ Item {
                     Layout.alignment: Qt.AlignHCenter
                     Layout.fillWidth: true
                     horizontalAlignment: Text.AlignHCenter
-                    size: 13
+                    size: Variables.fontSmall
                     color: Colors.on_surface
                     opacity: 0.8
                     text: recMainRoot.formatTime(ScreenRecordService.elapsedSeconds)

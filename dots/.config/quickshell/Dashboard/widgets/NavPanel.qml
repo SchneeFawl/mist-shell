@@ -14,13 +14,13 @@ Rectangle {
     color: "transparent"
 
     ColumnLayout {
-        spacing: 2
+        spacing: Variables.dashInnerColSpacing
         anchors.fill: parent
 
         NavButton {
             id: mediaModeBtn
             icon: Icons.navMusic
-            iconSize: Variables.dashIconSize
+            iconSize: Variables.iconNormal
 
             onClicked: {
                 navWrapper.activeTab = 1;
@@ -33,7 +33,7 @@ Rectangle {
         NavButton {
             id: systemInfoBtn
             icon: Icons.navSystemInfo
-            iconSize: Variables.dashIconSize - 2
+            iconSize: Variables.iconNormal
 
             onClicked: {
                 navWrapper.activeTab = 2;
@@ -46,7 +46,7 @@ Rectangle {
         NavButton {
             id: themeBtn
             icon: Icons.navTheme
-            iconSize: Variables.dashIconSize
+            iconSize: Variables.iconNormal
 
             onClicked: {
                 navWrapper.activeTab = 3;
@@ -59,7 +59,7 @@ Rectangle {
         NavButton {
             id: recordBtn
             icon: Icons.navRecord
-            iconSize: Variables.dashIconSize + 6
+            iconSize: Variables.iconNormal
 
             onClicked: {
                 navWrapper.activeTab = 4;
@@ -74,7 +74,7 @@ Rectangle {
         NavButton {
             id: settingsBtn
             icon: Icons.sysSettings
-            iconSize: Variables.dashIconSize
+            iconSize: Variables.iconNormal
             btnBgColor: Colors.surface_container_highest
 
             onClicked: {

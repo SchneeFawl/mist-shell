@@ -159,7 +159,7 @@ Rectangle {
         anchors.rightMargin: 12
         font.family: Variables.defaultFontFamily
         color: Colors.on_surface
-        size: 20
+        size: Variables.fontLarge
         text: Icons.chevronDown
     }
 

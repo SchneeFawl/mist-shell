@@ -39,7 +39,7 @@ Item {
                 ScreenRecordText {
                     anchors.centerIn: parent
                     text: "Screen Recorder"
-                    size: 16
+                    size: Variables.fontMedium
                 }
             }
         }

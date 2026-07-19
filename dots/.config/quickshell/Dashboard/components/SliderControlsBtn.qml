@@ -25,7 +25,7 @@ Rectangle {
             ? ( sliderButtonRoot.muted ? Colors.on_tertiary : Colors.on_primary)
             : Colors.on_surface
         }
-        font.pixelSize: Variables.dashIconSize - 1
+        font.pixelSize: Variables.iconNormal
         text: sliderButtonRoot.icon
 
         Behavior on color {

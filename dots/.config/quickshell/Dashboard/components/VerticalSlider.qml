@@ -38,7 +38,7 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
         anchors.bottomMargin: (root.width - implicitWidth) / 2
-        implicitHeight: 200 - percentText.height
+        implicitHeight: (200 - percentText.height)
         implicitWidth: 16
         color: Colors.surface_container_low
         radius: width / 2

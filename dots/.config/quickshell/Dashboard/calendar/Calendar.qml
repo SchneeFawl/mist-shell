@@ -77,7 +77,7 @@ Rectangle {
         // weekday container
         Rectangle {
             Layout.fillWidth: true
-            Layout.preferredHeight: 24
+            Layout.preferredHeight: 26 * Variables.scaleFactor
             radius: parent.fixedRadius
             color: Colors.surface_container_high
 

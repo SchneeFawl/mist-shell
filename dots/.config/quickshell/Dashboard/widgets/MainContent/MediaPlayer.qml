@@ -185,15 +185,15 @@ ClippingRectangle {
             MediaControlBtn {
                 icon: Icons.mediaPrevious
                 iconColor: Colors.primary_fixed
-                btnSize: 40
+                btnSize: Variables.buttonHeight
                 onClicked: player.activePlayer.canGoPrevious ? player.activePlayer.previous() : null
             }
 
             // play/pause btn
             MediaControlBtn {
                 icon: player.isPlaying ? Icons.mediaPause : Icons.mediaPlay
-                iconSize: 34
-                btnSize: 58
+                iconSize: Variables.iconLargest + 4
+                btnSize: Variables.buttonHeight + 24
                 bgColor: Colors.primary
                 iconColor: Colors.on_primary
                 onClicked: {
@@ -209,13 +209,13 @@ ClippingRectangle {
             MediaControlBtn {
                 icon: Icons.mediaNext
                 iconColor: Colors.primary_fixed
-                btnSize: 40
+                btnSize: Variables.buttonHeight
                 onClicked: player.activePlayer.canGoNext ? player.activePlayer.next() : null
             }
 
             // loop btn
             MediaControlBtn {
-                iconSize: 28
+                iconSize: Variables.iconLargest
                 icon: {
                     if (!player.activePlayer) return Icons.mediaLoopNone;
                     switch (player.activePlayer.loopState) {
@@ -225,7 +225,7 @@ ClippingRectangle {
                     }
                 }
                 iconColor: Colors.primary_fixed
-                btnSize: 40
+                btnSize: Variables.buttonHeight
 
                 onClicked: {
                     if (player.activePlayer && player.activePlayer.loopSupported && player.activePlayer.loopState === MprisLoopState.None) {

@@ -17,6 +17,11 @@ QtObject {
     readonly property int fontLarge:   Math.round(20 * scaleFactor)
     readonly property int fontLargest: Math.round(24 * scaleFactor)
 
+    readonly property int iconSmall:   Math.round(16 * scaleFactor)
+    readonly property int iconNormal:  Math.round(20 * scaleFactor)
+    readonly property int iconLarge:   Math.round(24 * scaleFactor)
+    readonly property int iconLargest: Math.round(30 * scaleFactor)
+
     // Animations
     readonly property var standardCurve:  [0.30, 0.90, 0.40, 1.0, 1, 1]
     readonly property var overshootCurve: [0.18, 1.1, 0.7, 1.10, 1, 1]
@@ -46,7 +51,6 @@ QtObject {
     readonly property int dashColumnRadius:    Math.round(14 * scaleFactor)
     readonly property int dashInnerColSpacing: Math.round(5 * scaleFactor)
     readonly property int dashInnerRadius:     dashColumnRadius - dashInnerColSpacing
-    readonly property int dashIconSize:        Math.round(20 * scaleFactor)
 
     // Controls
     readonly property int buttonHeight:        Math.round(36 * scaleFactor)
