@@ -6,10 +6,10 @@ Rectangle {
     id: mediaContBtn
 
     property string icon
-    property int iconSize: Variables.fontLargest + (12 * Variables.scaleFactor)
+    property int iconSize: Variables.fontLargest + Math.round(12 * Variables.scaleFactor)
     property color iconColor: Colors.inactiveAccent
     property color bgColor: "transparent"
-    property int btnSize: 50
+    property int btnSize: Variables.buttonHeightMedium
 
     signal clicked()
 

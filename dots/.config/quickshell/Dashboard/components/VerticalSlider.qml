@@ -25,7 +25,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.topMargin: Variables.dashInnerColSpacing + 2
         font.family: Variables.defaultFontFamily
-        font.pixelSize: 13
+        font.pixelSize: Variables.fontSmall
         color: Colors.textSub
         text: Math.round(root.value * 100) + "%"
     }
@@ -37,9 +37,10 @@ Rectangle {
 
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: (root.width - implicitWidth) / 2
-        implicitHeight: (200 - percentText.height)
-        implicitWidth: 16
+        anchors.top: parent.top
+        anchors.topMargin: Variables.spacingMedium * 2
+        anchors.bottomMargin: Variables.spacingMedium
+        implicitWidth: Variables.spacingLarge
         color: Colors.surface_container_low
         radius: width / 2
 

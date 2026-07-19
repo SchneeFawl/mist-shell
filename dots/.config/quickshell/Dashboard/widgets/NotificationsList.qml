@@ -113,8 +113,8 @@ ColumnLayout {
                     ClippingRectangle {
                         id: iconContainer
                         Layout.alignment: Qt.AlignVCenter
-                        Layout.preferredHeight: 50
-                        Layout.preferredWidth: 50
+                        Layout.preferredHeight: Variables.buttonHeightMedium
+                        Layout.preferredWidth: Variables.buttonHeightMedium
                         visible: !!card.resolvedIcon
                         color: "transparent"
                         radius: width / 2

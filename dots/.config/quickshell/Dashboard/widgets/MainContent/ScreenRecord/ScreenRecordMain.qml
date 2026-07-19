@@ -62,8 +62,8 @@ Item {
 
                 Rectangle {
                     id: recordIndicator
-                    Layout.preferredHeight: 80 * Variables.scaleFactor
-                    Layout.preferredWidth: 80 * Variables.scaleFactor
+                    Layout.preferredHeight: Math.round(80 * Variables.scaleFactor)
+                    Layout.preferredWidth: Math.round(80 * Variables.scaleFactor)
                     Layout.alignment: Qt.AlignHCenter
                     radius: Variables.dashInnerRadius + 10
                     color: ScreenRecordService.status === "recording" ? Colors.error : (
@@ -78,7 +78,7 @@ Item {
 
                     ScreenRecordText {      // idle icon
                         anchors.centerIn: parent
-                        size: 50 * Variables.scaleFactor
+                        size: Variables.buttonHeightMedium
                         color: Colors.error
                         text: Icons.record
                         opacity: ScreenRecordService.status === "idle" ? 1 : 0
@@ -88,7 +88,7 @@ Item {
 
                     ScreenRecordText {      // recording icon
                         anchors.centerIn: parent
-                        size: 50 * Variables.scaleFactor
+                        size: Variables.buttonHeightMedium
                         color: Colors.on_error
                         text: Icons.recording
                         opacity: ScreenRecordService.status === "recording" ? 1 : 0
@@ -98,7 +98,7 @@ Item {
 
                     ScreenRecordText {      // replay icon
                         anchors.centerIn: parent
-                        size: 50 * Variables.scaleFactor
+                        size: Variables.buttonHeightMedium
                         color: Colors.on_error
                         text: Icons.replay
                         opacity: ScreenRecordService.status === "replay" ? 1 : 0

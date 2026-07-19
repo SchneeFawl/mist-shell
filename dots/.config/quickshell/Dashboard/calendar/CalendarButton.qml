@@ -7,7 +7,7 @@ Rectangle {
     property string icon: ""
     signal clicked()
 
-    implicitHeight: (Variables.buttonHeight - 12) * Variables.scaleFactor
+    implicitHeight: Math.round((Variables.buttonHeight - 12) * Variables.scaleFactor)
     implicitWidth: implicitHeight
     radius: width / 2
     color: mouseArea.pressed ? Colors.primary : Colors.surface_container_high

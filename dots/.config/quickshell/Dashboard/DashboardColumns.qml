@@ -20,7 +20,7 @@ RowLayout {
 
     // navigation panel
     ColumnRectangle {
-        Layout.preferredWidth: 50
+        Layout.preferredWidth: Variables.buttonHeightMedium
         color: "transparent"
 
         NavPanel {
@@ -50,7 +50,7 @@ RowLayout {
     // quick controls
     ColumnRectangle {
         id: quickControls
-        Layout.preferredWidth: 280 * Variables.scaleFactor
+        Layout.preferredWidth: Math.round(280 * Variables.scaleFactor)
         color: "transparent"
 
         property string columnState: "default"
@@ -60,7 +60,7 @@ RowLayout {
             anchors.fill: parent
             clip: true
 
-            // quick control btns + calendar
+            // quick controls + calendar
             ColumnLayout {
                 width: parent.width
                 anchors.top: parent.top
@@ -78,10 +78,11 @@ RowLayout {
 
                 Rectangle {
                     Layout.fillWidth: true
-                    Layout.preferredHeight: 80
+                    Layout.preferredHeight: quickControlsWidget.implicitHeight
                     color: "transparent"
 
                     QuickControls {
+                        id: quickControlsWidget
                         onBluetoothRightClicked: quickControls.columnState = "bluetooth"
                     }
                 }
@@ -113,7 +114,7 @@ RowLayout {
 
     // slider controls
     ColumnRectangle {
-        Layout.preferredWidth: 50 * Variables.scaleFactor
+        Layout.preferredWidth: Variables.buttonHeightMedium
         color: Colors.surface_container_low
 
         SliderControls {}

@@ -11,8 +11,8 @@ Rectangle {
 
     signal clicked()
 
-    implicitWidth: 50
-    implicitHeight: 50
+    implicitWidth: Variables.buttonHeightMedium
+    implicitHeight: Variables.buttonHeightMedium
     radius: Variables.dashColumnRadius
     color: active ? Colors.primary : btnBgColor
     scale: mouseArea.pressed ? 0.85 : 1.0

@@ -17,7 +17,7 @@ ColumnLayout {
     property color rightIconColor: Colors.on_surface
 
     Layout.fillWidth: true
-    Layout.preferredHeight: 50
+    Layout.preferredHeight: Variables.buttonHeightMedium
     spacing: Variables.dashInnerColSpacing
 
     RowLayout {

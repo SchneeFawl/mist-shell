@@ -5,7 +5,7 @@ Rectangle {
     id: controlsButtonRoot
 
     property string icon: ""
-    property int iconSize: Variables.fontLargest
+    property int iconSize: Variables.iconLarge
 
     property bool active: false
     signal clicked()
@@ -19,6 +19,7 @@ Rectangle {
     Text {
         anchors.centerIn: parent
         color: controlsButtonRoot.active ? Colors.on_primary : Colors.on_surface
+        font.family: Variables.defaultFontFamily
         font.pixelSize: controlsButtonRoot.iconSize
         text: controlsButtonRoot.icon
 

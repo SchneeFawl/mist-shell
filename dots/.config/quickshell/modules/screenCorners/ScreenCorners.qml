@@ -9,7 +9,7 @@ Variants {
     delegate: PanelWindow {       // qmllint disable uncreatable-type
         required property var modelData
         readonly property var monitor: Hyprland.monitorFor(modelData)
-        readonly property var activeFullscreen: monitor.activeWorkspace.toplevels.values.filter(window => window.wayland?.fullscreen)
+        readonly property var activeFullscreen: monitor?.activeWorkspace?.toplevels?.values?.filter(window => window.wayland?.fullscreen) ?? []
 
         anchors {
             top: true

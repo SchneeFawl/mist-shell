@@ -7,12 +7,12 @@ import qs.services
 Rectangle {
     id: controlsRoot
 
-    property int rootWidth: (controlsLayout.rectSize * 4) + (35)
+    readonly property int padding: Math.round(10 * Variables.scaleFactor)
     signal bluetoothRightClicked()
 
     color: Colors.surface_container_low
-    implicitHeight: 80
-    implicitWidth: rootWidth
+    implicitHeight: controlsLayout.rectSize + (padding * 2)
+    implicitWidth: (controlsLayout.rectSize * 4) + (Variables.dashInnerColSpacing * 3)  + (padding * 2)
     radius: Variables.dashboardRadius - 4
     anchors.horizontalCenter: parent.horizontalCenter
     clip: true
@@ -20,12 +20,11 @@ Rectangle {
     RowLayout {
         id: controlsLayout
         anchors.fill: parent
-        anchors.leftMargin: 10
-        anchors.rightMargin: 10
+        anchors.margins: controlsRoot.padding
         spacing: Variables.dashInnerColSpacing
         clip: true
 
-        property int rectSize: 60
+        property int rectSize: Math.round(60 * Variables.scaleFactor)
 
         // dnd button
         QuickControlsBtn {

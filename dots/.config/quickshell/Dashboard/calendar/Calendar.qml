@@ -77,7 +77,7 @@ Rectangle {
         // weekday container
         Rectangle {
             Layout.fillWidth: true
-            Layout.preferredHeight: 26 * Variables.scaleFactor
+            Layout.preferredHeight: Math.round(26 * Variables.scaleFactor)
             radius: parent.fixedRadius
             color: Colors.surface_container_high
 
@@ -92,9 +92,10 @@ Rectangle {
 
                     delegate: Text {
                         required property string modelData
-                        font.family: Variables.defaultFontFamily
                         Layout.fillWidth: true
                         horizontalAlignment: Text.AlignHCenter
+                        font.family: Variables.defaultFontFamily
+                        font.pixelSize: Variables.fontSmall
                         color: Colors.on_surface
                         text: modelData
                     }

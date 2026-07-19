@@ -9,7 +9,7 @@ QtObject {
     id: settingsService
 
     property string settingsFilePath: Quickshell.env("HOME") + "/.config/quickshell/settings.json"
-    property real scaleFactor: 1.0
+    property real scaleFactor: 1.25
 
     property FileView settingsFile: FileView {
         path: settingsService.settingsFilePath

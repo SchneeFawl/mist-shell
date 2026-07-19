@@ -19,7 +19,7 @@ ColumnLayout {
         Layout.rightMargin: Variables.dashInnerColSpacing
         Layout.topMargin: Variables.dashInnerColSpacing
         Layout.fillWidth: true
-        Layout.preferredHeight: (40*3) + (4*2)
+        Layout.preferredHeight: ((Variables.buttonHeight + 4) * 3) + (Variables.spacingSmall * 2)
         color: "transparent"
         radius: Variables.dashInnerRadius
 

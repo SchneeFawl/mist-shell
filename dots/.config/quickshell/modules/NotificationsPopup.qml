@@ -193,8 +193,8 @@ PanelWindow {           // qmllint disable uncreatable-type
                     id: iconImageContainer
 
                     Layout.alignment: Qt.AlignVCenter
-                    Layout.preferredHeight: visible ? 50 : 0
-                    Layout.preferredWidth: visible ? 50 : 0
+                    Layout.preferredHeight: visible ? Variables.buttonHeightMedium : 0
+                    Layout.preferredWidth: visible ? Variables.buttonHeightMedium : 0
                     visible: !!notifCard.resolvedIcon
                     color: "transparent"
                     radius: width / 2
