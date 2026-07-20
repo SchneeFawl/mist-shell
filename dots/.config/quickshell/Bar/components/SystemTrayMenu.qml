@@ -162,7 +162,7 @@ PopupWindow {
                 id: submenu
                 width: stackView.width
                 height: stackView.height
-                spacing: 4
+                spacing: Variables.spacingSmall
 
                 required property var handle
                 property bool isSubMenu: false

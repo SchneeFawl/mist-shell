@@ -58,7 +58,7 @@ Item {
 
             ColumnLayout {
                 anchors.centerIn: parent
-                spacing: 12
+                spacing: Variables.spacingMedium
 
                 Rectangle {
                     id: recordIndicator

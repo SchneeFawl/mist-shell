@@ -6,7 +6,7 @@ import qs.services
 Pill {
     id: timePill
     innerPadding: Variables.pillInnerPadding
-    pillSpacing: 6
+    pillSpacing: Variables.pillInnerSpacing
 
     property bool showFullDate: true
 

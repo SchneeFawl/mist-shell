@@ -5,10 +5,11 @@ import QtQuick.Layouts
 import Quickshell.Services.SystemTray
 import Quickshell.Widgets
 import Quickshell.Hyprland
+import qs.modules.theme
 
 RowLayout {
     id: trayRoot
-    spacing: 8
+    spacing: Variables.spacingNormal
 
     property var activePopup: null
 

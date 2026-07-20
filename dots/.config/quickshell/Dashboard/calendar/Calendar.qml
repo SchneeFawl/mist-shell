@@ -84,8 +84,8 @@ Rectangle {
             RowLayout {
                 anchors.fill: parent
                 Layout.alignment: Qt.AlignHCenter
-                anchors.margins: 4
-                spacing: 4
+                anchors.margins: Variables.spacingSmall
+                spacing: Variables.spacingSmall
 
                 Repeater {
                     model: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
@@ -112,10 +112,10 @@ Rectangle {
 
             GridLayout {
                 anchors.fill: parent
-                anchors.margins: 4
+                anchors.margins: Variables.spacingSmall
                 columns: 7
-                rowSpacing: 4
-                columnSpacing: 4
+                rowSpacing: Variables.spacingSmall
+                columnSpacing: Variables.spacingSmall
 
                 Repeater {
                     model: CalendarLogic.getDaysForGrid(root.currentYear, root.currentMonth)

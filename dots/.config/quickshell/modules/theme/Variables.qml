@@ -8,6 +8,12 @@ QtObject {
     // General
     readonly property real scaleFactor: SettingsService.scaleFactor
 
+    // Animations
+    readonly property var standardCurve:  [0.30, 0.90, 0.40, 1.0, 1, 1]
+    readonly property var overshootCurve: [0.18, 1.1, 0.7, 1.10, 1, 1]
+    readonly property var entranceCurve:  [0, 0, 0.2, 1.0, 1, 1]
+    readonly property var exitCurve:      [0.10, 0.80, 0.60, 1.0, 1, 1]
+
     // Text
     readonly property string defaultFontFamily: "GeistMono Nerd Font"
     readonly property int defaultFontWeight: 500
@@ -21,12 +27,6 @@ QtObject {
     readonly property int iconNormal:  Math.round(20 * scaleFactor)
     readonly property int iconLarge:   Math.round(24 * scaleFactor)
     readonly property int iconLargest: Math.round(30 * scaleFactor)
-
-    // Animations
-    readonly property var standardCurve:  [0.30, 0.90, 0.40, 1.0, 1, 1]
-    readonly property var overshootCurve: [0.18, 1.1, 0.7, 1.10, 1, 1]
-    readonly property var entranceCurve:  [0, 0, 0.2, 1.0, 1, 1]
-    readonly property var exitCurve:      [0.10, 0.80, 0.60, 1.0, 1, 1]
 
     readonly property int durationFast: 160
     readonly property int durationMedium: 240
@@ -45,6 +45,7 @@ QtObject {
     readonly property int pillHeight:            Math.round(32 * scaleFactor)
     readonly property int pillRadius:            Math.round(12 * scaleFactor)
     readonly property int pillInnerPadding:      Math.round(12 * scaleFactor)
+    readonly property int pillInnerSpacing:     Math.round(6 * scaleFactor)
     readonly property int pillOuterSpacing:      Math.round(12 * scaleFactor)
     readonly property int barSideMargins:        barHeight - pillHeight - Math.round(2 * scaleFactor)
     readonly property int workspaceActiveSize:   Math.round(32 * scaleFactor)
@@ -58,6 +59,7 @@ QtObject {
     readonly property int dashInnerRadius:     dashColumnRadius - dashInnerColSpacing
 
     // Controls
+    readonly property int buttonHeightSmall:   Math.round(30 * scaleFactor)
     readonly property int buttonHeight:        Math.round(36 * scaleFactor)
     readonly property int buttonHeightMedium:  Math.round(50 * scaleFactor)
 }

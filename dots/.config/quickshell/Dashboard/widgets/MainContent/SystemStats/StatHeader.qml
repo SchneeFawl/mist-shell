@@ -12,7 +12,7 @@ RowLayout {
     Layout.fillWidth: true
     Layout.preferredHeight: 20
     Layout.alignment: Qt.AlignCenter
-    spacing: Variables.dashInnerColSpacing + 3
+    spacing: Variables.dashInnerColSpacing + Math.round(3 * Variables.scaleFactor)
 
     Text {
         verticalAlignment: Text.AlignVCenter

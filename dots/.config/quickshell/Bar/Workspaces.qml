@@ -3,7 +3,7 @@ import QtQuick
 import qs.modules.theme
 
 Row {
-    spacing: 6
+    spacing: Variables.pillInnerSpacing
     clip: true
 
     Repeater {
@@ -62,4 +62,3 @@ Row {
         }
     }
 }
-

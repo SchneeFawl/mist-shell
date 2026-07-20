@@ -16,15 +16,15 @@ Rectangle {
 
     RowLayout {
         anchors.fill: parent
-        anchors.leftMargin: 12
-        spacing: 6
+        anchors.leftMargin: Variables.spacingMedium
+        spacing: Variables.spacingNormal
         clip: true
 
         Text {
             Layout.alignment: Text.AlignVCenter
             color: Colors.textVibrant
             font.family: Variables.defaultFontFamily
-            font.pixelSize: Variables.dashIconSize - 4
+            font.pixelSize: Variables.iconNormal
             text: Icons.magnify
         }
 

@@ -77,14 +77,14 @@ Item {
     Row {
         id: contentRow
         spacing: menuItemText.leftPadding
-        leftPadding: 4
+        leftPadding: Variables.spacingSmall
         anchors.verticalCenter: parent.verticalCenter
 
         Item {
             visible: menuItem.modelData?.buttonType > 0 ?? false
             anchors.verticalCenter: parent.verticalCenter
-            height: 16
-            width: 16
+            height: Math.round(16 * Variables.scaleFactor)
+            width: height
 
             // modelData.buttonType [ None = 0, checkbox = 1, radiobutton = 2 ]
             // Qt.Checkstate (modelData.checkState) [ unchecked = 0, partially = 1, checked = 2 ]
@@ -93,11 +93,11 @@ Item {
             Rectangle {
                 visible: menuItem.modelData?.buttonType === 1 ?? false
                 anchors.verticalCenter: parent.verticalCenter
-                height: 16
-                width: 16
+                height: Math.round(16 * Variables.scaleFactor)
+                width: height
                 border.width: 1
                 border.color: menuItem.modelData?.checkState === 0 ? Colors.inverse_primary : Colors.primary ?? ""
-                radius: 4
+                radius: Math.round(4 * Variables.scaleFactor)
                 color: menuItem.modelData?.checkState === 0 ? "transparent" : Colors.surface_bright ?? ""
 
                 Text {
@@ -115,18 +115,18 @@ Item {
             Rectangle {
                 visible: menuItem.modelData?.buttonType === 2 ?? false
                 anchors.verticalCenter: parent.verticalCenter
-                height: 16
-                width: 16
+                height: Math.round(16 * Variables.scaleFactor)
+                width: Math.round(16 * Variables.scaleFactor)
                 border.width: 1
                 border.color: Colors.surface_bright
-                radius: 4
+                radius: Math.round(4 * Variables.scaleFactor)
                 color: menuItem.modelData?.checkState === 2 ? Colors.primary : Colors.inactiveAccent ?? ""
 
                 Rectangle {
                     visible: menuItem.modelData?.checkState === 2 ?? false
-                    height: 12
-                    width: 12
-                    radius: 4
+                    height: Math.round(12 * Variables.scaleFactor)
+                    width: height
+                    radius: Math.round(4 * Variables.scaleFactor)
                     color: Colors.activeAccent
                 }
             }
@@ -145,11 +145,11 @@ Item {
             id: menuItemText
             visible: !menuItem.modelData?.isSeparator ?? false
             anchors.verticalCenter: parent.verticalCenter
-            text: menuItem.modelData?.text ?? ""
             font.pixelSize: Variables.fontSmall
             font.family: Variables.defaultFontFamily
             color: Colors.on_primary_container
-            leftPadding: 4
+            text: menuItem.modelData?.text ?? ""
+            leftPadding: Variables.spacingSmall
         }
     }
 
@@ -157,12 +157,12 @@ Item {
         id: submenuArrow
         visible: menuItem.modelData ? !menuItem.modelData.isSeparator && menuItem.modelData.hasChildren : false
         anchors.right: parent.right
-        anchors.rightMargin: 20
+        anchors.rightMargin: Variables.spacingLarge
         anchors.verticalCenter: parent.verticalCenter
-        text: Icons.chevronRight
-        color: Colors.on_primary_container
-        font.pixelSize: Variables.fontSmall
+        font.pixelSize: Variables.fontNormal
         font.family: Variables.defaultFontFamily
+        color: Colors.on_primary_container
+        text: Icons.chevronRight
         opacity: 0.7
     }
 

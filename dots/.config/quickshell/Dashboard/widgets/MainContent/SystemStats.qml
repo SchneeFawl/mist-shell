@@ -26,7 +26,7 @@ Rectangle {
         anchors.topMargin: Variables.dashInnerColSpacing * 3
         anchors.rightMargin: Variables.dashInnerColSpacing * 2
         anchors.leftMargin: Variables.dashInnerColSpacing * 2
-        spacing: Variables.dashInnerColSpacing * 2 + 2
+        spacing: (Variables.dashInnerColSpacing * 2) + Math.round(2 * Variables.scaleFactor)
 
         StatHeader  {
             text: SystemStatsService.username

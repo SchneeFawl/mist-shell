@@ -41,7 +41,7 @@ Rectangle {
 
     RowLayout {
         anchors.centerIn: parent
-        spacing: 6
+        spacing: Variables.spacingNormal
 
         Text {
             visible: recBtnRoot.icon !== ""

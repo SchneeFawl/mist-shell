@@ -12,7 +12,7 @@ ListView {
     id: btListView
     Layout.fillHeight: true
     Layout.fillWidth: true
-    Layout.topMargin: 3
+    Layout.topMargin: Variables.spacingSmall
     visible: Bluetooth.defaultAdapter?.enabled ?? false
     clip: true
     spacing: Variables.dashInnerColSpacing
@@ -42,8 +42,8 @@ ListView {
         RowLayout {
             id: cardLayout
             anchors.fill: parent
-            anchors.leftMargin: 12
-            anchors.rightMargin: 12
+            anchors.leftMargin: Variables.spacingMedium
+            anchors.rightMargin: Variables.spacingMedium
             spacing: 0
             clip: true
 
@@ -58,7 +58,7 @@ ListView {
             ColumnLayout {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                Layout.leftMargin: 8
+                Layout.leftMargin: Variables.spacingNormal
 
                 Text {
                     id: deviceName
@@ -81,12 +81,12 @@ ListView {
 
             ColumnLayout {
                 Layout.fillHeight: true
-                spacing: 4
+                spacing: Variables.spacingSmall
 
                 // connect/disconnect button
                 Rectangle {
-                    Layout.preferredHeight: 30
-                    Layout.preferredWidth: 86
+                    Layout.preferredHeight: Variables.buttonHeightSmall
+                    Layout.preferredWidth: Math.round(86 * Variables.scaleFactor)
                     radius: Variables.dashInnerRadius
                     color: card.modelData.connected ? Colors.surface_container_highest : Colors.primary
                     border.color: Colors.primary
@@ -140,8 +140,8 @@ ListView {
 
                 // unpair/forget button
                 Rectangle {
-                    Layout.preferredHeight: 30
-                    Layout.preferredWidth: 86
+                    Layout.preferredHeight: Variables.buttonHeightSmall
+                    Layout.preferredWidth: Math.round(86 * Variables.scaleFactor)
                     radius: Variables.dashInnerRadius
                     color: Colors.surface_container_highest
                     border.color: Colors.primary

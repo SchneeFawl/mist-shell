@@ -13,7 +13,7 @@ ColumnLayout {
 
     anchors.fill: parent
     anchors.margins: Variables.dashInnerColSpacing
-    spacing: Variables.dashInnerColSpacing + 3
+    spacing: Variables.dashInnerColSpacing
 
     NotifListRect {
         onClicked: {
@@ -105,9 +105,9 @@ ColumnLayout {
                     anchors.left: card.left
                     anchors.right: card.right
                     anchors.topMargin: 14
-                    anchors.leftMargin: 12
-                    anchors.rightMargin: 12
-                    spacing: 8
+                    anchors.leftMargin: Variables.spacingMedium
+                    anchors.rightMargin: Variables.spacingMedium
+                    spacing: Variables.spacingNormal
                     clip: true
 
                     ClippingRectangle {
@@ -130,7 +130,7 @@ ColumnLayout {
                     ColumnLayout {
                         id: contentLayout
                         Layout.fillWidth: true
-                        spacing: 8
+                        spacing: Variables.spacingNormal
                         clip: true
 
                         Text {

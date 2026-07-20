@@ -41,7 +41,7 @@ PanelWindow {           // qmllint disable uncreatable-type
         id: notifListView
 
         model: notifModel
-        spacing: 4
+        spacing: Variables.spacingSmall
         anchors.fill: parent
 
         displaced: Transition {
@@ -185,9 +185,9 @@ PanelWindow {           // qmllint disable uncreatable-type
                 anchors.left: cardBg.left
                 anchors.right: cardBg.right
                 anchors.topMargin: 14
-                anchors.leftMargin: 12
-                anchors.rightMargin: 12
-                spacing: 8
+                anchors.leftMargin: Variables.spacingMedium
+                anchors.rightMargin: Variables.spacingMedium
+                spacing: Variables.spacingNormal
 
                 ClippingRectangle {
                     id: iconImageContainer
@@ -211,7 +211,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                 ColumnLayout {
                     id: cardContentLayout
                     Layout.fillWidth: true
-                    spacing: 8
+                    spacing: Variables.spacingNormal
                     clip: true
 
                     Text {

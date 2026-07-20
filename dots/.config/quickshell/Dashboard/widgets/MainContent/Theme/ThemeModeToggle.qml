@@ -58,7 +58,7 @@ Rectangle {
         Text {
             anchors.centerIn: parent
             font.family: Variables.defaultFontFamily
-            font.pixelSize: Variables.dashIconSize - 8
+            font.pixelSize: Variables.iconSmall
             color: track.currentMode === "dark" ? Colors.on_primary : Colors.primary
             text: track.currentMode === "dark" ? Icons.moonCrescent : Icons.sunBright
 

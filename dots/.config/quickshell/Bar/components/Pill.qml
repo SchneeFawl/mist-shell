@@ -8,7 +8,7 @@ Item {
     default property alias pillContent: contentLayout.data
     property color customBorderColor: Colors.border
     property int innerPadding: Variables.pillInnerPadding
-    property int pillSpacing: 8
+    property int pillSpacing: Variables.spacingNormal
 
     implicitWidth: contentLayout.implicitWidth + (innerPadding * 2)
     implicitHeight: Variables.pillHeight

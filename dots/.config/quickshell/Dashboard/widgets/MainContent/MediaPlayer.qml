@@ -52,8 +52,8 @@ ClippingRectangle {
 
     ColumnLayout {
         anchors.fill: parent
-        anchors.margins: 12
-        spacing: 6
+        anchors.margins: Variables.spacingMedium
+        spacing: Variables.spacingNormal - Math.round(2 * Variables.scaleFactor)
 
         // wrapper for disc + progress ring
         Item {
@@ -118,9 +118,9 @@ ClippingRectangle {
             id: trackDetails
             Layout.fillWidth: true
             Layout.fillHeight: true
-            spacing: 3
-            Layout.leftMargin: 10
-            Layout.rightMargin: 10
+            spacing: Variables.spacingSmall
+            Layout.leftMargin: Variables.spacingMedium
+            Layout.rightMargin: Variables.spacingMedium
 
             Text {
                 id: songProgress
@@ -177,9 +177,9 @@ ClippingRectangle {
             Layout.fillWidth: true
             Layout.leftMargin: 8
             Layout.rightMargin: 8
-            Layout.bottomMargin: 12
+            Layout.bottomMargin: Variables.spacingMedium
             Layout.alignment: Qt.AlignHCenter
-            spacing: 8
+            spacing: Variables.spacingNormal
 
             // previous btn
             MediaControlBtn {
