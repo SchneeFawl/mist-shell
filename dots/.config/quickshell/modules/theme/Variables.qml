@@ -28,9 +28,9 @@ QtObject {
     readonly property int iconLarge:   Math.round(24 * scaleFactor)
     readonly property int iconLargest: Math.round(30 * scaleFactor)
 
-    readonly property int durationFast: 160
+    readonly property int durationFast:   160
     readonly property int durationMedium: 240
-    readonly property int durationSlow: 300
+    readonly property int durationSlow:   300
 
     // Common
     readonly property int screenCornerRadius: (barHeight - pillHeight) + pillRadius

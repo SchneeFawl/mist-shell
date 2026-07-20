@@ -28,8 +28,8 @@ PanelWindow {           // qmllint disable uncreatable-type
     }
 
     // implicitHeight: Math.min(200*4, notifListView.contentHeight)
-    implicitHeight: 800
-    implicitWidth: 360
+    implicitHeight: Math.round(800 * Variables.scaleFactor)
+    implicitWidth: Math.round(360 * Variables.scaleFactor)
     color: "transparent"
     visible: active || exitTimer.running
 
@@ -140,10 +140,10 @@ PanelWindow {           // qmllint disable uncreatable-type
             ClippingRectangle {
                 id: cardBg
 
-                width: 320
-                height: cardLayout.implicitHeight + 14 + 12
+                width: Math.round(320 * Variables.scaleFactor)
+                height: cardLayout.implicitHeight + Math.round((14 + 12) * Variables.scaleFactor)
                 anchors.right: parent.right
-                anchors.rightMargin: 20
+                anchors.rightMargin: Math.round(20 * Variables.scaleFactor)
 
                 radius: Variables.pillRadius
                 color: Colors.primary_container
@@ -152,12 +152,12 @@ PanelWindow {           // qmllint disable uncreatable-type
 
                 Rectangle {
                     id: progressBar
-                    width: notifCard ? (cardBg.width - 20) * notifCard.progress : 0
-                    height: 3
+                    width: notifCard ? (cardBg.width - Math.round(20 * Variables.scaleFactor)) * notifCard.progress : 0
+                    height: Math.round(3 * Variables.scaleFactor)
                     anchors.top: parent.top
                     anchors.left: parent.left
                     color: Notifications.getUrgencyColor(notifCard.urgency, Colors.on_error_container, Colors.primary)
-                    radius: 2
+                    radius: Variables.radiusSmall - Math.round(2 * Variables.scaleFactor)
                 }
             }
 
@@ -184,7 +184,7 @@ PanelWindow {           // qmllint disable uncreatable-type
                 anchors.top: cardBg.top
                 anchors.left: cardBg.left
                 anchors.right: cardBg.right
-                anchors.topMargin: 14
+                anchors.topMargin: Variables.spacingLarge - Math.round(2 * Variables.scaleFactor)
                 anchors.leftMargin: Variables.spacingMedium
                 anchors.rightMargin: Variables.spacingMedium
                 spacing: Variables.spacingNormal

@@ -10,7 +10,7 @@ RowLayout {
     property color iconColor: Colors.on_surface
 
     Layout.fillWidth: true
-    Layout.preferredHeight: 20
+    Layout.preferredHeight: Math.round(20 * Variables.scaleFactor)
     Layout.alignment: Qt.AlignCenter
     spacing: Variables.dashInnerColSpacing + Math.round(3 * Variables.scaleFactor)
 

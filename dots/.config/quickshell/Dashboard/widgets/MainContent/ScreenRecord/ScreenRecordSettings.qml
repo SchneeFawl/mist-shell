@@ -155,7 +155,7 @@ Item {
 
         ScreenRecordText {
             id: selectQualityText
-            Layout.topMargin: Variables.dashInnerColSpacing + 2
+            Layout.topMargin: Variables.spacingNormal
             text: "Select recording quality:"
             leftPadding: Variables.dashInnerColSpacing
         }
@@ -164,8 +164,8 @@ Item {
 
         RowLayout {
             Layout.fillWidth: true
-            Layout.preferredHeight: 38
-            Layout.topMargin: Variables.dashInnerColSpacing - 2
+            Layout.preferredHeight: Variables.buttonHeight
+            Layout.topMargin: Variables.spacingSmall
 
             ScreenRecordText {
                 id: recordAudioText
@@ -175,10 +175,10 @@ Item {
             }
 
             ScreenRecordToggle {
-                Layout.preferredHeight: parent.height - 4
-                Layout.preferredWidth: parent.height + 20
+                Layout.preferredHeight: parent.height - Variables.spacingSmall
+                Layout.preferredWidth: parent.height + Math.round(20 * Variables.scaleFactor)
                 Layout.alignment: Qt.AlignVCenter
-                Layout.rightMargin: 6
+                Layout.rightMargin: Variables.spacingSmall + Math.round(2 * Variables.scaleFactor)
             }
         }
 
@@ -186,7 +186,7 @@ Item {
             id: colorRangeContainer
             Layout.fillWidth: true
             Layout.preferredHeight: Variables.buttonHeight
-            Layout.topMargin: Variables.dashInnerColSpacing - 2
+            Layout.topMargin: Variables.spacingSmall
 
             Rectangle {
                 id: colorRangeHighlight
@@ -227,7 +227,7 @@ Item {
 
                 ScreenRecordText {
                     id: colorModeText
-                    Layout.preferredWidth: 120
+                    Layout.preferredWidth: Math.round(120 * Variables.scaleFactor)
                     text: "Color mode:"
                     leftPadding: Variables.dashInnerColSpacing
                 }
@@ -255,12 +255,12 @@ Item {
         RowLayout {
             Layout.fillWidth: true
             Layout.preferredHeight: Variables.buttonHeight
-            Layout.topMargin: Variables.dashInnerColSpacing - 2
+            Layout.topMargin: Variables.spacingSmall
             spacing: Variables.dashInnerColSpacing
 
             ScreenRecordText {
                 id: fpsText
-                Layout.preferredWidth: 120
+                Layout.preferredWidth: Math.round(120 * Variables.scaleFactor)
                 text: "Framerate:"
                 leftPadding: Variables.dashInnerColSpacing
             }
