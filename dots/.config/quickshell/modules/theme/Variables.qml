@@ -40,6 +40,11 @@ QtObject {
     readonly property int spacingMedium:  Math.round(12 * scaleFactor)
     readonly property int spacingLarge:   Math.round(16 * scaleFactor)
 
+    readonly property int radiusSmall:    Math.round(4 * scaleFactor)
+    readonly property int radiusNormal:   Math.round(8 * scaleFactor)
+    readonly property int radiusMedium:   Math.round(12 * scaleFactor)
+    readonly property int radiusLarge:    Math.round(16 * scaleFactor)
+
     // Bar
     readonly property int barHeight:             Math.round(40 * scaleFactor)
     readonly property int pillHeight:            Math.round(32 * scaleFactor)
@@ -59,7 +64,8 @@ QtObject {
     readonly property int dashInnerRadius:     dashColumnRadius - dashInnerColSpacing
 
     // Controls
-    readonly property int buttonHeightSmall:   Math.round(30 * scaleFactor)
-    readonly property int buttonHeight:        Math.round(36 * scaleFactor)
-    readonly property int buttonHeightMedium:  Math.round(50 * scaleFactor)
+    readonly property int buttonHeightSmallest: Math.round(16 * scaleFactor)
+    readonly property int buttonHeightSmall:    Math.round(30 * scaleFactor)
+    readonly property int buttonHeight:         Math.round(36 * scaleFactor)
+    readonly property int buttonHeightMedium:   Math.round(50 * scaleFactor)
 }

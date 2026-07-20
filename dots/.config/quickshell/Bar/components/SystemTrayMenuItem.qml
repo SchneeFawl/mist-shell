@@ -16,8 +16,10 @@ Item {
     signal popped()
 
     Layout.fillWidth: true
-    implicitWidth: (modelData?.isSeparator ?? false) ? 0 : contentRow.childrenRect.width + contentRow.leftPadding + 20
-    implicitHeight: (modelData?.isSeparator ?? false) ? 6 : 28
+    implicitWidth: (modelData?.isSeparator ?? false) ? 0 : (
+        contentRow.childrenRect.width + contentRow.leftPadding + Math.round(20 * Variables.scaleFactor)
+    )
+    implicitHeight: (modelData?.isSeparator ?? false) ? 6 * (Variables.scaleFactor) : Math.round(28 * Variables.scaleFactor)
 
     Connections {
         target: menuItem.parentMenu
@@ -49,11 +51,9 @@ Item {
         id: menuItemRect
         anchors.fill: parent
         color: Colors.surface_container_high
-        radius: Variables.pillRadius - 8
+        radius: Variables.radiusSmall
         visible: true
-        opacity: (
-            (delegateMouseHandler.containsMouse || menuItem.isHighlighted) && !menuItem.modelData.isSeparator
-            ) ? 1.0 : 0
+        opacity: ((delegateMouseHandler.containsMouse || menuItem.isHighlighted) && !menuItem.modelData.isSeparator) ? 1.0 : 0
 
         Behavior on opacity {
             NumberAnimation {
@@ -69,7 +69,7 @@ Item {
         visible: menuItem.modelData?.isSeparator ?? false
         anchors.verticalCenter: parent.verticalCenter
         width: parent.width
-        height: 1
+        height: Math.round(1 * Variables.scaleFactor)
         color: Colors.border_variant
     }
 
@@ -83,7 +83,7 @@ Item {
         Item {
             visible: menuItem.modelData?.buttonType > 0 ?? false
             anchors.verticalCenter: parent.verticalCenter
-            height: Math.round(16 * Variables.scaleFactor)
+            height: Variables.buttonHeightSmallest
             width: height
 
             // modelData.buttonType [ None = 0, checkbox = 1, radiobutton = 2 ]
@@ -93,11 +93,11 @@ Item {
             Rectangle {
                 visible: menuItem.modelData?.buttonType === 1 ?? false
                 anchors.verticalCenter: parent.verticalCenter
-                height: Math.round(16 * Variables.scaleFactor)
+                height: Variables.buttonHeightSmallest
                 width: height
                 border.width: 1
                 border.color: menuItem.modelData?.checkState === 0 ? Colors.inverse_primary : Colors.primary ?? ""
-                radius: Math.round(4 * Variables.scaleFactor)
+                radius: Variables.radiusSmall
                 color: menuItem.modelData?.checkState === 0 ? "transparent" : Colors.surface_bright ?? ""
 
                 Text {
@@ -115,11 +115,11 @@ Item {
             Rectangle {
                 visible: menuItem.modelData?.buttonType === 2 ?? false
                 anchors.verticalCenter: parent.verticalCenter
-                height: Math.round(16 * Variables.scaleFactor)
-                width: Math.round(16 * Variables.scaleFactor)
+                height: Variables.buttonHeightSmallest
+                width: Variables.buttonHeightSmallest
                 border.width: 1
                 border.color: Colors.surface_bright
-                radius: Math.round(4 * Variables.scaleFactor)
+                radius: Variables.radiusSmall
                 color: menuItem.modelData?.checkState === 2 ? Colors.primary : Colors.inactiveAccent ?? ""
 
                 Rectangle {
@@ -136,7 +136,7 @@ Item {
             id: menuItemIcon
             source: menuItem.modelData?.icon ?? ""
             visible: menuItem.modelData?.icon ?? false
-            implicitSize: 14
+            implicitSize: Variables.iconSmall
             anchors.verticalCenter: parent.verticalCenter
         }
 
@@ -194,9 +194,6 @@ Item {
             if (menuItem.parentMenu.activeSubmenu && menuItem.parentMenu.activeSubmenu !== menuItem) {
                 menuItem.parentMenu.activeSubmenu.submenuOpen = false;
             }
-            // if (menuItem.modelData.hasChildren) {
-            //     submenuHoverTimer.start();
-            // }
         }
     }
 }

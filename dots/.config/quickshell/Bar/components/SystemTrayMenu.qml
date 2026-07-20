@@ -76,13 +76,13 @@ PopupWindow {
     WrapperRectangle {
         id: menuItemWrapper
 
-        readonly property int targetHeight: stackView.currentItem?.implicitHeight + 16 ?? 0
-        readonly property int targetWidth: stackView.currentItem?.implicitWidth + 16 ?? 0
+        readonly property int targetHeight: stackView.currentItem?.implicitHeight + Variables.spacingLarge ?? 0
+        readonly property int targetWidth: stackView.currentItem?.implicitWidth + Variables.spacingLarge ?? 0
 
         anchors.left: parent.left
         anchors.top: parent.top
-        width: customMenuPopup.expanded ? targetWidth : 1
-        height: customMenuPopup.expanded ? targetHeight : 1
+        width: customMenuPopup.expanded ? targetWidth : 1 * Variables.scaleFactor
+        height: customMenuPopup.expanded ? targetHeight : 1 * Variables.scaleFactor
         color: Colors.surface_container_low
         radius: Variables.pillRadius
         border.color: Colors.border
@@ -110,7 +110,7 @@ PopupWindow {
         StackView {
             id: stackView
             anchors.fill: parent
-            anchors.margins: 8
+            anchors.margins: Variables.spacingNormal
             focus: true
 
             pushEnter: Transition {

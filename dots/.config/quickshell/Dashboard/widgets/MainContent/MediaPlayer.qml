@@ -58,8 +58,8 @@ ClippingRectangle {
         // wrapper for disc + progress ring
         Item {
             id: discWrapper
-            Layout.preferredHeight: discMediaContainer.height + 20
-            Layout.preferredWidth: discMediaContainer.width + 20
+            Layout.preferredHeight: discMediaContainer.height + Math.round(20 * Variables.scaleFactor)
+            Layout.preferredWidth: discMediaContainer.width + Math.round(20 * Variables.scaleFactor)
             Layout.alignment: Qt.AlignHCenter
 
             // progress ring
@@ -90,8 +90,8 @@ ClippingRectangle {
             ClippingRectangle {
                 id: discMediaContainer
                 anchors.centerIn: parent
-                height: 120
-                width: 120
+                height: Math.round(120 * Variables.scaleFactor)
+                width: Math.round(120 * Variables.scaleFactor)
                 radius: width / 2
                 color: "transparent"
 
@@ -175,8 +175,8 @@ ClippingRectangle {
             id: playbackControls
             Layout.fillHeight: true
             Layout.fillWidth: true
-            Layout.leftMargin: 8
-            Layout.rightMargin: 8
+            Layout.leftMargin: Variables.spacingNormal
+            Layout.rightMargin: Variables.spacingNormal
             Layout.bottomMargin: Variables.spacingMedium
             Layout.alignment: Qt.AlignHCenter
             spacing: Variables.spacingNormal
@@ -192,8 +192,8 @@ ClippingRectangle {
             // play/pause btn
             MediaControlBtn {
                 icon: player.isPlaying ? Icons.mediaPause : Icons.mediaPlay
-                iconSize: Variables.iconLargest + 4
-                btnSize: Variables.buttonHeight + 24
+                iconSize: Variables.iconLargest + Math.round(4 * Variables.scaleFactor)
+                btnSize: Variables.buttonHeight + Math.round(24 * Variables.scaleFactor)
                 bgColor: Colors.primary
                 iconColor: Colors.on_primary
                 onClicked: {

@@ -39,7 +39,7 @@ RowLayout {
             required property var modelData
 
             source: modelData.icon
-            implicitSize: modelData.status !== "Passive" ? 18 : 0
+            implicitSize: modelData.status !== "Passive" ? Math.round(18 * Variables.scaleFactor) : 0
             visible: modelData.status !== "Passive" ? true : false
 
             HyprlandFocusGrab {

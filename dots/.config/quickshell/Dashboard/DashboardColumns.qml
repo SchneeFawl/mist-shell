@@ -14,7 +14,7 @@ RowLayout {
     property bool active: DashboardController.active
 
     spacing: Variables.dashInnerColSpacing
-    anchors.margins: 16
+    anchors.margins: Variables.spacingLarge
     anchors.fill: parent
     clip: true
 

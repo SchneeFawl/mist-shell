@@ -37,7 +37,7 @@ Rectangle {
     Layout.preferredHeight: btnSize
     Layout.preferredWidth: btnSize
     color: bgColor
-    radius: 16
+    radius: Variables.radiusLarge
     scale: btnMouseArea.pressed ? 0.85 : 1.0
 
     Behavior on scale {
