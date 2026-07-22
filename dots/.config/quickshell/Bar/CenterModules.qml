@@ -22,6 +22,7 @@ Item {
 
         anchors.fill: parent
         implicitWidth: mediaText.width + Variables.pillInnerPadding * 2
+        implicitHeight: Variables.barHeight - Math.round(6 * Variables.scaleFactor)
         Behavior on implicitWidth {
             NumberAnimation {
                 duration: Variables.durationMedium

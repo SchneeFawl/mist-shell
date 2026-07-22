@@ -7,6 +7,7 @@ QtObject {
 
     // General
     readonly property real scaleFactor: SettingsService.scaleFactor
+    readonly property int screenCornerRadius: (barHeight - pillHeight) + pillRadius
 
     // Animations
     readonly property var standardCurve:  [0.30, 0.90, 0.40, 1.0, 1, 1]
@@ -33,8 +34,6 @@ QtObject {
     readonly property int durationSlow:   300
 
     // Common
-    readonly property int screenCornerRadius: (barHeight - pillHeight) + pillRadius
-
     readonly property int spacingSmall:   Math.round(4 * scaleFactor)
     readonly property int spacingNormal:  Math.round(8 * scaleFactor)
     readonly property int spacingMedium:  Math.round(12 * scaleFactor)
@@ -50,7 +49,7 @@ QtObject {
     readonly property int pillHeight:            Math.round(32 * scaleFactor)
     readonly property int pillRadius:            Math.round(12 * scaleFactor)
     readonly property int pillInnerPadding:      Math.round(12 * scaleFactor)
-    readonly property int pillInnerSpacing:     Math.round(6 * scaleFactor)
+    readonly property int pillInnerSpacing:      Math.round(6 * scaleFactor)
     readonly property int pillOuterSpacing:      Math.round(12 * scaleFactor)
     readonly property int barSideMargins:        barHeight - pillHeight - Math.round(2 * scaleFactor)
     readonly property int workspaceActiveSize:   Math.round(32 * scaleFactor)

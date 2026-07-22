@@ -32,8 +32,9 @@ manage_dependencies() {
     # packages (arch)
     local deps_pacman=(
         "hyprland" "kitty" "zsh" "playerctl" "networkmanager" "network-manager-applet" "pavucontrol"
-        "pipewire" "pipewire-pulse" "wireplumber" "bluez" "bluez-utils" "blueman"
-        "awww" "matugen" "rofi" "papirus-icon-theme" "starship" "gpu-screen-recorder" "dolphin"
+        "pipewire" "pipewire-pulse" "wireplumber" "bluez" "bluez-utils" "blueman" "dolphin"
+        "awww" "matugen" "rofi" "papirus-icon-theme" "starship"
+        "gpu-screen-recorder" "gamemode"
         "qt6-declarative" "qt6-base" "qt6-wayland" "qt6-svg" "qt6-multimedia" "qt6-multimedia-ffmpeg"
         "qt6-imageformats" "qt6-shadertools" "qt6-positioning" "qt6-webengine" "libpipewire"
     )

@@ -11,8 +11,8 @@ Singleton {
 
     property Process gameModeEnabler: Process {
         command: [
-            "hyprctl",
-            "eval",
+            "sh", "-c",
+            "gamemoded -s && hyprctl eval '" +
             "hl.config({" +
             "  decoration = {" +
             "    rounding = 0," +
@@ -27,21 +27,26 @@ Singleton {
             "    border_size = 1," +
             "    allow_tearing = true" +
             "  }," +
-            "})"
+            "  render = {" +
+            "    direct_scanout = 1" +
+            "  }" +
+            "})'"
         ]
     }
 
     property Process gameModeDisabler: Process {
-        command: ["hyprctl", "reload"]
+        command: ["sh", "-c", "hyprctl reload && (pkill -SIGUSR2 gamemoded || pkill gamemoded || true)"]
     }
 
     onActivate: {
         if (!gameModeActive) {
             gameModeActive = true;
-            gameModeEnabler.startDetached();
+            if (gameModeDisabler.running) gameModeDisabler.running = false;
+            gameModeEnabler.running = true;
         } else {
             gameModeActive = false;
-            gameModeDisabler.startDetached();
+            if (gameModeEnabler.running) gameModeEnabler.running = false;
+            gameModeDisabler.running = true;
         }
     }
 }
