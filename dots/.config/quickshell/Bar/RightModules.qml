@@ -30,12 +30,10 @@ RowLayout {
                     Layout.fillHeight: true
                     font.pixelSize: Variables.fontNormal
                     text: {
-                        let batteryIcon = Battery.getBatteryIcon(Battery.batPercentage)
-                        if (Battery.hasBattery && !Battery.isCharging) {
-                            return batteryIcon + " " + Math.round(Battery.batPercentage) + "%"
-                        } else if (Battery.hasBattery && Battery.isCharging) {
-                            return Icons.batteryCharging + " " + Math.round(Battery.batPercentage) + "%"
-                        }
+                        let icon = (Battery.isCharging || Battery.isPluggedIn) ? Icons.batteryCharging : (
+                            Battery.getBatteryIcon(Battery.batPercentage)
+                        );
+                        return icon + " " + Math.round(Battery.batPercentage) + "%";
                     }
 
                     MouseArea {
