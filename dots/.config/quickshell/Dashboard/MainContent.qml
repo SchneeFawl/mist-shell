@@ -1,42 +1,74 @@
 import QtQuick
+import QtQuick.Controls
+import qs.modules.theme
+import qs.services
 import "./widgets/MainContent"      // qmllint disable unused-imports
 
 Rectangle {
     id: contentRoot
 
-    property int activeTab
+    property int activeTab: DashboardController.activeTab
+    property int previousTab: 1
+    property bool isMovingDown: true
+
+    onActiveTabChanged: {
+        if (activeTab === previousTab) return;
+        isMovingDown = activeTab > previousTab;
+        previousTab = activeTab;
+        stackView.replace(DashboardController.activeTabPath(activeTab));
+    }
 
     anchors.fill: parent
     color: "transparent"
     clip: true
 
-    Loader {
-        active: parent.activeTab === 1
+    StackView {
+        id: stackView
         anchors.fill: parent
-        source: "widgets/MainContent/MediaPlayer.qml"
-    }
+        initialItem: DashboardController.activeTabPath(DashboardController.activeTab)
 
-    Loader {
-        active: parent.activeTab === 2
-        anchors.fill: parent
-        source: "widgets/MainContent/SystemStats.qml"
-    }
+        replaceEnter: Transition {
+            NumberAnimation {
+                property: "opacity"
+                from: 0
+                to: 1
+                duration: Variables.durationMedium
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.entranceCurve
+            }
+            NumberAnimation {
+                property: "y"
+                from: {
+                    contentRoot.isMovingDown ?
+                    Math.round(30 * Variables.scaleFactor) : -Math.round(30 * Variables.scaleFactor)
+                }
+                to: 0
+                duration: Variables.durationMedium
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.entranceCurve
+            }
+        }
 
-    Loader {
-        active: parent.activeTab === 3
-        anchors.fill: parent
-        source: "widgets/MainContent/ThemeSelector.qml"
-    }
-
-    Loader {
-        active: parent.activeTab === 4
-        anchors.fill: parent
-        source: "widgets/MainContent/ScreenRecord.qml"
-    }
-
-    Loader {
-        active: parent.activeTab === 5
-        anchors.fill: parent
-        source: "widgets/MainContent/SettingsMenu.qml"
+        replaceExit: Transition {
+            NumberAnimation {
+                property: "opacity"
+                from: 1
+                to: 0
+                duration: Variables.durationMedium
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.exitCurve
+            }
+            NumberAnimation {
+                property: "y"
+                from: 0
+                to: {
+                    contentRoot.isMovingDown ?
+                    -Math.round(30 * Variables.scaleFactor) : Math.round(30 * Variables.scaleFactor)
+                }
+                duration: Variables.durationMedium
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.exitCurve
+            }
+        }
     }
 }

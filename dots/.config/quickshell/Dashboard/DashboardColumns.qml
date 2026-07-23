@@ -10,7 +10,6 @@ import qs.services
 RowLayout {
     id: dashboardColumnsLayout
 
-    property int activeTab: DashboardController.activeTab
     property bool active: DashboardController.active
 
     spacing: Variables.dashInnerColSpacing
@@ -24,7 +23,7 @@ RowLayout {
         color: "transparent"
 
         NavPanel {
-            onTabSelected: (index) => dashboardColumnsLayout.activeTab = index
+            onTabSelected: (index) => DashboardController.activeTab = index
         }
     }
 
@@ -42,9 +41,7 @@ RowLayout {
         Layout.fillHeight: true
         color: "transparent"
 
-        MainContent {
-            activeTab: dashboardColumnsLayout.activeTab
-        }
+        MainContent {}
     }
 
     // quick controls

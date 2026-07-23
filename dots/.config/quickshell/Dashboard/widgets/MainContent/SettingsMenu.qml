@@ -7,7 +7,7 @@ import "./SettingsMenu"
 Rectangle {
     id: settingsRoot
 
-    anchors.fill: parent
+    // anchors.fill: parent
     color: Colors.surface_container_low
     radius: Variables.dashColumnRadius
     clip: true

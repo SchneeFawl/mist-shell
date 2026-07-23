@@ -2,6 +2,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Wayland
+import qs.services
 
 Variants {
     model: Quickshell.screens
@@ -23,7 +24,7 @@ Variants {
         WlrLayershell.namespace: "quickshell:screenCorners"
         WlrLayershell.layer: WlrLayer.Overlay
         mask: Region { item: null }
-        visible: activeFullscreen.length === 0
+        visible: activeFullscreen.length === 0 && !GameMode.gameModeActive
 
         ScreenCornersItem {
             anchors.top: parent.top

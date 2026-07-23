@@ -38,7 +38,7 @@ ClippingRectangle {
         return _list.filter(item => item.name.toLowerCase().includes(query));
     }
 
-    anchors.fill: parent
+    // anchors.fill: parent
     color: Colors.surface_container_low
     radius: Variables.dashColumnRadius
     clip: true

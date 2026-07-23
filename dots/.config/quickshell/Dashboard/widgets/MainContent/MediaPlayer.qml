@@ -22,7 +22,7 @@ ClippingRectangle {
         progress = (activePlayer && activePlayer.length > 0) ? (currentPosition / activePlayer.length) : 0;
     }
 
-    anchors.fill: parent
+    // anchors.fill: parent
     color: blurEffect.visible ? "transparent" : Colors.surface_container_low
     radius: Variables.dashColumnRadius
     clip: true

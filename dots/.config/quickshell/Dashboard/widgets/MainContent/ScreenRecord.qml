@@ -8,7 +8,7 @@ Rectangle {
 
     property bool showSettings: false
 
-    anchors.fill: parent
+    // anchors.fill: parent
     color: Colors.surface_container_low
     radius: Variables.dashColumnRadius
     clip: true
