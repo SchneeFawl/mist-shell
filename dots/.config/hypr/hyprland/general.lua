@@ -3,7 +3,7 @@ hl.monitor({
     output   = "",
     mode     = "preferred",
     position = "auto",
-    scale    = 1,
+    scale    = 1.5,
 })
 
 hl.gesture({
@@ -20,7 +20,7 @@ hl.gesture({
 
 hl.device({
     name        = "epic-mouse-v1",
-    sensitivity = -0.5,
+    sensitivity = 0,
 })
 
 -----------------------
@@ -79,6 +79,10 @@ hl.config({
         preserve_split = true,
         smart_resizing = false
     },
+
+    xwayland = {
+      force_zero_scaling = true
+    }
 })
 
 -- INPUT CONFIG
@@ -94,6 +98,7 @@ hl.config({
 
         touchpad           = {
             natural_scroll = true,
+            scroll_factor = 0.75
         },
     },
 })

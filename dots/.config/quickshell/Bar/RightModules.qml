@@ -32,9 +32,9 @@ RowLayout {
                     text: {
                         let batteryIcon = Battery.getBatteryIcon(Battery.batPercentage)
                         if (Battery.hasBattery && !Battery.isCharging) {
-                            return batteryIcon + " " + Battery.batPercentage + "%"
+                            return batteryIcon + " " + Math.round(Battery.batPercentage) + "%"
                         } else if (Battery.hasBattery && Battery.isCharging) {
-                            return Icons.batteryCharging + " " + Battery.batPercentage + "%"
+                            return Icons.batteryCharging + " " + Math.round(Battery.batPercentage) + "%"
                         }
                     }
 
@@ -49,7 +49,7 @@ RowLayout {
 
     // desktop feature
     Pill {
-        innerPadding: 4
+        innerPadding: Variables.spacingSmall
         pillSpacing: 0
 
         MouseArea {     // audio control

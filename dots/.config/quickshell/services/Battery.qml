@@ -9,10 +9,10 @@ Singleton {
 
     property bool hasBattery: UPower.displayDevice.isLaptopBattery
     property real batPercentage: UPower.displayDevice.percentage * 100
-    property bool state: UPower.displayDevice.state
+    property var state: UPower.displayDevice.state
     property bool isCharging: state === UPowerDeviceState.Charging
-    property real chargingTime: UPower.displayDevice.timeToFull
-    property real emptyTime: UPower.displayDevice.timeToEmpty
+    // property real chargingTime: UPower.displayDevice.timeToFull
+    // property real emptyTime: UPower.displayDevice.timeToEmpty
 
     readonly property var batteryIcons: [
         Icons.batteryAlert, Icons.battery10, Icons.battery20,

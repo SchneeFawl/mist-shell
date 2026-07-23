@@ -18,7 +18,7 @@ prev_total=$((user + nice + system + idle + iowait + irq + softirq + steal + gue
 echo "{\"username\": \"$USER_NAME\", \"hostname\": \"$HOST_NAME\", \"os\": \"$OS_NAME\", \"cpu\": 0, \"temp\": 0, \"ram_used\": 0, \"ram_total\": 0, \"disk_used\": 0, \"disk_total\": 0}"
 
 while true; do
-    sleep 2
+    sleep 1.2
 
     # cpu percentage
     read -r _ user nice system idle iowait irq softirq steal guest guest_nice _ < /proc/stat
