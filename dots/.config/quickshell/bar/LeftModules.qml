@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.modules.theme
+import qs.modules.common
 import "./components"
 
 RowLayout {
@@ -9,18 +10,19 @@ RowLayout {
     Pill {
         Row {
             Layout.fillHeight: true
-            spacing: 8
+            spacing: Variables.spacingNormal
 
-            BarText {
-                text: Icons.barIcon
+            StyledText {
                 color: Colors.primary
                 font.pixelSize: Variables.fontMedium
                 anchors.verticalCenter: parent.verticalCenter
+                text: Icons.barIcon
             }
 
-            BarText {
-                text: "mist"
+            StyledText {
                 anchors.verticalCenter: parent.verticalCenter
+                color: Colors.primary
+                text: "mist"
             }
         }
     }
@@ -37,11 +39,11 @@ RowLayout {
             cursorShape: Qt.PointingHandCursor
             hoverEnabled: true
 
-            BarText {
+            StyledText {
                 id: keybindText
                 anchors.centerIn: parent
-                text: Icons.keyboard
                 font.pixelSize: Variables.fontMedium
+                text: Icons.keyboard
                 color: Colors.primary
             }
             onClicked: console.log("trigger keybinds help menu")

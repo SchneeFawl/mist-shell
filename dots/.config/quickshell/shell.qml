@@ -2,9 +2,9 @@
 //@ pragma IconTheme Papirus
 import Quickshell
 import QtQuick
-import "./Bar"
-import qs.modules
+import "./bar"
 import "./modules/screenCorners"
+import qs.modules
 
 ShellRoot {
     id: shellRoot

@@ -18,11 +18,6 @@ hl.gesture({
     action = "fullscreen"
 })
 
-hl.device({
-    name        = "epic-mouse-v1",
-    sensitivity = 0,
-})
-
 -----------------------
 --|  LOOK AND FEEL  |--
 -----------------------
@@ -92,9 +87,9 @@ hl.config({
         numlock_by_default = true,
 
         follow_mouse       = 1,
-        force_no_accel     = false,
         sensitivity        = 0,
-        -- accel_profile = "flat",
+        force_no_accel     = false,
+        accel_profile = "flat",
 
         touchpad           = {
             natural_scroll = true,
@@ -106,7 +101,7 @@ hl.config({
 -- useless
 hl.config({
     misc = {
-        force_default_wallpaper = -1,    -- Set to 0 or 1 to disable the anime mascot wallpapers
+        force_default_wallpaper = 0,    -- Set to 0 or 1 to disable the anime mascot wallpapers
         disable_hyprland_logo   = false, -- If true disables the random hyprland logo / anime girl background. :(
     },
 })

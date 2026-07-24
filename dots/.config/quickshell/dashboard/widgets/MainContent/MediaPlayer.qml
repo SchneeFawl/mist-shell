@@ -127,7 +127,7 @@ ClippingRectangle {
                 text: player.activePlayer ?
                     (formatTime(player.currentPosition) + " / " + formatTime(player.activePlayer.length))
                     : "--:--"
-                color: Colors.textSub
+                color: Colors.secondary
                 font.pixelSize: Variables.fontSmall
                 font.family: Variables.defaultFontFamily
                 Layout.fillWidth: true

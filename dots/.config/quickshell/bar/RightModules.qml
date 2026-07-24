@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import qs.modules.theme
+import qs.modules.common
 import qs.services
 import "./components"
 
@@ -12,6 +13,7 @@ RowLayout {
     Pill {
         visible: sysTray.implicitWidth > 0
         innerPadding: visible ? Variables.pillInnerPadding : 0
+
         SystemTray { id: sysTray }
     }
 
@@ -26,9 +28,10 @@ RowLayout {
             Pill {
                 innerPadding: visible ? Variables.pillInnerPadding : 0
 
-                BarText {
+                StyledText {
                     Layout.fillHeight: true
                     font.pixelSize: Variables.fontNormal
+                    color: Colors.primary
                     text: {
                         let icon = (Battery.isCharging || Battery.isPluggedIn) ? Icons.batteryCharging : (
                             Battery.getBatteryIcon(Battery.batPercentage)
@@ -51,29 +54,29 @@ RowLayout {
         pillSpacing: 0
 
         MouseArea {     // audio control
-            implicitWidth: 30
+            Layout.preferredWidth: Variables.buttonHeightSmall
             Layout.fillHeight: true
             cursorShape: Qt.PointingHandCursor
 
-            BarText {
+            StyledText {
                 anchors.centerIn: parent
-                text: Icons.sysVolume
-                color: Colors.primary
                 font.pixelSize: Variables.fontMedium
+                color: Colors.primary
+                text: Icons.sysVolume
             }
             onClicked: Quickshell.execDetached(["pavucontrol"]);
         }
 
         MouseArea {     // power actions
-            implicitWidth: 30
+            Layout.preferredWidth: Variables.buttonHeightSmall
             Layout.fillHeight: true
             cursorShape: Qt.PointingHandCursor
 
-            BarText {
+            StyledText {
                 anchors.centerIn: parent
-                text: Icons.powerIcon
-                color: "#F7768E"
                 font.pixelSize: Variables.fontMedium
+                color: Colors.error
+                text: Icons.powerIcon
             }
             onClicked: console.log("trigger custom power actions")
         }

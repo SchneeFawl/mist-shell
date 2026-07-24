@@ -26,7 +26,7 @@ Rectangle {
         anchors.topMargin: Variables.dashInnerColSpacing + 2
         font.family: Variables.defaultFontFamily
         font.pixelSize: Variables.fontSmall
-        color: Colors.textSub
+        color: Colors.secondary
         text: Math.round(root.value * 100) + "%"
     }
 

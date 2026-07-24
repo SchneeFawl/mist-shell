@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import qs.modules.theme
 import qs.services
-import "../Dashboard"
+import "../dashboard"
 import "./components"
 
 Item {

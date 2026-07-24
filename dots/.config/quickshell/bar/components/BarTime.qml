@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.modules.theme
+import qs.modules.common
 import qs.services
 
 Pill {
@@ -22,19 +23,21 @@ Pill {
         spacing: 6
         clip: true
 
-        BarText {
+        StyledText {
             id: timeDisplay
-            text: Time.timeText
             anchors.verticalCenter: parent.verticalCenter
+            color: Colors.primary
+            text: Time.timeText
         }
 
-        BarText {
+        StyledText {
             id: dayDisplay
-            isSubText: true
-            text: Time.dayText
-            visible: timePill.showFullDate
-            opacity: timePill.showFullDate ? 1.0 : 0.0
             anchors.verticalCenter: parent.verticalCenter
+            opacity: timePill.showFullDate ? 1.0 : 0.0
+            visible: timePill.showFullDate
+            font.pixelSize: Variables.fontSmall
+            color: Colors.secondary
+            text: Time.dayText
 
             Behavior on opacity {
                 NumberAnimation {
@@ -45,13 +48,14 @@ Pill {
             }
         }
 
-        BarText {
+        StyledText {
             id: dateDisplay
-            isSubText: true
-            text: Time.dateText
+            anchors.verticalCenter: parent.verticalCenter
             visible: timePill.showFullDate
             opacity: timePill.showFullDate ? 1.0 : 0.0
-            anchors.verticalCenter: parent.verticalCenter
+            font.pixelSize: Variables.fontSmall
+            color: Colors.secondary
+            text: Time.dateText
 
             Behavior on opacity {
                 NumberAnimation {
