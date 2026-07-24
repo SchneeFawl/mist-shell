@@ -1,5 +1,6 @@
 import QtQuick
 import qs.modules.theme
+import qs.modules.common
 
 Rectangle {
     id: btButtonRoot
@@ -30,12 +31,10 @@ Rectangle {
         }
     }
 
-    Text {
+    StyledText {
         id: iconText
         anchors.centerIn: parent
-        font.family: Variables.defaultFontFamily
         font.pixelSize: Variables.fontLarge
-        color: Colors.on_surface
         text: btButtonRoot.icon
 
         NumberAnimation on rotation {
@@ -50,6 +49,8 @@ Rectangle {
     MouseArea {
         id: backMouseArea
         anchors.fill: parent
+        acceptedButtons: Qt.LeftButton
+        cursorShape: Qt.PointingHandCursor
         onClicked: {
             btButtonRoot.clicked();
             if (btButtonRoot.rotationAnim) {

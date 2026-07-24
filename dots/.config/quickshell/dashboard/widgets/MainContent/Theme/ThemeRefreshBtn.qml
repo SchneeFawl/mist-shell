@@ -1,5 +1,6 @@
 import QtQuick
 import qs.modules.theme
+import qs.modules.common
 import qs.services
 
 Rectangle {
@@ -11,11 +12,9 @@ Rectangle {
     radius: Variables.dashInnerRadius
     scale: mouseArea.pressed ? 0.85 : 1.0
 
-    Text {
+    StyledText {
         id: refreshText
         anchors.centerIn: parent
-        font.family: Variables.defaultFontFamily
-        font.pixelSize: Variables.fontNormal
         color: mouseArea.containsMouse ? Colors.on_primary : Colors.on_surface
         text: Icons.refresh + " Rescan Themes"
         opacity: btnRoot.showRefreshedText ? 0.0 : 1
@@ -29,11 +28,9 @@ Rectangle {
         }
     }
 
-    Text {
+    StyledText {
         id: refreshedText
         anchors.centerIn: parent
-        font.family: Variables.defaultFontFamily
-        font.pixelSize: Variables.fontNormal
         color: mouseArea.containsMouse ? Colors.on_primary : Colors.on_surface
         text: Icons.refresh + " Rescanned Themes!"
         opacity: btnRoot.showRefreshedText ? 1.0 : 0.0

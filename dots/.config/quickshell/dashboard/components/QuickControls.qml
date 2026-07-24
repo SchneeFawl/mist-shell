@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell.Bluetooth
 import qs.modules.theme
+import qs.modules.common
 import qs.services
 
 Rectangle {
@@ -27,11 +28,12 @@ Rectangle {
         property int rectSize: Math.round(60 * Variables.scaleFactor)
 
         // dnd button
-        QuickControlsBtn {
+        BaseButton {
             implicitHeight: controlsLayout.rectSize
             implicitWidth: controlsLayout.rectSize
+            radius: Variables.dashColumnRadius
+            iconSize: Variables.iconLarge
             icon: active ? Icons.sysDndActive : Icons.sysDndInactive
-
             onClicked: {
                 active = !active;
                 Notifications.dndActive = !Notifications.dndActive;
@@ -40,30 +42,31 @@ Rectangle {
 
         // qmllint disable
         // bluetooth button
-        QuickControlsBtn {
+        BaseButton {
             id: bluetoothBtn
             implicitHeight: controlsLayout.rectSize
             implicitWidth: controlsLayout.rectSize
+            radius: Variables.dashColumnRadius
+            iconSize: Variables.iconLarge
             icon: Icons.sysBluetooth
             active: Bluetooth.defaultAdapter ? Bluetooth.defaultAdapter.enabled : false
-
             onClicked: {
                 if (Bluetooth.defaultAdapter) {
                     Bluetooth.defaultAdapter.enabled = !Bluetooth.defaultAdapter.enabled;
                 }
             }
-
             onRightClicked: controlsRoot.bluetoothRightClicked()
         }
         // qmllint enable
 
         // gamemode button
-        QuickControlsBtn {
+        BaseButton {
             implicitHeight: controlsLayout.rectSize
             implicitWidth: controlsLayout.rectSize
+            radius: Variables.dashColumnRadius
+            iconSize: Variables.iconLarge
             icon: Icons.sysGameMode
             active: GameMode.gameModeActive
-
             onClicked: {
                 GameMode.activate();
                 active = GameMode.gameModeActive;
@@ -71,12 +74,13 @@ Rectangle {
         }
 
         // caffeine mode button
-        QuickControlsBtn {
+        BaseButton {
             implicitHeight: controlsLayout.rectSize
             implicitWidth: controlsLayout.rectSize
+            radius: Variables.dashColumnRadius
+            iconSize: Variables.iconLarge
             icon: Idle.caffeineActive ? Icons.sysCaffeineActive : Icons.sysCaffeineInactive
             active: Idle.caffeineActive
-
             onClicked: {
                 Idle.caffeineActive = !Idle.caffeineActive;
             }

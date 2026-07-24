@@ -1,8 +1,7 @@
-
 import QtQuick
 import QtQuick.Layouts
-import "../components"
 import qs.modules.theme
+import qs.modules.common
 
 Rectangle {
 
@@ -17,71 +16,71 @@ Rectangle {
         spacing: Variables.dashInnerColSpacing
         anchors.fill: parent
 
-        NavButton {
+        BaseButton {
             id: mediaModeBtn
+            btnSize: Variables.buttonHeightMedium
+            radius: Variables.dashColumnRadius
             icon: Icons.navMusic
             iconSize: Variables.iconNormal
-
             onClicked: {
                 navWrapper.activeTab = 1;
                 navWrapper.tabSelected(1);
             }
-
             active: navWrapper.activeTab === 1
         }
 
-        NavButton {
+        BaseButton {
             id: systemInfoBtn
             icon: Icons.navSystemInfo
             iconSize: Variables.iconNormal
-
+            btnSize: Variables.buttonHeightMedium
+            radius: Variables.dashColumnRadius
             onClicked: {
                 navWrapper.activeTab = 2;
                 navWrapper.tabSelected(2);
             }
-
             active: navWrapper.activeTab === 2
         }
 
-        NavButton {
+        BaseButton {
             id: themeBtn
             icon: Icons.navTheme
             iconSize: Variables.iconNormal
-
+            btnSize: Variables.buttonHeightMedium
+            radius: Variables.dashColumnRadius
             onClicked: {
                 navWrapper.activeTab = 3;
                 navWrapper.tabSelected(3);
             }
-
             active: navWrapper.activeTab === 3
         }
 
-        NavButton {
+        BaseButton {
             id: recordBtn
             icon: Icons.navRecord
             iconSize: Variables.iconNormal
-
+            btnSize: Variables.buttonHeightMedium
+            radius: Variables.dashColumnRadius
             onClicked: {
                 navWrapper.activeTab = 4;
                 navWrapper.tabSelected(4);
             }
-
             active: navWrapper.activeTab === 4
         }
 
-        Item { Layout.fillHeight: true }
+        Item { Layout.fillHeight: true }        // filler
 
-        NavButton {
+        BaseButton {
             id: settingsBtn
             icon: Icons.sysSettings
             iconSize: Variables.iconNormal
-            btnBgColor: Colors.surface_container_highest
-
+            btnSize: Variables.buttonHeightMedium
+            radius: Variables.dashColumnRadius
+            inactiveColor: Colors.surface_container_highest
             onClicked: {
                 navWrapper.activeTab = 5;
                 navWrapper.tabSelected(5);
             }
-
             active: navWrapper.activeTab === 5
         }
     }
