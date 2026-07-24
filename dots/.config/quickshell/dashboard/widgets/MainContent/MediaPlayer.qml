@@ -1,3 +1,4 @@
+
 import QtQuick
 import QtQuick.Effects
 import QtQuick.Layouts
@@ -6,6 +7,7 @@ import Quickshell.Widgets
 import Quickshell.Services.Mpris
 import qs.services
 import qs.modules.theme
+import qs.modules.common
 import "../../components"
 
 ClippingRectangle {
@@ -122,16 +124,16 @@ ClippingRectangle {
             Layout.leftMargin: Variables.spacingMedium
             Layout.rightMargin: Variables.spacingMedium
 
-            Text {
+            StyledText {
                 id: songProgress
-                text: player.activePlayer ?
-                    (formatTime(player.currentPosition) + " / " + formatTime(player.activePlayer.length))
-                    : "--:--"
-                color: Colors.secondary
-                font.pixelSize: Variables.fontSmall
-                font.family: Variables.defaultFontFamily
                 Layout.fillWidth: true
                 horizontalAlignment: Text.AlignHCenter
+                font.pixelSize: Variables.fontSmall
+                color: Colors.secondary
+                text: {
+                    player.activePlayer ?
+                    (formatTime(player.currentPosition) + " / " + formatTime(player.activePlayer.length)) : "--:--"
+                }
 
                 function formatTime(seconds) {
                     const totalSeconds = Math.floor(seconds);
@@ -147,27 +149,24 @@ ClippingRectangle {
                 }
             }
 
-            Text {
+            StyledText {
                 id: songTitle
-                text: player.activePlayer?.trackTitle ?? "No media playing"
-                color: Colors.textVibrant
-                font.bold: true
-                font.pixelSize: Variables.fontLarge - 2
-                font.family: Variables.defaultFontFamily
-                elide: Text.ElideRight
                 Layout.fillWidth: true
                 horizontalAlignment: Text.AlignHCenter
+                font.bold: true
+                font.pixelSize: Variables.fontMedium
+                color: Colors.on_primary_container
+                text: player.activePlayer?.trackTitle ?? "No media playing"
+                elide: Text.ElideRight
             }
 
-            Text {
+            StyledText {
                 id: artistName
-                text: player.activePlayer?.trackArtist ?? "-"
-                color: Colors.primary_fixed
-                font.pixelSize: Variables.fontNormal
-                font.family: Variables.defaultFontFamily
-                elide: Text.ElideRight
                 Layout.fillWidth: true
                 horizontalAlignment: Text.AlignHCenter
+                color: Colors.tertiary
+                text: player.activePlayer?.trackArtist ?? "-"
+                elide: Text.ElideRight
             }
         }
 

@@ -6,6 +6,7 @@ import Quickshell
 import Quickshell.Widgets
 import qs.services
 import qs.modules.theme
+import qs.modules.common
 
 PanelWindow {           // qmllint disable uncreatable-type
     id: notifPopup
@@ -214,31 +215,24 @@ PanelWindow {           // qmllint disable uncreatable-type
                     spacing: Variables.spacingNormal
                     clip: true
 
-                    Text {
+                    StyledText {
                         Layout.fillWidth: true
                         color: Colors.secondary
-                        font.pixelSize: Variables.fontNormal
-                        font.family: Variables.defaultFontFamily
-                        renderType: Text.NativeRendering
                         text: notifCard.appName
                     }
 
-                    Text {
+                    StyledText {
                         Layout.fillWidth: true
                         color: Colors.on_primary_container
                         font.pixelSize: Variables.fontMedium - 1
-                        font.family: Variables.defaultFontFamily
-                        renderType: Text.NativeRendering
                         text: notifCard.summary
                         elide: Text.ElideRight
                     }
 
-                    Text {
+                    StyledText {
                         Layout.fillWidth: true
                         color: Colors.tertiary
                         font.pixelSize: Variables.fontSmall
-                        font.family: Variables.defaultFontFamily
-                        renderType: Text.NativeRendering
                         text: notifCard.body
                         wrapMode: Text.WordWrap
                         maximumLineCount: 3

@@ -5,6 +5,7 @@ import Quickshell.Widgets
 import "../components"
 import qs.services
 import qs.modules.theme
+import qs.modules.common
 
 ColumnLayout {
     id: notifListRoot
@@ -133,28 +134,24 @@ ColumnLayout {
                         spacing: Variables.spacingNormal
                         clip: true
 
-                        Text {
+                        StyledText {
                             Layout.fillWidth: true
                             color: Colors.secondary
-                            font.family: Variables.defaultFontFamily
-                            font.pixelSize: Variables.fontNormal
                             text: card.modelData.appName
                         }
 
-                        Text {
+                        StyledText {
                             Layout.fillWidth: true
                             color: Colors.on_primary_container
-                            font.family: Variables.defaultFontFamily
                             font.pixelSize: Variables.fontMedium - 1
                             text: card.modelData.summary
                             elide: Text.ElideRight
                         }
 
-                        Text {
+                        StyledText {
                             Layout.fillWidth: true
                             color: Colors.tertiary
                             font.pixelSize: Variables.fontSmall
-                            font.family: Variables.defaultFontFamily
                             text: card.modelData.body
                             wrapMode: Text.WordWrap
                             maximumLineCount: 3

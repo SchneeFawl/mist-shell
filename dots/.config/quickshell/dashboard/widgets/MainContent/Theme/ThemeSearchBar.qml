@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.modules.theme
+import qs.modules.common
 import qs.services
 
 Rectangle {
@@ -20,11 +21,10 @@ Rectangle {
         spacing: Variables.spacingNormal
         clip: true
 
-        Text {
+        StyledText {
             Layout.alignment: Text.AlignVCenter
-            color: Colors.textVibrant
-            font.family: Variables.defaultFontFamily
             font.pixelSize: Variables.iconNormal
+            color: Colors.on_primary_container
             text: Icons.magnify
         }
 
@@ -34,7 +34,7 @@ Rectangle {
             Layout.fillWidth: true
             color: Colors.on_surface
             font.family: Variables.defaultFontFamily
-            font.pixelSize: 14
+            font.pixelSize: Variables.fontNormal
             cursorVisible: true
             clip: true
             onTextChanged: searchBar.searchQuery = text
@@ -47,11 +47,9 @@ Rectangle {
                 }
             }
 
-            Text {
+            StyledText {
                 id: searchPlaceholder
                 color: Colors.surface_variant
-                font.family: Variables.defaultFontFamily
-                font.pixelSize: 14
                 text: "Search wallpapers..."
                 visible: searchBar.searchQuery.length === 0
             }

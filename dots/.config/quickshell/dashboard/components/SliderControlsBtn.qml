@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.modules.theme
+import qs.modules.common
 
 Rectangle {
     id: sliderButtonRoot
@@ -18,23 +19,14 @@ Rectangle {
     scale: mouseArea.pressed ? 0.85 : 1.0
     clip: true
 
-    Text {
+    StyledText {
         anchors.centerIn: parent
         color: {
-            sliderButtonRoot.active
-            ? ( sliderButtonRoot.muted ? Colors.on_tertiary : Colors.on_primary)
-            : Colors.on_surface
+            sliderButtonRoot.active ?
+            ( sliderButtonRoot.muted ? Colors.on_tertiary : Colors.on_primary) : Colors.on_surface
         }
         font.pixelSize: Variables.iconNormal
         text: sliderButtonRoot.icon
-
-        Behavior on color {
-            ColorAnimation {
-                duration: Variables.durationMedium
-                easing.type: Easing.Bezier
-                easing.bezierCurve: Variables.standardCurve
-            }
-        }
     }
 
     Behavior on color {

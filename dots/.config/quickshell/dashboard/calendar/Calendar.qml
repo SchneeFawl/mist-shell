@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import "calendar.js" as CalendarLogic
 import qs.modules.theme
-
+import qs.modules.common
 
 Rectangle {
     id: root
@@ -46,14 +46,11 @@ Rectangle {
                 }
 
                 // month and year lable
-                Text {
+                StyledText {
                     Layout.fillWidth: true
                     horizontalAlignment: Text.AlignHCenter
-                    color: Colors.on_surface
                     font.pixelSize: Variables.fontMedium
-                    font.family: Variables.defaultFontFamily
                     font.bold: true
-
                     text: {
                         var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
                         return months[root.currentMonth] + " " + root.currentYear;
@@ -90,13 +87,11 @@ Rectangle {
                 Repeater {
                     model: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
 
-                    delegate: Text {
+                    delegate: StyledText {
                         required property string modelData
                         Layout.fillWidth: true
                         horizontalAlignment: Text.AlignHCenter
-                        font.family: Variables.defaultFontFamily
                         font.pixelSize: Variables.fontSmall
-                        color: Colors.on_surface
                         text: modelData
                     }
                 }
@@ -126,12 +121,10 @@ Rectangle {
                         Layout.fillHeight: true
                         Layout.fillWidth: true
 
-                        Text {
+                        StyledText {
                             anchors.centerIn: parent
                             color: dateContainer.modelData.isCurrentMonth ? Colors.primary : Colors.on_surface
                             text: dateContainer.modelData.day
-                            font.family: Variables.defaultFontFamily
-                            font.pixelSize: Variables.fontNormal
                         }
                     }
                 }

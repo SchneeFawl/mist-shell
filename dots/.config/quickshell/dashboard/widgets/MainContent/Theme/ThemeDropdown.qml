@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Controls
 import qs.modules.theme
+import qs.modules.common
 import qs.services
 
 Rectangle {
@@ -20,7 +21,7 @@ Rectangle {
         readonly property int btnHeight: Variables.buttonHeight
         readonly property int targetHeight: Math.min(themeDropdown.themeModel.length * btnHeight + 8, btnHeight * 4)
 
-        y: parent.height + 4         // topMargin = 4
+        y: parent.height + Variables.spacingSmall         // topMargin = 4
         width: parent.width
         height: targetHeight
         opacity: themeDropdown.expanded ? 1.0 : 0.0
@@ -78,11 +79,11 @@ Rectangle {
             highlight: Item {
                 Rectangle {
                     anchors.fill: parent
-                    anchors.leftMargin: 4
-                    anchors.rightMargin: 4
-                    anchors.topMargin: 4
+                    anchors.leftMargin: Variables.spacingSmall
+                    anchors.rightMargin: Variables.spacingSmall
+                    anchors.topMargin: Variables.spacingSmall
                     color: Colors.primary
-                    radius: Variables.dashInnerRadius - 4
+                    radius: Variables.dashInnerRadius - Variables.spacingSmall
                 }
             }
 
@@ -97,27 +98,17 @@ Rectangle {
 
                 Rectangle {
                     anchors.fill: parent
-                    anchors.leftMargin: 4
-                    anchors.rightMargin: 4
-                    anchors.topMargin: 4
+                    anchors.leftMargin: Variables.spacingSmall
+                    anchors.rightMargin: Variables.spacingSmall
+                    anchors.topMargin: Variables.spacingSmall
                     color: "transparent"
-                    radius: Variables.dashInnerRadius - 4
+                    radius: Variables.dashInnerRadius - Variables.spacingSmall
 
-                    Text {
+                    StyledText {
                         anchors.verticalCenter: parent.verticalCenter
-                        leftPadding: 8
+                        leftPadding: Variables.spacingNormal
                         color: themeDelegate.index === themeListView.currentIndex ? Colors.on_primary : Colors.on_surface
-                        font.family: Variables.defaultFontFamily
-                        font.pixelSize: 14
                         text: themeDelegate.modelData.name
-
-                        Behavior on color {
-                            ColorAnimation {
-                                duration: Variables.durationFast
-                                easing.type: Easing.Bezier
-                                easing.bezierCurve: Variables.standardCurve
-                            }
-                        }
                     }
 
                     MouseArea {
@@ -141,11 +132,9 @@ Rectangle {
         }
     }
 
-    Text {
+    StyledText {
         anchors.verticalCenter: parent.verticalCenter
-        leftPadding: 8 + 4
-        font.family: Variables.defaultFontFamily
-        font.pixelSize: 14
+        leftPadding: Variables.spacingMedium
         color: Colors.on_surface
         text: ThemeController.theme
     }

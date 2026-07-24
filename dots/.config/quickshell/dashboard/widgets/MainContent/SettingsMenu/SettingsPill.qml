@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.modules.theme
+import qs.modules.common
 
 Rectangle {
     id: stngPillRoot
@@ -16,21 +17,11 @@ Rectangle {
     radius: Variables.dashInnerRadius
     color: "transparent"
 
-    Text {
+    StyledText {
         id: optionText
         anchors.centerIn: parent
-        font.family: Variables.defaultFontFamily
-        font.pixelSize: Variables.fontNormal
         color: stngPillRoot.highlighted ? Colors.on_primary : Colors.on_surface
         text: stngPillRoot.text
-
-        Behavior on color {
-            ColorAnimation {
-                duration: Variables.durationMedium
-                easing.type: Easing.Bezier
-                easing.bezierCurve: Variables.standardCurve
-            }
-        }
     }
 
     MouseArea {

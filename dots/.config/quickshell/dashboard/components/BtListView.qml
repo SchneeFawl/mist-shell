@@ -5,6 +5,7 @@ import Quickshell
 import Quickshell.Bluetooth
 import qs.services
 import qs.modules.theme
+import qs.modules.common
 
 // qmllint disable unresolved-type
 
@@ -47,11 +48,9 @@ ListView {
             spacing: 0
             clip: true
 
-            Text {
+            StyledText {
                 id: deviceIcon
-                font.family: Variables.defaultFontFamily
                 font.pixelSize: Variables.fontLarge
-                color: Colors.on_surface
                 text: BluetoothStatus.getDeviceIcon(card.modelData.icon)
             }
 
@@ -60,17 +59,14 @@ ListView {
                 Layout.fillWidth: true
                 Layout.leftMargin: Variables.spacingNormal
 
-                Text {
+                StyledText {
                     id: deviceName
-                    font.family: Variables.defaultFontFamily
                     font.pixelSize: Variables.fontSmall
-                    color: Colors.on_surface
                     text: card.fixedDevName
                 }
 
-                Text {
+                StyledText {
                     id: deviceStatus
-                    font.family: Variables.defaultFontFamily
                     font.pixelSize: Variables.fontSmall - 1
                     color: Colors.inactiveAccent
                     text: BluetoothStatus.getStatus(card.modelData)
@@ -109,20 +105,11 @@ ListView {
                         }
                     }
 
-                    Text {
+                    StyledText {
                         anchors.centerIn: parent
-                        font.family: Variables.defaultFontFamily
                         font.pixelSize: card.modelData.connected ? Variables.fontSmall - 1 : Variables.fontSmall
                         color: card.modelData.connected ? Colors.on_surface : Colors.on_primary
                         text: card.modelData.connected ? "Disconnect" : "Connect"
-
-                        Behavior on color {
-                            ColorAnimation {
-                                duration: Variables.durationMedium
-                                easing.type: Easing.Bezier
-                                easing.bezierCurve: Variables.standardCurve
-                            }
-                        }
                     }
 
                     MouseArea {
@@ -157,11 +144,9 @@ ListView {
                         }
                     }
 
-                    Text {
+                    StyledText {
                         anchors.centerIn: parent
-                        font.family: Variables.defaultFontFamily
                         font.pixelSize: Variables.fontSmall
-                        color: Colors.on_surface
                         text: "Forget"
                     }
 

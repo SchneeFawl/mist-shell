@@ -15,10 +15,10 @@ Rectangle {
         id: refreshText
         anchors.centerIn: parent
         font.family: Variables.defaultFontFamily
-        font.pixelSize: 14
+        font.pixelSize: Variables.fontNormal
         color: mouseArea.containsMouse ? Colors.on_primary : Colors.on_surface
         text: Icons.refresh + " Rescan Themes"
-        opacity: btnRoot.showRefreshedText ? 0.0 : 1.
+        opacity: btnRoot.showRefreshedText ? 0.0 : 1
 
         Behavior on opacity {
             NumberAnimation {
@@ -33,7 +33,7 @@ Rectangle {
         id: refreshedText
         anchors.centerIn: parent
         font.family: Variables.defaultFontFamily
-        font.pixelSize: 14
+        font.pixelSize: Variables.fontNormal
         color: mouseArea.containsMouse ? Colors.on_primary : Colors.on_surface
         text: Icons.refresh + " Rescanned Themes!"
         opacity: btnRoot.showRefreshedText ? 1.0 : 0.0

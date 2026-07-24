@@ -1,5 +1,6 @@
 import QtQuick
 import qs.modules.theme
+import qs.modules.common
 
 Rectangle {
     id: controlsButtonRoot
@@ -16,20 +17,11 @@ Rectangle {
     clip: true
     scale: mouseArea.pressed ? 0.85 : 1.0
 
-    Text {
+    StyledText {
         anchors.centerIn: parent
         color: controlsButtonRoot.active ? Colors.on_primary : Colors.on_surface
-        font.family: Variables.defaultFontFamily
         font.pixelSize: controlsButtonRoot.iconSize
         text: controlsButtonRoot.icon
-
-        Behavior on color {
-            ColorAnimation {
-                duration: Variables.durationMedium
-                easing.type: Easing.Bezier
-                easing.bezierCurve: Variables.standardCurve
-            }
-        }
     }
 
     Behavior on scale {

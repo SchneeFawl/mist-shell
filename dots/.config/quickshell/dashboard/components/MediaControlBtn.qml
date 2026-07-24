@@ -1,14 +1,15 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.modules.theme
+import qs.modules.common
 
 Rectangle {
     id: mediaContBtn
 
     property string icon
     property int iconSize: Variables.fontLargest + Math.round(12 * Variables.scaleFactor)
-    property color iconColor: Colors.inactiveAccent
     property color bgColor: "transparent"
+    property color iconColor: Colors.tertiary
     property int btnSize: Variables.buttonHeightMedium
 
     signal clicked()
@@ -42,37 +43,46 @@ Rectangle {
 
     Behavior on scale {
         NumberAnimation {
-            duration: 100
-            easing.type: Easing.OutQuad
+            duration: Variables.durationFast
+            easing.type: Easing.Bezier
+            easing.bezierCurve: Variables.exitCurve
         }
     }
 
-    Text {
+    StyledText {
         id: text1
         anchors.centerIn: parent
-        text: mediaContBtn.icon
         font.pixelSize: mediaContBtn.iconSize
-        font.family: Variables.defaultFontFamily
         color: mediaContBtn.iconColor
+        text: mediaContBtn.icon
         opacity: mediaContBtn.showSecondIcon ? 0.0 : 1.0
         scale: mediaContBtn.showSecondIcon ? 0.6 : 1.0
 
-        Behavior on opacity { NumberAnimation { duration: 150; easing.type: Easing.OutQuad } }
-        Behavior on scale { NumberAnimation { duration: 150; easing.type: Easing.OutBack } }
+        Behavior on opacity {
+            NumberAnimation {
+                duration: Variables.durationFast
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.exitCurve
+            }
+        }
     }
 
     Text {
         id: text2
         anchors.centerIn: parent
-        text: mediaContBtn.icon
         font.pixelSize: mediaContBtn.iconSize
-        font.family: Variables.defaultFontFamily
         color: mediaContBtn.iconColor
+        text: mediaContBtn.icon
         opacity: mediaContBtn.showSecondIcon ? 1.0 : 0.0
         scale: mediaContBtn.showSecondIcon ? 1.0 : 0.6
 
-        Behavior on opacity { NumberAnimation { duration: 150; easing.type: Easing.OutQuad } }
-        Behavior on scale { NumberAnimation { duration: 150; easing.type: Easing.OutBack } }
+        Behavior on opacity {
+            NumberAnimation {
+                duration: Variables.durationFast
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.exitCurve
+            }
+        }
     }
 
     MouseArea {

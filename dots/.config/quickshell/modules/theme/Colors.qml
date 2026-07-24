@@ -18,9 +18,6 @@ FileView {
         property color border: "#8c9198"
         property color border_variant: "#42474e"
 
-        property color textSub: "#b9c8da"
-        property color textVibrant: "#cee5ff"
-
         property color activeAccent: "#9bcbfb"      // indicator states
         property color inactiveAccent: "#d3bfe6"    // sleeping components
         property color activeVibrant: "#42474e"
@@ -62,9 +59,6 @@ FileView {
     property color background: adapter.background
     property color border: adapter.border
     property color border_variant: adapter.border_variant
-
-    property color textSub: adapter.textSub
-    property color textVibrant: adapter.textVibrant
 
     property color activeAccent: adapter.activeAccent
     property color inactiveAccent: adapter.inactiveAccent

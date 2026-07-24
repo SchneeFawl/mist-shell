@@ -5,15 +5,15 @@ examples/
 # -- SHELL --
 # color related
 color_theme.json
-colors.json
-state.json
-themes.json
-colors.lua
+dots/.config/mist/themes.json
+dots/.config/quickshell/modules/theme/state.json
+dots/.config/quickshell/modules/theme/colors.json
+dots/.config/hyprland/colors.lua
 
 # others
-screen_record.json
-settings.json
-variables.lua
+dots/.config/mist/screen_record.json
+dots/.config/quickshell/settings.json
+dots/.config/hypr/hyprland/variables.lua
 
 # system trash
 .DS_Store

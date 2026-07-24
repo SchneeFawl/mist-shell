@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.modules.theme
+import qs.modules.common
 
 RowLayout {
     id: statHeaderRoot
@@ -14,21 +15,16 @@ RowLayout {
     Layout.alignment: Qt.AlignCenter
     spacing: Variables.dashInnerColSpacing + Math.round(3 * Variables.scaleFactor)
 
-    Text {
-        verticalAlignment: Text.AlignVCenter
+    StyledText {
         horizontalAlignment: Text.AlignHCenter
-        font.family: Variables.defaultFontFamily
         font.pixelSize: Variables.fontMedium
         color: statHeaderRoot.iconColor
         text: statHeaderRoot.icon
     }
 
-    Text {
-        verticalAlignment: Text.AlignVCenter
+    StyledText {
         horizontalAlignment: Text.AlignHCenter
-        font.family: Variables.defaultFontFamily
         font.pixelSize: Variables.fontMedium - 1
-        color: Colors.on_surface
         text: statHeaderRoot.text
     }
 }

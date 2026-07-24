@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.modules.theme
+import qs.modules.common
 import qs.services
 
 Rectangle {
@@ -55,20 +56,11 @@ Rectangle {
             }
         }
 
-        Text {
+        StyledText {
             anchors.centerIn: parent
-            font.family: Variables.defaultFontFamily
             font.pixelSize: Variables.iconSmall
             color: track.currentMode === "dark" ? Colors.on_primary : Colors.primary
             text: track.currentMode === "dark" ? Icons.moonCrescent : Icons.sunBright
-
-            Behavior on color {
-                ColorAnimation {
-                    duration: Variables.durationSlow
-                    easing.type: Easing.Bezier
-                    easing.bezierCurve: Variables.standardCurve
-                }
-            }
         }
     }
 }

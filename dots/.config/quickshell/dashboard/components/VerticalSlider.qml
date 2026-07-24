@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.modules.theme
+import qs.modules.common
 
 Rectangle {
     id: root
@@ -19,12 +20,11 @@ Rectangle {
     radius: Variables.dashInnerRadius
     clip: true
 
-    Text {
+    StyledText {
         id: percentText
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
-        anchors.topMargin: Variables.dashInnerColSpacing + 2
-        font.family: Variables.defaultFontFamily
+        anchors.topMargin: Variables.dashInnerColSpacing + Math.round(2 * Variables.scaleFactor)
         font.pixelSize: Variables.fontSmall
         color: Colors.secondary
         text: Math.round(root.value * 100) + "%"

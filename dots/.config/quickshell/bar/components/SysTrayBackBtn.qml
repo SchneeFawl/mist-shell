@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.modules.theme
+import qs.modules.common
 
 Rectangle {
     id: backButton
@@ -39,37 +40,17 @@ Rectangle {
         leftPadding: 8
         anchors.verticalCenter: parent.verticalCenter
 
-        Text {
+        StyledText {
             anchors.verticalCenter: parent.verticalCenter
-            font.family: Variables.defaultFontFamily
-            font.pixelSize: Variables.fontNormal
             color: backBtnMouse.pressed ? Colors.on_primary : Colors.on_surface
             text: Icons.chevronLeft
-
-            Behavior on color {
-                ColorAnimation {
-                    duration: Variables.durationMedium
-                    easing.type: Easing.Bezier
-                    easing.bezierCurve: Variables.standardCurve
-                }
-            }
         }
 
-        Text {
+        StyledText {
             anchors.verticalCenter: parent.verticalCenter
-            leftPadding: 4
-            font.family: Variables.defaultFontFamily
-            font.pixelSize: 13
+            leftPadding: Variables.spacingSmall
             color: backBtnMouse.pressed ? Colors.on_primary : Colors.on_surface
             text: "Back"
-
-            Behavior on color {
-                ColorAnimation {
-                    duration: Variables.durationMedium
-                    easing.type: Easing.Bezier
-                    easing.bezierCurve: Variables.standardCurve
-                }
-            }
         }
     }
 

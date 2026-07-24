@@ -4,6 +4,7 @@ import QtQuick.Layouts
 import Quickshell.Widgets
 import Quickshell.Bluetooth
 import qs.modules.theme
+import qs.modules.common
 import "../components"
 
 // qmllint disable unresolved-type
@@ -33,12 +34,9 @@ ClippingRectangle {
                 onClicked: btMenuRoot.backClicked()
             }
 
-            Text {
+            StyledText {
                 anchors.centerIn: parent
-                font.family: Variables.defaultFontFamily
                 font.pixelSize: Variables.fontMedium
-                font.weight: Variables.defaultFontWeight
-                color: Colors.on_surface
                 text: "Bluetooth"
             }
 
@@ -63,12 +61,9 @@ ClippingRectangle {
             Layout.fillWidth: true
             visible: !Bluetooth.defaultAdapter || !Bluetooth.defaultAdapter.enabled
 
-            Text {
+            StyledText {
                 anchors.centerIn: parent
                 Layout.alignment: Text.AlignHCenter
-                font.family: Variables.defaultFontFamily
-                font.pixelSize: Variables.fontNormal
-                color: Colors.on_surface
                 text: "Bluetooth is turned off"
             }
         }

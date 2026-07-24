@@ -4,7 +4,6 @@
   "border_variant": "{{colors.outline_variant.default.hex}}",
   "textMain": "{{colors.primary.default.hex}}",
   "textSub": "{{colors.secondary.default.hex}}",
-  "textVibrant": "{{colors.on_primary_container.default.hex}}",
   "activeAccent": "{{colors.primary.default.hex}}",
   "inactiveAccent": "{{colors.tertiary.default.hex}}",
   "activeVibrant": "{{colors.surface_variant.default.hex}}",

@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell.Widgets
 import qs.modules.theme
+import qs.modules.common
 
 Item {
     id: menuItem
@@ -100,14 +101,13 @@ Item {
                 radius: Variables.radiusSmall
                 color: menuItem.modelData?.checkState === 0 ? "transparent" : Colors.surface_bright ?? ""
 
-                Text {
+                StyledText {
                     anchors.centerIn: parent
                     visible: menuItem.modelData?.checkState !== 0 ?? false
-                    text: menuItem.modelData?.checkState === 1 ? Icons.minus : Icons.checkMark ?? ""
-                    color: Colors.primary
                     font.pixelSize: Variables.fontSmall
                     font.bold: true
-                    font.family: Variables.defaultFontFamily
+                    color: Colors.primary
+                    text: menuItem.modelData?.checkState === 1 ? Icons.minus : Icons.checkMark ?? ""
                 }
             }
 
@@ -141,26 +141,23 @@ Item {
         }
 
         // menu item text
-        Text {
+        StyledText {
             id: menuItemText
-            visible: !menuItem.modelData?.isSeparator ?? false
+            leftPadding: Variables.spacingSmall
             anchors.verticalCenter: parent.verticalCenter
+            visible: !menuItem.modelData?.isSeparator ?? false
             font.pixelSize: Variables.fontSmall
-            font.family: Variables.defaultFontFamily
             color: Colors.on_primary_container
             text: menuItem.modelData?.text ?? ""
-            leftPadding: Variables.spacingSmall
         }
     }
 
-    Text {
+    StyledText {
         id: submenuArrow
         visible: menuItem.modelData ? !menuItem.modelData.isSeparator && menuItem.modelData.hasChildren : false
         anchors.right: parent.right
         anchors.rightMargin: Variables.spacingLarge
         anchors.verticalCenter: parent.verticalCenter
-        font.pixelSize: Variables.fontNormal
-        font.family: Variables.defaultFontFamily
         color: Colors.on_primary_container
         text: Icons.chevronRight
         opacity: 0.7

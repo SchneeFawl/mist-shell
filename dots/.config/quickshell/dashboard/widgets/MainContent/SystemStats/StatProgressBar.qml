@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.modules.theme
+import qs.modules.common
 
 ColumnLayout {
     id: statProgBarRoot
@@ -26,12 +27,10 @@ ColumnLayout {
         Layout.leftMargin: Variables.dashInnerColSpacing
         spacing: Variables.dashInnerColSpacing
 
-        Text {
+        StyledText {
             id: titleText
-            verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
-            font.family: Variables.defaultFontFamily
-            font.pixelSize: 15
+            font.pixelSize: Variables.fontMedium
             color: Colors.on_surface
             text: statProgBarRoot.title
         }
@@ -39,7 +38,7 @@ ColumnLayout {
         Rectangle {
             id: progressRoot
             Layout.fillWidth: true
-            Layout.preferredHeight: 18
+            Layout.preferredHeight: Math.round(18 * Variables.scaleFactor)
             Layout.alignment: Qt.AlignHCenter
             color: Colors.surface_container_high
             border.width: 2
@@ -70,13 +69,10 @@ ColumnLayout {
         id: subTextLayout
         Layout.fillWidth: true
 
-        Text {
+        StyledText {
             id: leftText
-            Layout.leftMargin: Variables.dashInnerColSpacing + 2
-            verticalAlignment: Text.AlignVCenter
+            Layout.leftMargin: Variables.dashInnerColSpacing + Math.round(2 * Variables.scaleFactor)
             horizontalAlignment: Text.AlignLeft
-            font.family: Variables.defaultFontFamily
-            font.pixelSize: Variables.fontNormal
             color: statProgBarRoot.leftSubTextColor
             text: statProgBarRoot.leftSubText
             visible: statProgBarRoot.leftSubText !== ""
@@ -89,25 +85,20 @@ ColumnLayout {
             radius: Variables.dashInnerRadius
         }
 
-        Text {
+        StyledText {
             id: rightIcon
-            verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignRight
             rightPadding: -Variables.dashInnerColSpacing
-            font.family: Variables.defaultFontFamily
             font.pixelSize: Variables.fontMedium
             color: statProgBarRoot.rightIconColor
             text: statProgBarRoot.rightIcon
             visible: statProgBarRoot.rightIcon !== ""
         }
 
-        Text {
+        StyledText {
             id: rightText
-            Layout.rightMargin: Variables.dashInnerColSpacing + 2
-            verticalAlignment: Text.AlignVCenter
+            Layout.rightMargin: Variables.dashInnerColSpacing + Math.round(2 * Variables.scaleFactor)
             horizontalAlignment: Text.AlignRight
-            font.family: Variables.defaultFontFamily
-            font.pixelSize: Variables.fontNormal
             color: statProgBarRoot.rightSubTextColor
             text: statProgBarRoot.rightSubText
             visible: statProgBarRoot.rightSubText !== ""

@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.modules.theme
+import qs.modules.common
 
 Rectangle {
     id: notifRectRoot
@@ -25,11 +26,9 @@ Rectangle {
             radius: Variables.dashInnerRadius
             clip: true
 
-            Text {
+            StyledText {
                 anchors.centerIn: parent
                 font.pixelSize: Variables.fontMedium
-                font.family: Variables.defaultFontFamily
-                font.weight: Variables.defaultFontWeight
                 color: Colors.on_surface
                 text: "Notifications"
             }
@@ -60,11 +59,9 @@ Rectangle {
                 }
             }
 
-            Text {
-                color: Colors.on_surface
+            StyledText {
                 anchors.centerIn: parent
                 font.pixelSize: Variables.iconNormal
-                font.family: Variables.defaultFontFamily
                 text: Icons.actionClear
             }
 
