@@ -33,8 +33,11 @@ Rectangle {
                 anchors.leftMargin: 10
                 anchors.rightMargin: 10
 
-                CalendarButton {
+                BaseButton {
+                    btnSize: Variables.buttonHeightSmall
+                    radius: width / 2
                     icon: Icons.chevronLeft
+                    iconSize: Variables.iconNormal
                     onClicked: {
                         if (root.currentMonth === 0) {
                             root.currentMonth = 11;
@@ -45,7 +48,7 @@ Rectangle {
                     }
                 }
 
-                // month and year lable
+                // month and year label
                 StyledText {
                     Layout.fillWidth: true
                     horizontalAlignment: Text.AlignHCenter
@@ -57,8 +60,11 @@ Rectangle {
                     }
                 }
 
-                CalendarButton {
+                BaseButton {
+                    btnSize: Variables.buttonHeightSmall
+                    radius: width / 2
                     icon: Icons.chevronRight
+                    iconSize: Variables.iconNormal
                     onClicked: {
                         if (root.currentMonth === 11) {
                             root.currentMonth = 0;
@@ -121,10 +127,25 @@ Rectangle {
                         Layout.fillHeight: true
                         Layout.fillWidth: true
 
-                        StyledText {
-                            anchors.centerIn: parent
-                            color: dateContainer.modelData.isCurrentMonth ? Colors.primary : Colors.on_surface
-                            text: dateContainer.modelData.day
+                        Rectangle {
+                            anchors.fill: parent
+                            radius: width / 2
+                            color: {
+                                dateContainer.modelData.isToday ? Colors.primary : (
+                                    dateContainer.modelData.isCurrentWeek ? Colors.surface_container_highest : "transparent"
+                                )
+                            }
+
+                            StyledText {
+                                anchors.centerIn: parent
+                                color: {
+                                    dateContainer.modelData.isToday ? Colors.on_primary : (
+                                        dateContainer.modelData.isCurrentMonth ? Colors.secondary : Colors.tertiary
+                                    )
+                                }
+                                font.bold: dateContainer.modelData.isToday ? true : false
+                                text: dateContainer.modelData.day
+                            }
                         }
                     }
                 }

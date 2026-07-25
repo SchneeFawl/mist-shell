@@ -2,10 +2,11 @@ import QtQuick
 import QtQuick.Layouts
 import qs.modules.theme
 import qs.modules.common
+import qs.services
 
 Rectangle {
 
-    property int activeTab: 1
+    property int activeTab: DashboardController.activeTab
     signal tabSelected(int index)
 
     id: navWrapper
