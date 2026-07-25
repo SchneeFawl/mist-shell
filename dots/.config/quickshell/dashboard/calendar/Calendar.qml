@@ -13,13 +13,13 @@ Rectangle {
     Layout.fillWidth: true
     Layout.fillHeight: true
     color: Colors.surface_container_low
-    radius: 14
+    radius: Variables.dashColumnRadius
 
     ColumnLayout {
         anchors.fill: parent
-        anchors.margins: 5
+        anchors.margins: Variables.spacingSmall
 
-        property int fixedRadius: 14 - 5
+        property int fixedRadius: Variables.dashColumnRadius - Variables.spacingSmaal
 
         // month container
         Rectangle {
@@ -30,8 +30,8 @@ Rectangle {
 
             RowLayout {
                 anchors.fill: parent
-                anchors.leftMargin: 10
-                anchors.rightMargin: 10
+                anchors.leftMargin: Variables.spacingMedium
+                anchors.rightMargin: Variables.spacingMedium
 
                 BaseButton {
                     btnSize: Variables.buttonHeightSmall
@@ -48,6 +48,8 @@ Rectangle {
                     }
                 }
 
+                Item { Layout.fillWidth: true }     // filler
+
                 // month and year label
                 StyledText {
                     Layout.fillWidth: true
@@ -55,10 +57,24 @@ Rectangle {
                     font.pixelSize: Variables.fontMedium
                     font.bold: true
                     text: {
-                        var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                        var months = ["January", "February", "March", "April", "May",
+                            "June", "July", "August", "September", "October", "November", "December"];
                         return months[root.currentMonth] + " " + root.currentYear;
                     }
+                    scale: labelMouseArea.pressed ? 0.85 : 1.0
+
+                    MouseArea {
+                        id: labelMouseArea
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: {
+                            root.currentMonth = new Date().getMonth();
+                            root.currentYear = new Date().getFullYear();
+                        }
+                    }
                 }
+
+                Item { Layout.fillWidth: true }     // filler
 
                 BaseButton {
                     btnSize: Variables.buttonHeightSmall
@@ -92,12 +108,18 @@ Rectangle {
 
                 Repeater {
                     model: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
-
                     delegate: StyledText {
+                        required property int index
+                        readonly property bool isTodayWeekDay: {
+                            root.currentMonth === new Date().getMonth() && root.currentYear === new Date().getFullYear() && index === new Date().getDay();
+                        }
+
                         required property string modelData
                         Layout.fillWidth: true
                         horizontalAlignment: Text.AlignHCenter
                         font.pixelSize: Variables.fontSmall
+                        color: isTodayWeekDay ? Colors.primary : Colors.on_surface
+                        font.weight: isTodayWeekDay ? Variables.defaultFontWeight + 200 : Variables.defaultFontWeight
                         text: modelData
                     }
                 }
@@ -167,7 +189,7 @@ Rectangle {
                                         dateContainer.modelData.isCurrentMonth ? Colors.secondary : Colors.tertiary
                                     )
                                 }
-                                font.bold: dateContainer.modelData.isToday ? true : false
+                                font.bold: dateContainer.modelData.isToday ? Variables.defaultFontWeight + 200 : Variables.defaultFontWeight
                                 text: dateContainer.modelData.day
                             }
                         }
