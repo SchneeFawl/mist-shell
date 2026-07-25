@@ -127,13 +127,13 @@ hl.window_rule({
     float = true,
     center = true,
     size = { 800, 600 },
-    opacity = "0.8 0.7"
+    opacity = "0.95 0.85"
 })
 
 -- Picture-in-picture mode
 hl.window_rule({
     match = {
-	title = "^([Pp]icture[-\\s]?[Ii]n[-\\s]?[Pp]icture)(.*)$"
+        title = "^([Pp]icture[-\\s]?[Ii]n[-\\s]?[Pp]icture)(.*)$"
     },
     float = true,
     keep_aspect_ratio = true,
@@ -141,26 +141,26 @@ hl.window_rule({
 })
 
 
--- APP SPECIFIC WINDOW RULES AHEAD
-hl.window_rule({
-    match = {
-        class = "^(code)$"
-    },
-    opacity = "1 0.82"
-})
-
+--- APP SPECIFIC WINDOW RULES ---
 hl.window_rule({
     match = {
         class = "^(zen)$"       -- zen browser
     },
-    opacity = "1 0.82 1"
+    opacity = "1.1 0.92"
 })
 
 hl.window_rule({
     match = {
         class = "^(firefox)$"
     },
-    opacity = "0.92 0.82"
+    opacity = "1.1 0.92"
+})
+
+hl.window_rule({
+    match = {
+        class = "^(discord)$"
+    },
+    opacity = "1.1 0.85"
 })
 
 -- universal system dialog rule
@@ -189,10 +189,9 @@ local suppressMaximizeRule = hl.window_rule({
 
 hl.workspace_rule({
     workspace = "special:magic",
-    gaps_out = 24
+    gaps_out = 20
 })
 
 -----------------------
 --|   LAYER RULES   |--
 -----------------------
--- Currently empty, plan to use when quickshell widgets are added

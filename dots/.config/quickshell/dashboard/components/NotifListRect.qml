@@ -68,6 +68,8 @@ Rectangle {
             MouseArea {
                 id: notifClearMouse
                 anchors.fill: parent
+                acceptedButtons: Qt.LeftButton
+                cursorShape: Qt.PointingHandCursor
                 onClicked: notifRectRoot.clicked()
             }
         }

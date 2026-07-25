@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import "../components"
 import qs.modules.theme
+import qs.modules.common
 import qs.services
 
 ColumnLayout {
@@ -27,9 +28,12 @@ ColumnLayout {
             anchors.fill: parent
             spacing: Variables.dashInnerColSpacing
 
-            SliderControlsBtn {
+            BaseButton {
+                property bool muted: Audio.sinkMuted
+
+                color: active ? (muted ? Colors.error : Colors.primary) : Colors.surface_container_high
                 icon: muted ? Icons.sysVolumeMute : Icons.sysVolume
-                muted: Audio.sinkMuted
+                iconSize: Variables.iconNormal
                 onClicked: {
                     if (root.activeOption === 1 && Audio.sink && Audio.sink.audio) {
                         Audio.sink.audio.muted = !Audio.sink.audio.muted
@@ -38,9 +42,12 @@ ColumnLayout {
                 active: root.activeOption === 1
             }
 
-            SliderControlsBtn {
+            BaseButton {
+                property bool muted: Audio.sourceMuted
+
+                color: active ? (muted ? Colors.error : Colors.primary) : Colors.surface_container_high
                 icon: muted ? Icons.sysMicMute : Icons.sysMic
-                muted: Audio.sourceMuted
+                iconSize: Variables.iconNormal
                 onClicked: {
                     if (root.activeOption === 2 && Audio.source && Audio.source.audio) {
                         Audio.source.audio.muted = !Audio.source.audio.muted
@@ -49,8 +56,9 @@ ColumnLayout {
                 active: root.activeOption === 2
             }
 
-            SliderControlsBtn {
+            BaseButton {
                 icon: Icons.sysBrightness
+                iconSize: Variables.iconNormal
                 onClicked: {
                     root.activeOption = 3
                 }
