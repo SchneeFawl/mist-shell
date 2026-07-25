@@ -67,7 +67,7 @@ Rectangle {
         }
     }
 
-    Text {
+    StyledText {
         id: text2
         anchors.centerIn: parent
         font.pixelSize: mediaContBtn.iconSize

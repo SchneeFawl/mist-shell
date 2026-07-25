@@ -38,14 +38,6 @@ Pill {
             font.pixelSize: Variables.fontSmall
             color: Colors.secondary
             text: Time.dayText
-
-            Behavior on opacity {
-                NumberAnimation {
-                    duration: Variables.durationMedium
-                    easing.type: Easing.Bezier
-                    easing.bezierCurve: Variables.standardCurve
-                }
-            }
         }
 
         StyledText {
@@ -56,14 +48,6 @@ Pill {
             font.pixelSize: Variables.fontSmall
             color: Colors.secondary
             text: Time.dateText
-
-            Behavior on opacity {
-                NumberAnimation {
-                    duration: Variables.durationMedium
-                    easing.type: Easing.Bezier
-                    easing.bezierCurve: Variables.standardCurve
-                }
-            }
         }
     }
 }

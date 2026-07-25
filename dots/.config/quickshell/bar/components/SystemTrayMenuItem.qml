@@ -58,7 +58,7 @@ Item {
 
         Behavior on opacity {
             NumberAnimation {
-                duration: 100
+                duration: Variables.durationFast
                 easing.type: Easing.Bezier
                 easing.bezierCurve: Variables.standardCurve
             }

@@ -83,7 +83,14 @@ Item {
                         text: Icons.record
                         opacity: ScreenRecordService.status === "idle" ? 1 : 0
                         visible: opacity > 0
-                        Behavior on opacity { NumberAnimation { duration: Variables.durationSlow } }
+
+                        Behavior on opacity {
+                            NumberAnimation {
+                                duration: Variables.durationSlow
+                                easing.type: Easing.Bezier
+                                easing.bezierCurve: Variables.standardCurve
+                            }
+                        }
                     }
 
                     ScreenRecordText {      // recording icon
@@ -93,7 +100,14 @@ Item {
                         text: Icons.recording
                         opacity: ScreenRecordService.status === "recording" ? 1 : 0
                         visible: opacity > 0
-                        Behavior on opacity { NumberAnimation { duration: Variables.durationSlow } }
+
+                        Behavior on opacity {
+                            NumberAnimation {
+                                duration: Variables.durationSlow
+                                easing.type: Easing.Bezier
+                                easing.bezierCurve: Variables.standardCurve
+                            }
+                        }
                     }
 
                     ScreenRecordText {      // replay icon
@@ -103,7 +117,14 @@ Item {
                         text: Icons.replay
                         opacity: ScreenRecordService.status === "replay" ? 1 : 0
                         visible: opacity > 0
-                        Behavior on opacity { NumberAnimation { duration: Variables.durationSlow } }
+
+                        Behavior on opacity {
+                            NumberAnimation {
+                                duration: Variables.durationSlow
+                                easing.type: Easing.Bezier
+                                easing.bezierCurve: Variables.standardCurve
+                            }
+                        }
                     }
 
                     SequentialAnimation {
