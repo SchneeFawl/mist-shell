@@ -106,10 +106,37 @@ Rectangle {
 
         // bg for calendar grid (dates)
         Rectangle {
+            id: gridBg
+
+            readonly property int activeWeekRow: {
+                let days = CalendarLogic.getDaysForGrid(root.currentYear, root.currentMonth);
+                let idx = days.findIndex(d => d.isToday);
+                return idx >= 0 ? Math.floor(idx / 7) : -1;
+            }
+            readonly property int rowHeight: (height - (Variables.spacingSmall * 2) - (Variables.spacingSmall * 5)) / 6
+            readonly property Item targetWeekItem: {
+                if (gridBg.activeWeekRow >= 0 && gridRepeater.count > gridBg.activeWeekRow * 7) {
+                    return gridRepeater.itemAt(gridBg.activeWeekRow * 7);
+                }
+                return null;
+            }
+
             Layout.fillWidth: true
             Layout.fillHeight: true
             radius: parent.fixedRadius
             color: Colors.surface_container_high
+
+            Rectangle {
+                id: weekBg
+
+                x: Variables.spacingSmall
+                y: gridBg.targetWeekItem ? (gridBg.targetWeekItem.y + Variables.spacingSmall) : 0
+                width: parent.width - (Variables.spacingSmall * 2)
+                height: gridBg.targetWeekItem?.height ?? 0
+                radius: height / 2
+                color: Colors.surface_container_highest
+                visible: gridBg.activeWeekRow >= 0
+            }
 
             GridLayout {
                 anchors.fill: parent
@@ -119,6 +146,7 @@ Rectangle {
                 columnSpacing: Variables.spacingSmall
 
                 Repeater {
+                    id: gridRepeater
                     model: CalendarLogic.getDaysForGrid(root.currentYear, root.currentMonth)
                     delegate: Item {
                         id: dateContainer
@@ -130,11 +158,7 @@ Rectangle {
                         Rectangle {
                             anchors.fill: parent
                             radius: width / 2
-                            color: {
-                                dateContainer.modelData.isToday ? Colors.primary : (
-                                    dateContainer.modelData.isCurrentWeek ? Colors.surface_container_highest : "transparent"
-                                )
-                            }
+                            color: dateContainer.modelData.isToday ? Colors.primary : "transparent"
 
                             StyledText {
                                 anchors.centerIn: parent
