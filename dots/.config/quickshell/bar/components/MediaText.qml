@@ -2,105 +2,150 @@ import QtQuick
 import qs.services
 import qs.modules.theme
 
-Text {
-    id: mediaLabel
+Item {
+    id: root
 
-    property string displayedText: Icons.barMedia + "  No media playing"
-    property string activeText: ""
-    property var player: MprisController.activePlayer
+    property int maxViewportWidth: Math.round(360 * Variables.scaleFactor)
 
-    onPlayerChanged: updateDisplayText()
+    implicitWidth: Math.min(mediaLabel.implicitWidth, maxViewportWidth)
+    width: implicitWidth
+    implicitHeight: mediaLabel.implicitHeight
+    height: implicitHeight
+    clip: true
 
-    font.family: Variables.defaultFontFamily
-    font.pixelSize: Variables.fontNormal
-    font.weight: Variables.defaultFontWeight
-    color: Colors.primary
-    renderType: Text.NativeRendering
-    verticalAlignment: Text.AlignVCenter
-    text: activeText
-    opacity: 1.0
+    Text {
+        id: mediaLabel
 
-    Connections {
-        target: mediaLabel.player
-        ignoreUnknownSignals: true
+        property string displayedText: Icons.barMedia + "  No media playing"
+        property string activeText: ""
+        property var player: MprisController.activePlayer
 
-        function onTrackTitleChanged() {
-            mediaLabel.updateDisplayText();
-        }
+        onPlayerChanged: updateDisplayText()
 
-        function onTrackArtistChanged() {
-            mediaLabel.updateDisplayText();
-        }
-    }
+        anchors.verticalCenter: parent.verticalCenter
+        font.family: Variables.defaultFontFamily
+        font.pixelSize: Variables.fontNormal
+        font.weight: Variables.defaultFontWeight
+        color: Colors.primary
+        renderType: Text.NativeRendering
+        verticalAlignment: Text.AlignVCenter
+        text: activeText
+        opacity: 1.0
 
-    Timer {
-        id: resetTimer
-        interval: 1000
-        repeat: false
-        onTriggered: {
-            if (!mediaLabel.player) {
-                mediaLabel.displayedText = Icons.barMedia + "  No media playing";
+        Connections {
+            target: mediaLabel.player
+            ignoreUnknownSignals: true
+
+            function onTrackTitleChanged() {
+                mediaLabel.updateDisplayText();
+            }
+
+            function onTrackArtistChanged() {
+                mediaLabel.updateDisplayText();
             }
         }
-    }
 
-    onDisplayedTextChanged: textSwapAnim.restart()
-
-    SequentialAnimation {
-        id: textSwapAnim
-
-        NumberAnimation {
-            target: mediaLabel
-            property: "opacity"
-            to: 0.0
-            duration: Variables.durationFast
-            easing.type: Easing.Bezier
-            easing.bezierCurve: Variables.standardCurve
+        Timer {
+            id: resetTimer
+            interval: 1000
+            repeat: false
+            onTriggered: {
+                if (!mediaLabel.player) {
+                    mediaLabel.displayedText = Icons.barMedia + "  No media playing";
+                }
+            }
         }
 
-        ScriptAction {
-            script: mediaLabel.activeText = mediaLabel.displayedText
+        onDisplayedTextChanged: textSwapAnim.restart()
+
+        onImplicitWidthChanged: checkMarquee()
+        onActiveTextChanged: Qt.callLater(checkMarquee())
+
+        SequentialAnimation {
+            id: textSwapAnim
+
+            NumberAnimation {
+                target: mediaLabel
+                property: "opacity"
+                to: 0.0
+                duration: Variables.durationFast
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.standardCurve
+            }
+
+            ScriptAction {
+                script: mediaLabel.activeText = mediaLabel.displayedText
+            }
+
+            NumberAnimation {
+                target: mediaLabel
+                property: "opacity"
+                to: 1.0
+                duration: Variables.durationFast
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.standardCurve
+            }
         }
 
-        NumberAnimation {
-            target: mediaLabel
-            property: "opacity"
-            to: 1.0
-            duration: Variables.durationFast
-            easing.type: Easing.Bezier
-            easing.bezierCurve: Variables.standardCurve
-        }
-    }
+        SequentialAnimation {
+            id: marqueeAnim
+            loops: Animation.Infinite
 
-    function updateDisplayText() {
-        let active = MprisController.activePlayer
+            PauseAnimation { duration: 1800 }
 
-        if (!active) {
-            resetTimer.start();
-            return;
-        }
+            NumberAnimation {
+                target: mediaLabel
+                property: "x"
+                to: -(mediaLabel.implicitWidth - root.width)
+                duration: Math.max(1000, (mediaLabel.implicitWidth - root.width) * 25)
+                easing.type: Easing.Linear
+            }
 
-        resetTimer.stop();
+            PauseAnimation { duration: 1800 }
 
-        let title = active.trackTitle
-        let artist = active.trackArtist
-
-        // in case no title, display identity
-        if (!title || title.trim() === "") {
-            if (displayedText !== Icons.barMedia + "  No media playing") return;
-
-            let name = active.identity ?? "Media";
-            displayedText = Icons.barMedia + "  " + name;
-            return;
+            NumberAnimation {
+                target: mediaLabel
+                property: "x"
+                to: 0
+                duration: Math.max(1000, (mediaLabel.implicitWidth - root.width) * 25)
+                easing.type: Easing.Linear
+            }
         }
 
-        let actualText = artist ? (Icons.barMedia + "  " + title + " " + Icons.dot + " " + artist) : title;
-        let maxChars = Variables.maxBarMediaChars
+        function updateDisplayText() {
+            let active = MprisController.activePlayer
 
-        if (actualText.length > maxChars) {
-            actualText = actualText.substring(0, maxChars) + " ...";
+            if (!active) {
+                resetTimer.start();
+                return;
+            }
+
+            resetTimer.stop();
+
+            let title = active.trackTitle
+            let artist = active.trackArtist
+
+            // in case no title, display identity
+            if (!title || title.trim() === "") {
+                if (displayedText !== Icons.barMedia + "  No media playing") return;
+
+                let name = active.identity ?? "Media";
+                displayedText = Icons.barMedia + "  " + name;
+                return;
+            }
+
+            let actualText = artist ? (Icons.barMedia + "  " + title + " " + Icons.dot + " " + artist) : title;
+
+            mediaLabel.displayedText = actualText
         }
 
-        mediaLabel.displayedText = actualText
+        function checkMarquee() {
+            mediaLabel.x = 0;
+            if (mediaLabel.implicitWidth > root.maxViewportWidth) {
+                marqueeAnim.restart();
+            } else {
+                marqueeAnim.stop();
+            }
+        }
     }
 }

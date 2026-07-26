@@ -39,7 +39,7 @@ Rectangle {
         anchors.top: percentText.bottom
         anchors.topMargin: Variables.dashInnerColSpacing
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: Variables.dashInnerColSpacing
+        anchors.bottomMargin: Variables.dashInnerColSpacing * 2
         implicitWidth: Variables.spacingLarge
         color: Colors.surface_container_low
         radius: width / 2

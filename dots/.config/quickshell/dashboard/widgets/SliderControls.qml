@@ -74,7 +74,6 @@ ColumnLayout {
         }
     }
 
-    // slider (placeholder)
     VerticalSlider {
         id: volumeSlider
         visible: root.activeOption === 1
@@ -99,6 +98,7 @@ ColumnLayout {
         }
     }
 
+    // (placeholder)
     VerticalSlider {
         id: brightnessSlider
         visible: root.activeOption === 3

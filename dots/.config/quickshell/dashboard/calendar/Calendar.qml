@@ -110,9 +110,7 @@ Rectangle {
                     model: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
                     delegate: StyledText {
                         required property int index
-                        readonly property bool isTodayWeekDay: {
-                            root.currentMonth === new Date().getMonth() && root.currentYear === new Date().getFullYear() && index === new Date().getDay();
-                        }
+                        readonly property bool isTodayWeekDay: root.currentMonth === new Date().getMonth() && root.currentYear === new Date().getFullYear() && index === new Date().getDay();
 
                         required property string modelData
                         Layout.fillWidth: true
