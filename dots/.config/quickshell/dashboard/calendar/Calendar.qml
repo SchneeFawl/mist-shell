@@ -19,7 +19,7 @@ Rectangle {
         anchors.fill: parent
         anchors.margins: Variables.spacingSmall
 
-        property int fixedRadius: Variables.dashColumnRadius - Variables.spacingSmaal
+        property int fixedRadius: Variables.dashColumnRadius - Variables.spacingSmall
 
         // month container
         Rectangle {

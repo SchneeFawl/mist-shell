@@ -20,17 +20,20 @@ ColumnLayout {
         Layout.rightMargin: Variables.dashInnerColSpacing
         Layout.topMargin: Variables.dashInnerColSpacing
         Layout.fillWidth: true
-        Layout.preferredHeight: ((Variables.buttonHeight + 4) * 3) + (Variables.spacingSmall * 2)
+        Layout.preferredHeight: buttonsLayout.implicitHeight
         color: "transparent"
         radius: Variables.dashInnerRadius
 
         ColumnLayout {
+            id: buttonsLayout
             anchors.fill: parent
             spacing: Variables.dashInnerColSpacing
 
             BaseButton {
                 property bool muted: Audio.sinkMuted
 
+                Layout.alignment: Qt.AlignHCenter
+                btnSize: Variables.buttonHeightMedium - (Variables.dashInnerColSpacing * 2)
                 color: active ? (muted ? Colors.error : Colors.primary) : Colors.surface_container_high
                 icon: muted ? Icons.sysVolumeMute : Icons.sysVolume
                 iconSize: Variables.iconNormal
@@ -45,6 +48,8 @@ ColumnLayout {
             BaseButton {
                 property bool muted: Audio.sourceMuted
 
+                Layout.alignment: Qt.AlignHCenter
+                btnSize: Variables.buttonHeightMedium - (Variables.dashInnerColSpacing * 2)
                 color: active ? (muted ? Colors.error : Colors.primary) : Colors.surface_container_high
                 icon: muted ? Icons.sysMicMute : Icons.sysMic
                 iconSize: Variables.iconNormal
@@ -57,6 +62,8 @@ ColumnLayout {
             }
 
             BaseButton {
+                Layout.alignment: Qt.AlignHCenter
+                btnSize: Variables.buttonHeightMedium - (Variables.dashInnerColSpacing * 2)
                 icon: Icons.sysBrightness
                 iconSize: Variables.iconNormal
                 onClicked: {

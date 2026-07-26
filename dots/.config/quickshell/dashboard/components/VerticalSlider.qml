@@ -36,10 +36,10 @@ Rectangle {
         property real value
 
         anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: percentText.bottom
+        anchors.topMargin: Variables.dashInnerColSpacing
         anchors.bottom: parent.bottom
-        anchors.top: parent.top
-        anchors.topMargin: Variables.spacingMedium * 2
-        anchors.bottomMargin: Variables.spacingMedium
+        anchors.bottomMargin: Variables.dashInnerColSpacing
         implicitWidth: Variables.spacingLarge
         color: Colors.surface_container_low
         radius: width / 2
