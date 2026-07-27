@@ -7,7 +7,6 @@ import "./SettingsMenu"
 Rectangle {
     id: settingsRoot
 
-    // anchors.fill: parent
     color: Colors.surface_container_low
     radius: Variables.dashColumnRadius
     clip: true
@@ -26,10 +25,10 @@ Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: Variables.buttonHeight
 
-            Rectangle {
+            StngsPillHighlight {
                 id: scaleHighlight
 
-                property var hoveredPill: {
+                hoveredPill: {
                     scalePill1.isHovered ? scalePill1 : (
                         scalePill2.isHovered ? scalePill2 : (
                             scalePill3.isHovered ? scalePill3 : (
@@ -38,35 +37,12 @@ Rectangle {
                         )
                     )
                 }
-                property var activePill: {
+                activePill: {
                     (SettingsService.scaleFactor === 1) ? scalePill1 : (
                         (SettingsService.scaleFactor === 1.25) ? scalePill2 : (
                             (SettingsService.scaleFactor === 1.5) ? scalePill3 : scalePill4
                         )
                     )
-                }
-                property var targetPill: hoveredPill ?? activePill
-
-                height: parent.height
-                width: targetPill?.width ?? 0
-                x: targetPill?.x ?? 0
-                radius: Variables.dashInnerRadius
-                color: Colors.primary
-                opacity: targetPill ? 1.0 : 0
-
-                Behavior on x {
-                    NumberAnimation {
-                        duration: Variables.durationMedium
-                        easing.type: Easing.Bezier
-                        easing.bezierCurve: Variables.standardCurve
-                    }
-                }
-                Behavior on opacity {
-                    NumberAnimation {
-                        duration: Variables.durationFast
-                        easing.type: Easing.Bezier
-                        easing.bezierCurve: Variables.standardCurve
-                    }
                 }
             }
 
@@ -98,6 +74,46 @@ Rectangle {
                     text: "2.0"
                     highlighted: scaleHighlight.targetPill === scalePill4
                     onClicked: SettingsService.scaleFactor = 2.0
+                }
+            }
+        }
+
+        SettingsText {
+            Layout.topMargin: Variables.spacingSmall
+            text: "Bar media text display style:"
+        }
+
+        Item {
+            id: mediaTextContainer
+            Layout.fillWidth: true
+            Layout.preferredHeight: Variables.buttonHeight
+
+            StngsPillHighlight {
+                id: mediaTextHighlight
+
+                hoveredPill: {
+                    mediaPill1.isHovered ? mediaPill1 :
+                        mediaPill2.isHovered ? mediaPill2 : null
+                }
+                activePill: SettingsService.mediaTextMode === "marquee" ? mediaPill1 : mediaPill2
+            }
+
+            RowLayout {
+                id: mediaTextPillsRow
+                anchors.fill: parent
+                spacing: 0
+
+                SettingsPill {
+                    id: mediaPill1
+                    text: "Marquee"
+                    highlighted: mediaTextHighlight.targetPill === mediaPill1
+                    onClicked: SettingsService.mediaTextMode = "marquee"
+                }
+                SettingsPill {
+                    id: mediaPill2
+                    text: "Elide"
+                    highlighted: mediaTextHighlight.targetPill === mediaPill2
+                    onClicked: SettingsService.mediaTextMode = "elide"
                 }
             }
         }

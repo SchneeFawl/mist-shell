@@ -9,7 +9,10 @@ QtObject {
     id: settingsService
 
     property string settingsFilePath: Quickshell.env("HOME") + "/.config/quickshell/settings.json"
+
+    // all the settings:
     property real scaleFactor: 1.25
+    property string mediaTextMode: "marquee"        // OPTIONS: "marquee", "elide"
 
     property FileView settingsFile: FileView {
         path: settingsService.settingsFilePath
@@ -18,6 +21,7 @@ QtObject {
 
         adapter: JsonAdapter {
             property real scaleFactor: 1.0
+            property string mediaTextMode: "marquee"
         }
 
         onLoadFailed: {
@@ -26,11 +30,13 @@ QtObject {
 
         onLoaded: {
             settingsService.scaleFactor = adapter.scaleFactor;
+            settingsService.mediaTextMode = adapter.mediaTextMode;
         }
     }
 
     onScaleFactorChanged: {
         settingsFile.adapter.scaleFactor = scaleFactor;
+        settingsFile.adapter.mediaTextMode = mediaTextMode;
         settingsFile.writeAdapter();
     }
 
@@ -38,3 +44,4 @@ QtObject {
         settingsFile.reload();
     }
 }
+

@@ -5,7 +5,8 @@ import qs.modules.theme
 Item {
     id: root
 
-    property int maxViewportWidth: Math.round(360 * Variables.scaleFactor)
+    property string mode: SettingsService.mediaTextMode
+    property int maxViewportWidth: Math.round(380 * Variables.scaleFactor)
 
     implicitWidth: Math.min(mediaLabel.implicitWidth, maxViewportWidth)
     width: implicitWidth
@@ -59,7 +60,7 @@ Item {
         onDisplayedTextChanged: textSwapAnim.restart()
 
         onImplicitWidthChanged: checkMarquee()
-        onActiveTextChanged: Qt.callLater(checkMarquee())
+        onActiveTextChanged: Qt.callLater(checkMarquee)
 
         SequentialAnimation {
             id: textSwapAnim
@@ -97,7 +98,7 @@ Item {
                 target: mediaLabel
                 property: "x"
                 to: -(mediaLabel.implicitWidth - root.width)
-                duration: Math.max(1000, (mediaLabel.implicitWidth - root.width) * 25)
+                duration: Math.max(1000, (mediaLabel.implicitWidth - root.width) * 30)
                 easing.type: Easing.Linear
             }
 
@@ -107,7 +108,7 @@ Item {
                 target: mediaLabel
                 property: "x"
                 to: 0
-                duration: Math.max(1000, (mediaLabel.implicitWidth - root.width) * 25)
+                duration: Math.max(1000, (mediaLabel.implicitWidth - root.width) * 30)
                 easing.type: Easing.Linear
             }
         }
