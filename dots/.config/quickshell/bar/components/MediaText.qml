@@ -6,7 +6,14 @@ Item {
     id: root
 
     property string mode: SettingsService.mediaTextMode
-    property int maxViewportWidth: Math.round(380 * Variables.scaleFactor)
+    property int maxViewportWidth: Math.round(360 * Variables.scaleFactor)
+
+    onModeChanged: {
+        marqueeAnim.stop();
+        mediaLabel.x = 0;
+        mediaLabel.activeText = mediaLabel.getFormattedText(mediaLabel.displayedText);
+        if (root.mode === "marquee") Qt.callLater(mediaLabel.checkMarquee);
+    }
 
     implicitWidth: Math.min(mediaLabel.implicitWidth, maxViewportWidth)
     width: implicitWidth
@@ -59,8 +66,18 @@ Item {
 
         onDisplayedTextChanged: textSwapAnim.restart()
 
-        onImplicitWidthChanged: checkMarquee()
-        onActiveTextChanged: Qt.callLater(checkMarquee)
+        onImplicitWidthChanged: {
+            if (root.mode === "marquee") checkMarquee();
+            else elideDisplayText();
+        }
+
+        onActiveTextChanged: {
+            if (root.mode === "marquee") {
+                Qt.callLater(checkMarquee);
+            } else {
+                Qt.callLater(elideDisplayText);
+            }
+        }
 
         SequentialAnimation {
             id: textSwapAnim
@@ -75,7 +92,7 @@ Item {
             }
 
             ScriptAction {
-                script: mediaLabel.activeText = mediaLabel.displayedText
+                script: mediaLabel.activeText = mediaLabel.getFormattedText(mediaLabel.displayedText)
             }
 
             NumberAnimation {
@@ -142,11 +159,30 @@ Item {
 
         function checkMarquee() {
             mediaLabel.x = 0;
-            if (mediaLabel.implicitWidth > root.maxViewportWidth) {
+            if (SettingsService.mediaTextMode === "marquee" &&
+                mediaLabel.implicitWidth > root.maxViewportWidth) {
                 marqueeAnim.restart();
             } else {
                 marqueeAnim.stop();
             }
         }
+
+        function getFormattedText(fullString) {
+            if (SettingsService.mediaTextMode === "elide" &&
+                fullString.length > Variables.maxBarMediaChars) {
+                return fullString.substring(0, Variables.maxBarMediaChars) + " ...";
+            }
+            return fullString;
+        }
+
+        function elideDisplayText() {
+            text = mediaLabel.displayedText;
+            if (text.length > Variables.maxBarMediaChars) {
+                let newText = text.substring(0, Variables.maxBarMediaChars) + "...";
+                mediaLabel.activeText = newText;
+            }
+        }
     }
+
+    // onModeChanged: console.log("[MediaText] Mode changed to:", mode)
 }

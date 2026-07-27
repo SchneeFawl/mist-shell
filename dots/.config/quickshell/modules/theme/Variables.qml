@@ -54,7 +54,7 @@ QtObject {
     readonly property int barSideMargins:        barHeight - pillHeight - Math.round(2 * scaleFactor)
     readonly property int workspaceActiveSize:   Math.round(32 * scaleFactor)
     readonly property int workspaceInactiveSize: Math.round(16 * scaleFactor)
-    readonly property int maxBarMediaChars:      Math.round(48 * scaleFactor)
+    readonly property int maxBarMediaChars:      Math.round(36 * scaleFactor)
 
     // Dashboard
     readonly property int dashboardRadius:     Math.round(28 * scaleFactor)

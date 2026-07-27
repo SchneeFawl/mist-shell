@@ -36,6 +36,10 @@ QtObject {
 
     onScaleFactorChanged: {
         settingsFile.adapter.scaleFactor = scaleFactor;
+        settingsFile.writeAdapter();
+    }
+
+    onMediaTextModeChanged: {
         settingsFile.adapter.mediaTextMode = mediaTextMode;
         settingsFile.writeAdapter();
     }
