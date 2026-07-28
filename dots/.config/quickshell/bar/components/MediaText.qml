@@ -68,14 +68,14 @@ Item {
 
         onImplicitWidthChanged: {
             if (root.mode === "marquee") checkMarquee();
-            else elideDisplayText();
+            else getFormattedText(mediaLabel.displayedText);
         }
 
         onActiveTextChanged: {
             if (root.mode === "marquee") {
                 Qt.callLater(checkMarquee);
             } else {
-                Qt.callLater(elideDisplayText);
+                getFormattedText(mediaLabel.displayedText);
             }
         }
 
@@ -170,19 +170,9 @@ Item {
         function getFormattedText(fullString) {
             if (SettingsService.mediaTextMode === "elide" &&
                 fullString.length > Variables.maxBarMediaChars) {
-                return fullString.substring(0, Variables.maxBarMediaChars) + " ...";
+                return fullString.substring(0, Variables.maxBarMediaChars) + "...";
             }
             return fullString;
         }
-
-        function elideDisplayText() {
-            text = mediaLabel.displayedText;
-            if (text.length > Variables.maxBarMediaChars) {
-                let newText = text.substring(0, Variables.maxBarMediaChars) + "...";
-                mediaLabel.activeText = newText;
-            }
-        }
     }
-
-    // onModeChanged: console.log("[MediaText] Mode changed to:", mode)
 }

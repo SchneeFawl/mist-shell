@@ -79,6 +79,7 @@ Rectangle {
     MouseArea {
         id: mouseArea
         anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
         onClicked: recBtnRoot.clicked()
     }
 }

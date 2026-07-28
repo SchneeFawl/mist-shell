@@ -1,5 +1,7 @@
 import QtQuick
+import QtQuick.Effects
 import Quickshell
+import Quickshell.Widgets
 import Quickshell.Hyprland
 import qs.modules.theme
 import qs.services
@@ -38,7 +40,7 @@ PopupWindow {
         onCleared: DashboardController.keyboardFocus = false
     }
 
-    Rectangle {
+    ClippingRectangle {
         id: dashboardBg
 
         property alias centerPill: dashboardPopup.centerPill
@@ -81,7 +83,7 @@ PopupWindow {
                     properties: "implicitWidth,implicitHeight"
                     duration: Variables.durationSlow
                     easing.type: Easing.Bezier
-                    easing.bezierCurve: Variables.entranceCurve
+                    easing.bezierCurve: Variables.standardCurve
                 }
             },
 
@@ -118,16 +120,57 @@ PopupWindow {
             }
         }
 
-        Loader {
-            id: dashLoader
-            active: dashboardPopup.active || dashboardPopup._wasActive
-            anchors.fill: parent
-            source: "DashboardColumns.qml"
+        Item {
+            id: contentViewport
 
-            Binding {
-                target: dashLoader.item
-                property: "active"
-                value: dashboardPopup.active
+            width: dashboardPopup.implicitWidth
+            height: dashboardPopup.implicitHeight
+            anchors.centerIn: parent
+            opacity: dashboardPopup.active ? 1.0 : 0.0
+            scale: dashboardPopup.active ? 1.0 : 0.95
+
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: Variables.durationMedium
+                    easing.type: Easing.Bezier
+                    easing.bezierCurve: Variables.standardCurve
+                }
+            }
+            Behavior on scale {
+                NumberAnimation {
+                    duration: Variables.durationMedium
+                    easing.type: Easing.Bezier
+                    easing.bezierCurve: Variables.standardCurve
+                }
+            }
+
+            Loader {
+                id: dashLoader
+                active: dashboardPopup.active || dashboardPopup._wasActive
+                anchors.fill: parent
+                source: "DashboardColumns.qml"
+
+                Binding {
+                    target: dashLoader.item
+                    property: "active"
+                    value: dashboardPopup.active
+                }
+            }
+        }
+
+        MultiEffect {
+            anchors.fill: contentViewport
+            source: contentViewport
+            blurEnabled: true
+            blurMax: 32
+            blur: dashboardPopup.active ? 0.0 : 1.0
+
+            Behavior on blur {
+                NumberAnimation {
+                    duration: Variables.durationSlow
+                    easing.type: Easing.Bezier
+                    easing.bezierCurve: Variables.standardCurve
+                }
             }
         }
     }
