@@ -36,7 +36,7 @@ PopupWindow {
 
     HyprlandFocusGrab {
         active: DashboardController.keyboardFocus && dashboardPopup.visible
-        windows: [ dashboardPopup ]
+        windows: [dashboardPopup]
         onCleared: DashboardController.keyboardFocus = false
     }
 
@@ -78,7 +78,8 @@ PopupWindow {
 
         transitions: [
             Transition {
-                from: "inactive"; to: "active"
+                from: "inactive"
+                to: "active"
                 NumberAnimation {
                     properties: "implicitWidth,implicitHeight"
                     duration: Variables.durationSlow
@@ -86,9 +87,9 @@ PopupWindow {
                     easing.bezierCurve: Variables.standardCurve
                 }
             },
-
             Transition {
-                from: "active"; to: "inactive"
+                from: "active"
+                to: "inactive"
 
                 SequentialAnimation {
 
@@ -109,7 +110,9 @@ PopupWindow {
         ]
 
         Behavior on radius {
-            NumberAnimation { duration: Variables.durationMedium }
+            NumberAnimation {
+                duration: Variables.durationMedium
+            }
         }
 
         HoverHandler {
@@ -127,7 +130,7 @@ PopupWindow {
             height: dashboardPopup.implicitHeight
             anchors.centerIn: parent
             opacity: dashboardPopup.active ? 1.0 : 0.0
-            scale: dashboardPopup.active ? 1.0 : 0.95
+            scale: dashboardPopup.active ? 1.0 : 0.9
 
             Behavior on opacity {
                 NumberAnimation {

@@ -18,6 +18,7 @@ QtObject {
     // Text
     readonly property string defaultFontFamily: "GeistMono Nerd Font"
     readonly property int defaultFontWeight: 500
+
     readonly property int fontSmall:   Math.round(12 * scaleFactor)
     readonly property int fontNormal:  Math.round(14 * scaleFactor)
     readonly property int fontMedium:  Math.round(16 * scaleFactor)
