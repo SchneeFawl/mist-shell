@@ -9,5 +9,7 @@ hl.on("hyprland.start", function ()
 
     -- screenshare fix:
     hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
+
+    hl.exec_cmd("hyprctl setcursor Bibata-Modern-Classic 22")
 end
 )
