@@ -24,13 +24,24 @@ Singleton {
         }
     }
 
-    function refresh() {}
+    function refresh() {
+        readProc.buffer = [];
+        readProc.running = true;
+    }
 
-    function copy(id) {}
+    function copy(rawEntry) {
+        Quickshell.execDetached(["bash", "-c", `printf '%s' "${rawEntry}" | ${cliphistBinary} decode | wl-copy`]);
+    }
 
-    function deleteEntry(id) {}
+    function deleteEntry(rawEntry) {
+        Quickshell.execDetached(["bash", "-c", `printf '%s' "${rawEntry}" | ${cliphistBinary} delete`]);
+        refreshTimer.restart();
+    }
 
-    function wipe() {}
+    function wipe() {
+        Quickshell.execDetached([cliphistBinary, "wipe"]);
+        refreshTimer.restart();
+    }
 
     Process {
         id: readProc
@@ -51,6 +62,20 @@ Singleton {
                 root.entries = parsed;
                 root.rawBuffer = [];        // reset buffer for next refresh
             }
+        }
+    }
+
+    Timer {
+        id: refreshTimer
+        interval: 150
+        repeat: false
+        onTriggered: root.refresh()
+    }
+
+    Connections {
+        target: Quickshell
+        function onClipboardTextChanged() {
+            refreshTimer.restart();
         }
     }
 }
