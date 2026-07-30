@@ -51,16 +51,16 @@ RowLayout {
     // desktop feature
     Pill {
         innerPadding: Variables.spacingSmall
-        pillSpacing: 0
+        pillSpacing: Variables.spacingSmall
 
         MouseArea {     // audio control
-            Layout.preferredWidth: Variables.buttonHeightSmall
+            Layout.preferredWidth: Math.round(24 * Variables.scaleFactor)
             Layout.fillHeight: true
             cursorShape: Qt.PointingHandCursor
 
             StyledText {
                 anchors.centerIn: parent
-                font.pixelSize: Variables.fontMedium
+                font.pixelSize: Variables.iconSmall
                 color: Colors.primary
                 text: Icons.sysVolume
             }
@@ -68,13 +68,13 @@ RowLayout {
         }
 
         MouseArea {     // power actions
-            Layout.preferredWidth: Variables.buttonHeightSmall
+            Layout.preferredWidth: Math.round(24 * Variables.scaleFactor)
             Layout.fillHeight: true
             cursorShape: Qt.PointingHandCursor
 
             StyledText {
                 anchors.centerIn: parent
-                font.pixelSize: Variables.fontMedium
+                font.pixelSize: Variables.iconSmall
                 color: Colors.error
                 text: Icons.powerIcon
             }

@@ -18,7 +18,7 @@ QtObject {
     readonly property string sysGameMode: "󰺷"
     readonly property string sysCaffeineActive: "󰅶"
     readonly property string sysCaffeineInactive: "󰾪"
-    readonly property string sysClipboard: "󰅍"
+    readonly property string clipboard: "󰅍"
 
     readonly property string sysVolume: "󰕾"
     readonly property string sysVolumeMedium: "󰖀"

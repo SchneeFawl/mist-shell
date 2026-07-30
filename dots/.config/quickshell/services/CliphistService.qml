@@ -8,6 +8,7 @@ Singleton {
 
     property string cliphistBinary: "cliphist"
     property list<string> entries: []
+    property var rawBuffer: []
 
     function parsedLine(line) {
         let tabIdx = line.indexOf("\t");
@@ -35,6 +36,21 @@ Singleton {
         id: readProc
 
         command: [root.cliphistBinary, "list"]
-        
+        stdout: SplitParser {
+            onRead: (line) => root.rawBuffer.push(line)
+        }
+
+        onRunningChanged: {
+            // process finished
+            if (!running) {
+                let parsed = [];
+                for (let i = 0; i < root.rawBuffer.length; i++) {
+                    let item = root.parsedLine(root.rawBuffer[i]);
+                    if (item) parsed.push(item);
+                }
+                root.entries = parsed;
+                root.rawBuffer = [];        // reset buffer for next refresh
+            }
+        }
     }
 }

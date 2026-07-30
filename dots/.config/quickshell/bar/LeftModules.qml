@@ -30,29 +30,45 @@ RowLayout {
     // keybinds trigger
     Pill {
         id: keybindPill
-        innerPadding: 0
+        innerPadding: Variables.spacingSmall
+        pillSpacing: Variables.spacingSmall
 
         MouseArea {
             id: keybindHelper
-            implicitWidth: keybindText.implicitWidth + 24
+            Layout.preferredWidth: Math.round(24 * Variables.scaleFactor)
             Layout.fillHeight: true
             cursorShape: Qt.PointingHandCursor
             hoverEnabled: true
+            onClicked: console.log("[Keybinds] Keybind helper clicked")
 
             StyledText {
-                id: keybindText
                 anchors.centerIn: parent
-                font.pixelSize: Variables.fontMedium
+                font.pixelSize: Variables.iconSmall
                 text: Icons.keyboard
                 color: Colors.primary
             }
-            onClicked: console.log("trigger keybinds help menu")
+        }
+
+        MouseArea {
+            id: clipboard
+            Layout.preferredWidth: Math.round(24 * Variables.scaleFactor)
+            Layout.fillHeight: true
+            cursorShape: Qt.PointingHandCursor
+            hoverEnabled: true
+            onClicked: console.log("[Clipboard] clipboard icon clicked")
+
+            StyledText {
+                anchors.centerIn: parent
+                font.pixelSize: Variables.iconSmall
+                color: Colors.primary
+                text: Icons.clipboard
+            }
         }
     }
 
     // workspaces
     Pill {
-        innerPadding: Variables.pillInnerPadding - 4
+        innerPadding: Variables.spacingNormal
         Workspaces {}
     }
 }
