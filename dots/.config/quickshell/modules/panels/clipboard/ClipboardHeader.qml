@@ -8,15 +8,10 @@ Rectangle {
 
     property string searchQuery: ""
 
-    anchors.leftMargin: Variables.spacingNormal
-    anchors.rightMargin: Variables.spacingNormal
-    anchors.topMargin: Variables.spacingNormal
-    anchors.left: parent.left
-    anchors.right: parent.right
-    anchors.top: parent.top
-    implicitHeight: Math.round(40 * Variables.scaleFactor)
+    Layout.fillWidth: true
+    Layout.preferredHeight: Math.round(40 * Variables.scaleFactor)
     color: Colors.surface_container_high
-    radius: width / 2
+    radius: Variables.radiusLarge - Variables.spacingNormal
     clip: true
 
     RowLayout {
