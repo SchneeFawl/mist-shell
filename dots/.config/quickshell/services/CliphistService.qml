@@ -6,6 +6,8 @@ import Quickshell.Io
 Singleton {
     id: root
 
+    property bool panelVisible: false
+
     property string cliphistBinary: "cliphist"
     property list<string> entries: []
     property var rawBuffer: []

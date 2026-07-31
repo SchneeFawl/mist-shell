@@ -5,6 +5,7 @@ import QtQuick
 import qs.modules
 import "./bar"
 import "./modules/screenCorners"
+import "./modules/panels/clipboard"
 
 ShellRoot {
     id: shellRoot
@@ -13,6 +14,7 @@ ShellRoot {
     property string activeBarLayout: "top-fragmented"  // OPTIONS: "vertical-sidebar", "minimal"
 
     ScreenCorners {}
+    Clipboard {}
 
     Variants {
         model: Quickshell.screens

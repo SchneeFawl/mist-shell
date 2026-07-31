@@ -2,17 +2,21 @@ import QtQuick
 import QtQuick.Layouts
 import qs.modules.theme
 import qs.modules.common
-import qs.services
 
 Rectangle {
     id: searchBar
 
     property string searchQuery: ""
 
-    Layout.fillWidth: true
-    Layout.preferredHeight: Math.round(40 * Variables.scaleFactor)
+    anchors.leftMargin: Variables.spacingNormal
+    anchors.rightMargin: Variables.spacingNormal
+    anchors.topMargin: Variables.spacingNormal
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.top: parent.top
+    implicitHeight: Math.round(40 * Variables.scaleFactor)
     color: Colors.surface_container_high
-    radius: Variables.dashInnerRadius
+    radius: width / 2
     clip: true
 
     RowLayout {
@@ -41,16 +45,10 @@ Rectangle {
             enabled: searchBar.visible
             focus: true
 
-            Keys.onPressed: event => {
-                if (event.key === Qt.Key_Escape) {
-                    DashboardController.keyboardFocus = false
-                }
-            }
-
             StyledText {
                 id: searchPlaceholder
                 color: Colors.surface_variant
-                text: "Search wallpapers..."
+                text: "Search clipboard..."
                 visible: searchBar.searchQuery.length === 0
             }
         }
@@ -58,9 +56,7 @@ Rectangle {
 
     MouseArea {
         anchors.fill: parent
-        enabled: !DashboardController.keyboardFocus
         onClicked: {
-            DashboardController.keyboardFocus = true;
             searchInput.forceActiveFocus();
         }
     }

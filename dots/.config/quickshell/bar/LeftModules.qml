@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import qs.modules.theme
 import qs.modules.common
+import qs.services
 import "./components"
 
 RowLayout {
@@ -55,7 +56,8 @@ RowLayout {
             Layout.fillHeight: true
             cursorShape: Qt.PointingHandCursor
             hoverEnabled: true
-            onClicked: console.log("[Clipboard] clipboard icon clicked")
+            // onClicked: console.log("[Clipboard] clipboard icon clicked")
+            onClicked: CliphistService.panelVisible = !CliphistService.panelVisible
 
             StyledText {
                 anchors.centerIn: parent

@@ -7,7 +7,7 @@ Item {
 
     enum CornerEnum { TopLeft, TopRight, BottomLeft, BottomRight }
     property var corner: ScreenCornersItem.CornerEnum.TopLeft
-    property color color: Colors.primary_container
+    property color color: Colors.surface_container_lowest
     property int radius: Variables.screenCornerRadius
 
     implicitHeight: radius
