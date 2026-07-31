@@ -16,7 +16,7 @@ Window {       // qmllint disable uncreatable-type
     }
 
     maximumHeight: Math.round(500 * Variables.scaleFactor)
-    maximumWidth: Math.round(370 * Variables.scaleFactor)
+    maximumWidth: Math.round(400 * Variables.scaleFactor)
     minimumHeight: Math.round(370 * Variables.scaleFactor)
     minimumWidth: Math.round(280 * Variables.scaleFactor)
     color: Colors.surface_container_low
@@ -33,23 +33,27 @@ Window {       // qmllint disable uncreatable-type
                 anchors.fill: parent
                 anchors.margins: Variables.spacingNormal + Math.round(2 * Variables.scaleFactor)
                 spacing: Variables.spacingNormal
+                clip: true
 
                 RowLayout {
                     id: headerRow
                     Layout.fillWidth: true
                     Layout.preferredHeight: Variables.buttonHeightMedium
                     spacing: Variables.spacingNormal
+                    clip: true
 
                     StyledText {
                         Layout.fillWidth: true
+                        bottomPadding: Variables.spacingNormal
                         leftPadding: Variables.spacingSmall
                         font.pixelSize: Variables.fontLargest
                         text: "Clipboard"
                     }
-
-                    Rectangle {  // placeholder
-                        Layout.preferredWidth: 50
-                        Layout.preferredHeight: 36
+                    
+                    ClipboardButton {
+                        icon: Icons.actionDelete
+                        text: "Clear"
+                        onClicked: CliphistService.wipe()
                     }
                 }
 

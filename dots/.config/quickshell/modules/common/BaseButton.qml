@@ -8,7 +8,7 @@ Rectangle {
     property int btnSize: Variables.buttonHeight
     property string text: ""
     property string icon: ""
-    property int iconSize: Variables.fontLarge
+    property int iconSize: Variables.iconNormal
 
     property bool active: false
     property color activeColor: Colors.primary

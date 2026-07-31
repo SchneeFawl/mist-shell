@@ -68,6 +68,7 @@ QtObject {
     readonly property string replay: "󰑙"
     readonly property string stopRecording: "󰙧"
     readonly property string save: "󰆓"
+    readonly property string actionDelete: "󰆴"
 
     // Devices
     readonly property string headphones: "󰋋"
