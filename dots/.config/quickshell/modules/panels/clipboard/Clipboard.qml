@@ -50,7 +50,7 @@ Window {       // qmllint disable uncreatable-type
                     }
                 }
 
-                ClipboardHeader {}          // contains the search bar
+                ClipboardHeader {}          // search bar
 
                 ClipboardItem {
                     Layout.topMargin: Variables.spacingNormal

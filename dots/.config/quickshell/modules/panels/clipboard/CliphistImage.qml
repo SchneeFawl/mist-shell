@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Layouts
 import Quickshell.Widgets
 import Quickshell.Io
 import qs.modules.theme
@@ -11,13 +12,19 @@ ClippingRectangle {
     property string cachedPath: "/tmp/quickshell/cliphist/" + entryId + ".png"
     property string imageSource: ""
 
-    implicitWidth: Math.round(200 * Variables.scaleFactor)
-    implicitHeight: Math.round(100 * Variables.scaleFactor)
+    Layout.preferredWidth: Math.round(200 * Variables.scaleFactor)
+    Layout.preferredHeight: Math.round(100 * Variables.scaleFactor)
     color: "transparent"
     radius: Variables.radiusNormal
     clip: true
 
-    Component.onCompleted: checkPath.running = true
+    Component.onCompleted: {
+        if (root.entryId !== "" && root.rawEntry !== "") checkPath.running = true;
+    }
+
+    onEntryIdChanged: {
+        if (root.entryId !== "" && root.rawEntry !== "" && root.imageSource === "") checkPath.running = true;
+    }
 
     Process {
         id: checkPath
@@ -32,6 +39,7 @@ ClippingRectangle {
     Image {
         id: image
         anchors.fill: parent
+        visible: root.imageSource !== ""
         asynchronous: true
         source: root.imageSource
         fillMode: Image.PreserveAspectFit

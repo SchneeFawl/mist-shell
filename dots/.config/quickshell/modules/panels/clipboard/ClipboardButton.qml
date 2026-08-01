@@ -6,7 +6,9 @@ Rectangle {
     id: btnRoot
 
     property string icon: ""
+    property color iconColor: Colors.on_surface
     property string text: ""
+    property color textColor: Colors.on_surface
     property bool hasIcon: icon !== ""
     property bool hasText: text !== ""
 
@@ -38,7 +40,7 @@ Rectangle {
         StyledText {
             id: iconText
             font.pixelSize: btnRoot.iconSize
-            color: Colors.on_surface
+            color: btnRoot.iconColor
             text: btnRoot.icon
             visible: btnRoot.hasIcon
         }
@@ -47,7 +49,7 @@ Rectangle {
             id: btnText
             anchors.verticalCenter: parent.verticalCenter
             font.pixelSize: Variables.fontNormal
-            color: Colors.on_surface
+            color: btnRoot.textColor
             text: btnRoot.text
             visible: btnRoot.hasText
         }

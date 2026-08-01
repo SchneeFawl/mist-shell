@@ -15,7 +15,7 @@ GridView {
     clip: true
 
     reuseItems: true
-    cellHeight: 110
+    cellHeight: Math.round(110 * Variables.scaleFactor)
     cellWidth: width / 2
     boundsBehavior: Flickable.StopAtBounds
 
