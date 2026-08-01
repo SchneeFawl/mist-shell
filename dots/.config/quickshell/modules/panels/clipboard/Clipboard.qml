@@ -52,7 +52,11 @@ Window {       // qmllint disable uncreatable-type
 
                 ClipboardHeader {}          // contains the search bar
 
-                ClipboardItem {}
+                ClipboardItem {
+                    Layout.topMargin: Variables.spacingNormal
+                }
+
+                Item { Layout.fillHeight: true }     // filler
             }
         }
     }

@@ -1,14 +1,21 @@
 import QtQuick
+import Quickshell.Widgets
 import Quickshell.Io
 import qs.modules.theme
 
-Rectangle {
+ClippingRectangle {
     id: root
 
     property string rawEntry: ""
     property string entryId: ""
     property string cachedPath: "/tmp/quickshell/cliphist/" + entryId + ".png"
     property string imageSource: ""
+
+    implicitWidth: Math.round(200 * Variables.scaleFactor)
+    implicitHeight: Math.round(100 * Variables.scaleFactor)
+    color: "transparent"
+    radius: Variables.radiusNormal
+    clip: true
 
     Component.onCompleted: checkPath.running = true
 
@@ -29,7 +36,7 @@ Rectangle {
         source: root.imageSource
         fillMode: Image.PreserveAspectFit
         retainWhileLoading: true
-        sourceSize.width: Math.round(200 * Variables.scaleFactor)
+        sourceSize: Qt.size(Math.round(200 * Variables.scaleFactor), Math.round(100 * Variables.scaleFactor))
     }
 }
 
