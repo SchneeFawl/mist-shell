@@ -8,13 +8,6 @@ import qs.modules.common
 Window {       // qmllint disable uncreatable-type
     id: root
 
-    property string searchText: ""
-    readonly property var filteredEntries: {
-        if (searchText.trim() === "") return CliphistService.entries;
-        let query = searchText.toLowerCase();
-        return CliphistService.entries.filter(entry => entry.text.toLowerCase().includes(query));
-    }
-
     maximumHeight: Math.round(500 * Variables.scaleFactor)
     maximumWidth: Math.round(400 * Variables.scaleFactor)
     minimumHeight: Math.round(370 * Variables.scaleFactor)
@@ -28,7 +21,7 @@ Window {       // qmllint disable uncreatable-type
         anchors.fill: parent
         active: CliphistService.panelVisible
 
-        sourceComponent: Component { 
+        sourceComponent: Component {
             ColumnLayout {
                 anchors.fill: parent
                 anchors.margins: Variables.spacingNormal + Math.round(2 * Variables.scaleFactor)
@@ -57,11 +50,9 @@ Window {       // qmllint disable uncreatable-type
                     }
                 }
 
-                ClipboardHeader {
-                    searchQuery: root.searchText
-                }
+                ClipboardHeader {}          // contains the search bar
 
-                Item { Layout.fillHeight: true }     // filler
+                ClipboardItem {}
             }
         }
     }

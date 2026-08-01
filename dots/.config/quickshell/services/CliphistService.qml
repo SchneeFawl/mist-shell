@@ -12,6 +12,13 @@ Singleton {
     property list<string> entries: []
     property var rawBuffer: []
 
+    property string searchText: ""
+    readonly property var filteredEntries: {
+        if (searchText.trim() === "") return entries;
+        let query = searchText.toLowerCase();
+        return entries.filter(entry => entry.text.toLowerCase().includes(query));
+    }
+
     function parsedLine(line) {
         let tabIdx = line.indexOf("\t");
         if (tabIdx === -1) return null;
@@ -27,7 +34,7 @@ Singleton {
     }
 
     function refresh() {
-        readProc.buffer = [];
+        root.rawBuffer = [];
         readProc.running = true;
     }
 

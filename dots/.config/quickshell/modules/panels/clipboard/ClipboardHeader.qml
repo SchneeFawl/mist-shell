@@ -2,11 +2,10 @@ import QtQuick
 import QtQuick.Layouts
 import qs.modules.theme
 import qs.modules.common
+import qs.services
 
 Rectangle {
     id: searchBar
-
-    property string searchQuery: ""
 
     Layout.fillWidth: true
     Layout.preferredHeight: Math.round(40 * Variables.scaleFactor)
@@ -36,7 +35,7 @@ Rectangle {
             font.pixelSize: Variables.fontNormal
             cursorVisible: true
             clip: true
-            onTextChanged: searchBar.searchQuery = text
+            onTextChanged: CliphistService.searchText = text
             enabled: searchBar.visible
             focus: true
 
@@ -44,7 +43,7 @@ Rectangle {
                 id: searchPlaceholder
                 color: Colors.surface_variant
                 text: "Search clipboard..."
-                visible: searchBar.searchQuery.length === 0
+                visible: CliphistService.searchText.length === 0
             }
         }
     }

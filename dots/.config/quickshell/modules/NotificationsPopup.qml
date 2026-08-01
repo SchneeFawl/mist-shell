@@ -24,8 +24,8 @@ PanelWindow {           // qmllint disable uncreatable-type
     }
 
     margins {       // qmllint disable unresolved-type unqualified
-        top: 5
-        right: 5
+        top: Variables.spacingSmall + Math.round(1 * Variables.scaleFactor)
+        right: Variables.spacingSmall + Math.round(1 * Variables.scaleFactor)
     }
 
     // implicitHeight: Math.min(200*4, notifListView.contentHeight)
