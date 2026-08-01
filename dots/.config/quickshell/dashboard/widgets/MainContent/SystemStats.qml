@@ -14,6 +14,13 @@ Rectangle {
     Component.onCompleted: SystemStatsService.active = true
     Component.onDestruction: SystemStatsService.active = false
 
+    function getProgressColor(percentage) {
+        if (percentage >= 90) return Colors.error_container;
+        if (percentage >= 75) return Colors.error;
+        if (percentage >= 50) return Colors.on_error_container;
+        return Colors.primary;
+    }
+
     function getUsageColor(percentage) {
         if (percentage >= 90) return Colors.error_container;
         if (percentage >= 75) return Colors.error;
@@ -72,6 +79,7 @@ Rectangle {
 
             title: Icons.cpu + " "
             progress: SystemStatsService.cpuUsed / 100
+            progressColor: statsRoot.getProgressColor(SystemStatsService.cpuUsed)
             leftSubText: SystemStatsService.cpuUsed + " %"
             rightIcon: getCpuTempIcon(SystemStatsService.cpuTemp)
             rightIconColor: getCpuTempIconColor(SystemStatsService.cpuTemp)
@@ -81,6 +89,7 @@ Rectangle {
         StatProgressBar {   // ram stats
             title: Icons.ram + " "
             progress: SystemStatsService.ramTotal > 0 ? (SystemStatsService.ramUsed / SystemStatsService.ramTotal) : 0.0
+            progressColor: statsRoot.getProgressColor(SystemStatsService.ramUsed / SystemStatsService.ramTotal * 100)
             leftSubText: SystemStatsService.ramUsed + " GB / " + SystemStatsService.ramTotal + " GB"
             rightSubText: Math.floor(SystemStatsService.ramUsed / SystemStatsService.ramTotal * 100) + " %"
             rightSubTextColor: statsRoot.getUsageColor(SystemStatsService.ramUsed / SystemStatsService.ramTotal * 100)
@@ -89,6 +98,7 @@ Rectangle {
         StatProgressBar {   // disk stats
             title: Icons.database + " "
             progress: SystemStatsService.diskTotal > 0 ? (SystemStatsService.diskUsed / SystemStatsService.diskTotal) : 0.0
+            progressColor: statsRoot.getProgressColor(SystemStatsService.diskUsed / SystemStatsService.diskTotal * 100)
             leftSubText: SystemStatsService.diskUsed + " GB / " + SystemStatsService.diskTotal + " GB"
             rightSubText: Math.floor(SystemStatsService.diskUsed / SystemStatsService.diskTotal * 100) + " %"
             rightSubTextColor: statsRoot.getUsageColor(SystemStatsService.diskUsed / SystemStatsService.diskTotal * 100)
