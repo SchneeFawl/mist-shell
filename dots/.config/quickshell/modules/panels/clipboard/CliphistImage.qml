@@ -45,7 +45,6 @@ ClippingRectangle {
 
     Image {
         id: image
-        // anchors.fill: parent
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom

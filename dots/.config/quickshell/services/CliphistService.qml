@@ -8,6 +8,7 @@ Singleton {
 
     property bool panelVisible: false
     onPanelVisibleChanged: refresh()
+    property string selectedId: ""
 
     property string cliphistBinary: "cliphist"
     property var entries: []
@@ -86,6 +87,14 @@ Singleton {
         target: Quickshell
         function onClipboardTextChanged() {
             refreshTimer.restart();
+        }
+    }
+
+    IpcHandler {
+        target: "clipboard"
+        function openMenu() {
+            root.panelVisible = !root.panelVisible;
+            root.refresh();
         }
     }
 }

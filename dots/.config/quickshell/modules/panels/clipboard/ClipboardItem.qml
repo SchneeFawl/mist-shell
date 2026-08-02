@@ -9,7 +9,7 @@ Rectangle {
 
     // entryData: { id, text, isImage, rawEntry }
     property var entryData: null
-    property bool selected
+    readonly property bool selected: CliphistService.selectedId === (entryData?.id ?? "")
     property bool isCopied
 
     signal copyRequested()
@@ -47,7 +47,7 @@ Rectangle {
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
         onClicked: {
-            if (!root.selected) root.selected = true;
+            if (!root.selected) CliphistService.selectedId = root.entryData?.id ?? "";
             else root.isCopied = true;
         }
         onDoubleClicked: root.copyTriggered()
@@ -133,12 +133,8 @@ Rectangle {
         onTriggered: {
             CliphistService.panelVisible = false;
             root.isCopied = false;
-            root.selected = false;
+            CliphistService.selectedId = false;
         }
     }
-
-    // DEBUG:
-    // onIsCopiedChanged: console.log("[ClipboardItem] Copied entry")
-    // onSelectedChanged: console.log("[ClipboardItem] Selected entry")
 }
 

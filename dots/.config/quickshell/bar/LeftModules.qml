@@ -56,7 +56,6 @@ RowLayout {
             Layout.fillHeight: true
             cursorShape: Qt.PointingHandCursor
             hoverEnabled: true
-            // onClicked: console.log("[Clipboard] clipboard icon clicked")
             onClicked: CliphistService.panelVisible = !CliphistService.panelVisible
 
             StyledText {

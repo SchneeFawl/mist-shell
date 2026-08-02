@@ -2,10 +2,11 @@ require("hyprland.variables")
 
 -- KEYBINDS
 local mainMod = "SUPER"
+local qsIpcCall = "qs ipc call"
 
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(Terminal))
-local closeWindowBind = hl.bind(mainMod .. " + Q", hl.dsp.window.close())
--- closeWindowBind:set_enabled(false)
+
+hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + F", hl.dsp.exec_cmd(Browser))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(FileManager))
@@ -13,7 +14,6 @@ hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(Editor))
 hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(Menu))
 hl.bind(mainMod .. " + W", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
--- hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 
 -- move focus with arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
@@ -69,3 +69,10 @@ hl.bind("XF86AudioNext"       , hl.dsp.exec_cmd("playerctl next"), { locked = tr
 hl.bind("XF86AudioMicMute",      hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"), { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"), { locked = true, repeating = true })
+
+
+------------------
+--- Quickshell ---
+------------------
+hl.bind(mainMod .. " + V",  hl.dsp.exec_cmd(qsIpcCall .. " clipboard openMenu"))
+
