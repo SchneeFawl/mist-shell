@@ -7,9 +7,10 @@ Singleton {
     id: root
 
     property bool panelVisible: false
+    onPanelVisibleChanged: refresh()
 
     property string cliphistBinary: "cliphist"
-    property list<string> entries: []
+    property var entries: []
     property var rawBuffer: []
 
     property string searchText: ""
@@ -48,7 +49,7 @@ Singleton {
     }
 
     function wipe() {
-        Quickshell.execDetached([cliphistBinary, "wipe"]);
+        Quickshell.execDetached(["bash", "-c", `${cliphistBinary} wipe && rm -rf /tmp/quickshell/cliphist`]);
         refreshTimer.restart();
     }
 
@@ -76,7 +77,7 @@ Singleton {
 
     Timer {
         id: refreshTimer
-        interval: 150
+        interval: 100
         repeat: false
         onTriggered: root.refresh()
     }

@@ -46,7 +46,7 @@ GridView {
 
             ClippingRectangle {
                 anchors.fill: parent
-                anchors.margins: 6
+                anchors.margins: Variables.spacingSmall - Math.round(2 * Variables.scaleFactor)
                 radius: Variables.dashInnerRadius - anchors.margins
                 color: "transparent"
 

@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Layouts
 import Quickshell.Widgets
 import Quickshell.Io
 import qs.modules.theme
@@ -12,11 +11,14 @@ ClippingRectangle {
     property string cachedPath: "/tmp/quickshell/cliphist/" + entryId + ".png"
     property string imageSource: ""
 
-    Layout.preferredWidth: Math.round(200 * Variables.scaleFactor)
-    Layout.preferredHeight: Math.round(100 * Variables.scaleFactor)
+    property int fixedHeight: Math.round(120 * Variables.scaleFactor)
+    property int fixedWidth: Math.round(230 * Variables.scaleFactor)
+
+    // anchors.fill: parent
+    implicitWidth: image.sourceSize.width
+    implicitHeight: image.sourceSize.height
     color: "transparent"
-    radius: Variables.radiusNormal
-    clip: true
+    // radius: Variables.radiusNormal
 
     Component.onCompleted: {
         if (root.entryId !== "" && root.rawEntry !== "") checkPath.running = true;
@@ -29,22 +31,30 @@ ClippingRectangle {
     Process {
         id: checkPath
         command: [
-            "bash", "-c", `[ -f ${root.cachedPath} ] ||
-            (mkdir -p /tmp/quickshell/cliphist && printf '%s' '${root.rawEntry}' |
-            cliphist decode > '${root.cachedPath}')`
+            "bash", "-c", `[ -s '${root.cachedPath}' ] ||
+            (mkdir -p /tmp/quickshell/cliphist &&
+            cliphist decode ${root.entryId} > '${root.cachedPath}.tmp' &&
+            mv '${root.cachedPath}.tmp' '${root.cachedPath}')`
         ]
-        onRunningChanged: !running ? root.imageSource = "file://" + root.cachedPath : null
+        onRunningChanged: {
+            if (!running && root.cachedPath !== "") {
+                root.imageSource = "file://" + root.cachedPath;
+            }
+        }
     }
 
     Image {
         id: image
-        anchors.fill: parent
+        // anchors.fill: parent
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
         visible: root.imageSource !== ""
         asynchronous: true
         source: root.imageSource
         fillMode: Image.PreserveAspectFit
         retainWhileLoading: true
-        sourceSize: Qt.size(Math.round(200 * Variables.scaleFactor), Math.round(100 * Variables.scaleFactor))
+        sourceSize: Qt.size(root.fixedWidth, root.fixedHeight)
     }
 }
 
