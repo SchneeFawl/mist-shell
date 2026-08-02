@@ -42,6 +42,7 @@ Singleton {
 
     function copy(rawEntry) {
         Quickshell.execDetached(["bash", "-c", `printf '%s' "${rawEntry}" | ${cliphistBinary} decode | wl-copy`]);
+        closeTimer.restart();
     }
 
     function deleteEntry(rawEntry) {
@@ -83,18 +84,26 @@ Singleton {
         onTriggered: root.refresh()
     }
 
+    Timer {
+        id: closeTimer
+        interval: 500
+        repeat: false
+        onTriggered: root.panelVisible = false;
+    }
+
     Connections {
         target: Quickshell
         function onClipboardTextChanged() {
-            refreshTimer.restart();
+            if (!root.panelVisible) refreshTimer.restart();
         }
     }
+
+    Component.onCompleted: root.refresh()
 
     IpcHandler {
         target: "clipboard"
         function openMenu() {
             root.panelVisible = !root.panelVisible;
-            root.refresh();
         }
     }
 }

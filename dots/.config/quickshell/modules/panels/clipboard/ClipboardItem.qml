@@ -47,8 +47,11 @@ Rectangle {
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
         onClicked: {
-            if (!root.selected) CliphistService.selectedId = root.entryData?.id ?? "";
-            else root.isCopied = true;
+            if (!root.selected) {
+                CliphistService.selectedId = root.entryData?.id ?? "";
+            } else {
+                root.copyTriggered();
+            }
         }
         onDoubleClicked: root.copyTriggered()
     }
@@ -120,9 +123,9 @@ Rectangle {
     }
 
     function copyTriggered() {
+        if (isCopied) return;
         isCopied = true;
         CliphistService.copy(entryData.rawEntry);
-        copyTimer.start();
     }
 
     Timer {
@@ -133,7 +136,7 @@ Rectangle {
         onTriggered: {
             CliphistService.panelVisible = false;
             root.isCopied = false;
-            CliphistService.selectedId = false;
+            CliphistService.selectedId = "";
         }
     }
 }

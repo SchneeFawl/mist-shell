@@ -16,11 +16,23 @@ Window {
     visible: CliphistService.panelVisible
     flags: Qt.Window | Qt.FramelessWindowHint
 
+    onVisibleChanged: {
+        if (visible) {
+            root.requestActivate();
+        } else {
+            CliphistService.panelVisible = false;
+        }
+    }
+
+    onClosing: (close) => {
+        CliphistService.panelVisible = false;
+    }
+
     Loader {
         id: contentLoader
         anchors.fill: parent
         active: CliphistService.panelVisible
-
+    
         sourceComponent: Component {
             ColumnLayout {
                 anchors.fill: parent
