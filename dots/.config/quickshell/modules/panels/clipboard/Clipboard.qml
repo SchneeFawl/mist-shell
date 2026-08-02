@@ -5,7 +5,7 @@ import qs.services
 import qs.modules.theme
 import qs.modules.common
 
-Window {       // qmllint disable uncreatable-type
+Window {
     id: root
 
     maximumHeight: Math.round(500 * Variables.scaleFactor)
@@ -52,11 +52,23 @@ Window {       // qmllint disable uncreatable-type
 
                 ClipboardHeader {}          // search bar
 
-                ClipboardItem {
+                // clipboard entries
+                ListView {
+                    id: listView
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
                     Layout.topMargin: Variables.spacingNormal
-                }
+                    spacing: Variables.spacingSmall
+                    clip: true
+                    model: CliphistService.filteredEntries
+                    delegate: ClipboardItem {
+                        required property var modelData
 
-                Item { Layout.fillHeight: true }     // filler
+                        entryData: modelData
+                        onDeleteRequested: CliphistService.deleteEntry(modelData.rawEntry)
+                        onCopyRequested: CliphistService.copy(modelData.rawEntry)
+                    }
+                }
             }
         }
     }

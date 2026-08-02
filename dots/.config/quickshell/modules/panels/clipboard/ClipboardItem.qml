@@ -8,17 +8,19 @@ Rectangle {
 
     // entryData: { id, text, isImage, rawEntry }
     property var entryData: null
+    property bool selected
+    property bool isCopied
 
     signal copyRequested()
     signal deleteRequested()
 
-    Layout.fillWidth: true
-    Layout.preferredHeight: {
+    implicitWidth: parent.width
+    implicitHeight: {
         root.entryData?.isImage ?
         Math.round((100 * Variables.scaleFactor) + (Variables.spacingNormal * 2)) :
-        Variables.buttonHeightMedium
+        Variables.buttonHeightMedium + Math.round(6 * Variables.scaleFactor)
     }
-    color: Colors.surface_container_highest
+    color: (isCopied || selected) ? Colors.secondary : Colors.surface_container_highest
     radius: Variables.radiusNormal
     scale: mouseArea.pressed ? 0.90 : 1.0
     clip: true
@@ -31,21 +33,29 @@ Rectangle {
         }
     }
 
+    Behavior on color {
+        ColorAnimation {
+            duration: Variables.durationMedium
+            easing.type: Easing.Bezier
+            easing.bezierCurve: Variables.standardCurve
+        }
+    }
+
     MouseArea {
         id: mouseArea
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
-        onClicked: root.copyRequested()
+        onClicked: !root.selected ? root.selected = true : root.isCopied = true;
+        onDoubleClicked: root.isCopied = true;
     }
 
     RowLayout {
         id: contentRow
         anchors.fill: parent
-        // anchors.topMargin: Variables.spacingNormal
-        // anchors.leftMargin: Variables.spacingMedium
-        // anchors.rightMargin: Variables.spacingNormal
-        // anchors.bottomMargin: Variables.spacingNormal
-        anchors.margins: Variables.spacingNormal
+        anchors.topMargin: Variables.spacingNormal
+        anchors.leftMargin: Variables.spacingMedium
+        anchors.rightMargin: Variables.spacingNormal
+        anchors.bottomMargin: Variables.spacingNormal
         spacing: Variables.spacingNormal
 
         CliphistImage {
@@ -56,15 +66,17 @@ Rectangle {
 
         StyledText {
             Layout.fillWidth: true
+            color: root.selected ? Colors.on_secondary : Colors.on_surface
             elide: Text.ElideRight
             maximumLineCount: 2
             text: root.entryData?.text ?? ""
         }
 
-        Rectangle {     // separator
+        // separator
+        Rectangle {
             Layout.fillHeight: true
             Layout.preferredWidth: Math.round(2 * Variables.scaleFactor)
-            color: Colors.border_variant
+            color: root.selected ? Colors.border : Colors.border_variant
             radius: width / 2
         }
 
@@ -73,9 +85,13 @@ Rectangle {
             implicitWidth: height
             Layout.fillHeight: true
             icon: Icons.actionDelete
-            iconColor: Colors.error
+            iconColor: root.selected ? Colors.on_error : Colors.error
             onClicked: root.deleteRequested()
         }
     }
+
+    // DEBUG:
+    // onIsCopiedChanged: console.log("[ClipboardItem] Copied entry")
+    // onSelectedChanged: console.log("[ClipboardItem] Selected entry")
 }
 
