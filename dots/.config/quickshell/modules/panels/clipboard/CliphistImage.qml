@@ -6,19 +6,26 @@ import qs.modules.theme
 ClippingRectangle {
     id: root
 
+    property bool isImage
     property string rawEntry: ""
     property string entryId: ""
     property string cachedPath: "/tmp/quickshell/cliphist/" + entryId + ".png"
     property string imageSource: ""
 
-    property int fixedHeight: Math.round(120 * Variables.scaleFactor)
-    property int fixedWidth: Math.round(230 * Variables.scaleFactor)
+    readonly property real aspectRatio: {
+        (image.implicitHeight > 0) ? (image.implicitWidth / image.implicitHeight) : (16 / 9)
+    }
 
-    // anchors.fill: parent
-    implicitWidth: image.sourceSize.width
-    implicitHeight: image.sourceSize.height
-    color: "transparent"
-    // radius: Variables.radiusNormal
+    implicitHeight: Math.round(100 * Variables.scaleFactor)
+    implicitWidth: Math.round(implicitHeight * aspectRatio)
+    color: "white"
+    radius: Variables.radiusNormal
+
+    Binding {
+        target: root.parent?.parent ?? null
+        property: "width"
+        value: root.implicitWidth
+    }
 
     Component.onCompleted: {
         if (root.entryId !== "" && root.rawEntry !== "") checkPath.running = true;
@@ -48,12 +55,12 @@ ClippingRectangle {
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
+        // anchors.fill: parent
         visible: root.imageSource !== ""
         asynchronous: true
         source: root.imageSource
         fillMode: Image.PreserveAspectFit
         retainWhileLoading: true
-        sourceSize: Qt.size(root.fixedWidth, root.fixedHeight)
     }
 }
 

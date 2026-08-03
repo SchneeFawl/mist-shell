@@ -1,3 +1,4 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import qs.modules.theme
@@ -86,14 +87,28 @@ Rectangle {
         }
 
         Item {
-            Layout.fillWidth: true
+            id: imgContainer
             Layout.fillHeight: true
-            visible: root.entryData?.isImage ? true : false
+            Layout.preferredWidth: width
+            visible: Boolean(root.entryData && root.entryData.isImage)
 
-            CliphistImage {
-                rawEntry: root.entryData?.rawEntry ?? ""
-                entryId: root.entryData?.id ?? ""
+            Loader {
+                id: imgLoader
+                anchors.fill: parent
+                active: Boolean(root.entryData && root.entryData.isImage)
+                sourceComponent: Component {
+                    CliphistImage {
+                        isImage: true
+                        rawEntry: root.entryData?.rawEntry ?? ""
+                        entryId: root.entryData?.id ?? ""
+                    }
+                }
             }
+        }
+
+        Item {
+            Layout.fillWidth: true
+            visible: Boolean(root.entryData && root.entryData.isImage)
         }
 
         // separator
