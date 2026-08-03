@@ -56,6 +56,9 @@ Window {
                     }
                     
                     ClipboardButton {
+                        color: "transparent"
+                        border.color: Colors.secondary
+                        border.width: 1
                         icon: Icons.actionDelete
                         text: "Clear"
                         onClicked: CliphistService.wipe()
@@ -72,6 +75,7 @@ Window {
                     Layout.topMargin: Variables.spacingNormal
                     spacing: Variables.spacingSmall
                     clip: true
+
                     model: CliphistService.filteredEntries
                     delegate: ClipboardItem {
                         required property var modelData
@@ -79,6 +83,25 @@ Window {
                         entryData: modelData
                         onDeleteRequested: CliphistService.deleteEntry(modelData.rawEntry)
                         onCopyRequested: CliphistService.copy(modelData.rawEntry)
+                    }
+
+                    displaced: Transition {
+                        NumberAnimation {
+                            properties: "x,y"
+                            duration: Variables.durationMedium
+                            easing.type: Easing.Bezier
+                            easing.bezierCurve: Variables.standardCurve
+                        }
+                    }
+                    
+                    remove: Transition {
+                        NumberAnimation {
+                            property: "opacity"
+                            to: 0.0
+                            duration: Variables.durationMedium
+                            easing.type: Easing.Bezier
+                            easing.bezierCurve: Variables.exitCurve
+                        }
                     }
                 }
             }

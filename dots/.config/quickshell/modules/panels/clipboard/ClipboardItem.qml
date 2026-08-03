@@ -76,32 +76,27 @@ Rectangle {
         opacity: root.isCopied ? 0.0 : 1.0
 
         StyledText {
-            Layout.fillWidth: true
+            Layout.fillWidth: !root.entryData?.isImage
             Layout.fillHeight: true
+            Layout.preferredWidth: root.entryData?.isImage ? 0 : -1
             color: root.selected ? Colors.on_secondary : Colors.on_surface
             elide: Text.ElideRight
             maximumLineCount: 2
             textFormat: Text.PlainText
-            visible: root.entryData?.isImage ? false : true
+            visible: !root.entryData?.isImage
             text: root.entryData?.text ?? ""
         }
 
-        Item {
-            id: imgContainer
-            Layout.fillHeight: true
-            Layout.preferredWidth: width
-            visible: Boolean(root.entryData && root.entryData.isImage)
+        Loader {        // loader to prevent unsupported img format
+            id: imgLoader
+            active: Boolean(root.entryData && root.entryData.isImage)
 
-            Loader {
-                id: imgLoader
-                anchors.fill: parent
-                active: Boolean(root.entryData && root.entryData.isImage)
-                sourceComponent: Component {
-                    CliphistImage {
-                        isImage: true
-                        rawEntry: root.entryData?.rawEntry ?? ""
-                        entryId: root.entryData?.id ?? ""
-                    }
+            sourceComponent: Component {
+                CliphistImage {
+                    visible: Boolean(root.entryData && root.entryData.isImage)
+                    isImage: Boolean(root.entryData && root.entryData.isImage)
+                    rawEntry: root.entryData?.rawEntry ?? ""
+                    entryId: root.entryData?.id ?? ""
                 }
             }
         }

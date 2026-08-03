@@ -1,9 +1,9 @@
 import QtQuick
-import Quickshell.Widgets
+// import Quickshell.Widgets
 import Quickshell.Io
 import qs.modules.theme
 
-ClippingRectangle {
+Rectangle {
     id: root
 
     property bool isImage
@@ -12,20 +12,30 @@ ClippingRectangle {
     property string cachedPath: "/tmp/quickshell/cliphist/" + entryId + ".png"
     property string imageSource: ""
 
-    readonly property real aspectRatio: {
-        (image.implicitHeight > 0) ? (image.implicitWidth / image.implicitHeight) : (16 / 9)
+    property real maxWidth: Math.round(220 * Variables.scaleFactor)
+    property real maxHeight: Math.round(120 * Variables.scaleFactor)
+
+    property int imageWidth: {
+        if (!rawEntry) return 0;
+        let match = rawEntry.match(/(\d+)x(\d+)/);
+        return match ? parseInt(match[2]) : 0;
     }
 
-    implicitHeight: Math.round(100 * Variables.scaleFactor)
-    implicitWidth: Math.round(implicitHeight * aspectRatio)
+    property int imageHeight: {
+        if (!rawEntry) return 0;
+        let match = rawEntry.match(/(\d+)x(\d+)/);
+        return match ? parseInt(match[2]) : 0;
+    }
+
+    property real imageScale: {
+        if (imageWidth <= 0 || imageHeight <= 0) return 1.0;
+        return Math.min(maxWidth / imageWidth, maxHeight / imageWidth, 1.0);
+    }
+
+    implicitWidth: imageWidth > 0 ? Math.round(imageWidth * imageScale) : maxWidth
+    implicitHeight: imageHeight > 0 ? Math.round(imageHeight * imageScale) : maxHeight
     color: "white"
     radius: Variables.radiusNormal
-
-    Binding {
-        target: root.parent?.parent ?? null
-        property: "width"
-        value: root.implicitWidth
-    }
 
     Component.onCompleted: {
         if (root.entryId !== "" && root.rawEntry !== "") checkPath.running = true;

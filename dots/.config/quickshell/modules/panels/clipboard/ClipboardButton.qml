@@ -21,7 +21,7 @@ Rectangle {
     implicitHeight: Variables.buttonHeight
     radius: Variables.dashInnerRadius
     color: Colors.surface_container_highest
-    scale: mouseArea.pressed ? 0.85 : 1.0
+    scale: mouseArea.pressed ? 0.90 : 1.0
     clip: true
 
     Behavior on scale {
