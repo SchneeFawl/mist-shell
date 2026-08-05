@@ -1,0 +1,28 @@
+pragma ComponentBehavior: Bound
+import QtQuick
+import Quickshell
+
+import qs.bar
+import qs.modules
+import qs.modules.screenCorners
+import qs.modules.panels.clipboard
+import qs.modules.onScreenDisplays
+
+Scope {
+    id: modulesRoot
+
+    required property var modelData
+    property string activeBarLayout: "top-fragmented"   // OPTIONS: "vertical-sidebar", "minimal"
+
+    ModulesLoader {
+        component: Bar {
+            modelData: modulesRoot.modelData
+            layoutStyle: modulesRoot.activeBarLayout
+        }
+    }
+    ModulesLoader { component: NotificationsPopup { modelData: modulesRoot.modelData } }
+    ModulesLoader { component: ScreenCorners {} }
+    ModulesLoader { component: Clipboard {} }
+    ModulesLoader { component: OSD {} }
+}
+
