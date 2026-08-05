@@ -27,6 +27,7 @@ QtObject {
 
     readonly property int iconSmall:   Math.round(16 * scaleFactor)
     readonly property int iconNormal:  Math.round(20 * scaleFactor)
+    readonly property int iconMedium:  Math.round(22 * scaleFactor)
     readonly property int iconLarge:   Math.round(24 * scaleFactor)
     readonly property int iconLargest: Math.round(30 * scaleFactor)
 
@@ -39,6 +40,7 @@ QtObject {
     readonly property int spacingNormal:  Math.round(8 * scaleFactor)
     readonly property int spacingMedium:  Math.round(12 * scaleFactor)
     readonly property int spacingLarge:   Math.round(16 * scaleFactor)
+    readonly property int spacingLargest: Math.round(20 * scaleFactor)
 
     readonly property int radiusSmall:    Math.round(4 * scaleFactor)
     readonly property int radiusNormal:   Math.round(8 * scaleFactor)

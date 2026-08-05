@@ -9,10 +9,9 @@ import qs.services
 PanelWindow {       // qmllint disable uncreatable-type
     id: root
 
-    // visible: OSDController.visible
-    visible: true
+    visible: OSDController.visible
 
-    implicitHeight: Math.round(56 * Variables.scaleFactor)
+    implicitHeight: Variables.buttonHeightMedium
     implicitWidth: Math.round(240 * Variables.scaleFactor)
     color: "transparent"
 
@@ -34,24 +33,23 @@ PanelWindow {       // qmllint disable uncreatable-type
         color: Colors.surface_container
         radius: height / 2
         border.width: 2
-        border.color: Colors.border
+        border.color: Colors.border_variant
         clip: true
 
         RowLayout {
             id: contentLayout
             anchors.fill: parent
-            anchors.margins: Variables.spacingMedium
+            anchors.margins: Variables.spacingNormal
             spacing: Variables.spacingNormal
 
             StyledText {
                 Layout.preferredWidth: Math.round(20 * Variables.scaleFactor)
                 Layout.fillHeight: true
                 horizontalAlignment: Text.AlignHCenter
-                leftPadding: Variables.spacingSmall
+                leftPadding: Variables.spacingNormal
                 color: OSDController.muted ? Colors.on_error_container : Colors.secondary
                 font.pixelSize: Variables.iconMedium
-                // text: OSDController.icon
-                text: Icons.sysVolume
+                text: OSDController.icon
             }
 
             ColumnLayout {
@@ -59,19 +57,29 @@ PanelWindow {       // qmllint disable uncreatable-type
                 Layout.fillWidth: true
                 spacing: Variables.spacingNormal
 
-                StyledText {
-                    Layout.fillWidth: true
+                Row {
+                    id: textRow
+                    Layout.alignment: Qt.AlignCenter
                     Layout.fillHeight: true
-                    horizontalAlignment: Text.AlignHCenter
-                    color: Colors.on_secondary_container
-                    font.pixelSize: Variables.fontMedium
-                    // text: OSDController.title
-                    text: "Volume"
+                    spacing: Variables.spacingLargest
+
+                    StyledText {
+                        color: Colors.on_secondary_container
+                        font.pixelSize: Variables.fontMedium
+                        text: OSDController.title
+                    }
+
+                    StyledText {
+                        color: Colors.on_secondary_container
+                        font.pixelSize: Variables.fontMedium
+                        font.weight: Variables.defaultFontWeight + 100      // bold
+                        text: Math.round(OSDController.value * 100)
+                    }
                 }
 
                 Rectangle {
                     id: progressBar
-                    Layout.preferredHeight: Math.round(6 * Variables.scaleFactor)
+                    Layout.preferredHeight: Math.round(5 * Variables.scaleFactor)
                     Layout.fillWidth: true
                     Layout.leftMargin: Variables.spacingMedium
                     Layout.rightMargin: Variables.spacingMedium
@@ -109,5 +117,7 @@ PanelWindow {       // qmllint disable uncreatable-type
             }
         }
     }
+
+
 }
 
