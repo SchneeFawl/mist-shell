@@ -6,6 +6,7 @@ import qs.modules
 import "./bar"
 import "./modules/screenCorners"
 import "./modules/panels/clipboard"
+import "./modules/onScreenDisplays"
 
 ShellRoot {
     id: shellRoot
@@ -15,6 +16,7 @@ ShellRoot {
 
     ScreenCorners {}
     Clipboard {}
+    OSD {}
 
     Variants {
         model: Quickshell.screens

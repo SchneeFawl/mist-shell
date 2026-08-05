@@ -69,7 +69,7 @@ Singleton {
 
     Component.onCompleted: {
         detectProc.running = true;
-        console.log("[Brightness] Initialized")
+        // console.log("[Brightness] Initialized")
     }
 
     // `qs ipc brightness change increase 5`
