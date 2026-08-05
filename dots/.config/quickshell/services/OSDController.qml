@@ -18,7 +18,7 @@ Singleton {
 
     Timer {
         id: hideTimer
-        interval: 5000
+        interval: 4000
         running: false
         onTriggered: root.visible = false;
     }

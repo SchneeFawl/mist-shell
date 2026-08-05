@@ -9,7 +9,7 @@ import qs.services
 PanelWindow {       // qmllint disable uncreatable-type
     id: root
 
-    visible: OSDController.visible
+    visible: OSDController.visible || popupRoot.opacity > 0.01
 
     implicitHeight: Variables.buttonHeightMedium
     implicitWidth: Math.round(240 * Variables.scaleFactor)
@@ -35,6 +35,9 @@ PanelWindow {       // qmllint disable uncreatable-type
         border.width: 2
         border.color: Colors.border_variant
         clip: true
+        transformOrigin: Item.Top
+        scale: OSDController.visible ? 1.0 : 0.8
+        opacity: OSDController.visible ? 1.0 : 0.0
 
         RowLayout {
             id: contentLayout
@@ -42,7 +45,7 @@ PanelWindow {       // qmllint disable uncreatable-type
             anchors.margins: Variables.spacingNormal
             spacing: Variables.spacingNormal
 
-            StyledText {
+            StyledText {        // icon
                 Layout.preferredWidth: Math.round(20 * Variables.scaleFactor)
                 Layout.fillHeight: true
                 horizontalAlignment: Text.AlignHCenter
@@ -53,6 +56,7 @@ PanelWindow {       // qmllint disable uncreatable-type
             }
 
             ColumnLayout {
+                id: contentColumn
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 spacing: Variables.spacingNormal
@@ -109,6 +113,23 @@ PanelWindow {       // qmllint disable uncreatable-type
             }
         }
 
+        Behavior on opacity {
+            NumberAnimation {
+                duration: Variables.durationMedium
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.standardCurve
+            }
+        }
+
+        Behavior on scale {
+            NumberAnimation {
+                duration: Variables.durationMedium
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Variables.standardCurve
+            }
+        }
+
+
         HoverHandler {
             id: popupHover
             onHoveredChanged: {
@@ -117,7 +138,5 @@ PanelWindow {       // qmllint disable uncreatable-type
             }
         }
     }
-
-
 }
 
