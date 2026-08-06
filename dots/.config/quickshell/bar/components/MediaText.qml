@@ -5,7 +5,7 @@ import qs.modules.theme
 Item {
     id: root
 
-    property string mode: SettingsService.mediaTextMode
+    property string mode: SettingsService.bar.mediaTextMode
     property int maxViewportWidth: Math.round(360 * Variables.scaleFactor)
 
     onModeChanged: {
@@ -159,7 +159,7 @@ Item {
 
         function checkMarquee() {
             mediaLabel.x = 0;
-            if (SettingsService.mediaTextMode === "marquee" &&
+            if (root.mode === "marquee" &&
                 mediaLabel.implicitWidth > root.maxViewportWidth) {
                 marqueeAnim.restart();
             } else {
@@ -168,7 +168,7 @@ Item {
         }
 
         function getFormattedText(fullString) {
-            if (SettingsService.mediaTextMode === "elide" &&
+            if (root.mode === "elide" &&
                 fullString.length > Variables.maxBarMediaChars) {
                 return fullString.substring(0, Variables.maxBarMediaChars) + "...";
             }

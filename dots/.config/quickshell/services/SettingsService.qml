@@ -3,46 +3,98 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 
-// qmllint disable unresolved-type
+// qmllint disable unresolved-type missing-type
 
 QtObject {
-    id: settingsService
+    id: root
 
     property string settingsFilePath: Quickshell.env("HOME") + "/.config/quickshell/settings.json"
 
-    // all the settings:
-    property real scaleFactor: 1.25
-    property string mediaTextMode: "marquee"        // OPTIONS: "marquee", "elide"
+    property alias scaleFactor: displayObj.scaleFactor
+    property alias mediaTextMode: barObj.mediaTextMode
 
-    property FileView settingsFile: FileView {
-        path: settingsService.settingsFilePath
-        watchChanges: true
-        preload: false
+    property alias display: adapter.display
+    property alias appearance: adapter.appearance
+    property alias bar: adapter.bar
 
-        adapter: JsonAdapter {
+    readonly property JsonAdapter adapter: JsonAdapter {
+        id: adapter
+
+        property JsonObject display: JsonObject {
+            id: displayObj
             property real scaleFactor: 1.0
+        }
+
+        property JsonObject bar: JsonObject {
+            id: barObj
             property string mediaTextMode: "marquee"
         }
 
-        onLoadFailed: {
-            writeAdapter();
-        }
-
-        onLoaded: {
-            settingsService.scaleFactor = adapter.scaleFactor;
-            settingsService.mediaTextMode = adapter.mediaTextMode;
+        property JsonObject appearance: JsonObject {
+            property real radiusMultiplier: 1.0
+            property real spacingMultiplier: 1.0
+            property real fontSizeMultiplier: 1.0
         }
     }
 
-    onScaleFactorChanged: {
-        settingsFile.adapter.scaleFactor = scaleFactor;
-        settingsFile.writeAdapter();
+    readonly property FileView settingsFile: FileView {
+        path: root.settingsFilePath
+        watchChanges: true
+        preload: false
+
+        adapter: root.adapter
+        onAdapterUpdated: writeAdapter()
+
+        onLoadFailed: (error) => {
+            if (error === FileViewError.FileNotFound) {
+                root.settingsFile.writeAdapter();
+            }
+        }
     }
 
-    onMediaTextModeChanged: {
-        settingsFile.adapter.mediaTextMode = mediaTextMode;
-        settingsFile.writeAdapter();
-    }
+    // function save() {
+    //     settingsFile.writeAdapter();
+    // }
+
+    // onDisplayChanged: {
+    //     settingsFile.adapter.display = display;
+    //     settingsFile.writeAdapter();
+    // }
+    //
+    // onAppearanceChanged: {
+    //     settingsFile.adapter.appearance = appearance;
+    //     settingsFile.writeAdapter();
+    // }
+    //
+    // onBarChanged: {
+    //     settingsFile.adapter.bar = bar;
+    //     settingsFile.writeAdapter;
+    // }
+
+    // onScaleFactorChanged: {
+    //     settingsFile.adapter.display.scaleFactor = scaleFactor;
+    //     settingsFile.writeAdapter();
+    // }
+    //
+    // onMediaTextModeChanged: {
+    //     settingsFile.adapter.bar.mediaTextMode = mediaTextMode;
+    //     settingsFile.writeAdapter();
+    // }
+    //
+    // onSpacingMultiplierChanged: {
+    //     settingsFile.adapter.appearance.spacingMultiplier = spacingMultiplier;
+    //     settingsFile.writeAdapter();
+    // }
+    //
+    // onRadiusMultiplierChanged: {
+    //     settingsFile.adapter.appearance.radiusMultiplier = radiusMultiplier;
+    //     settingsFile.writeAdapter();
+    // }
+    //
+    // onFontSizeMultiplierChanged: {
+    //     settingsFile.adapter.appearance.fontSizeMultiplier = fontSizeMultiplier;
+    //     settingsFile.writeAdapter();
+    // }
 
     Component.onCompleted: {
         settingsFile.reload();
