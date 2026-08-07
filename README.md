@@ -24,9 +24,47 @@ Mist-shell is a desktop shell with dotfiles specifically made for Arch Linux. Th
 <details>
     <summary>Installation</summary>
 
-   - **Hyprland 0.54**: If you're using Hyprland version 0.54 or less then you are not ready to use it because this is made only for Hyprland 0.55 or later, which uses the Lua language for config instead of hyprlang
+   > **Hyprland 0.54**: If you're using Hyprland version 0.54 or less then you are not ready to use it because this is made only for Hyprland 0.55 or later, which uses the Lua language for config files instead of hyprlang.
 
-   - Clone this repo (preferrably in the home directory) and run the install script `./install.sh`
+  Clone this repo (preferrably in the home directory) and run the install script using `./install.sh`
+
+</details>
+
+<details>
+    <summary>Manual Installation</summary>
+
+  > **NOTE**: It is recommended to use a fresh installation of Arch Linux. If not using a fresh installation, make sure to back up your dotfiles.
+
+  - **Clone this repo and enter the directory**
+    ```sh
+    git clone https://github.com/SchneeFawl/mist-shell.git
+    cd mist-shell
+    ```
+
+  - **Copy the config files `dots/.config` to your config directory**
+    ```sh
+    mkdir -p $HOME/.config
+    cp -ri dots/.config/. $HOME/.config/
+    ```
+
+  - **Install all the pacman dependencies**
+    ```sh
+    sudo pacman -S --needed \
+      hyprland kitty zsh playerctl networkmanager network-manager-applet \
+      pavucontrol pipewire pipewire-pulse wireplumber bluez bluez-utils \
+      blueman dolphin awww matugen rofi papirus-icon-theme starship \
+      cliphist brightnessctl gpu-screen-recorder gamemode qt6-declarative \
+      qt6-base qt6-wayland qt6-svg qt6-multimedia qt6-multimedia-ffmpeg \
+      qt6-imageformats qt6-shadertools qt6-positioning qt6-webengine \
+      libpipewire xdg-desktop-portal-hyprland xdg-desktop-portal-gtk
+    ```
+
+  - **Install all the AUR dependencies (replace `yay` with your preferred AUR helper if needed)**:
+    ```sh
+    yay -S --needed \
+      otf-geist-mono-nerd ttf-cascadia-code-nerd ttf-cascadia-mono-nerd \
+      quickshell-git bibata-cursor-theme-bin
+    ```
 
 </details>
 
@@ -89,7 +127,7 @@ Mist-shell is a desktop shell with dotfiles specifically made for Arch Linux. Th
 - [x] Theme selector (dashboard)
 - [x] Wallpapers
 - [x] Bluetooth
-- [ ] Clipboard manager
+- [x] Clipboard
 - [x] Notifications
 - [x] Media control (dashboard)
 - [x] Game mode (dashboard)

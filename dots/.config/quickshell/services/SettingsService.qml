@@ -52,50 +52,6 @@ QtObject {
         }
     }
 
-    // function save() {
-    //     settingsFile.writeAdapter();
-    // }
-
-    // onDisplayChanged: {
-    //     settingsFile.adapter.display = display;
-    //     settingsFile.writeAdapter();
-    // }
-    //
-    // onAppearanceChanged: {
-    //     settingsFile.adapter.appearance = appearance;
-    //     settingsFile.writeAdapter();
-    // }
-    //
-    // onBarChanged: {
-    //     settingsFile.adapter.bar = bar;
-    //     settingsFile.writeAdapter;
-    // }
-
-    // onScaleFactorChanged: {
-    //     settingsFile.adapter.display.scaleFactor = scaleFactor;
-    //     settingsFile.writeAdapter();
-    // }
-    //
-    // onMediaTextModeChanged: {
-    //     settingsFile.adapter.bar.mediaTextMode = mediaTextMode;
-    //     settingsFile.writeAdapter();
-    // }
-    //
-    // onSpacingMultiplierChanged: {
-    //     settingsFile.adapter.appearance.spacingMultiplier = spacingMultiplier;
-    //     settingsFile.writeAdapter();
-    // }
-    //
-    // onRadiusMultiplierChanged: {
-    //     settingsFile.adapter.appearance.radiusMultiplier = radiusMultiplier;
-    //     settingsFile.writeAdapter();
-    // }
-    //
-    // onFontSizeMultiplierChanged: {
-    //     settingsFile.adapter.appearance.fontSizeMultiplier = fontSizeMultiplier;
-    //     settingsFile.writeAdapter();
-    // }
-
     Component.onCompleted: {
         settingsFile.reload();
     }

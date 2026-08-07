@@ -5,9 +5,10 @@ import qs.services
 QtObject {
     id: variables
 
+    readonly property real radiusMultiplier: SettingsService.appearance.radiusMultiplier
+
     // General
     readonly property real scaleFactor: SettingsService.display.scaleFactor
-    readonly property real radiusMultiplier: SettingsService.appearance.radiusMultiplier
     readonly property int screenCornerRadius: (barHeight - pillHeight) + pillRadius
 
     // Animations
