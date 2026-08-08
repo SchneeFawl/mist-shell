@@ -34,9 +34,18 @@ Window {
         anchors.margins: Variables.spacingNormal
         spacing: Variables.spacingNormal
 
-        SettingsSidebar {}
+        SettingsSidebar { id: sidebar }
 
-        SettingsContent {}
+        SettingsContent {
+            pages: sidebar.pages
+            currentPage: sidebar.currentPage
+        }
+
+        Keys.onPressed: (event) => {
+            if (event.key === Qt.Key_Escape) {
+                SettingsService.windowVisible = false;
+            }
+        }
     }
 }
 
