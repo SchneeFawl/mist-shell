@@ -60,6 +60,7 @@ RowLayout {
 
             StyledText {
                 anchors.centerIn: parent
+                monospace: true
                 font.pixelSize: Variables.iconSmall
                 color: Colors.primary
                 text: Icons.sysVolume
@@ -74,6 +75,7 @@ RowLayout {
 
             StyledText {
                 anchors.centerIn: parent
+                monospace: true
                 font.pixelSize: Variables.iconSmall
                 color: Colors.error
                 text: Icons.powerIcon

@@ -3,8 +3,11 @@ import qs.modules.theme
 
 Text {
     id: styledTextRoot
+
+    property bool monospace: false
+
     verticalAlignment: Text.AlignVCenter
-    font.family: Variables.defaultFontFamily
+    font.family: monospace ? Variables.monoFontFamily : Variables.sansFontFamily
     font.weight: Variables.defaultFontWeight
     font.pixelSize: Variables.fontNormal
     color: Colors.on_surface

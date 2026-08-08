@@ -53,24 +53,28 @@ Rectangle {
 
                 SettingsPill {
                     id: scalePill1
+                    monospace: true
                     text: "1.0"
                     highlighted: scaleHighlight.targetPill === scalePill1
                     onClicked: SettingsService.scaleFactor = 1.0
                 }
                 SettingsPill {
                     id: scalePill2
+                    monospace: true
                     text: "1.25"
                     highlighted: scaleHighlight.targetPill === scalePill2
                     onClicked: SettingsService.scaleFactor = 1.25
                 }
                 SettingsPill {
                     id: scalePill3
+                    monospace: true
                     text: "1.50"
                     highlighted: scaleHighlight.targetPill === scalePill3
                     onClicked: SettingsService.scaleFactor = 1.50
                 }
                 SettingsPill {
                     id: scalePill4
+                    monospace: true
                     text: "2.0"
                     highlighted: scaleHighlight.targetPill === scalePill4
                     onClicked: SettingsService.scaleFactor = 2.0

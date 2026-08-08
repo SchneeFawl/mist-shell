@@ -40,8 +40,8 @@ manage_dependencies() {
         "xdg-desktop-portal-hyprland" "xdg-desktop-portal-gtk"
     )
     local deps_aur=(
-        "otf-geist-mono-nerd" "ttf-cascadia-code-nerd" "ttf-cascadia-mono-nerd" "quickshell-git"
-        "bibata-cursor-theme-bin"
+        "otf-geist-mono-nerd" "ttf-cascadia-code-nerd" "ttf-cascadia-mono-nerd" "ttf-roboto"
+        "quickshell-git" "bibata-cursor-theme-bin"
     )
 
     log_info "Checking system commands... "

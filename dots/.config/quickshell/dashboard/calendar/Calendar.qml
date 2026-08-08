@@ -1,3 +1,4 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import "calendar.js" as CalendarLogic
@@ -111,10 +112,11 @@ Rectangle {
                     delegate: StyledText {
                         required property int index
                         readonly property bool isTodayWeekDay: root.currentMonth === new Date().getMonth() && root.currentYear === new Date().getFullYear() && index === new Date().getDay();
-
                         required property string modelData
+
                         Layout.fillWidth: true
                         horizontalAlignment: Text.AlignHCenter
+                        monospace: true
                         font.pixelSize: Variables.fontSmall
                         color: isTodayWeekDay ? Colors.primary : Colors.on_surface
                         font.weight: isTodayWeekDay ? Variables.defaultFontWeight + 200 : Variables.defaultFontWeight
@@ -187,6 +189,7 @@ Rectangle {
                                         dateContainer.modelData.isCurrentMonth ? Colors.secondary : Colors.tertiary
                                     )
                                 }
+                                monospace: true
                                 font.bold: dateContainer.modelData.isToday ? Variables.defaultFontWeight + 200 : Variables.defaultFontWeight
                                 text: dateContainer.modelData.day
                             }

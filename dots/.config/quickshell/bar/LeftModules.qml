@@ -15,6 +15,7 @@ RowLayout {
 
             StyledText {
                 color: Colors.primary
+                monospace: true
                 font.pixelSize: Variables.fontMedium
                 anchors.verticalCenter: parent.verticalCenter
                 text: Icons.barIcon
@@ -44,6 +45,7 @@ RowLayout {
 
             StyledText {
                 anchors.centerIn: parent
+                monospace: true
                 font.pixelSize: Variables.iconSmall
                 text: Icons.keyboard
                 color: Colors.primary
@@ -60,6 +62,7 @@ RowLayout {
 
             StyledText {
                 anchors.centerIn: parent
+                monospace: true
                 font.pixelSize: Variables.iconSmall
                 color: Colors.primary
                 text: Icons.clipboard

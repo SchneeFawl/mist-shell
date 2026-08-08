@@ -2,52 +2,58 @@ pragma Singleton
 import QtQuick
 import qs.services
 
+// qmllint disable missing-property
+
 QtObject {
     id: variables
 
     readonly property real radiusMultiplier: SettingsService.appearance.radiusMultiplier
+    readonly property real spacingMultiplier: SettingsService.appearance.spacingMultiplier
+    readonly property real fontSizeMultiplier: SettingsService.appearance.fontSizeMultiplier
 
     // General
     readonly property real scaleFactor: SettingsService.display.scaleFactor
     readonly property int screenCornerRadius: (barHeight - pillHeight) + pillRadius
 
     // Animations
-    readonly property var standardCurve: [0.30, 0.90, 0.40, 1.0, 1, 1]
+    readonly property var standardCurve:  [0.30, 0.90, 0.40, 1.0, 1, 1]
     readonly property var overshootCurve: [0.18, 1.1, 0.7, 1.10, 1, 1]
-    readonly property var entranceCurve: [0, 0, 0.2, 1.0, 1, 1]
-    readonly property var exitCurve: [0.10, 0.80, 0.60, 1.0, 1, 1]
+    readonly property var entranceCurve:  [0, 0, 0.2, 1.0, 1, 1]
+    readonly property var exitCurve:      [0.10, 0.80, 0.60, 1.0, 1, 1]
 
     // Text
-    readonly property string defaultFontFamily: "GeistMono Nerd Font"
+    readonly property string monoFontFamily: "GeistMono Nerd Font"
+    readonly property string defaultFontFamily: monoFontFamily          // backwards compatibility
+    readonly property string sansFontFamily: "Roboto Condensed"
     readonly property int defaultFontWeight: 500
 
-    readonly property int fontSmall: Math.round(12 * scaleFactor)
-    readonly property int fontNormal: Math.round(14 * scaleFactor)
-    readonly property int fontMedium: Math.round(16 * scaleFactor)
-    readonly property int fontLarge: Math.round(20 * scaleFactor)
-    readonly property int fontLargest: Math.round(24 * scaleFactor)
+    readonly property int fontSmall:   Math.round(12 * scaleFactor * variables.fontSizeMultiplier)
+    readonly property int fontNormal:  Math.round(14 * scaleFactor * variables.fontSizeMultiplier)
+    readonly property int fontMedium:  Math.round(16 * scaleFactor * variables.fontSizeMultiplier)
+    readonly property int fontLarge:   Math.round(20 * scaleFactor * variables.fontSizeMultiplier)
+    readonly property int fontLargest: Math.round(24 * scaleFactor * variables.fontSizeMultiplier)
 
-    readonly property int iconSmall: Math.round(16 * scaleFactor)
-    readonly property int iconNormal: Math.round(20 * scaleFactor)
-    readonly property int iconMedium: Math.round(22 * scaleFactor)
-    readonly property int iconLarge: Math.round(24 * scaleFactor)
-    readonly property int iconLargest: Math.round(30 * scaleFactor)
+    readonly property int iconSmall:   Math.round(16 * scaleFactor * variables.fontSizeMultiplier)
+    readonly property int iconNormal:  Math.round(20 * scaleFactor * variables.fontSizeMultiplier)
+    readonly property int iconMedium:  Math.round(22 * scaleFactor * variables.fontSizeMultiplier)
+    readonly property int iconLarge:   Math.round(24 * scaleFactor * variables.fontSizeMultiplier)
+    readonly property int iconLargest: Math.round(30 * scaleFactor * variables.fontSizeMultiplier)
 
-    readonly property int durationFast: 160
+    readonly property int durationFast:   160
     readonly property int durationMedium: 240
-    readonly property int durationSlow: 300
+    readonly property int durationSlow:   300
 
     // Common
-    readonly property int spacingSmall: Math.round(4 * scaleFactor)
-    readonly property int spacingNormal: Math.round(8 * scaleFactor)
-    readonly property int spacingMedium: Math.round(12 * scaleFactor)
-    readonly property int spacingLarge: Math.round(16 * scaleFactor)
-    readonly property int spacingLargest: Math.round(20 * scaleFactor)
+    readonly property int spacingSmall:   Math.round(4  * scaleFactor * variables.spacingMultiplier)
+    readonly property int spacingNormal:  Math.round(8  * scaleFactor * variables.spacingMultiplier)
+    readonly property int spacingMedium:  Math.round(12 * scaleFactor * variables.spacingMultiplier)
+    readonly property int spacingLarge:   Math.round(16 * scaleFactor * variables.spacingMultiplier)
+    readonly property int spacingLargest: Math.round(20 * scaleFactor * variables.spacingMultiplier)
 
-    readonly property int radiusSmall: Math.round(4 * scaleFactor)
-    readonly property int radiusNormal: Math.round(8 * scaleFactor)
-    readonly property int radiusMedium: Math.round(12 * scaleFactor)
-    readonly property int radiusLarge: Math.round(16 * scaleFactor)
+    readonly property int radiusSmall:  Math.round(4  * scaleFactor * variables.radiusMultiplier)
+    readonly property int radiusNormal: Math.round(8  * scaleFactor * variables.radiusMultiplier)
+    readonly property int radiusMedium: Math.round(12 * scaleFactor * variables.radiusMultiplier)
+    readonly property int radiusLarge:  Math.round(16 * scaleFactor * variables.radiusMultiplier)
 
     // Bar
     readonly property int barHeight: Math.round(40 * scaleFactor)
@@ -62,19 +68,19 @@ QtObject {
     readonly property int maxBarMediaChars: Math.round(36 * scaleFactor)
 
     // Dashboard
-    readonly property int dashboardRadius: Math.round(28 * scaleFactor)
-    readonly property int dashColumnRadius: Math.round(14 * scaleFactor)
-    readonly property int dashInnerColSpacing: Math.round(5 * scaleFactor)
-    readonly property int dashInnerRadius: dashColumnRadius - dashInnerColSpacing
+    readonly property int dashboardRadius:     Math.round(28 * scaleFactor * variables.radiusMultiplier)
+    readonly property int dashColumnRadius:    Math.round(14 * scaleFactor * variables.radiusMultiplier)
+    readonly property int dashInnerColSpacing: Math.round(5 * scaleFactor * variables.spacingMultiplier)
+    readonly property int dashInnerRadius:     dashColumnRadius - dashInnerColSpacing
 
     // Controls
     readonly property int buttonHeightSmallest: Math.round(16 * scaleFactor)
-    readonly property int buttonHeightSmall: Math.round(30 * scaleFactor)
-    readonly property int buttonHeight: Math.round(36 * scaleFactor)
-    readonly property int buttonHeightMedium: Math.round(50 * scaleFactor)
+    readonly property int buttonHeightSmall:    Math.round(30 * scaleFactor)
+    readonly property int buttonHeight:         Math.round(36 * scaleFactor)
+    readonly property int buttonHeightMedium:   Math.round(50 * scaleFactor)
 
     // DEBUG
     // Component.onCompleted: {
-    //     console.log("[Settings] Radius multiplier:", radiusMultiplier)
+    //     console.log("[Settings] Radius multiplier:", radiusMultiplier);
     // }
 }

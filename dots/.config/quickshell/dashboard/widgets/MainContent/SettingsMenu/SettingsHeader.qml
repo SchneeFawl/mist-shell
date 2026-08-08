@@ -10,6 +10,8 @@ Rectangle {
 
     SettingsText {
         anchors.centerIn: parent
+        font.family: Variables.sansFontFamily
+        font.weight: Variables.defaultFontWeight + 100
         text: "Settings"
         size: Variables.fontMedium
     }

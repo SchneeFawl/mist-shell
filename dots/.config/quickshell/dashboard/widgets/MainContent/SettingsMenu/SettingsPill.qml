@@ -12,6 +12,8 @@ Rectangle {
     property bool active: false
     property bool isHovered: mouseArea.containsMouse
 
+    property bool monospace: false
+
     Layout.preferredHeight: parent.height
     Layout.fillWidth: true
     radius: Variables.dashInnerRadius
@@ -20,6 +22,7 @@ Rectangle {
     StyledText {
         id: optionText
         anchors.centerIn: parent
+        font.family: stngPillRoot.monospace ? Variables.monoFontFamily : Variables.sansFontFamily
         color: stngPillRoot.highlighted ? Colors.on_primary : Colors.on_surface
         text: stngPillRoot.text
     }

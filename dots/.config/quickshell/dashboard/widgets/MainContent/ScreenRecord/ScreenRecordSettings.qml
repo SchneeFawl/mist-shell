@@ -38,6 +38,8 @@ Item {
 
                 ScreenRecordText {
                     anchors.centerIn: parent
+                    font.family: Variables.sansFontFamily
+                    font.weight: Variables.defaultFontWeight + 100
                     text: "Screen Recorder"
                     size: Variables.fontMedium
                 }
