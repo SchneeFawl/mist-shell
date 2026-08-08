@@ -5,10 +5,11 @@ import Quickshell.Io
 
 // qmllint disable unresolved-type missing-type
 
-QtObject {
+Singleton {
     id: root
 
     property string settingsFilePath: Quickshell.env("HOME") + "/.config/quickshell/settings.json"
+    property bool windowVisible
 
     property alias scaleFactor: displayObj.scaleFactor
     property alias mediaTextMode: barObj.mediaTextMode
@@ -49,6 +50,13 @@ QtObject {
             if (error === FileViewError.FileNotFound) {
                 root.settingsFile.writeAdapter();
             }
+        }
+    }
+
+    IpcHandler {
+        target: "settings"
+        function openMenu(): void {
+            root.windowVisible = !root.windowVisible;
         }
     }
 

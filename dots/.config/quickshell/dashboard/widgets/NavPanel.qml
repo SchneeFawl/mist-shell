@@ -21,7 +21,7 @@ Rectangle {
             id: mediaModeBtn
             btnSize: Variables.buttonHeightMedium
             radius: Variables.dashColumnRadius
-            icon: Icons.navMusic
+            icon: Icons.music
             iconSize: Variables.iconNormal
             onClicked: {
                 navWrapper.activeTab = 1;
@@ -32,7 +32,7 @@ Rectangle {
 
         BaseButton {
             id: systemInfoBtn
-            icon: Icons.navSystemInfo
+            icon: Icons.systemInfo
             iconSize: Variables.iconNormal
             btnSize: Variables.buttonHeightMedium
             radius: Variables.dashColumnRadius
@@ -45,7 +45,7 @@ Rectangle {
 
         BaseButton {
             id: themeBtn
-            icon: Icons.navTheme
+            icon: Icons.palette
             iconSize: Variables.iconNormal
             btnSize: Variables.buttonHeightMedium
             radius: Variables.dashColumnRadius
@@ -58,7 +58,7 @@ Rectangle {
 
         BaseButton {
             id: recordBtn
-            icon: Icons.navRecord
+            icon: Icons.recorder
             iconSize: Variables.iconNormal
             btnSize: Variables.buttonHeightMedium
             radius: Variables.dashColumnRadius
@@ -73,7 +73,7 @@ Rectangle {
 
         BaseButton {
             id: settingsBtn
-            icon: Icons.sysSettings
+            icon: Icons.settings
             iconSize: Variables.iconNormal
             btnSize: Variables.buttonHeightMedium
             radius: Variables.dashColumnRadius

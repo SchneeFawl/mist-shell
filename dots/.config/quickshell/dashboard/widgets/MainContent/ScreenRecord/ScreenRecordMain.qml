@@ -49,7 +49,7 @@ Item {
 
             ScreenRecordBtn {
                 id: headerText
-                icon: Icons.sysSettings
+                icon: Icons.settings
                 onClicked: recMainRoot.StackView.view.push("ScreenRecordSettings.qml")
             }
         }

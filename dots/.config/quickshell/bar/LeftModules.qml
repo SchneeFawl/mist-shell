@@ -49,6 +49,7 @@ RowLayout {
                 font.pixelSize: Variables.iconSmall
                 text: Icons.keyboard
                 color: Colors.primary
+                scale: keybindHelper.pressed ? 0.9 : 1.0
             }
         }
 
@@ -66,6 +67,25 @@ RowLayout {
                 font.pixelSize: Variables.iconSmall
                 color: Colors.primary
                 text: Icons.clipboard
+                scale: clipboard.pressed ? 0.9 : 1.0
+            }
+        }
+
+        MouseArea {
+            id: settings
+            Layout.preferredWidth: Math.round(24 * Variables.scaleFactor)
+            Layout.fillHeight: true
+            cursorShape: Qt.PointingHandCursor
+            hoverEnabled: true
+            onClicked: SettingsService.windowVisible = !SettingsService.windowVisible
+
+            StyledText {
+                anchors.centerIn: parent
+                monospace: true
+                font.pixelSize: Variables.iconSmall
+                color: Colors.primary
+                text: Icons.settings
+                scale: settings.pressed ? 0.9 : 1.0
             }
         }
     }

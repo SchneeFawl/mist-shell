@@ -7,6 +7,7 @@ import qs.modules
 import qs.modules.screenCorners
 import qs.modules.panels.clipboard
 import qs.modules.onScreenDisplays
+import qs.modules.settings
 
 Scope {
     id: modulesRoot
@@ -23,6 +24,7 @@ Scope {
     ModulesLoader { component: NotificationsPopup { modelData: modulesRoot.modelData } }
     ModulesLoader { component: ScreenCorners {} }
     ModulesLoader { component: Clipboard {} }
+    ModulesLoader { component: SettingsWindow {} }
     ModulesLoader { component: OSD {} }
 }
 

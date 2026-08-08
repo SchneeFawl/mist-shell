@@ -11,7 +11,8 @@ QtObject {
     // System
     readonly property string powerIcon: "󰐥"
     readonly property string archLinux: "󰣇"
-    readonly property string sysSettings: "󰒓"
+    readonly property string settings: "󰒓"
+    readonly property string sliders: "󰘮"
     readonly property string sysDndActive: "󰂛"
     readonly property string sysDndInactive: "󰂚"
     readonly property string sysBluetooth: "󰂯"
@@ -50,12 +51,10 @@ QtObject {
     readonly property string checkMark: "󰄬"
     readonly property string close: "󰅖"
 
-    /*  DASHBOARD  */
-    // navPanel
-    readonly property string navRecord: "󰻂"
-    readonly property string navSystemInfo: ""
-    readonly property string navMusic: "󰽴"
-    readonly property string navTheme: "󰏘"
+    readonly property string recorder: "󰻂"
+    readonly property string systemInfo: ""
+    readonly property string music: "󰽴"
+    readonly property string palette: "󰏘"
 
     // General controls/actions
     readonly property string actionClear: "󰃢"
@@ -76,6 +75,7 @@ QtObject {
     readonly property string mouse: "󰍽"
     readonly property string keyboard: "󰌌"
     readonly property string laptop: "󰌢"
+    readonly property string monitor: "󰍹"
     readonly property string television: "󰔂"
     readonly property string phone: "󰏲"
 
@@ -104,4 +104,6 @@ QtObject {
     readonly property string ram: ""
     readonly property string database: "󰆼"
     readonly property string databaseAlert: "󱘺"
+
+    readonly property string dockTop: "󱔓"
 }
