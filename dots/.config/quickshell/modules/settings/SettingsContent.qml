@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
-import qs.modules.common
 import qs.modules.theme
+import "./pages"
 
 Rectangle {
     id: root
@@ -19,6 +19,7 @@ Rectangle {
     Loader {
         anchors.fill: parent
         anchors.margins: Variables.spacingMedium
+        active: root.currentComponentPath !== ""
         source: root.currentComponentPath !== "" ? Qt.resolvedUrl(root.currentComponentPath) : ""
     }
 }
