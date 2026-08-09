@@ -10,6 +10,7 @@ Singleton {
 
     property string settingsFilePath: Quickshell.env("HOME") + "/.config/quickshell/settings.json"
     property bool windowVisible
+    property string searchText: ""
 
     property alias scaleFactor: displayObj.scaleFactor
     property alias mediaTextMode: barObj.mediaTextMode

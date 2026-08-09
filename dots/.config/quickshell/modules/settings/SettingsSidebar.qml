@@ -1,9 +1,9 @@
 pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
-// import qs.services
 import qs.modules.common
 import qs.modules.theme
+import qs.services
 
 Rectangle {
     id: root
@@ -14,25 +14,38 @@ Rectangle {
         {
             name: "General",
             icon: Icons.sliders,
-            component: "pages/GeneralSettings.qml"
+            component: "pages/GeneralSettings.qml",
+            keywords: ["font", "general", "monospaced", "family"]
         },
         {
             name: "Display",
             icon: Icons.monitor,
-            component: "pages/DisplaySettings.qml"
+            component: "pages/DisplaySettings.qml",
+            keywords: ["display", "monitor", "resolution", "scale", "scaling"]
         },
         {
             name: "Appearance",
             icon: Icons.palette,
-            component: "pages/AppearanceSettings.qml"
+            component: "pages/AppearanceSettings.qml",
+            keywords: ["appearance", "radius", "spacing", "space", "font size", "fontsize"]
         },
         {
             name: "Bar",
             icon: Icons.dockTop,
-            component: "pages/BarSettings.qml"
+            component: "pages/BarSettings.qml",
+            keywords: ["bar", "pill", "fragment", "workspace", "radius", "margin", "spacing", "characters", "media", "max"]
         }
     ]
     property int currentPage: 0
+
+    readonly property var filteredPages: {
+        if (SettingsService.searchText.trim() === "") return pages;
+        let query = SettingsService.searchText.toLowerCase();
+        return pages.filter(p => 
+            p.name.toLowerCase().includes(query) ||
+            (p.keywords && p.keywords.some(k => k.toLowerCase().includes(query)))
+        );
+    }
 
     Layout.preferredWidth: Math.round(250 * Variables.scaleFactor)
     Layout.fillHeight: true
@@ -65,7 +78,7 @@ Rectangle {
             spacing: Variables.spacingSmall
             clip: true
 
-            model: root.pages
+            model: root.filteredPages
             delegate: Rectangle {
                 id: card
                 required property var modelData

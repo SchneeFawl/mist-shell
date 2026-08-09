@@ -35,7 +35,7 @@ Rectangle {
             font.pixelSize: Variables.fontNormal
             cursorVisible: true
             clip: true
-            // onTextChanged: 
+            onTextChanged: SettingsService.searchText = text
             enabled: searchBar.visible
             focus: true
 
@@ -43,7 +43,7 @@ Rectangle {
                 id: searchPlaceholder
                 color: Colors.surface_variant
                 text: "Search settings..."
-                visible: !(searchInput.text.length > 0)
+                visible: SettingsService.searchText.length === 0
             }
         }
     }
