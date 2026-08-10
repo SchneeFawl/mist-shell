@@ -62,7 +62,44 @@ Item {
 
         ColumnLayout {
             id: mainColumn
+            anchors.fill: parent
             spacing: Variables.spacingNormal
+
+            RowLayout {
+                Layout.fillWidth: true
+                Layout.preferredHeight: defaultFontColumn.height
+                spacing: Variables.spacingNormal
+
+                Column {
+                    id: defaultFontColumn
+                    spacing: Variables.spacingSmall
+
+                    StyledText {
+                        font.pixelSize: Variables.fontMedium
+                        text: "Default font"
+                    }
+                    StyledText {
+                        font.pixelSize: Variables.fontSmall
+                        text: "Font used for the general interface"
+                    }
+                }
+
+                Item { Layout.fillWidth: true }
+
+                StyledTextInput {
+                    id: defaultFontInput
+                    baseWidth: Math.round(240 * Variables.scaleFactor)
+                    baseHeight: defaultFontColumn.height - Variables.spacingSmall
+                    icon: Icons.textShadow
+                    placeholderText: "Roboto Condensed"
+                }
+
+                BaseButton {
+                    Layout.preferredHeight: defaultFontColumn.height - Variables.spacingSmall
+                    Layout.preferredWidth: height
+                    icon: Icons.checkMark
+                }
+            }
         }
     }
 }

@@ -21,6 +21,7 @@ Rectangle {
 
         StyledText {
             Layout.alignment: Text.AlignVCenter
+            monospace: true
             font.pixelSize: Variables.iconNormal
             color: Colors.on_primary_container
             text: Icons.magnify
@@ -31,7 +32,7 @@ Rectangle {
             Layout.alignment: Text.AlignVCenter
             Layout.fillWidth: true
             color: Colors.on_surface
-            font.family: Variables.defaultFontFamily
+            font.family: Variables.sansFontFamily
             font.pixelSize: Variables.fontNormal
             cursorVisible: true
             clip: true
@@ -41,6 +42,7 @@ Rectangle {
 
             StyledText {
                 id: searchPlaceholder
+                font.family: Variables.sansFontFamily
                 color: Colors.surface_variant
                 text: "Search settings..."
                 visible: SettingsService.searchText.length === 0

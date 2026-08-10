@@ -47,7 +47,7 @@ Rectangle {
         );
     }
 
-    Layout.preferredWidth: Math.round(250 * Variables.scaleFactor)
+    Layout.preferredWidth: Math.round(200 * Variables.scaleFactor)
     Layout.fillHeight: true
     color: "transparent"
 
@@ -59,16 +59,9 @@ Rectangle {
 
         SettingsSearchBar {}
 
-        // separator
-        Rectangle {
+        StyledSeparator {
             Layout.fillWidth: true
             Layout.preferredHeight: Math.round(2 * Variables.scaleFactor)
-            Layout.topMargin: Variables.spacingSmall
-            Layout.bottomMargin: Variables.spacingSmall
-            Layout.leftMargin: Variables.spacingLarge
-            Layout.rightMargin: Variables.spacingLarge
-            color: Colors.border_variant
-            radius: height / 2
         }
 
         ListView {

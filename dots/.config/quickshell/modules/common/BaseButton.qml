@@ -43,6 +43,7 @@ Rectangle {
 
     StyledText {
         anchors.centerIn: parent
+        monospace: buttonRoot.icon !== ""
         font.pixelSize: buttonRoot.icon ? buttonRoot.iconSize : Variables.fontNormal
         color: buttonRoot.active ? Colors.on_primary : Colors.on_surface
         text: buttonRoot.icon || buttonRoot.text

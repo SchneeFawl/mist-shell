@@ -106,4 +106,6 @@ QtObject {
     readonly property string databaseAlert: "󱘺"
 
     readonly property string dockTop: "󱔓"
+
+    readonly property string textShadow: "󰙩"
 }
