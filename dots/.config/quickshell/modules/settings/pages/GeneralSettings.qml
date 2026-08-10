@@ -91,13 +91,14 @@ Item {
                     baseWidth: Math.round(240 * Variables.scaleFactor)
                     baseHeight: defaultFontColumn.height - Variables.spacingSmall
                     icon: Icons.textShadow
-                    placeholderText: "Roboto Condensed"
+                    placeholderText: Variables.sansFontFamily
                 }
 
                 BaseButton {
                     Layout.preferredHeight: defaultFontColumn.height - Variables.spacingSmall
                     Layout.preferredWidth: height
                     icon: Icons.checkMark
+                    onClicked: SettingsService.general.sansFontFamily = defaultFontInput.textInputText
                 }
             }
         }

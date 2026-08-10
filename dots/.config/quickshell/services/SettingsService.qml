@@ -15,12 +15,19 @@ Singleton {
     property alias scaleFactor: displayObj.scaleFactor
     property alias mediaTextMode: barObj.mediaTextMode
 
+    property alias general: adapter.general
     property alias display: adapter.display
     property alias appearance: adapter.appearance
     property alias bar: adapter.bar
 
     readonly property JsonAdapter adapter: JsonAdapter {
         id: adapter
+
+        property JsonObject general: JsonObject {
+            id: generalObj
+            property string sansFontFamily: "Roboto Condensed"
+            property string monoFontFamily: "GeistMono Nerd Font"
+        }
 
         property JsonObject display: JsonObject {
             id: displayObj

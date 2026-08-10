@@ -19,6 +19,7 @@ Rectangle {
     property int iconSize: Variables.iconNormal
 
     property color textInputColor: Colors.on_surface
+    property var textInputText: textInput.text
 
     Layout.preferredWidth: baseWidth
     width: baseWidth
