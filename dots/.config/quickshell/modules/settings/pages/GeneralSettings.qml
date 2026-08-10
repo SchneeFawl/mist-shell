@@ -63,8 +63,9 @@ Item {
         ColumnLayout {
             id: mainColumn
             anchors.fill: parent
-            spacing: Variables.spacingNormal
+            spacing: Variables.spacingLarge
 
+            // sans font
             RowLayout {
                 Layout.fillWidth: true
                 Layout.preferredHeight: defaultFontColumn.height
@@ -89,16 +90,58 @@ Item {
                 StyledTextInput {
                     id: defaultFontInput
                     baseWidth: Math.round(240 * Variables.scaleFactor)
-                    baseHeight: defaultFontColumn.height - Variables.spacingSmall
+                    baseHeight: Variables.buttonHeight
                     icon: Icons.textShadow
                     placeholderText: Variables.sansFontFamily
                 }
 
                 BaseButton {
-                    Layout.preferredHeight: defaultFontColumn.height - Variables.spacingSmall
-                    Layout.preferredWidth: height
+                    Layout.preferredHeight: Variables.buttonHeight
+                    Layout.preferredWidth: Variables.buttonHeight
                     icon: Icons.checkMark
                     onClicked: SettingsService.general.sansFontFamily = defaultFontInput.textInputText
+                }
+            }
+
+            // monospace font
+            RowLayout {
+                Layout.fillWidth: true
+                spacing: Variables.spacingNormal
+
+                ColumnLayout {
+                    id: monoFontColumn
+                    Layout.fillWidth: true
+                    spacing: Variables.spacingSmall
+
+                    StyledText {
+                        font.pixelSize: Variables.fontMedium
+                        text: "Monospaced font"
+                    }
+                    StyledText {
+                        Layout.fillWidth: true
+                        font.pixelSize: Variables.fontSmall
+                        wrapMode: Text.WordWrap
+                        maximumLineCount: 2
+                        elide: Text.ElideRight
+                        text: "Monospaced nerd font (patched) used for icons and numbers"
+                    }
+                }
+
+                Item { Layout.fillWidth: true }
+
+                StyledTextInput {
+                    id: monoFontInput
+                    baseWidth: Math.round(240 * Variables.scaleFactor)
+                    baseHeight: Variables.buttonHeight
+                    icon: Icons.textShadow
+                    placeholderText: Variables.monoFontFamily
+                }
+
+                BaseButton {
+                    Layout.preferredHeight: Variables.buttonHeight
+                    Layout.preferredWidth: Variables.buttonHeight
+                    icon: Icons.checkMark
+                    onClicked: SettingsService.general.monoFontFamily = monoFontInput.textInputText
                 }
             }
         }

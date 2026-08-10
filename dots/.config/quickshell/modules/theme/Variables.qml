@@ -22,9 +22,9 @@ QtObject {
     readonly property var exitCurve:      [0.10, 0.80, 0.60, 1.0, 1, 1]
 
     // Text
-    property string monoFontFamily: SettingsService.general.monoFontFamily
+    readonly property string monoFontFamily: SettingsService.general.monoFontFamily
     readonly property string defaultFontFamily: monoFontFamily          // backwards compatibility
-    property string sansFontFamily: SettingsService.general.sansFontFamily
+    readonly property string sansFontFamily: SettingsService.general.sansFontFamily
     readonly property int defaultFontWeight: 500
 
     readonly property int fontSmall:   Math.round(12 * scaleFactor * variables.fontSizeMultiplier)
