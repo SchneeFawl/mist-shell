@@ -23,14 +23,14 @@ Item {
                 anchors.verticalCenter: parent.verticalCenter
                 font.pixelSize: Variables.iconLargest
                 color: Colors.primary
-                text: Icons.sliders
+                text: Icons.monitor
             }
 
             StyledText {
                 anchors.verticalCenter: parent.verticalCenter
                 font.pixelSize: Variables.fontLargest
                 color: Colors.primary
-                text: "General"
+                text: "Display"
             }
         }
 
@@ -65,83 +65,31 @@ Item {
             anchors.fill: parent
             spacing: Variables.spacingLarge
 
-            // sans font
-            RowLayout {
-                Layout.fillWidth: true
-                spacing: Variables.spacingNormal
-
-                Column {
-                    id: defaultFontColumn
-                    spacing: Variables.spacingSmall
-
-                    StyledText {
-                        font.pixelSize: Variables.fontMedium
-                        text: "Default font"
-                    }
-                    StyledText {
-                        font.pixelSize: Variables.fontSmall
-                        text: "Font used for the general interface"
-                    }
-                }
-
-                Item { Layout.fillWidth: true }
-
-                StyledTextInput {
-                    id: defaultFontInput
-                    baseWidth: Math.round(240 * Variables.scaleFactor)
-                    baseHeight: Variables.buttonHeight
-                    icon: Icons.textShadow
-                    placeholderText: Variables.sansFontFamily
-                }
-
-                BaseButton {
-                    Layout.preferredHeight: Variables.buttonHeight
-                    Layout.preferredWidth: Variables.buttonHeight
-                    icon: Icons.checkMark
-                    onClicked: SettingsService.general.sansFontFamily = defaultFontInput.textInputText
-                }
-            }
-
-            // monospace font
             RowLayout {
                 Layout.fillWidth: true
                 spacing: Variables.spacingNormal
 
                 ColumnLayout {
-                    id: monoFontColumn
                     Layout.fillWidth: true
                     spacing: Variables.spacingSmall
 
                     StyledText {
                         font.pixelSize: Variables.fontMedium
-                        text: "Monospaced font"
+                        text: "Scale Factor"
                     }
                     StyledText {
                         Layout.fillWidth: true
                         font.pixelSize: Variables.fontSmall
                         wrapMode: Text.WordWrap
-                        maximumLineCount: 2
+                        maximumLineCount: 3
                         elide: Text.ElideRight
-                        text: "Monospaced nerd font (patched) used for icons and numbers"
+                        text: "Controls scale of the quickshell components. Default value: 1.0"
                     }
                 }
 
                 Item { Layout.fillWidth: true }
 
-                StyledTextInput {
-                    id: monoFontInput
-                    baseWidth: Math.round(240 * Variables.scaleFactor)
-                    baseHeight: Variables.buttonHeight
-                    icon: Icons.textShadow
-                    placeholderText: Variables.monoFontFamily
-                }
 
-                BaseButton {
-                    Layout.preferredHeight: Variables.buttonHeight
-                    Layout.preferredWidth: Variables.buttonHeight
-                    icon: Icons.checkMark
-                    onClicked: SettingsService.general.monoFontFamily = monoFontInput.textInputText
-                }
             }
         }
     }
