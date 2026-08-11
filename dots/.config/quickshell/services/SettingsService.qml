@@ -13,7 +13,6 @@ Singleton {
     property string searchText: ""
 
     property alias scaleFactor: displayObj.scaleFactor
-    property alias mediaTextMode: barObj.mediaTextMode
 
     property alias general: adapter.general
     property alias display: adapter.display
@@ -24,7 +23,6 @@ Singleton {
         id: adapter
 
         property JsonObject general: JsonObject {
-            id: generalObj
             property string sansFontFamily: "Roboto Condensed"
             property string monoFontFamily: "GeistMono Nerd Font"
         }
@@ -36,7 +34,9 @@ Singleton {
 
         property JsonObject bar: JsonObject {
             id: barObj
-            property string mediaTextMode: "marquee"
+            property string position: "top"             // top, bottom, vertical-left, vertical-right
+            property string style: "fragmented"         // fragmented, filled
+            property string mediaTextMode: "marquee"    // marquee, elide
         }
 
         property JsonObject appearance: JsonObject {

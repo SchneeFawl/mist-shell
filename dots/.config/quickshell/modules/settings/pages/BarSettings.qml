@@ -23,14 +23,14 @@ Item {
                 anchors.verticalCenter: parent.verticalCenter
                 font.pixelSize: Variables.iconLargest
                 color: Colors.primary
-                text: Icons.monitor
+                text: Icons.dockTop
             }
 
             StyledText {
                 anchors.verticalCenter: parent.verticalCenter
                 font.pixelSize: Variables.fontLargest
                 color: Colors.primary
-                text: "Display"
+                text: "Bar"
             }
         }
 
@@ -64,11 +64,10 @@ Item {
             id: mainColumn
             anchors.fill: parent
             spacing: Variables.spacingLarge
-
-            // scale factor
+            
+            // bar position
             RowLayout {
                 Layout.fillWidth: true
-                spacing: Variables.spacingNormal
 
                 ColumnLayout {
                     Layout.fillWidth: true
@@ -76,7 +75,7 @@ Item {
 
                     StyledText {
                         font.pixelSize: Variables.fontMedium
-                        text: "Scale Factor"
+                        text: "Position"
                     }
                     StyledText {
                         Layout.fillWidth: true
@@ -84,22 +83,21 @@ Item {
                         wrapMode: Text.WordWrap
                         maximumLineCount: 3
                         elide: Text.ElideRight
-                        text: "Controls scale of the quickshell components. Default value: 1.0"
+                        text: "Sets the position of the bar. Default value: 'top' \n(Still under construction)"
                     }
                 }
 
                 Item { Layout.fillWidth: true }
 
                 StyledDropdown {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: Variables.buttonHeight
-                    model: [1.0, 1.25, 1.5, 2.0]
-                    selectedText: String(SettingsService.scaleFactor)
+                    Layout.preferredWidth: Math.round(200 * Variables.scaleFactor)
+                    model: ["top", "bottom", "vertical-left", "vertical-right"]
+                    selectedText: String(SettingsService.bar.mediaTextMode)
                     onDelegateClicked: (itemData, index) => {
-                        SettingsService.scaleFactor = itemData;
+                        SettingsService.bar.mediaTextMode = itemData;
                     }
                     onReturnPressed: (model, currentIndex) => {
-                        SettingsService.scaleFactor = model[currentIndex];
+                        SettingsService.bar.mediaTextMode = model[currentIndex];
                     }
                 }
             }

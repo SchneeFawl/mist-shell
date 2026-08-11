@@ -8,7 +8,8 @@ PanelWindow {       // qmllint disable
     id: barWindow
 
     required property var modelData
-    property string layoutStyle: "top-fragmented"
+    property string position: "top"
+    property string style: "fragmented"
 
     screen: modelData
     anchors {

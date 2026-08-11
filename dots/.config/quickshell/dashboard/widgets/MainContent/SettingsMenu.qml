@@ -99,7 +99,7 @@ Rectangle {
                     mediaPill1.isHovered ? mediaPill1 :
                         mediaPill2.isHovered ? mediaPill2 : null
                 }
-                activePill: SettingsService.mediaTextMode === "marquee" ? mediaPill1 : mediaPill2
+                activePill: SettingsService.bar.mediaTextMode === "marquee" ? mediaPill1 : mediaPill2
             }
 
             RowLayout {
@@ -111,13 +111,13 @@ Rectangle {
                     id: mediaPill1
                     text: "Marquee"
                     highlighted: mediaTextHighlight.targetPill === mediaPill1
-                    onClicked: SettingsService.mediaTextMode = "marquee"
+                    onClicked: SettingsService.bar.mediaTextMode = "marquee"
                 }
                 SettingsPill {
                     id: mediaPill2
                     text: "Elide"
                     highlighted: mediaTextHighlight.targetPill === mediaPill2
-                    onClicked: SettingsService.mediaTextMode = "elide"
+                    onClicked: SettingsService.bar.mediaTextMode = "elide"
                 }
             }
         }

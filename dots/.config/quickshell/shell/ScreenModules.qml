@@ -13,12 +13,10 @@ Scope {
     id: modulesRoot
 
     required property var modelData
-    property string activeBarLayout: "top-fragmented"   // OPTIONS: "vertical-sidebar", "minimal"
 
     ModulesLoader {
         component: Bar {
             modelData: modulesRoot.modelData
-            layoutStyle: modulesRoot.activeBarLayout
         }
     }
     ModulesLoader { component: NotificationsPopup { modelData: modulesRoot.modelData } }
