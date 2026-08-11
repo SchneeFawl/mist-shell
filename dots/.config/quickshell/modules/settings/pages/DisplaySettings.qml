@@ -84,6 +84,7 @@ Item {
                         wrapMode: Text.WordWrap
                         maximumLineCount: 3
                         elide: Text.ElideRight
+                        color: Colors.secondary
                         text: "Controls scale of the quickshell components. Default value: 1.0"
                     }
                 }

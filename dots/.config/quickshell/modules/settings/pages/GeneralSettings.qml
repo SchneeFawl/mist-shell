@@ -80,6 +80,7 @@ Item {
                     }
                     StyledText {
                         font.pixelSize: Variables.fontSmall
+                        color: Colors.secondary
                         text: "Font used for the general interface"
                     }
                 }
@@ -122,6 +123,7 @@ Item {
                         wrapMode: Text.WordWrap
                         maximumLineCount: 2
                         elide: Text.ElideRight
+                        color: Colors.secondary
                         text: "Monospaced nerd font (patched) used for icons and numbers"
                     }
                 }
