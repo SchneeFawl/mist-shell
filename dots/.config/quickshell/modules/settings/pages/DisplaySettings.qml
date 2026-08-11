@@ -89,7 +89,15 @@ Item {
 
                 Item { Layout.fillWidth: true }
 
-
+                StyledDropdown {
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: Variables.buttonHeight
+                    model: [1.0, 1.25, 1.5, 2.0]
+                    selectedText: String(SettingsService.scaleFactor)
+                    onDelegateClicked: (itemData, index) => {
+                        SettingsService.scaleFactor = itemData;
+                    }
+                }
             }
         }
     }
