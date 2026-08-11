@@ -19,7 +19,10 @@ Rectangle {
         id: dropdownMenu
 
         readonly property int btnHeight: Variables.buttonHeight
-        readonly property int targetHeight: Math.min(themeDropdown.themeModel.length * btnHeight + 8, btnHeight * 4)
+        readonly property int targetHeight: Math.min(
+            themeDropdown.themeModel.length * btnHeight + Variables.spacingSmall,
+            btnHeight * Variables.spacingSmall
+        )
 
         y: parent.height + Variables.spacingSmall         // topMargin = 4
         width: parent.width

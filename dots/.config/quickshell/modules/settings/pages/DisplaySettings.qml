@@ -97,6 +97,9 @@ Item {
                     onDelegateClicked: (itemData, index) => {
                         SettingsService.scaleFactor = itemData;
                     }
+                    onReturnPressed: (model, currentIndex) => {
+                        SettingsService.scaleFactor = model[currentIndex];
+                    }
                 }
             }
         }

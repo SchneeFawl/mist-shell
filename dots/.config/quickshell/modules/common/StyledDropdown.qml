@@ -7,6 +7,7 @@ Rectangle {
     id: root
 
     property bool expanded: false
+    property int maxVisibleItems: 4
 
     property var model: []
     property var delegateText
@@ -15,25 +16,29 @@ Rectangle {
     property color selectedTextColor: Colors.on_surface
 
     signal delegateClicked(var itemData, int index)
-    signal returnPressed()
+    signal returnPressed(var model, int currentIndex)
 
-    implicitHeight: Variables.buttonHeightMedium
+    implicitHeight: Variables.buttonHeight
     implicitWidth: Math.round(120 * Variables.scaleFactor)
     color: Colors.surface_container_high
     radius: Variables.radiusNormal
-    focus: true
 
     Popup {
         id: dropdownMenu
 
         readonly property int btnHeight: Variables.buttonHeight
-        readonly property int targetHeight: Math.min(root.model.length * btnHeight + 8, btnHeight * 4)
+        readonly property int targetHeight: Math.min(
+            root.model.length * btnHeight + Variables.spacingSmall,
+            btnHeight * root.maxVisibleItems + Variables.spacingSmall
+        )
 
         y: parent.height + Variables.spacingSmall         // topMargin = 4
         width: parent.width
         height: targetHeight
         opacity: root.expanded ? 1.0 : 0.0
 
+        focus: true
+        modal: true
         onClosed: root.expanded = false
         closePolicy: Popup.CloseOnPressOutside || Popup.CloseOnPressOutsideParent
 
@@ -80,6 +85,7 @@ Rectangle {
             id: listView
             anchors.fill: parent
             clip: true
+            spacing: 0
             model: root.model
 
             highlightFollowsCurrentItem: true
@@ -173,7 +179,7 @@ Rectangle {
             }
             event.accepted = true;
         } else if ([Qt.Key_Return, Qt.Key_Enter].includes(event.key)) {
-            returnPressed();
+            returnPressed(listView.model, listView.currentIndex);
             expanded = false;
             event.accepted = true;
         } else if (event.key === Qt.Key_Escape) {
@@ -186,10 +192,8 @@ Rectangle {
         if (expanded) {
             dropdownMenu.open();
             root.forceActiveFocus();
-            // DashboardController.keyboardFocus = true;
         } else {
             dropdownMenu.close();
-            // DashboardController.keyboardFocus = false;
         }
     }
 }

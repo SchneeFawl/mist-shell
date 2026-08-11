@@ -26,9 +26,9 @@ Rectangle {
     Popup {
         id: qualityMenu
 
-        readonly property int targetHeight: (Variables.buttonHeight * 4) + 4
+        readonly property int targetHeight: (Variables.buttonHeight * 4) + Variables.spacingSmall
 
-        y: parent.height + 4
+        y: parent.height + Variables.spacingSmall
         width: parent.width
         height: targetHeight
         opacity: qualityDropdown.expanded ? 1.0 : 0
@@ -51,11 +51,11 @@ Rectangle {
             highlight: Item {
                 Rectangle {
                     anchors.fill: parent
-                    anchors.leftMargin: 4
-                    anchors.rightMargin: 4
-                    anchors.topMargin: 4
+                    anchors.leftMargin: Variables.spacingSmall
+                    anchors.rightMargin: Variables.spacingSmall
+                    anchors.topMargin: Variables.spacingSmall
                     color: Colors.primary
-                    radius: Variables.dashInnerRadius - 4
+                    radius: Variables.dashInnerRadius - Variables.spacingSmall
                 }
             }
 
@@ -71,15 +71,15 @@ Rectangle {
                 Rectangle {
                     id: textContainer
                     anchors.fill: parent
-                    anchors.leftMargin: 4
-                    anchors.rightMargin: 4
-                    anchors.topMargin: 4
+                    anchors.leftMargin: Variables.spacingSmall
+                    anchors.rightMargin: Variables.spacingSmall
+                    anchors.topMargin: Variables.spacingSmall
                     color: "transparent"
-                    radius: Variables.dashInnerRadius - 4
+                    radius: Variables.dashInnerRadius - Variables.spacingSmall
 
                     ScreenRecordText {
                         anchors.verticalCenter: parent.verticalCenter
-                        leftPadding: 12
+                        leftPadding: Variables.spacingMedium
                         font.family: Variables.defaultFontFamily
                         color: content.index === qualityView.currentIndex ? Colors.on_primary : Colors.on_surface
                         text: qualityDropdown.formatQualityName(content.modelData)
@@ -146,8 +146,8 @@ Rectangle {
     ScreenRecordText {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
-        anchors.leftMargin: 12
-        font.family: Variables.defaultFontFamily
+        anchors.leftMargin: Variables.spacingMedium
+        font.family: Variables.sansFontFamily
         color: Colors.on_surface
         text: qualityDropdown.formatQualityName(ScreenRecordService.quality)
     }
@@ -155,11 +155,11 @@ Rectangle {
     ScreenRecordText {
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: parent.right
-        anchors.leftMargin: 12
-        anchors.rightMargin: 12
+        anchors.leftMargin: Variables.spacingMedium
+        anchors.rightMargin: Variables.spacingMedium
         font.family: Variables.defaultFontFamily
         color: Colors.on_surface
-        size: Variables.fontLarge
+        size: Variables.iconNormal
         text: Icons.chevronDown
     }
 
