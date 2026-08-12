@@ -65,6 +65,7 @@ Item {
             anchors.fill: parent
             spacing: Variables.spacingLarge
 
+            // font size multiplier
             ColumnLayout {
                 Layout.fillWidth: true
                 spacing: Variables.spacingMedium
@@ -90,15 +91,20 @@ Item {
 
                 RowLayout {
                     Layout.fillWidth: true
+                    Layout.leftMargin: Variables.spacingSmall
+                    Layout.rightMargin: Variables.spacingSmall
                     spacing: Variables.spacingLarge
 
                     StyledText {
+                        Layout.fillHeight: true
+                        Layout.alignment: Text.AlignVCenter
                         monospace: true
                         font.pixelSize: Variables.fontNormal
                         text: String(Math.round(SettingsService.appearance.fontSizeMultiplier * 100)) + "%"
                     }
 
                     StyledStepSlider {
+                        id: fontSizeSlider
                         Layout.fillWidth: true
                         Layout.preferredHeight: handleSize + Variables.spacingSmall
                         value: SettingsService.appearance.fontSizeMultiplier
@@ -113,7 +119,11 @@ Item {
                         color: "transparent"
                         iconSize: Variables.iconLarge
                         icon: Icons.restoreDefault
-                        onClicked: SettingsService.appearance.fontSizeMultiplier = 1.0
+                        onClicked: {
+                            let defaultValue = 1.0;
+                            fontSizeSlider.value = defaultValue;
+                            SettingsService.appearance.fontSizeMultiplier = defaultValue;
+                        }
                     }
                 }
             }

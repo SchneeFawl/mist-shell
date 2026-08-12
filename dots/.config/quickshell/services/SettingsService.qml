@@ -61,6 +61,24 @@ Singleton {
         }
     }
 
+    function resetCategory(targetObj, defaultObj) {
+        let keys = Object.keys(defaultObj);
+        for (let i = 0; i < keys.length; i++) {
+            let k = keys[i];
+            if (k.endsWith("Changed") || k === "objectName") continue;
+            if (typeof defaultObj[k] === "function") continue;
+
+            targetObj[k] = defaultObj[k];
+        }
+    }
+
+    function resetToDefaults() {
+        resetCategory(root.general, SettingsDefaults.general);
+        resetCategory(root.display, SettingsDefaults.display);
+        resetCategory(root.appearance, SettingsDefaults.appearance);
+        resetCategory(root.bar, SettingsDefaults.bar);
+    }
+
     IpcHandler {
         target: "settings"
         function openMenu(): void {

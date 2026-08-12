@@ -41,7 +41,7 @@ Item {
         height: root.handleSize
         radius: root.handleSize / 2
         color: Colors.primary_container
-        border.width: Math.round(2 * Variables.scaleFactor)
+        border.width: Math.round(3 * Variables.scaleFactor)
         border.color: Colors.primary
     }
 
