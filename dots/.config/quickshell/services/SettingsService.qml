@@ -29,7 +29,7 @@ Singleton {
 
         property JsonObject display: JsonObject {
             id: displayObj
-            property real scaleFactor: 1.0
+            property real scaleFactor: 1.0              // 1.0, 1.25, 1.50, 2.0
         }
 
         property JsonObject bar: JsonObject {
