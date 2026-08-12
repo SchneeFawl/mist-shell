@@ -65,7 +65,58 @@ Item {
             anchors.fill: parent
             spacing: Variables.spacingLarge
 
-            
+            ColumnLayout {
+                Layout.fillWidth: true
+                spacing: Variables.spacingMedium
+
+                ColumnLayout {
+                    Layout.fillWidth: true
+                    spacing: Variables.spacingSmall
+
+                    StyledText {
+                        font.pixelSize: Variables.fontMedium
+                        text: "Font size"
+                    }
+                    StyledText {
+                        Layout.fillWidth: true
+                        font.pixelSize: Variables.fontSmall
+                        elide: Text.ElideRight
+                        maximumLineCount: 3
+                        wrapMode: Text.WordWrap
+                        color: Colors.secondary
+                        text: "Multiplier to increase or decrease the font size"
+                    }
+                }
+
+                RowLayout {
+                    Layout.fillWidth: true
+                    spacing: Variables.spacingLarge
+
+                    StyledText {
+                        monospace: true
+                        font.pixelSize: Variables.fontNormal
+                        text: String(Math.round(SettingsService.appearance.fontSizeMultiplier * 100)) + "%"
+                    }
+
+                    StyledStepSlider {
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: handleSize + Variables.spacingSmall
+                        value: SettingsService.appearance.fontSizeMultiplier
+                        onValueCommitted: (finalValue) => {
+                            SettingsService.appearance.fontSizeMultiplier = finalValue;
+                        }
+                    }
+
+                    BaseButton {
+                        Layout.preferredHeight: Variables.buttonHeightSmall
+                        Layout.preferredWidth: Variables.buttonHeightSmall
+                        color: "transparent"
+                        iconSize: Variables.iconLarge
+                        icon: Icons.restoreDefault
+                        onClicked: SettingsService.appearance.fontSizeMultiplier = 1.0
+                    }
+                }
+            }
         }
     }
 }
