@@ -160,7 +160,7 @@ Item {
                         maximumLineCount: 3
                         elide: Text.ElideRight
                         color: Colors.secondary
-                        text: "Change the style of media text at the center of the bar. Default value: 'marquee' \n(Still under construction)"
+                        text: "Change the style of media text at the center of the bar. Default value: 'marquee'"
                     }
                 }
 
