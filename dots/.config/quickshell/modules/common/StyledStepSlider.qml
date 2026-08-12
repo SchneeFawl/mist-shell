@@ -10,6 +10,7 @@ Item {
     property real stepSize: 0.05
 
     signal valueMoved(real newValue)
+    signal valueCommitted(real finalValue)
 
     property int handleSize: Math.round(24 * Variables.scaleFactor)
     property int trackHeight: Math.round(9* Variables.scaleFactor)
@@ -59,18 +60,24 @@ Item {
         cursorShape: Qt.PointingHandCursor
 
         function updatePos(mouse) {
+            if (root.width <= root.handleSize) return;
+
             let rawRatio = (mouse.x - root.handleSize / 2) / (root.width - root.handleSize);
             let rawVal = root.from + rawRatio * (root.to - root.from);
 
             let steps = Math.round((rawVal - root.from) / root.stepSize);
             let steppedVal = Math.max(root.from, Math.min(root.to, root.from + steps * root.stepSize));
 
-            root.value = steppedVal;
-            root.valueMoved(steppedVal);
+            // update only when value actually crossed a step
+            if (Math.abs(steppedVal - root.value) > 0.0001) {
+                root.value = steppedVal;
+                root.valueMoved(steppedVal);
+            }
         }
 
         onPressed: (mouse) => updatePos(mouse)
         onPositionChanged: (mouse) => updatePos(mouse)
+        onReleased: root.valueCommitted(root.value)
     }
 }
 
