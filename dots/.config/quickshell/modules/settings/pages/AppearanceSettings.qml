@@ -67,191 +67,50 @@ Item {
             spacing: Variables.spacingLarge
 
             // font size multiplier
-            ColumnLayout {
-                Layout.fillWidth: true
-                spacing: Variables.spacingNormal
-
-                ColumnLayout {
-                    Layout.fillWidth: true
-                    spacing: Variables.spacingSmall
-
-                    StyledText {
-                        font.pixelSize: Variables.fontMedium
-                        text: "Font size"
-                    }
-                    StyledText {
-                        Layout.fillWidth: true
-                        font.pixelSize: Variables.fontSmall
-                        elide: Text.ElideRight
-                        maximumLineCount: 3
-                        wrapMode: Text.WordWrap
-                        color: Colors.secondary
-                        text: "Multiplier to increase or decrease the font size"
-                    }
+            SliderEntry {
+                entryText: "Font size"
+                entryDesc: "Multiplier to increase or decrease the font size"
+                sliderValue: SettingsService.appearance.fontSizeMultiplier
+                sliderTextValue: String(Math.round(SettingsService.appearance.fontSizeMultiplier * 100) + "%")
+                onSliderValueCommitted: (finalValue) => {
+                    SettingsService.appearance.fontSizeMultiplier = finalValue;
                 }
-
-                RowLayout {
-                    Layout.fillWidth: true
-                    Layout.leftMargin: Variables.spacingSmall
-                    Layout.rightMargin: Variables.spacingSmall
-                    spacing: Variables.spacingLarge
-
-                    StyledText {
-                        Layout.fillHeight: true
-                        Layout.alignment: Text.AlignVCenter
-                        monospace: true
-                        font.pixelSize: Variables.fontNormal
-                        text: String(Math.round(SettingsService.appearance.fontSizeMultiplier * 100)) + "%"
-                    }
-
-                    StyledStepSlider {
-                        id: fontSizeSlider
-                        Layout.fillWidth: true
-                        Layout.preferredHeight: handleSize + Variables.spacingSmall
-                        value: SettingsService.appearance.fontSizeMultiplier
-                        onValueCommitted: (finalValue) => {
-                            SettingsService.appearance.fontSizeMultiplier = finalValue;
-                        }
-                    }
-
-                    BaseButton {
-                        Layout.preferredHeight: Variables.buttonHeightSmall
-                        Layout.preferredWidth: Variables.buttonHeightSmall
-                        color: "transparent"
-                        iconSize: Variables.iconLarge
-                        icon: Icons.restoreDefault
-                        onClicked: {
-                            let defaultValue = 1.0;
-                            fontSizeSlider.value = defaultValue;
-                            SettingsService.appearance.fontSizeMultiplier = defaultValue;
-                        }
-                    }
+                onBtnClicked: {
+                    let defaultVal = SettingsDefaults.appearance.fontSizeMultiplier;
+                    value = defaultVal;
+                    SettingsService.appearance.fontSizeMultiplier = defaultVal;
                 }
             }
 
             // radius multiplier
-            ColumnLayout {
-                Layout.fillWidth: true
-                spacing: Variables.spacingNormal
-
-                ColumnLayout {
-                    Layout.fillWidth: true
-                    spacing: Variables.spacingSmall
-
-                    StyledText {
-                        font.pixelSize: Variables.fontMedium
-                        text: "Radius"
-                    }
-                    StyledText {
-                        Layout.fillWidth: true
-                        font.pixelSize: Variables.fontSmall
-                        elide: Text.ElideRight
-                        maximumLineCount: 3
-                        wrapMode: Text.WordWrap
-                        color: Colors.secondary
-                        text: "Multiplier to increase or decrease the radius of the overall interface"
-                    }
+            SliderEntry {
+                entryText: "Radius"
+                entryDesc: "Multiplier to increase or decrease the radius of the overall interface"
+                sliderValue: SettingsService.appearance.radiusMultiplier
+                sliderTextValue: String(Math.round(SettingsService.appearance.radiusMultiplier * 100) + "%")
+                onSliderValueCommitted: (finalValue) => {
+                    SettingsService.appearance.radiusMultiplier = finalValue;
                 }
-
-                RowLayout {
-                    Layout.fillWidth: true
-                    Layout.leftMargin: Variables.spacingSmall
-                    Layout.rightMargin: Variables.spacingSmall
-                    spacing: Variables.spacingLarge
-
-                    StyledText {
-                        Layout.fillHeight: true
-                        Layout.alignment: Text.AlignVCenter
-                        monospace: true
-                        font.pixelSize: Variables.fontNormal
-                        text: String(Math.round(SettingsService.appearance.radiusMultiplier * 100)) + "%"
-                    }
-
-                    StyledStepSlider {
-                        id: radiusSlider
-                        Layout.fillWidth: true
-                        Layout.preferredHeight: handleSize + Variables.spacingSmall
-                        value: SettingsService.appearance.radiusMultiplier
-                        onValueCommitted: (finalValue) => {
-                            SettingsService.appearance.radiusMultiplier = finalValue;
-                        }
-                    }
-
-                    BaseButton {
-                        Layout.preferredHeight: Variables.buttonHeightSmall
-                        Layout.preferredWidth: Variables.buttonHeightSmall
-                        color: "transparent"
-                        iconSize: Variables.iconLarge
-                        icon: Icons.restoreDefault
-                        onClicked: {
-                            let defaultValue = 1.0;
-                            radiusSlider.value = defaultValue;
-                            SettingsService.appearance.radiusMultiplier = defaultValue;
-                        }
-                    }
+                onBtnClicked: {
+                    let defaultVal = SettingsDefaults.appearance.radiusMultiplier;
+                    value = defaultVal;
+                    SettingsService.appearance.radiusMultiplier = defaultVal;
                 }
             }
 
             // spacing multiplier
-            ColumnLayout {
-                Layout.fillWidth: true
-                spacing: Variables.spacingNormal
-
-                ColumnLayout {
-                    Layout.fillWidth: true
-                    spacing: Variables.spacingSmall
-
-                    StyledText {
-                        font.pixelSize: Variables.fontMedium
-                        text: "Spacing"
-                    }
-                    StyledText {
-                        Layout.fillWidth: true
-                        font.pixelSize: Variables.fontSmall
-                        elide: Text.ElideRight
-                        maximumLineCount: 3
-                        wrapMode: Text.WordWrap
-                        color: Colors.secondary
-                        text: "Multiplier to increase or decrease spacing of the overall interface"
-                    }
+            SliderEntry {
+                entryText: "Spacing"
+                entryDesc: "Multiplier to increase or decrease spacing of the overall interface"
+                sliderValue: SettingsService.appearance.spacingMultiplier
+                sliderTextValue: String(Math.round(SettingsService.appearance.spacingMultiplier * 100) + "%")
+                onSliderValueCommitted: (finalValue) => {
+                    SettingsService.appearance.spacingMultiplier = finalValue;
                 }
-
-                RowLayout {
-                    Layout.fillWidth: true
-                    Layout.leftMargin: Variables.spacingSmall
-                    Layout.rightMargin: Variables.spacingSmall
-                    spacing: Variables.spacingLarge
-
-                    StyledText {
-                        Layout.fillHeight: true
-                        Layout.alignment: Text.AlignVCenter
-                        monospace: true
-                        font.pixelSize: Variables.fontNormal
-                        text: String(Math.round(SettingsService.appearance.spacingMultiplier * 100)) + "%"
-                    }
-
-                    StyledStepSlider {
-                        id: spacingSlider
-                        Layout.fillWidth: true
-                        Layout.preferredHeight: handleSize + Variables.spacingSmall
-                        value: SettingsService.appearance.spacingMultiplier
-                        onValueCommitted: (finalValue) => {
-                            SettingsService.appearance.spacingMultiplier = finalValue;
-                        }
-                    }
-
-                    BaseButton {
-                        Layout.preferredHeight: Variables.buttonHeightSmall
-                        Layout.preferredWidth: Variables.buttonHeightSmall
-                        color: "transparent"
-                        iconSize: Variables.iconLarge
-                        icon: Icons.restoreDefault
-                        onClicked: {
-                            let defaultValue = 1.0;
-                            spacingSlider.value = defaultValue;
-                            SettingsService.appearance.spacingMultiplier = defaultValue;
-                        }
-                    }
+                onBtnClicked: {
+                    let defaultVal = SettingsDefaults.appearance.spacingMultiplier;
+                    value = defaultVal;
+                    SettingsService.appearance.spacingMultiplier = defaultVal;
                 }
             }
 
