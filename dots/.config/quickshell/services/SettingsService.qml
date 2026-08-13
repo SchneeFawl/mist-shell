@@ -3,7 +3,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 
-// qmllint disable unresolved-type missing-type
+// qmllint disable unresolved-type missing-type missing-property
 
 Singleton {
     id: root
@@ -43,6 +43,7 @@ Singleton {
             property real radiusMultiplier: 1.0
             property real spacingMultiplier: 1.0
             property real fontSizeMultiplier: 1.0
+            property real iconSizeMultiplier: 1.0
         }
     }
 

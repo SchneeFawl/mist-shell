@@ -24,6 +24,7 @@ QtObject {
         property real radiusMultiplier: 1.0
         property real spacingMultiplier: 1.0
         property real fontSizeMultiplier: 1.0
+        property real iconSizeMultiplier: 1.0
     }
 }
 

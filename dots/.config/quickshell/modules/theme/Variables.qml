@@ -10,6 +10,7 @@ QtObject {
     readonly property real radiusMultiplier: SettingsService.appearance.radiusMultiplier
     readonly property real spacingMultiplier: SettingsService.appearance.spacingMultiplier
     readonly property real fontSizeMultiplier: SettingsService.appearance.fontSizeMultiplier
+    readonly property real iconSizeMutliplier: SettingsService.appearance.iconSizeMultiplier
 
     // General
     readonly property real scaleFactor: SettingsService.display.scaleFactor
@@ -27,41 +28,41 @@ QtObject {
     readonly property string sansFontFamily: SettingsService.general.sansFontFamily
     readonly property int defaultFontWeight: 500
 
-    readonly property int fontSmall:   Math.round(12 * scaleFactor * variables.fontSizeMultiplier)
-    readonly property int fontNormal:  Math.round(14 * scaleFactor * variables.fontSizeMultiplier)
-    readonly property int fontMedium:  Math.round(16 * scaleFactor * variables.fontSizeMultiplier)
-    readonly property int fontLarge:   Math.round(20 * scaleFactor * variables.fontSizeMultiplier)
-    readonly property int fontLargest: Math.round(24 * scaleFactor * variables.fontSizeMultiplier)
+    readonly property int fontSmall:   Math.round(12 * scaleFactor * fontSizeMultiplier)
+    readonly property int fontNormal:  Math.round(14 * scaleFactor * fontSizeMultiplier)
+    readonly property int fontMedium:  Math.round(16 * scaleFactor * fontSizeMultiplier)
+    readonly property int fontLarge:   Math.round(20 * scaleFactor * fontSizeMultiplier)
+    readonly property int fontLargest: Math.round(24 * scaleFactor * fontSizeMultiplier)
 
-    readonly property int iconSmall:   Math.round(16 * scaleFactor * variables.fontSizeMultiplier)
-    readonly property int iconNormal:  Math.round(20 * scaleFactor * variables.fontSizeMultiplier)
-    readonly property int iconMedium:  Math.round(22 * scaleFactor * variables.fontSizeMultiplier)
-    readonly property int iconLarge:   Math.round(24 * scaleFactor * variables.fontSizeMultiplier)
-    readonly property int iconLargest: Math.round(30 * scaleFactor * variables.fontSizeMultiplier)
+    readonly property int iconSmall:   Math.round(16 * scaleFactor * iconSizeMutliplier)
+    readonly property int iconNormal:  Math.round(20 * scaleFactor * iconSizeMutliplier)
+    readonly property int iconMedium:  Math.round(22 * scaleFactor * iconSizeMutliplier)
+    readonly property int iconLarge:   Math.round(24 * scaleFactor * iconSizeMutliplier)
+    readonly property int iconLargest: Math.round(30 * scaleFactor * iconSizeMutliplier)
 
     readonly property int durationFast:   160
     readonly property int durationMedium: 240
     readonly property int durationSlow:   300
 
     // Common
-    readonly property int spacingSmall:   Math.round(4  * scaleFactor * variables.spacingMultiplier)
-    readonly property int spacingNormal:  Math.round(8  * scaleFactor * variables.spacingMultiplier)
-    readonly property int spacingMedium:  Math.round(12 * scaleFactor * variables.spacingMultiplier)
-    readonly property int spacingLarge:   Math.round(16 * scaleFactor * variables.spacingMultiplier)
-    readonly property int spacingLargest: Math.round(20 * scaleFactor * variables.spacingMultiplier)
+    readonly property int spacingSmall:   Math.round(4  * scaleFactor * spacingMultiplier)
+    readonly property int spacingNormal:  Math.round(8  * scaleFactor * spacingMultiplier)
+    readonly property int spacingMedium:  Math.round(12 * scaleFactor * spacingMultiplier)
+    readonly property int spacingLarge:   Math.round(16 * scaleFactor * spacingMultiplier)
+    readonly property int spacingLargest: Math.round(20 * scaleFactor * spacingMultiplier)
 
-    readonly property int radiusSmall:  Math.round(4  * scaleFactor * variables.radiusMultiplier)
-    readonly property int radiusNormal: Math.round(8  * scaleFactor * variables.radiusMultiplier)
-    readonly property int radiusMedium: Math.round(12 * scaleFactor * variables.radiusMultiplier)
-    readonly property int radiusLarge:  Math.round(16 * scaleFactor * variables.radiusMultiplier)
+    readonly property int radiusSmall:  Math.round(4  * scaleFactor * radiusMultiplier)
+    readonly property int radiusNormal: Math.round(8  * scaleFactor * radiusMultiplier)
+    readonly property int radiusMedium: Math.round(12 * scaleFactor * radiusMultiplier)
+    readonly property int radiusLarge:  Math.round(16 * scaleFactor * radiusMultiplier)
 
     // Bar
     readonly property int barHeight: Math.round(40 * scaleFactor)
     readonly property int pillHeight: Math.round(32 * scaleFactor)
-    readonly property int pillRadius: Math.round(12 * scaleFactor)
-    readonly property int pillInnerPadding: Math.round(12 * scaleFactor)
-    readonly property int pillInnerSpacing: Math.round(6 * scaleFactor)
-    readonly property int pillOuterSpacing: Math.round(12 * scaleFactor)
+    readonly property int pillRadius: Math.round(12 * scaleFactor * radiusMultiplier)
+    readonly property int pillInnerPadding: Math.round(12 * scaleFactor * spacingMultiplier)
+    readonly property int pillInnerSpacing: Math.round(6 * scaleFactor * spacingMultiplier)
+    readonly property int pillOuterSpacing: Math.round(12 * scaleFactor * spacingMultiplier)
     readonly property int barSideMargins: barHeight - pillHeight - Math.round(2 * scaleFactor)
     readonly property int workspaceActiveSize: Math.round(32 * scaleFactor)
     readonly property int workspaceInactiveSize: Math.round(16 * scaleFactor)

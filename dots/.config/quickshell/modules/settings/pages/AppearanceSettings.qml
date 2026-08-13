@@ -68,7 +68,7 @@ Item {
             // font size multiplier
             ColumnLayout {
                 Layout.fillWidth: true
-                spacing: Variables.spacingMedium
+                spacing: Variables.spacingNormal
 
                 ColumnLayout {
                     Layout.fillWidth: true
@@ -123,6 +123,195 @@ Item {
                             let defaultValue = 1.0;
                             fontSizeSlider.value = defaultValue;
                             SettingsService.appearance.fontSizeMultiplier = defaultValue;
+                        }
+                    }
+                }
+            }
+
+            // radius multiplier
+            ColumnLayout {
+                Layout.fillWidth: true
+                spacing: Variables.spacingNormal
+
+                ColumnLayout {
+                    Layout.fillWidth: true
+                    spacing: Variables.spacingSmall
+
+                    StyledText {
+                        font.pixelSize: Variables.fontMedium
+                        text: "Radius"
+                    }
+                    StyledText {
+                        Layout.fillWidth: true
+                        font.pixelSize: Variables.fontSmall
+                        elide: Text.ElideRight
+                        maximumLineCount: 3
+                        wrapMode: Text.WordWrap
+                        color: Colors.secondary
+                        text: "Multiplier to increase or decrease the radius of the overall interface"
+                    }
+                }
+
+                RowLayout {
+                    Layout.fillWidth: true
+                    Layout.leftMargin: Variables.spacingSmall
+                    Layout.rightMargin: Variables.spacingSmall
+                    spacing: Variables.spacingLarge
+
+                    StyledText {
+                        Layout.fillHeight: true
+                        Layout.alignment: Text.AlignVCenter
+                        monospace: true
+                        font.pixelSize: Variables.fontNormal
+                        text: String(Math.round(SettingsService.appearance.radiusMultiplier * 100)) + "%"
+                    }
+
+                    StyledStepSlider {
+                        id: radiusSlider
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: handleSize + Variables.spacingSmall
+                        value: SettingsService.appearance.radiusMultiplier
+                        onValueCommitted: (finalValue) => {
+                            SettingsService.appearance.radiusMultiplier = finalValue;
+                        }
+                    }
+
+                    BaseButton {
+                        Layout.preferredHeight: Variables.buttonHeightSmall
+                        Layout.preferredWidth: Variables.buttonHeightSmall
+                        color: "transparent"
+                        iconSize: Variables.iconLarge
+                        icon: Icons.restoreDefault
+                        onClicked: {
+                            let defaultValue = 1.0;
+                            radiusSlider.value = defaultValue;
+                            SettingsService.appearance.radiusMultiplier = defaultValue;
+                        }
+                    }
+                }
+            }
+
+            // spacing multiplier
+            ColumnLayout {
+                Layout.fillWidth: true
+                spacing: Variables.spacingNormal
+
+                ColumnLayout {
+                    Layout.fillWidth: true
+                    spacing: Variables.spacingSmall
+
+                    StyledText {
+                        font.pixelSize: Variables.fontMedium
+                        text: "Spacing"
+                    }
+                    StyledText {
+                        Layout.fillWidth: true
+                        font.pixelSize: Variables.fontSmall
+                        elide: Text.ElideRight
+                        maximumLineCount: 3
+                        wrapMode: Text.WordWrap
+                        color: Colors.secondary
+                        text: "Multiplier to increase or decrease spacing of the overall interface"
+                    }
+                }
+
+                RowLayout {
+                    Layout.fillWidth: true
+                    Layout.leftMargin: Variables.spacingSmall
+                    Layout.rightMargin: Variables.spacingSmall
+                    spacing: Variables.spacingLarge
+
+                    StyledText {
+                        Layout.fillHeight: true
+                        Layout.alignment: Text.AlignVCenter
+                        monospace: true
+                        font.pixelSize: Variables.fontNormal
+                        text: String(Math.round(SettingsService.appearance.spacingMultiplier * 100)) + "%"
+                    }
+
+                    StyledStepSlider {
+                        id: spacingSlider
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: handleSize + Variables.spacingSmall
+                        value: SettingsService.appearance.spacingMultiplier
+                        onValueCommitted: (finalValue) => {
+                            SettingsService.appearance.spacingMultiplier = finalValue;
+                        }
+                    }
+
+                    BaseButton {
+                        Layout.preferredHeight: Variables.buttonHeightSmall
+                        Layout.preferredWidth: Variables.buttonHeightSmall
+                        color: "transparent"
+                        iconSize: Variables.iconLarge
+                        icon: Icons.restoreDefault
+                        onClicked: {
+                            let defaultValue = 1.0;
+                            spacingSlider.value = defaultValue;
+                            SettingsService.appearance.spacingMultiplier = defaultValue;
+                        }
+                    }
+                }
+            }
+
+            // icon size multiplier
+            ColumnLayout {
+                Layout.fillWidth: true
+                spacing: Variables.spacingNormal
+
+                ColumnLayout {
+                    Layout.fillWidth: true
+                    spacing: Variables.spacingSmall
+
+                    StyledText {
+                        font.pixelSize: Variables.fontMedium
+                        text: "Icon size"
+                    }
+                    StyledText {
+                        Layout.fillWidth: true
+                        font.pixelSize: Variables.fontSmall
+                        elide: Text.ElideRight
+                        maximumLineCount: 3
+                        wrapMode: Text.WordWrap
+                        color: Colors.secondary
+                        text: "Multiplier to increase or decrease icon sizes"
+                    }
+                }
+
+                RowLayout {
+                    Layout.fillWidth: true
+                    Layout.leftMargin: Variables.spacingSmall
+                    Layout.rightMargin: Variables.spacingSmall
+                    spacing: Variables.spacingLarge
+
+                    StyledText {
+                        Layout.fillHeight: true
+                        Layout.alignment: Text.AlignVCenter
+                        monospace: true
+                        font.pixelSize: Variables.fontNormal
+                        text: String(Math.round(SettingsService.appearance.iconSizeMultiplier * 100)) + "%"
+                    }
+
+                    StyledStepSlider {
+                        id: iconSizeSlider
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: handleSize + Variables.spacingSmall
+                        value: SettingsService.appearance.iconSizeMultiplier
+                        onValueCommitted: (finalValue) => {
+                            SettingsService.appearance.iconSizeMultiplier = finalValue;
+                        }
+                    }
+
+                    BaseButton {
+                        Layout.preferredHeight: Variables.buttonHeightSmall
+                        Layout.preferredWidth: Variables.buttonHeightSmall
+                        color: "transparent"
+                        iconSize: Variables.iconLarge
+                        icon: Icons.restoreDefault
+                        onClicked: {
+                            let defaultValue = 1.0;
+                            iconSizeSlider.value = defaultValue;
+                            SettingsService.appearance.iconSizeMultiplier = defaultValue;
                         }
                     }
                 }
