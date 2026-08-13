@@ -32,7 +32,7 @@ Row {
 
                 implicitWidth: workspaceSlot.modelData.active ? Variables.workspaceActiveSize : Variables.workspaceInactiveSize
                 implicitHeight: Variables.workspaceInactiveSize
-                radius: height / 2
+                radius: Variables.radiusNormal
 
                 color: workspaceSlot.modelData.active ? Colors.primary : Colors.inverse_primary
 

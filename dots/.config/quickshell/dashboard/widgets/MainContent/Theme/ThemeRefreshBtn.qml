@@ -12,12 +12,24 @@ Rectangle {
     radius: Variables.dashInnerRadius
     scale: mouseArea.pressed ? 0.85 : 1.0
 
-    StyledText {
+    Row {
         id: refreshText
         anchors.centerIn: parent
-        color: mouseArea.containsMouse ? Colors.on_primary : Colors.on_surface
-        text: Icons.refresh + " Rescan Themes"
+        spacing: Variables.spacingNormal
         opacity: btnRoot.showRefreshedText ? 0.0 : 1
+
+        StyledText {
+            monospace: true
+            anchors.verticalCenter: parent.verticalCenter
+            color: mouseArea.containsMouse ? Colors.on_primary : Colors.on_surface
+            font.pixelSize: Variables.iconNormal
+            text: Icons.refresh
+        }
+        StyledText {
+            anchors.verticalCenter: parent.verticalCenter
+            color: mouseArea.containsMouse ? Colors.on_primary : Colors.on_surface
+            text: "Rescan Themes"
+        }
 
         Behavior on opacity {
             NumberAnimation {
@@ -28,12 +40,24 @@ Rectangle {
         }
     }
 
-    StyledText {
+    Row {
         id: refreshedText
         anchors.centerIn: parent
-        color: mouseArea.containsMouse ? Colors.on_primary : Colors.on_surface
-        text: Icons.refresh + " Rescanned Themes!"
+        spacing: Variables.spacingNormal
         opacity: btnRoot.showRefreshedText ? 1.0 : 0.0
+
+        StyledText {
+            monospace: true
+            anchors.verticalCenter: parent.verticalCenter
+            color: mouseArea.containsMouse ? Colors.on_primary : Colors.on_surface
+            font.pixelSize: Variables.iconNormal
+            text: Icons.refresh
+        }
+        StyledText {
+            anchors.verticalCenter: parent.verticalCenter
+            color: mouseArea.containsMouse ? Colors.on_primary : Colors.on_surface
+            text: "Rescanned Themes!"
+        }
 
         Behavior on opacity {
             NumberAnimation {

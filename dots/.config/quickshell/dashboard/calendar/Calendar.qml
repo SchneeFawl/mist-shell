@@ -36,7 +36,7 @@ Rectangle {
 
                 BaseButton {
                     btnSize: Variables.buttonHeightSmall
-                    radius: width / 2
+                    radius: Variables.radiusNormal
                     icon: Icons.chevronLeft
                     iconSize: Variables.iconNormal
                     onClicked: {
@@ -79,7 +79,7 @@ Rectangle {
 
                 BaseButton {
                     btnSize: Variables.buttonHeightSmall
-                    radius: width / 2
+                    radius: Variables.radiusNormal
                     icon: Icons.chevronRight
                     iconSize: Variables.iconNormal
                     onClicked: {
@@ -155,7 +155,7 @@ Rectangle {
                 y: gridBg.targetWeekItem ? (gridBg.targetWeekItem.y + Variables.spacingSmall) : 0
                 width: parent.width - (Variables.spacingSmall * 2)
                 height: gridBg.targetWeekItem?.height ?? 0
-                radius: height / 2
+                radius: Variables.radiusLarge
                 color: Colors.surface_container_highest
                 visible: gridBg.activeWeekRow >= 0
             }
@@ -179,7 +179,7 @@ Rectangle {
 
                         Rectangle {
                             anchors.fill: parent
-                            radius: width / 2
+                            radius: Variables.radiusLarge
                             color: dateContainer.modelData.isToday ? Colors.primary : "transparent"
 
                             StyledText {

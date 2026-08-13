@@ -24,7 +24,7 @@ Variants {
         WlrLayershell.namespace: "quickshell:screenCorners"
         WlrLayershell.layer: WlrLayer.Overlay
         mask: Region { item: null }
-        visible: activeFullscreen.length === 0 && !GameMode.gameModeActive
+        visible: activeFullscreen.length === 0 && !GameMode.gameModeActive && (SettingsService.appearance.radiusMultiplier >= 0.3)
 
         ScreenCornersItem {
             anchors.top: parent.top
