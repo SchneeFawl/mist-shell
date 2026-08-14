@@ -39,12 +39,10 @@ Rectangle {
     property int currentPage: 0
 
     readonly property var filteredPages: {
-        if (SettingsService.searchText.trim() === "") return pages;
+        if (SettingsService.searchText.trim() === "")
+            return pages;
         let query = SettingsService.searchText.toLowerCase();
-        return pages.filter(p => 
-            p.name.toLowerCase().includes(query) ||
-            (p.keywords && p.keywords.some(k => k.toLowerCase().includes(query)))
-        );
+        return pages.filter(p => p.name.toLowerCase().includes(query) || (p.keywords && p.keywords.some(k => k.toLowerCase().includes(query))));
     }
 
     Layout.preferredWidth: Math.round(200 * Variables.scaleFactor)
@@ -130,11 +128,12 @@ Rectangle {
             }
         }
 
-        Item { Layout.fillHeight: true }
+        Item {
+            Layout.fillHeight: true
+        }
 
         Rectangle {
             id: resetCard
-
             property bool showConfirm: false
 
             Layout.fillWidth: true
@@ -157,7 +156,6 @@ Rectangle {
                     color: resetMouseArea.pressed ? Colors.on_error_container : Colors.on_error
                     text: Icons.restoreDefault
                 }
-
                 StyledText {
                     anchors.verticalCenter: parent.verticalCenter
                     font.pixelSize: Variables.fontMedium
@@ -195,8 +193,10 @@ Rectangle {
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
                 onClicked: {
-                    if (!resetCard.showConfirm) resetCard.showConfirm = !resetCard.showConfirm;
-                    else {
+                    if (!resetCard.showConfirm) {
+                        resetCard.showConfirm = !resetCard.showConfirm;
+                        confirmTimer.start();
+                    } else {
                         SettingsService.resetToDefaults();
                         resetCard.showConfirm = false;
                     }
@@ -210,7 +210,6 @@ Rectangle {
                     easing.bezierCurve: Variables.standardCurve
                 }
             }
-
             Behavior on scale {
                 NumberAnimation {
                     duration: Variables.durationFast
@@ -218,7 +217,14 @@ Rectangle {
                     easing.bezierCurve: Variables.standardCurve
                 }
             }
+
+            Timer {
+                id: confirmTimer
+                interval: 3500
+                running: false
+                repeat: false
+                onTriggered: resetCard.showConfirm = false
+            }
         }
     }
 }
-
