@@ -38,7 +38,7 @@ Rectangle {
             id: notifClearBtn
             Layout.fillHeight: true
             Layout.preferredWidth: notifTextContainer.height
-            color: notifClearMouse.pressed ? Colors.surface_variant : Colors.surface_container_high
+            color: Colors.surface_container_high
             radius: Variables.dashInnerRadius
             clip: true
             scale: notifClearMouse.pressed ? 0.85 : 1.0
@@ -48,14 +48,6 @@ Rectangle {
                     duration: Variables.durationFast
                     easing.type: Easing.Bezier
                     easing.bezierCurve: Variables.exitCurve
-                }
-            }
-
-            Behavior on color {
-                ColorAnimation {
-                    duration: Variables.durationMedium
-                    easing.type: Easing.Bezier
-                    easing.bezierCurve: Variables.standardCurve
                 }
             }
 

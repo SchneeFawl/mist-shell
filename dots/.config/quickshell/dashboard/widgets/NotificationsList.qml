@@ -16,7 +16,7 @@ ColumnLayout {
     anchors.margins: Variables.dashInnerColSpacing
     spacing: Variables.dashInnerColSpacing
 
-    NotifListRect {
+    NotifListHeader {
         onClicked: {
             const list = Notifications.trackedNotifications.values;
             for (let i = list.length - 1; i >= 0; i--) {
@@ -54,7 +54,7 @@ ColumnLayout {
                     property: "opacity"
                     from: 0
                     to: 1
-                    duration: 120
+                    duration: Variables.durationFast
                 }
             }
 
@@ -69,7 +69,7 @@ ColumnLayout {
                 NumberAnimation {
                     property: "opacity"
                     to: 0
-                    duration: 480
+                    duration: Variables.durationMedium * 2
                 }
             }
 
@@ -80,7 +80,7 @@ ColumnLayout {
             displaced: Transition {
                 NumberAnimation {
                     property: "y"
-                    duration: 240
+                    duration: Variables.durationMedium
                     easing.type: Easing.Bezier
                     easing.bezierCurve: Variables.standardCurve
                 }

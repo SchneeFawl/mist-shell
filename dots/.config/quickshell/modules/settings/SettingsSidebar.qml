@@ -128,9 +128,7 @@ Rectangle {
             }
         }
 
-        Item {
-            Layout.fillHeight: true
-        }
+        Item { Layout.fillHeight: true }
 
         Rectangle {
             id: resetCard

@@ -98,7 +98,12 @@ PanelWindow {           // qmllint disable uncreatable-type
                 duration: 7000
                 onFinished: {
                     let obj = notifPopup.activeNotificationsMap[notifCard.notifId];
-                    if (obj) obj.dismiss();
+                    for (let i = 0; i < notifModel.count; i++) {
+                        if (notifModel.get(i).notifId === notifCard.notifId) {
+                            notifModel.remove(i);
+                            break;
+                        }
+                    }
                 }
             }
 
