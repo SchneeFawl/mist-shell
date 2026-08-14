@@ -5,6 +5,8 @@ import qs.modules.theme
 import qs.modules.common
 import "./components"
 
+// qmllint disable missing-property
+
 Item {
     id: root
     anchors.fill: parent
@@ -72,7 +74,7 @@ Item {
                 entryDesc: "Multiplier to increase or decrease the font size"
                 sliderValue: SettingsService.appearance.fontSizeMultiplier
                 sliderTextValue: String(Math.round(SettingsService.appearance.fontSizeMultiplier * 100) + "%")
-                onSliderValueCommitted: (finalValue) => {
+                onSliderValueCommitted: finalValue => {
                     SettingsService.appearance.fontSizeMultiplier = finalValue;
                 }
                 onBtnClicked: {
@@ -88,7 +90,7 @@ Item {
                 entryDesc: "Multiplier to increase or decrease the radius of the overall interface"
                 sliderValue: SettingsService.appearance.radiusMultiplier
                 sliderTextValue: String(Math.round(SettingsService.appearance.radiusMultiplier * 100) + "%")
-                onSliderValueCommitted: (finalValue) => {
+                onSliderValueCommitted: finalValue => {
                     SettingsService.appearance.radiusMultiplier = finalValue;
                 }
                 onBtnClicked: {
@@ -104,7 +106,7 @@ Item {
                 entryDesc: "Multiplier to increase or decrease spacing of the overall interface"
                 sliderValue: SettingsService.appearance.spacingMultiplier
                 sliderTextValue: String(Math.round(SettingsService.appearance.spacingMultiplier * 100) + "%")
-                onSliderValueCommitted: (finalValue) => {
+                onSliderValueCommitted: finalValue => {
                     SettingsService.appearance.spacingMultiplier = finalValue;
                 }
                 onBtnClicked: {
@@ -120,7 +122,7 @@ Item {
                 entryDesc: "Multiplier to increase or decrease icon sizes"
                 sliderValue: SettingsService.appearance.iconSizeMultiplier
                 sliderTextValue: String(Math.round(SettingsService.appearance.iconSizeMultiplier * 100) + "%")
-                onSliderValueCommitted: (finalValue) => {
+                onSliderValueCommitted: finalValue => {
                     SettingsService.appearance.iconSizeMultiplier = finalValue;
                 }
                 onBtnClicked: {

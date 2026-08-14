@@ -129,6 +129,96 @@ Rectangle {
                 }
             }
         }
+
+        Item { Layout.fillHeight: true }
+
+        Rectangle {
+            id: resetCard
+
+            property bool showConfirm: false
+
+            Layout.fillWidth: true
+            Layout.preferredHeight: Variables.buttonHeight
+            color: resetMouseArea.pressed ? Colors.error_container : Colors.error
+            radius: Variables.radiusNormal
+            scale: resetMouseArea.pressed ? 0.90 : 1.0
+
+            Row {
+                anchors.fill: parent
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.margins: Variables.spacingMedium
+                spacing: Variables.spacingNormal
+                opacity: resetCard.showConfirm ? 0.0 : 1.0
+
+                StyledText {
+                    anchors.verticalCenter: parent.verticalCenter
+                    monospace: true
+                    font.pixelSize: Variables.iconNormal
+                    color: resetMouseArea.pressed ? Colors.on_error_container : Colors.on_error
+                    text: Icons.restoreDefault
+                }
+
+                StyledText {
+                    anchors.verticalCenter: parent.verticalCenter
+                    font.pixelSize: Variables.fontMedium
+                    color: resetMouseArea.pressed ? Colors.on_error_container : Colors.on_error
+                    text: "Reset to Defaults"
+                }
+
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: Variables.durationFast
+                        easing.type: Easing.Bezier
+                        easing.bezierCurve: Variables.standardCurve
+                    }
+                }
+            }
+
+            StyledText {
+                anchors.centerIn: parent
+                opacity: resetCard.showConfirm ? 1.0 : 0.0
+                font.pixelSize: Variables.fontMedium
+                color: resetMouseArea.pressed ? Colors.on_error_container : Colors.on_error
+                text: "Are you sure?"
+
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: Variables.durationFast
+                        easing.type: Easing.Bezier
+                        easing.bezierCurve: Variables.standardCurve
+                    }
+                }
+            }
+
+            MouseArea {
+                id: resetMouseArea
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                onClicked: {
+                    if (!resetCard.showConfirm) resetCard.showConfirm = !resetCard.showConfirm;
+                    else {
+                        SettingsService.resetToDefaults();
+                        resetCard.showConfirm = false;
+                    }
+                }
+            }
+
+            Behavior on color {
+                ColorAnimation {
+                    duration: Variables.durationMedium
+                    easing.type: Easing.Bezier
+                    easing.bezierCurve: Variables.standardCurve
+                }
+            }
+
+            Behavior on scale {
+                NumberAnimation {
+                    duration: Variables.durationFast
+                    easing.type: Easing.Bezier
+                    easing.bezierCurve: Variables.standardCurve
+                }
+            }
+        }
     }
 }
 
