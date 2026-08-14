@@ -1,9 +1,8 @@
-pragma Singleton
 import QtQuick
 import Quickshell
 import Quickshell.Services.Pam
 
-Singleton {
+Scope {
     id: root
 
     property bool locked
