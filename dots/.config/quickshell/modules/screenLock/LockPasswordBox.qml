@@ -6,12 +6,29 @@ import qs.modules.common
 Rectangle {
     id: root
 
+    required property var pamContext
+
     Layout.preferredHeight: Math.round(48 * Variables.scaleFactor)
     Layout.preferredWidth: Math.round(300 * Variables.scaleFactor)
     color: Colors.secondary_container
     radius: Variables.radiusLarge
     border.width: 1
     border.color: Colors.secondary
+
+    function submitPassword() {
+        if (passInput.text.length > 0) {
+            root.pamContext.tryUnlock();
+        }
+    }
+
+    Connections {
+        target: root.pamContext
+        function onAuthFailedChanged() {
+            if (root.pamContext.authFailed) {
+                passInput.clear();
+            }
+        }
+    }
 
     RowLayout {
         anchors.fill: parent
@@ -38,8 +55,11 @@ Rectangle {
             cursorVisible: false
             echoMode: TextInput.Password
             inputMethodHints: Qt.ImhSensitiveData
+            enabled: !root.pamContext.authenticating
             clip: true
             focus: true
+            onTextChanged: root.pamContext.currentText = text
+            onAccepted: root.submitPassword()
 
             StyledText {
                 id: passPlaceholder
@@ -76,7 +96,8 @@ Rectangle {
                                 from: 0
                                 to: 1
                                 duration: Variables.durationMedium
-                                easing.type: Variables.entranceCurve
+                                easing.type: Easing.Bezier
+                                easing.bezierCurve: Variables.entranceCurve
                             }
                             NumberAnimation {
                                 target: dot
@@ -84,7 +105,8 @@ Rectangle {
                                 from: 0.2
                                 to: 1
                                 duration: Variables.durationFast
-                                easing.type: Variables.entranceCurve
+                                easing.type: Easing.Bezier
+                                easing.bezierCurve: Variables.entranceCurve
                             }
                         }
                     }
@@ -92,6 +114,7 @@ Rectangle {
             }
         }
 
+        // enter/confirm button
         BaseButton {
             Layout.fillHeight: true
             Layout.preferredWidth: height
@@ -101,7 +124,7 @@ Rectangle {
             textActiveColor: Colors.on_primary
             iconSize: Variables.iconMedium
             icon: Icons.arrowRight
-            onClicked: {}
+            onClicked: root.submitPassword()
         }
     }
 }

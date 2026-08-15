@@ -12,6 +12,8 @@ Scope {
 
     PamContext {
         id: pam
+        configDirectory: "pam"
+        config: "pam.conf"
         
         onPamMessage: {
             if (this.responseRequired) {

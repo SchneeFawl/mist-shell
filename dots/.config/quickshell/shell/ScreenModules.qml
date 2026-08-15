@@ -7,6 +7,7 @@ import qs.modules
 import qs.modules.screenCorners
 import qs.modules.panels.clipboard
 import qs.modules.onScreenDisplays
+import qs.modules.screenLock
 import qs.modules.settings
 
 Scope {
@@ -24,5 +25,6 @@ Scope {
     ModulesLoader { component: Clipboard {} }
     ModulesLoader { component: SettingsWindow {} }
     ModulesLoader { component: OSD {} }
+    ModulesLoader { component: LockScreen {} }
 }
 

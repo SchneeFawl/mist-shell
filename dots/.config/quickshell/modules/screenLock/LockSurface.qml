@@ -8,6 +8,8 @@ import qs.services
 Rectangle {
     id: root
 
+    required property PamContext pamContext
+
     implicitHeight: Math.round(640 * Variables.scaleFactor)
     implicitWidth: Math.round(900 * Variables.scaleFactor)
     color: "transparent"
@@ -61,5 +63,21 @@ Rectangle {
                 text: Time.fullDateText
             }
         }
+
+        Item { Layout.fillHeight: true }
+
+        LockPasswordBox {
+            pamContext: root.pamContext
+        }
+    }
+
+    // emergency btn
+    BaseButton {
+        anchors.top: parent.top
+        anchors.left: parent.left
+        implicitWidth: 200
+        implicitHeight: 50
+        text: "DEBUG: Unlock"
+        onClicked: root.pamContext.locked = false;
     }
 }

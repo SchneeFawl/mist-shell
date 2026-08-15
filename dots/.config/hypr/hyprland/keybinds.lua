@@ -74,5 +74,6 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"
 ------------------
 --- Quickshell ---
 ------------------
-hl.bind(mainMod .. " + V",  hl.dsp.exec_cmd(qsIpcCall .. " clipboard openMenu"))
-hl.bind(mainMod .. " + I",  hl.dsp.exec_cmd(qsIpcCall .. " settings openMenu"))
+hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(qsIpcCall .. " clipboard openMenu"))
+hl.bind(mainMod .. " + I", hl.dsp.exec_cmd(qsIpcCall .. " settings openMenu"))
+hl.bind(mainMod .. " + L", hl.dsp.exec_cmd(qsIpcCall .. " lockscreen lock"))

@@ -10,7 +10,7 @@ Rectangle {
     property string text: ""
     property int textSize: Variables.fontNormal
     property color textColor: Colors.on_surface
-    property color textActiveColor: Colors.primary
+    property color textActiveColor: Colors.on_primary
 
     property string icon: ""
     property int iconSize: Variables.iconNormal
