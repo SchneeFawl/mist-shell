@@ -6,14 +6,20 @@ Rectangle {
     id: buttonRoot
 
     property int btnSize: Variables.buttonHeight
+
     property string text: ""
+    property int textSize: Variables.fontNormal
+    property color textColor: Colors.on_surface
+    property color textActiveColor: Colors.primary
+
     property string icon: ""
     property int iconSize: Variables.iconNormal
 
     property bool active: false
+    property bool isHovered: mouseArea.containsMouse
+
     property color activeColor: Colors.primary
     property color inactiveColor: Colors.surface_container_high
-    property bool isHovered: mouseArea.containsMouse
 
     signal clicked()
     signal rightClicked()
@@ -45,7 +51,7 @@ Rectangle {
         anchors.centerIn: parent
         monospace: buttonRoot.icon !== ""
         font.pixelSize: buttonRoot.icon ? buttonRoot.iconSize : Variables.fontNormal
-        color: buttonRoot.active ? Colors.on_primary : Colors.on_surface
+        color: buttonRoot.active ? buttonRoot.textActiveColor : buttonRoot.textColor
         text: buttonRoot.icon || buttonRoot.text
     }
 

@@ -7,15 +7,17 @@ Singleton {
 
     signal tick()
 
-    property string timeText: ""
-    property string dayText: ""
-    property string dateText: ""
+    property string timeText
+    property string dayText
+    property string dateText
+    property string fullDateText
 
     function updateTime() {
         var d = new Date();
         timeText = d.toLocaleTimeString(Qt.locale(), "hh:mm AP");
         dayText = Qt.formatDate(d, "dddd");
         dateText = Qt.formatDate(d, "dd/M");
+        fullDateText = Qt.formatDate(d, "dddd, dd MMMM yyyy");
     }
 
     Timer {

@@ -8,8 +8,7 @@ import qs.services
 Rectangle {
     id: root
 
-    anchors.centerIn: parent
-    implicitHeight: Math.round(600 * Variables.scaleFactor)
+    implicitHeight: Math.round(640 * Variables.scaleFactor)
     implicitWidth: Math.round(900 * Variables.scaleFactor)
     color: "transparent"
 
@@ -59,7 +58,7 @@ Rectangle {
             StyledText {
                 font.pixelSize: Variables.spacingMedium
                 color: Colors.tertiary
-                text: Time.dateText
+                text: Time.fullDateText
             }
         }
     }

@@ -20,6 +20,7 @@ QtObject {
     readonly property string sysCaffeineActive: "󰅶"
     readonly property string sysCaffeineInactive: "󰾪"
     readonly property string clipboard: "󰅍"
+    readonly property string lock: "󰌾"
 
     readonly property string sysVolume: "󰕾"
     readonly property string sysVolumeMedium: "󰖀"
@@ -50,6 +51,10 @@ QtObject {
     readonly property string minus: "󰍴"
     readonly property string checkMark: "󰄬"
     readonly property string close: "󰅖"
+    readonly property string arrowLeft: "󰁍"
+    readonly property string arrowRight: "󰁔"
+    readonly property string arrowDown: "󰁅"
+    readonly property string arrowUp: "󰁝"
 
     readonly property string recorder: "󰻂"
     readonly property string systemInfo: ""

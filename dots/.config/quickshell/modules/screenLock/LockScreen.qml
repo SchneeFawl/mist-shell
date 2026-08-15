@@ -11,6 +11,10 @@ Scope {
     property Component lockSurface: WlSessionLockSurface {
         id: lockSurface
         color: Colors.surface_container_low
+
+        LockSurface {
+            anchors.centerIn: parent
+        }
     }
 
     WlSessionLock {
