@@ -20,7 +20,7 @@ Pill {
 
     Row {
         Layout.fillHeight: true
-        spacing: 6
+        spacing: Variables.spacingSmall
         clip: true
 
         StyledText {
@@ -45,6 +45,7 @@ Pill {
             anchors.verticalCenter: parent.verticalCenter
             visible: timePill.showFullDate
             opacity: timePill.showFullDate ? 1.0 : 0.0
+            monospace: true
             font.pixelSize: Variables.fontSmall
             color: Colors.secondary
             text: Time.dateText

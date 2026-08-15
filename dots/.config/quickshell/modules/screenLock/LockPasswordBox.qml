@@ -28,25 +28,67 @@ Rectangle {
         }
 
         TextInput {
-            id: searchInput
+            id: passInput
             Layout.alignment: Text.AlignVCenter
             Layout.fillHeight: true
             Layout.fillWidth: true
-            color: Colors.on_surface
+            color: "transparent"
             font.family: Variables.sansFontFamily
             font.pixelSize: Variables.fontNormal
-            cursorVisible: true
+            cursorVisible: false
+            echoMode: TextInput.Password
+            inputMethodHints: Qt.ImhSensitiveData
             clip: true
-            onTextChanged: {}
-            enabled: {}
             focus: true
 
             StyledText {
-                id: searchPlaceholder
+                id: passPlaceholder
                 anchors.centerIn: parent
                 color: Colors.secondary_container
                 text: "Enter your password"
-                visible: searchInput.text.length === 0
+                visible: passInput.text.length === 0
+            }
+
+            Row {
+                id: passDotRow
+                anchors.centerIn: parent
+                spacing: Variables.spacingSmall
+                visible: passInput.text.length > 0
+
+                Repeater {
+                    model: passInput.text.length
+                    delegate: Rectangle {
+                        id: dot
+                        required property int index
+
+                        implicitWidth: Math.round(8 * Variables.scaleFactor)
+                        implicitHeight: implicitWidth
+                        radius: width / 2
+                        color: Colors.on_secondary_container
+
+                        Component.onCompleted: dotAppearAnim.start()
+
+                        ParallelAnimation {
+                            id: dotAppearAnim
+                            NumberAnimation {
+                                target: dot
+                                property: "opacity"
+                                from: 0
+                                to: 1
+                                duration: Variables.durationMedium
+                                easing.type: Variables.entranceCurve
+                            }
+                            NumberAnimation {
+                                target: dot
+                                property: "scale"
+                                from: 0.2
+                                to: 1
+                                duration: Variables.durationFast
+                                easing.type: Variables.entranceCurve
+                            }
+                        }
+                    }
+                }
             }
         }
 
