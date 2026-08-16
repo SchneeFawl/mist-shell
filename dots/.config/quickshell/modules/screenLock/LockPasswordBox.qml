@@ -11,7 +11,7 @@ Rectangle {
     Layout.preferredHeight: Math.round(48 * Variables.scaleFactor)
     Layout.preferredWidth: Math.round(300 * Variables.scaleFactor)
     color: Colors.secondary_container
-    radius: Variables.radiusLarge
+    radius: Variables.radiusLargest
     border.width: 1
     border.color: Colors.secondary
 
@@ -32,11 +32,15 @@ Rectangle {
 
     RowLayout {
         anchors.fill: parent
-        anchors.margins: Variables.spacingMedium
+        anchors.leftMargin: Variables.spacingMedium
+        anchors.rightMargin: Variables.spacingSmall
+        anchors.topMargin: Variables.spacingSmall
+        anchors.bottomMargin: Variables.spacingSmall
         spacing: Variables.spacingNormal
         clip: true
 
         StyledText {
+            Layout.fillHeight: true
             Layout.alignment: Text.AlignVCenter
             monospace: true
             font.pixelSize: Variables.iconMedium
@@ -46,7 +50,7 @@ Rectangle {
 
         TextInput {
             id: passInput
-            Layout.alignment: Text.AlignVCenter
+            Layout.alignment: TextInput.AlignVCenter
             Layout.fillHeight: true
             Layout.fillWidth: true
             color: "transparent"
@@ -64,7 +68,7 @@ Rectangle {
             StyledText {
                 id: passPlaceholder
                 anchors.centerIn: parent
-                color: Colors.secondary_container
+                color: Colors.tertiary
                 text: "Enter your password"
                 visible: passInput.text.length === 0
             }
@@ -73,7 +77,6 @@ Rectangle {
                 id: passDotRow
                 anchors.centerIn: parent
                 spacing: Variables.spacingSmall
-                visible: passInput.text.length > 0
 
                 Repeater {
                     model: passInput.text.length
@@ -81,7 +84,7 @@ Rectangle {
                         id: dot
                         required property int index
 
-                        implicitWidth: Math.round(8 * Variables.scaleFactor)
+                        implicitWidth: Math.round(12 * Variables.scaleFactor)
                         implicitHeight: implicitWidth
                         radius: width / 2
                         color: Colors.on_secondary_container
@@ -118,6 +121,7 @@ Rectangle {
         BaseButton {
             Layout.fillHeight: true
             Layout.preferredWidth: height
+            radius: Variables.radiusLarge
             inactiveColor: Colors.secondary
             activeColor: Colors.primary
             textColor: Colors.on_secondary

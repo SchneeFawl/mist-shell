@@ -10,7 +10,7 @@ Scope {
 
     property Component lockSurface: WlSessionLockSurface {
         id: lockSurface
-        color: Colors.surface_container_low
+        color: "transparent"
 
         LockSurface {
             anchors.centerIn: parent

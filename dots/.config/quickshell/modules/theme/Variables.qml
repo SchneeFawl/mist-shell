@@ -51,10 +51,11 @@ QtObject {
     readonly property int spacingLarge:   Math.round(16 * scaleFactor * spacingMultiplier)
     readonly property int spacingLargest: Math.round(20 * scaleFactor * spacingMultiplier)
 
-    readonly property int radiusSmall:  Math.round(4  * scaleFactor * radiusMultiplier)
-    readonly property int radiusNormal: Math.round(8  * scaleFactor * radiusMultiplier)
-    readonly property int radiusMedium: Math.round(12 * scaleFactor * radiusMultiplier)
-    readonly property int radiusLarge:  Math.round(16 * scaleFactor * radiusMultiplier)
+    readonly property int radiusSmall:   Math.round(4  * scaleFactor * radiusMultiplier)
+    readonly property int radiusNormal:  Math.round(8  * scaleFactor * radiusMultiplier)
+    readonly property int radiusMedium:  Math.round(12 * scaleFactor * radiusMultiplier)
+    readonly property int radiusLarge:   Math.round(16 * scaleFactor * radiusMultiplier)
+    readonly property int radiusLargest: Math.round(20 * scaleFactor * radiusMultiplier)
 
     // Bar
     readonly property int barHeight: Math.round(40 * scaleFactor)
@@ -79,6 +80,8 @@ QtObject {
     readonly property int buttonHeightSmall:    Math.round(30 * scaleFactor)
     readonly property int buttonHeight:         Math.round(36 * scaleFactor)
     readonly property int buttonHeightMedium:   Math.round(50 * scaleFactor)
+    readonly property int buttonHeightLarge:    Math.round(56 * scaleFactor)
+    readonly property int buttonHeightLargest:  Math.round(64 * scaleFactor)
 
     // DEBUG
     // Component.onCompleted: {

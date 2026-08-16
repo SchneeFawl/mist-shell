@@ -10,18 +10,20 @@ Rectangle {
 
     required property PamContext pamContext
 
-    implicitHeight: Math.round(640 * Variables.scaleFactor)
-    implicitWidth: Math.round(900 * Variables.scaleFactor)
-    color: "transparent"
-
-    anchors.margins: Variables.spacingLargest
+    implicitHeight: Math.round(500 * Variables.scaleFactor)
+    implicitWidth: Math.round(760 * Variables.scaleFactor)
+    color: Colors.surface_container
+    radius: Variables.radiusLarge
 
     ColumnLayout {
         id: masterLayout
-        spacing: Variables.spacingLarge
+        anchors.fill: parent
+        anchors.margins: Variables.spacingLargest + Variables.spacingNormal
+        spacing: Variables.spacingLargest
 
         // profile pic
         Rectangle {
+            Layout.alignment: Qt.AlignHCenter
             Layout.preferredHeight: Math.round(90 * Variables.scaleFactor)
             Layout.preferredWidth: Math.round(90 * Variables.scaleFactor)
             color: Colors.tertiary
@@ -30,35 +32,45 @@ Rectangle {
             StyledText {
                 anchors.centerIn: parent
                 monospace: true
-                font.pixelSize: Variables.iconLargest
+                font.pixelSize: Variables.iconLargest * 2
                 color: Colors.on_tertiary
                 text: Icons.account
             }
         }
 
         // username
-        StyledText {
+        Item {
             Layout.fillWidth: true
-            font.pixelSize: Variables.fontMedium
-            color: Colors.primary
-            text: Quickshell.env("USER")
+            Layout.preferredHeight: Math.round(50 * Variables.scaleFactor)
+
+            StyledText {
+                anchors.centerIn: parent
+                font.pixelSize: Variables.fontLargest
+                color: Colors.primary
+                text: Quickshell.env("USER")
+            }
         }
 
         // clock
         ColumnLayout {
+            Layout.alignment: Qt.AlignHCenter
             Layout.fillWidth: true
-            Layout.preferredHeight: Math.round(60 * Variables.scaleFactor)
-            spacing: Variables.spacingMedium
+            Layout.preferredHeight: Math.round(100 * Variables.scaleFactor)
+            spacing: Variables.spacingNormal
 
             StyledText {
+                Layout.alignment: Text.AlignHCenter
                 monospace: true
-                font.pixelSize: Variables.fontLargest
+                font.pixelSize: Variables.fontLargest * 2
+                font.weight: Variables.defaultFontWeight + 200
                 color: Colors.secondary
                 text: Time.timeText
             }
 
             StyledText {
-                font.pixelSize: Variables.spacingMedium
+                Layout.alignment: Text.AlignHCenter
+                font.pixelSize: Variables.fontLarge
+                font.weight: Variables.defaultFontWeight + 100
                 color: Colors.tertiary
                 text: Time.fullDateText
             }
@@ -67,6 +79,8 @@ Rectangle {
         Item { Layout.fillHeight: true }
 
         LockPasswordBox {
+            Layout.alignment: Qt.AlignHCenter
+            Layout.bottomMargin: Variables.spacingNormal
             pamContext: root.pamContext
         }
     }
@@ -75,8 +89,9 @@ Rectangle {
     BaseButton {
         anchors.top: parent.top
         anchors.left: parent.left
-        implicitWidth: 200
+        implicitWidth: 100
         implicitHeight: 50
+        radius: Variables.radiusLarge
         text: "DEBUG: Unlock"
         onClicked: root.pamContext.locked = false;
     }
