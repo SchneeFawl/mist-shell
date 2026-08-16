@@ -82,9 +82,4 @@ QtObject {
     readonly property int buttonHeightMedium:   Math.round(50 * scaleFactor)
     readonly property int buttonHeightLarge:    Math.round(56 * scaleFactor)
     readonly property int buttonHeightLargest:  Math.round(64 * scaleFactor)
-
-    // DEBUG
-    // Component.onCompleted: {
-    //     console.log("[Settings] Radius multiplier:", radiusMultiplier);
-    // }
 }
