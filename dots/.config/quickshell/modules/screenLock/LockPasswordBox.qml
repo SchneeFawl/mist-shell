@@ -57,6 +57,7 @@ Rectangle {
             font.family: Variables.sansFontFamily
             font.pixelSize: Variables.fontNormal
             cursorVisible: false
+            cursorDelegate: Item {}
             echoMode: TextInput.Password
             inputMethodHints: Qt.ImhSensitiveData
             enabled: !root.pamContext.authenticating

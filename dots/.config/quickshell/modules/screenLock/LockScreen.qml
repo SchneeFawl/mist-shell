@@ -1,5 +1,6 @@
 pragma ComponentBehavior: Bound
 import QtQuick
+import QtQuick.Effects
 import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
@@ -10,7 +11,26 @@ Scope {
 
     property Component lockSurface: WlSessionLockSurface {
         id: lockSurface
-        color: "transparent"
+        color: "black"
+
+        ScreencopyView {
+            anchors.fill: parent
+            live: false
+            captureSource: lockSurface.screen
+
+            layer.enabled: true
+            layer.effect: MultiEffect {
+                blurEnabled: true
+                blurMax: 48
+                blur: 1.0
+            }
+        }
+
+        Rectangle {
+            anchors.fill: parent
+            color: Colors.surface_container_low
+            opacity: 0.35
+        }
 
         LockSurface {
             anchors.centerIn: parent

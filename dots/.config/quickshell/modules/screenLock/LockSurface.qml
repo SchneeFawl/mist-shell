@@ -12,7 +12,7 @@ Rectangle {
 
     implicitHeight: Math.round(500 * Variables.scaleFactor)
     implicitWidth: Math.round(760 * Variables.scaleFactor)
-    color: Colors.surface_container
+    color: Colors.surface_container_low
     radius: Variables.radiusLarge
 
     ColumnLayout {
@@ -86,13 +86,13 @@ Rectangle {
     }
 
     // emergency btn
-    BaseButton {
-        anchors.top: parent.top
-        anchors.left: parent.left
-        implicitWidth: 100
-        implicitHeight: 50
-        radius: Variables.radiusLarge
-        text: "DEBUG: Unlock"
-        onClicked: root.pamContext.locked = false;
-    }
+    // BaseButton {
+    //     anchors.top: parent.top
+    //     anchors.left: parent.left
+    //     implicitWidth: 100
+    //     implicitHeight: 50
+    //     radius: Variables.radiusLarge
+    //     text: "DEBUG: Unlock"
+    //     onClicked: root.pamContext.locked = false;
+    // }
 }
