@@ -28,7 +28,20 @@ PanelWindow {       // qmllint disable uncreatable-type
         radius: Variables.radiusLarge
         border.width: 2
         border.color: Colors.border
-        color: Qt.alpha(Colors.secondary_container, 0.6)
+        color: Qt.alpha(Colors.secondary_container, 0.8)   // opacity will decrease opacity of child elements
+
+        ColumnLayout {
+            id: mainColumn
+            anchors.fill: parent
+            anchors.leftMargin: Variables.spacingLarge
+            anchors.rightMargin: Variables.spacingLarge
+            anchors.topMargin: Variables.spacingLarge
+            spacing: Variables.spacingNormal
+
+            AppLauncherHeader {}
+
+            Item { Layout.fillHeight: true }
+        }
     }
 }
 
