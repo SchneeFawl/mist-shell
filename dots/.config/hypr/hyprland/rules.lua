@@ -192,6 +192,16 @@ hl.workspace_rule({
     gaps_out = 20
 })
 
+
 -----------------------
 --|   LAYER RULES   |--
 -----------------------
+
+hl.layer_rule({
+    match = {
+        namespace = "^(mist:app_launcher)$",
+    },
+    blur = true,
+    blur_popups = true,
+    ignore_alpha = 0.1
+})

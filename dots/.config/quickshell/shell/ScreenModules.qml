@@ -4,6 +4,7 @@ import Quickshell
 
 import qs.bar
 import qs.modules
+import qs.modules.panels.appLauncher
 import qs.modules.screenCorners
 import qs.modules.panels.clipboard
 import qs.modules.onScreenDisplays
@@ -26,5 +27,6 @@ Scope {
     ModulesLoader { component: SettingsWindow {} }
     ModulesLoader { component: OSD {} }
     ModulesLoader { component: LockScreen {} }
+    ModulesLoader { component: AppLauncher {} }
 }
 

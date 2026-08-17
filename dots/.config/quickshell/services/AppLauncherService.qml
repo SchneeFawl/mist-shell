@@ -12,7 +12,7 @@ Singleton {
 
     readonly property var filteredApps: {
         let all = DesktopEntries.applications.values || [];
-        if (root.searchText.trim() === "") return;
+        if (root.searchText.trim() === "") return all;
         let query = root.searchText.toLowerCase();
         return all.filter(app =>
             (app.name && app.name.toLowerCase().includes(query)) ||
