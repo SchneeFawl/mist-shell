@@ -36,9 +36,11 @@ PanelWindow {       // qmllint disable uncreatable-type
             anchors.leftMargin: Variables.spacingLarge
             anchors.rightMargin: Variables.spacingLarge
             anchors.topMargin: Variables.spacingLarge
-            spacing: Variables.spacingNormal
+            spacing: Variables.spacingMedium
 
             AppLauncherHeader {}
+
+            AppLauncherSearchBar {}
 
             Item { Layout.fillHeight: true }
         }
