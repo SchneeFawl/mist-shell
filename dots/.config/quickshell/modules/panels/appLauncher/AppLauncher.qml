@@ -51,6 +51,7 @@ PanelWindow {       // qmllint disable uncreatable-type
                 clip: true
                 model: AppLauncherService.filteredApps
                 delegate: AppLauncherItem {
+                    listView: listView
                     implicitHeight: Variables.buttonHeightLarge
                     implicitWidth: mainColumn.width
                 }
