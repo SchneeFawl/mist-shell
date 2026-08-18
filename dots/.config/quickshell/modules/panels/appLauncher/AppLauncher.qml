@@ -1,10 +1,10 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
 import qs.services
 import qs.modules.theme
-import qs.modules.common
 
 PanelWindow {       // qmllint disable uncreatable-type
     id: root
@@ -33,16 +33,25 @@ PanelWindow {       // qmllint disable uncreatable-type
         ColumnLayout {
             id: mainColumn
             anchors.fill: parent
-            anchors.leftMargin: Variables.spacingLarge
-            anchors.rightMargin: Variables.spacingLarge
-            anchors.topMargin: Variables.spacingLarge
+            anchors.margins: Variables.spacingLarge
             spacing: Variables.spacingMedium
 
             AppLauncherHeader {}
 
             AppLauncherSearchBar {}
 
-            Item { Layout.fillHeight: true }
+            ListView {
+                id: listView
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                spacing: Variables.spacingSmall
+                clip: true
+                model: AppLauncherService.filteredApps
+                delegate: AppLauncherItem {
+                    implicitHeight: Variables.buttonHeightMedium
+                    implicitWidth: mainColumn.width
+                }
+            }
         }
     }
 }
