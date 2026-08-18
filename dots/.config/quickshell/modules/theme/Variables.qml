@@ -7,14 +7,16 @@ import qs.services
 QtObject {
     id: variables
 
-    readonly property real radiusMultiplier: SettingsService.appearance.radiusMultiplier
-    readonly property real spacingMultiplier: SettingsService.appearance.spacingMultiplier
+    readonly property real radiusMultiplier:   SettingsService.appearance.radiusMultiplier
+    readonly property real spacingMultiplier:  SettingsService.appearance.spacingMultiplier
     readonly property real fontSizeMultiplier: SettingsService.appearance.fontSizeMultiplier
     readonly property real iconSizeMutliplier: SettingsService.appearance.iconSizeMultiplier
 
     // General
     readonly property real scaleFactor: SettingsService.display.scaleFactor
     readonly property int screenCornerRadius: (barHeight - pillHeight) + pillRadius
+
+    readonly property real panelOpacity: 0.7
 
     // Animations
     readonly property var standardCurve:  [0.30, 0.90, 0.40, 1.0, 1, 1]

@@ -28,7 +28,8 @@ PanelWindow {       // qmllint disable uncreatable-type
         radius: Variables.radiusLarge
         border.width: 2
         border.color: Colors.border
-        color: Qt.alpha(Colors.secondary_container, 0.8)   // opacity will decrease opacity of child elements
+        // opacity property will decrease opacity of child elements
+        color: Qt.alpha(Colors.secondary_container, Variables.panelOpacity)
 
         ColumnLayout {
             id: mainColumn
@@ -38,7 +39,9 @@ PanelWindow {       // qmllint disable uncreatable-type
 
             AppLauncherHeader {}
 
-            AppLauncherSearchBar {}
+            AppLauncherSearchBar {
+                listView: listView
+            }
 
             ListView {
                 id: listView
@@ -48,10 +51,17 @@ PanelWindow {       // qmllint disable uncreatable-type
                 clip: true
                 model: AppLauncherService.filteredApps
                 delegate: AppLauncherItem {
-                    implicitHeight: Variables.buttonHeightMedium
+                    implicitHeight: Variables.buttonHeightLarge
                     implicitWidth: mainColumn.width
                 }
             }
+        }
+    }
+
+    Keys.onPressed: (event) => {
+        if (event.key === Qt.Key_Escape) {
+            AppLauncherService.visible = false;
+            event.accepted = true;
         }
     }
 }
