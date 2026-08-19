@@ -47,11 +47,12 @@ QtObject {
     readonly property int durationSlow:   300
 
     // Common
-    readonly property int spacingSmall:   Math.round(4  * scaleFactor * spacingMultiplier)
-    readonly property int spacingNormal:  Math.round(8  * scaleFactor * spacingMultiplier)
-    readonly property int spacingMedium:  Math.round(12 * scaleFactor * spacingMultiplier)
-    readonly property int spacingLarge:   Math.round(16 * scaleFactor * spacingMultiplier)
-    readonly property int spacingLargest: Math.round(20 * scaleFactor * spacingMultiplier)
+    readonly property int spacingSmallest: Math.round(2 * scaleFactor * spacingMultiplier)
+    readonly property int spacingSmall:    Math.round(4  * scaleFactor * spacingMultiplier)
+    readonly property int spacingNormal:   Math.round(8  * scaleFactor * spacingMultiplier)
+    readonly property int spacingMedium:   Math.round(12 * scaleFactor * spacingMultiplier)
+    readonly property int spacingLarge:    Math.round(16 * scaleFactor * spacingMultiplier)
+    readonly property int spacingLargest:  Math.round(20 * scaleFactor * spacingMultiplier)
 
     readonly property int radiusSmall:   Math.round(4  * scaleFactor * radiusMultiplier)
     readonly property int radiusNormal:  Math.round(8  * scaleFactor * radiusMultiplier)
@@ -61,12 +62,13 @@ QtObject {
 
     // Bar
     readonly property int barHeight: Math.round(40 * scaleFactor)
+    readonly property int barSideMargins: barHeight - pillHeight - Math.round(2 * scaleFactor)
+    readonly property int barTopMargin: barHeight - pillHeight - spacingSmall - spacingSmallest
     readonly property int pillHeight: Math.round(32 * scaleFactor)
     readonly property int pillRadius: Math.round(12 * scaleFactor * radiusMultiplier)
     readonly property int pillInnerPadding: Math.round(12 * scaleFactor * spacingMultiplier)
     readonly property int pillInnerSpacing: Math.round(6 * scaleFactor * spacingMultiplier)
     readonly property int pillOuterSpacing: Math.round(12 * scaleFactor * spacingMultiplier)
-    readonly property int barSideMargins: barHeight - pillHeight - Math.round(2 * scaleFactor)
     readonly property int workspaceActiveSize: Math.round(32 * scaleFactor)
     readonly property int workspaceInactiveSize: Math.round(16 * scaleFactor)
     readonly property int maxBarMediaChars: Math.round(36 * scaleFactor)

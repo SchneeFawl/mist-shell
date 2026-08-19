@@ -30,14 +30,19 @@ PanelWindow {       // qmllint disable
 
     RowLayout {
         anchors.fill: parent
+        anchors.topMargin: Variables.barTopMargin
         anchors.leftMargin: Variables.barSideMargins
         anchors.rightMargin: Variables.barSideMargins
 
-        LeftModules {}
+        LeftModules {
+            Layout.fillHeight: true
+        }
 
         Item { Layout.fillWidth: true }
 
-        RightModules {}
+        RightModules {
+            Layout.fillHeight: true
+        }
     }
 
     CenterModules {

@@ -20,7 +20,7 @@ RowLayout {
     // clock display widget
     BarTime {}
 
-    // battery indicator (!! NOT TESTED !!)
+    // battery indicator
     Loader {
         active: Battery.hasBattery
         visible: Battery.hasBattery
