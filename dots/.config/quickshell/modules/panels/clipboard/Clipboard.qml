@@ -12,7 +12,7 @@ Window {
     maximumWidth: Math.round(400 * Variables.scaleFactor)
     minimumHeight: Math.round(370 * Variables.scaleFactor)
     minimumWidth: Math.round(280 * Variables.scaleFactor)
-    color: Colors.surface_container_low
+    color: Qt.alpha(Colors.surface_container_low, Variables.panelOpacity)
     visible: CliphistService.panelVisible
     flags: Qt.Window | Qt.FramelessWindowHint
 

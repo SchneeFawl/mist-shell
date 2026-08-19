@@ -58,12 +58,5 @@ PanelWindow {       // qmllint disable uncreatable-type
             }
         }
     }
-
-    Keys.onPressed: (event) => {
-        if (event.key === Qt.Key_Escape) {
-            AppLauncherService.visible = false;
-            event.accepted = true;
-        }
-    }
 }
 

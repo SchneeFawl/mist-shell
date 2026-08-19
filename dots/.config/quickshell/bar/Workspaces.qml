@@ -15,6 +15,7 @@ Row {
 
             implicitWidth: modelData.active ? Variables.workspaceActiveSize : Variables.workspaceInactiveSize
             implicitHeight: Variables.workspaceInactiveSize
+            scale: mouseArea.pressed ? 0.9 : 1.0
             clip: true
 
             Behavior on implicitWidth {
@@ -51,7 +52,16 @@ Row {
                 }
             }
 
+            Behavior on scale {
+                NumberAnimation {
+                    duration: Variables.durationMedium
+                    easing.type: Easing.Bezier
+                    easing.bezierCurve: Variables.entranceCurve
+                }
+            }
+
             MouseArea {
+                id: mouseArea
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
                 hoverEnabled: true

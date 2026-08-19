@@ -1,7 +1,6 @@
 pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
-import qs.modules.common
 import qs.modules.theme
 import qs.services
 
@@ -12,7 +11,7 @@ Window {
     maximumWidth: Math.round(1000 * Variables.scaleFactor)
     minimumHeight: Math.round(500 * Variables.scaleFactor)
     minimumWidth: Math.round(800 * Variables.scaleFactor)
-    color: Colors.surface_container_low
+    color: Qt.alpha(Colors.surface_container_low, Variables.panelOpacity)
     visible: SettingsService.windowVisible
     flags: Qt.Window | Qt.FramelessWindowHint
 

@@ -17,6 +17,7 @@ Rectangle {
 
     color: selected ? Colors.secondary : Colors.secondary_container
     radius: Variables.radiusNormal
+    scale: mouseArea.pressed ? 0.90 : 1.0
 
     RowLayout {
         anchors.fill: parent
@@ -62,7 +63,16 @@ Rectangle {
         }
     }
 
+    Behavior on scale {
+        NumberAnimation {
+            duration: Variables.durationMedium
+            easing.type: Easing.Bezier
+            easing.bezierCurve: Variables.exitCurve
+        }
+    }
+
     MouseArea {
+        id: mouseArea
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
         onClicked: {
