@@ -14,7 +14,7 @@ QtObject {
 
     // General
     readonly property real scaleFactor: SettingsService.display.scaleFactor
-    readonly property int screenCornerRadius: (barHeight - pillHeight) + pillRadius
+    readonly property int screenCornerRadius: (barSize - pillHeight) + pillRadius
 
     readonly property real panelOpacity: 0.7
 
@@ -61,9 +61,9 @@ QtObject {
     readonly property int radiusLargest: Math.round(20 * scaleFactor * radiusMultiplier)
 
     // Bar
-    readonly property int barHeight: Math.round(40 * scaleFactor)
-    readonly property int barSideMargins: barHeight - pillHeight - Math.round(2 * scaleFactor)
-    readonly property int barTopMargin: barHeight - pillHeight - spacingSmall - spacingSmallest
+    readonly property int barSize: Math.round(40 * scaleFactor)
+    readonly property int barSideMargins: barSize - pillHeight - Math.round(2 * scaleFactor)
+    readonly property int barTopMargin: barSize - pillHeight - spacingSmall - spacingSmallest
     readonly property int pillHeight: Math.round(32 * scaleFactor)
     readonly property int pillRadius: Math.round(12 * scaleFactor * radiusMultiplier)
     readonly property int pillInnerPadding: Math.round(12 * scaleFactor * spacingMultiplier)

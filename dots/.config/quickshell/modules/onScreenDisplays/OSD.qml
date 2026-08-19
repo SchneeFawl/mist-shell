@@ -19,7 +19,7 @@ PanelWindow {       // qmllint disable uncreatable-type
         top: true
     }
     margins {       // qmllint disable unresolved-type unqualified
-        top: Variables.barHeight + Variables.spacingMedium
+        top: Variables.barSize + Variables.spacingMedium
     }
 
     WlrLayershell.layer: WlrLayer.Overlay
