@@ -118,9 +118,11 @@ Mist-shell is a desktop shell with dotfiles specifically made for Arch Linux. Th
 
 <h2 align="center">Screenshots</h2>
 
-| Mist theme | Nord theme (dashboard) |
+| Mist theme | Catppuccin theme |
 | :--------: | :--------------------: |
-| ![Mist](assets/mist-theme-preview.png) | ![Nord](assets/nord-theme-preview.png) |
+| ![Mist](assets/mist-theme-preview.jpg) | ![Catppuccin](assets/catppuccin-theme-preview.jpg)
+| **Dashboard (mist)** | **Dashboard (catppuccin)** |
+| ![Dashboard mist](assets/mist-theme-dashboard.jpg) | ![Dashboard catppuccin](assets/catppuccin-theme-dashboard.jpg) |
 
 ---
 
@@ -146,7 +148,7 @@ Mist-shell is a desktop shell with dotfiles specifically made for Arch Linux. Th
 
 <div align="center">
 
-I found that most desktop shells based on Quickshell use a lot of system resources by default. Since I have 4gb ram in my PC, I really don't like high ram usage but I do enjoy aesthetics.
+I found that most desktop shells based on Quickshell use a lot of system resources by default. Since I have only 4GB ram in my PC, I really don't like high ram usage but I do enjoy aesthetics.
 
 I made this project with a lot of performance aspects in my mind to use the absolute bare minimum system resources. The optimizations in the shell may not be good because I am a beginner to QML and JS overall.
 
