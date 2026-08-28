@@ -23,6 +23,7 @@ detect_pkg_manager() {
 }
 
 manage_dependencies() {
+    local aur_helper=""
     local missing=()
     local check_bins=(
         "quickshell" "hyprland" "hyprctl" "blueman-applet" "wpctl" "nmcli" "matugen" "awww" "rofi"
@@ -65,22 +66,29 @@ manage_dependencies() {
                 sudo pacman -S "${deps_pacman[@]}" --needed
             fi
 
+            # detect aur helper
+            if command -v paru &> /dev/null; then
+                aur_helper="paru"
+            elif command -v yay &> /dev/null; then
+                aur_helper="yay"
+            fi
+
             # install aur packagess
-            if command -v yay &> /dev/null; then
-                echo -ne "${YELLOW}Do you want to install AUR dependencies via yay?${NC} (y/N): "
+            if [ -n "$aur_helper" ]; then
+                echo -ne "${YELLOW}Do you want to install AUR dependencies via $aur_helper?${NC} (y/N): "
                 read -r response
                 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
-                    yay -S --needed "${deps_aur[@]}"
+                    "$aur_helper" -S --needed "${deps_aur[@]}"
                 fi
             else
-                log_error "AUR helper 'yay' not found. Please manually install dependencies: ${deps_aur[*]}"
+                log_error "No supported AUR helper (paru/yay) found. Please manually install dependencies: ${deps_aur[*]}"
             fi
         else
             log_success "All necessary dependencies are installed!\n"
         fi
     else
         if [ ${#missing[@]} -ne 0 ]; then
-            log_error "You are on a non Arch system. Please manually install dependencies: ${deps_aur[*]}"
+            log_error "You are on a non Arch system. Please manually install missing commands: ${missing[*]}"
         else
             log_success "All necessary dependencies are installed!\n"
         fi
@@ -93,10 +101,16 @@ deploy_config() {
     local source_dir="$script_dir/dots/.config"
     local target_dir="$HOME/.config"
 
+    if [ ! -d "$source_dir" ]; then
+        log_error "Source directory '$source_dir' not found. Skipping config deployment"
+        return 1
+    fi
+
     mkdir -p "$target_dir"
 
     log_info  "Deploying config files..."
 
+    shopt -s nullglob dotglob
     for item_path in "$source_dir"/*; do
         [ -e "$item_path" ] || continue
 
@@ -144,6 +158,7 @@ deploy_config() {
         cp -r "$item_path" "$target_dir/"
         log_success "Deployed: $item_name\n"
     done
+    shopt -u dotglob nullglob
 }
 
 main() {

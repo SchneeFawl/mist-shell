@@ -63,7 +63,7 @@ Mist-shell is a desktop shell with dotfiles specifically made for Arch Linux. Th
     ```sh
     yay -S --needed \
       otf-geist-mono-nerd ttf-cascadia-code-nerd ttf-cascadia-mono-nerd \
-      quickshell-git bibata-cursor-theme-bin
+      ttf-roboto quickshell-git bibata-cursor-theme-bin
     ```
 
 </details>
@@ -75,8 +75,11 @@ Mist-shell is a desktop shell with dotfiles specifically made for Arch Linux. Th
         - `SUPER` + `T` = terminal (kitty)
         - `SUPER` + `F` = browser (change browser in `.config/hypr/hyprland/keybinds.lua` if needed)
         - `SUPER` + `C` = editor (code)
-        - `SUPER` + `A` = app launcher/menu (rofi)
+        - `SUPER` + `A` = app launcher
         - `SUPER` + `E` = open file manager (dolphin)
+        - `SUPER` + `V` = open clipboard
+        - `SUPER` + `I` = open settings window
+        - `SUPER` + `L` = lockscreen
 
    - **Hyprland keybinds**:
         - `SUPER` + `Q` = close window

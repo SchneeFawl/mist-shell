@@ -26,6 +26,8 @@ Singleton {
         root.searchText = "";
     }
 
+    onVisibleChanged: searchText = ""
+
     IpcHandler {
         target: "applauncher"
         function toggle(): void {

@@ -63,9 +63,11 @@ Rectangle {
                 } else if ([Qt.Key_Enter, Qt.Key_Return].includes(event.key)) {
                     let currentApp = AppLauncherService.filteredApps[root.listView.currentIndex];
                     if (currentApp) AppLauncherService.launchApp(currentApp);
+                    searchInput.clear();
                     event.accepted = true;
                 } else if (event.key === Qt.Key_Escape) {
                     AppLauncherService.visible = false;
+                    searchInput.clear();
                     event.accepted = true;
                 }
             }
