@@ -110,6 +110,7 @@ Item {
                 SRPill {
                     id: pill1
                     editable: false
+                    monoText: true
                     staticText: "60s"
                     active: ScreenRecordService.replayDuration === 60
                     highlighted: slidingHighlight.targetPill === pill1
@@ -119,6 +120,7 @@ Item {
                 SRPill {
                     id: pill2
                     editable: false
+                    monoText: true
                     staticText: "90s"
                     active: ScreenRecordService.replayDuration === 90
                     highlighted: slidingHighlight.targetPill === pill2
@@ -128,6 +130,7 @@ Item {
                 SRPill {
                     id: pill3
                     editable: false
+                    monoText: true
                     staticText: "120s"
                     active: ScreenRecordService.replayDuration === 120
                     highlighted: slidingHighlight.targetPill === pill3
@@ -139,6 +142,7 @@ Item {
                 SRPill {
                     id: pill4
                     editable: true
+                    monoText: true
                     valueText: ScreenRecordService.replayDuration.toString()
                     highlighted: slidingHighlight.targetPill === pill4
                     active: ![60, 90, 120].includes(ScreenRecordService.replayDuration)
@@ -270,6 +274,7 @@ Item {
             SRPill {
                 id: fpsPill
                 editable: true
+                monoText: true
                 valueText: ScreenRecordService.fps.toString()
             }
 

@@ -77,7 +77,7 @@ Rectangle {
                 return Colors.on_surface;
             }
 
-            title: Icons.cpu + " "
+            icon: Icons.cpu + " "
             progress: SystemStatsService.cpuUsed / 100
             progressColor: statsRoot.getProgressColor(SystemStatsService.cpuUsed)
             leftSubText: SystemStatsService.cpuUsed + " %"
@@ -87,7 +87,7 @@ Rectangle {
         }
 
         StatProgressBar {   // ram stats
-            title: Icons.ram + " "
+            icon: Icons.ram + " "
             progress: SystemStatsService.ramTotal > 0 ? (SystemStatsService.ramUsed / SystemStatsService.ramTotal) : 0.0
             progressColor: statsRoot.getProgressColor(SystemStatsService.ramUsed / SystemStatsService.ramTotal * 100)
             leftSubText: SystemStatsService.ramUsed + " GB / " + SystemStatsService.ramTotal + " GB"
@@ -96,7 +96,7 @@ Rectangle {
         }
 
         StatProgressBar {   // disk stats
-            title: Icons.database + " "
+            icon: Icons.database + " "
             progress: SystemStatsService.diskTotal > 0 ? (SystemStatsService.diskUsed / SystemStatsService.diskTotal) : 0.0
             progressColor: statsRoot.getProgressColor(SystemStatsService.diskUsed / SystemStatsService.diskTotal * 100)
             leftSubText: SystemStatsService.diskUsed + " GB / " + SystemStatsService.diskTotal + " GB"

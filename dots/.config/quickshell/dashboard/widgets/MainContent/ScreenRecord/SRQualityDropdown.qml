@@ -80,7 +80,6 @@ Rectangle {
                     ScreenRecordText {
                         anchors.verticalCenter: parent.verticalCenter
                         leftPadding: Variables.spacingMedium
-                        font.family: Variables.sansFontFamily
                         color: content.index === qualityView.currentIndex ? Colors.on_primary : Colors.on_surface
                         text: qualityDropdown.formatQualityName(content.modelData)
 
@@ -147,7 +146,6 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.leftMargin: Variables.spacingMedium
-        font.family: Variables.sansFontFamily
         color: Colors.on_surface
         text: qualityDropdown.formatQualityName(ScreenRecordService.quality)
     }
@@ -157,7 +155,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.leftMargin: Variables.spacingMedium
         anchors.rightMargin: Variables.spacingMedium
-        font.family: Variables.sansFontFamily
+        monospace: true
         color: Colors.on_surface
         size: Variables.iconNormal
         text: Icons.chevronDown

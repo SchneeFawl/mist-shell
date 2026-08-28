@@ -6,7 +6,7 @@ import qs.modules.common
 ColumnLayout {
     id: statProgBarRoot
 
-    property string title: ""
+    property string icon: ""
     property var progress: 0.0
     property string leftSubText: ""
     property string rightSubText: ""
@@ -28,11 +28,12 @@ ColumnLayout {
         spacing: Variables.dashInnerColSpacing
 
         StyledText {
-            id: titleText
+            id: icon
+            monospace: true
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: Variables.fontMedium
             color: Colors.on_surface
-            text: statProgBarRoot.title
+            text: statProgBarRoot.icon
         }
 
         Rectangle {

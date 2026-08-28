@@ -80,6 +80,7 @@ Item {
 
                     ScreenRecordText {      // idle icon
                         anchors.centerIn: parent
+                        monospace: true
                         size: Variables.buttonHeightMedium
                         color: Colors.error
                         text: Icons.record
@@ -97,6 +98,7 @@ Item {
 
                     ScreenRecordText {      // recording icon
                         anchors.centerIn: parent
+                        monospace: true
                         size: Variables.buttonHeightMedium
                         color: Colors.on_error
                         text: Icons.recording
@@ -114,6 +116,7 @@ Item {
 
                     ScreenRecordText {      // replay icon
                         anchors.centerIn: parent
+                        monospace: true
                         size: Variables.buttonHeightMedium
                         color: Colors.on_error
                         text: Icons.replay
@@ -178,6 +181,7 @@ Item {
                     Layout.alignment: Qt.AlignHCenter
                     Layout.fillWidth: true
                     horizontalAlignment: Text.AlignHCenter
+                    monospace: true
                     size: Variables.fontSmall
                     color: Colors.on_surface
                     opacity: 0.8

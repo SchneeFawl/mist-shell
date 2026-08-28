@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.modules.theme
+import qs.modules.common
 
 Rectangle {
     id: recBtnRoot
@@ -43,9 +44,10 @@ Rectangle {
         anchors.centerIn: parent
         spacing: Variables.spacingNormal
 
-        Text {
+        // icon text
+        StyledText {
             visible: recBtnRoot.icon !== ""
-            font.family: Variables.defaultFontFamily
+            monospace: true
             font.pixelSize: Variables.fontLarge
             color: mouseArea.pressed ? recBtnRoot.textColor2 : recBtnRoot.textColor1
             text: recBtnRoot.icon
@@ -59,9 +61,9 @@ Rectangle {
             }
         }
 
-        Text {
+        // content text
+        StyledText {
             visible: recBtnRoot.text !== ""
-            font.family: Variables.defaultFontFamily
             font.pixelSize: Variables.fontNormal
             color: mouseArea.pressed ? recBtnRoot.textColor2 : recBtnRoot.textColor1
             text: recBtnRoot.text

@@ -12,6 +12,7 @@ Rectangle {
     readonly property bool isHovered: mouseArea.containsMouse
     property bool editable: false
     property bool active: false
+    property bool monoText: false
     property string staticText: "60s"
     property alias inputText: textInput.text
     property string valueText: ""
@@ -29,7 +30,7 @@ Rectangle {
         anchors.centerIn: parent
         visible: srPillRoot.editable
         color: srPillRoot.highlighted ? Colors.on_primary : Colors.on_surface
-        font.family: Variables.defaultFontFamily
+        font.family: srPillRoot.monoText ? Variables.monoFontFamily : Variables.sansFontFamily
         font.pixelSize: Variables.fontNormal
         clip: true
         validator: IntValidator { bottom: 10; top: 3600 }
@@ -63,6 +64,7 @@ Rectangle {
         anchors.centerIn: parent
         visible: !srPillRoot.editable
         color: srPillRoot.highlighted ? Colors.on_primary : Colors.on_surface
+        monospace: srPillRoot.monoText
         text: srPillRoot.staticText
 
         Behavior on color {

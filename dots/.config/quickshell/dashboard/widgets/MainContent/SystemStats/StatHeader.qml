@@ -17,7 +17,8 @@ RowLayout {
 
     StyledText {
         horizontalAlignment: Text.AlignHCenter
-        font.pixelSize: Variables.fontMedium
+        monospace: true
+        font.pixelSize: Variables.iconSmall
         color: statHeaderRoot.iconColor
         text: statHeaderRoot.icon
     }
