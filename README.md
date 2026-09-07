@@ -89,6 +89,9 @@ Mist-shell is a desktop shell with dotfiles specifically made for Arch Linux. Th
   ```sh
   sudo systemctl enable --now bluetooth.service
   ```
+  Restart Quickshell after doing this.
+
+  - **IMPORTANT**: Since there is no greeter in the project like sddm, for now you need to start Hyprland using the command `start-hyprland` in the tty.
 
 </details>
 
