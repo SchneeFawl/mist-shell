@@ -24,9 +24,9 @@ Mist-shell is a desktop shell with dotfiles specifically made for Arch Linux. Th
 <details>
     <summary>Installation</summary>
 
-   > **Hyprland 0.54**: If you're using Hyprland version 0.54 or less then you are not ready to use it because this is made only for Hyprland 0.55 or later, which uses the Lua language for config files instead of hyprlang.
+  > **Hyprland 0.54**: If you're using Hyprland version 0.54 or less then you are not ready to use it because this is made only for Hyprland 0.55 or later, which uses the Lua language for config files instead of hyprlang.
 
-  Clone this repo (preferrably in the home directory) and run the install script using `./install.sh`
+  Clone this repo _(preferrably in the home directory)_ and run the install script using `./install.sh`
 
 </details>
 
@@ -65,6 +65,30 @@ Mist-shell is a desktop shell with dotfiles specifically made for Arch Linux. Th
       otf-geist-mono-nerd ttf-cascadia-code-nerd ttf-cascadia-mono-nerd \
       ttf-roboto quickshell-git bibata-cursor-theme-bin
     ```
+
+</details>
+
+<details>
+    <summary>Post Installation</summary>
+
+  > **NOTE**: I plan to replace the installation script with a CLI instead which would automate the whole installation process and also support NixOS. So, this section will be removed after I implement the CLI, eliminating the need for manual installation and post installation setup.
+
+  After completing the installation manually or using the script, complete the setup with the following steps:
+
+  - **Zsh config _(starship prompt)_**:
+  ```sh
+  echo 'eval "$(starship init zsh)"' >> ~/.zshrc
+  ```
+
+  - **Set Zsh as default shell (requires a reboot/log out)**:
+  ```sh
+  chsh -s $(which zsh)
+  ```
+
+  - **Enable Bluetooth _(optional)_**:
+  ```sh
+  sudo systemctl enable --now bluetooth.service
+  ```
 
 </details>
 
@@ -109,8 +133,8 @@ Mist-shell is a desktop shell with dotfiles specifically made for Arch Linux. Th
 <details>
     <summary>Components</summary>
 
-   - Window manager: [Hyprland](https://hypr.land) (>0.55)
-   - Widgets: [Quickshell](https://quickshell.org/)
+  - Window manager: [Hyprland](https://hypr.land) (>0.55)
+  - Widgets: [Quickshell](https://quickshell.org/)
 
 </details>
 
@@ -133,7 +157,7 @@ Mist-shell is a desktop shell with dotfiles specifically made for Arch Linux. Th
 - [x] Bluetooth
 - [x] Clipboard
 - [x] Notifications
-- [x] DND mode (dashboard)
+- [ ] DND mode
 - [ ] Idle inhibitor/Caffeine mode (half complete)
 - [ ] Brightness control (dashboard)
 - [x] App launcher
