@@ -69,6 +69,18 @@ Mist-shell is a desktop shell with dotfiles specifically made for Arch Linux. Th
 </details>
 
 <details>
+    <summary>Dependency Details</summary>
+
+  Most of the dependencies are needed by the shell to run properly except a few, which are listed below:
+  - **firefox** (browser)
+  - **kitty** (terminal - recommended but optional, you can use something else)
+  - **dolphin** (file manager - optional, you can use something else)
+  - **network-manager-applet** (for NetworkManager system tray)
+  - **rofi** (for drun menu)
+
+</details>
+
+<details>
     <summary>Post Installation</summary>
 
   > **NOTE**: I plan to replace the installation script with a CLI instead which would automate the whole installation process and also support NixOS. So, this section will be removed after I implement the CLI, eliminating the need for manual installation and post installation setup.
