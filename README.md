@@ -56,14 +56,14 @@ Mist-shell is a desktop shell with dotfiles specifically made for Arch Linux. Th
       cliphist brightnessctl gpu-screen-recorder gamemode qt6-declarative \
       qt6-base qt6-wayland qt6-svg qt6-multimedia qt6-multimedia-ffmpeg \
       qt6-imageformats qt6-shadertools qt6-positioning qt6-webengine \
-      libpipewire xdg-desktop-portal-hyprland xdg-desktop-portal-gtk
+      libpipewire xdg-desktop-portal-hyprland xdg-desktop-portal-gtk \
+      otf-geist-mono-nerd ttf-cascadia-code-nerd ttf-cascadia-code-nerd \
+      ttf-roboto fastfetch
     ```
 
   - **Install all the AUR dependencies (replace `yay` with your preferred AUR helper if needed)**:
     ```sh
-    yay -S --needed \
-      otf-geist-mono-nerd ttf-cascadia-code-nerd ttf-cascadia-mono-nerd \
-      ttf-roboto quickshell-git bibata-cursor-theme-bin
+    yay -S --needed quickshell-git bibata-cursor-theme-bin
     ```
 
 </details>

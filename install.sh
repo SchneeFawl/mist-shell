@@ -39,9 +39,9 @@ manage_dependencies() {
         "qt6-declarative" "qt6-base" "qt6-wayland" "qt6-svg" "qt6-multimedia" "qt6-multimedia-ffmpeg"
         "qt6-imageformats" "qt6-shadertools" "qt6-positioning" "qt6-webengine" "libpipewire"
         "xdg-desktop-portal-hyprland" "xdg-desktop-portal-gtk"
+        "otf-geist-mono-nerd" "ttf-cascadia-code-nerd" "ttf-cascadia-mono-nerd" "ttf-roboto"
     )
     local deps_aur=(
-        "otf-geist-mono-nerd" "ttf-cascadia-code-nerd" "ttf-cascadia-mono-nerd" "ttf-roboto"
         "quickshell-git" "bibata-cursor-theme-bin"
     )
 

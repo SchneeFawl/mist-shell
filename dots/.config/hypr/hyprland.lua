@@ -11,3 +11,4 @@ require("hyprland.keybinds")
 require("hyprland.rules")         -- Contains window rules, workspace rules and layer rules
 require("hyprland.env")           -- Environment variables
 require("hyprland.execs")         -- Startup apps
+require("hyprland.user")          -- User custom config

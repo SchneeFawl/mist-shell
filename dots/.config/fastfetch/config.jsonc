@@ -56,7 +56,7 @@
     {
       "type": "display",
       "key": "│ {$2}󰍹 display{$1}",
-      "format": "{1>11}x{2} @ {3}Hz │"
+      "format": "{1>10}x{2} @ {3}Hz │"
     },
     {
       "type": "gpu",

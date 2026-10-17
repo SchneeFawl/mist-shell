@@ -135,6 +135,7 @@ hl.window_rule({
     match = {
         title = "^([Pp]icture[-\\s]?[Ii]n[-\\s]?[Pp]icture)(.*)$"
     },
+    opacity = "1.2 1.2",
     float = true,
     keep_aspect_ratio = true,
     pin = true
@@ -160,7 +161,7 @@ hl.window_rule({
     match = {
         class = "^(discord)$"
     },
-    opacity = "1.1 0.85"
+    opacity = "1.0 0.85"
 })
 
 -- universal system dialog rule

@@ -3,7 +3,7 @@ hl.monitor({
     output   = "",
     mode     = "preferred",
     position = "auto",
-    scale    = 1,
+    scale    = 1.25,
 })
 
 hl.gesture({
@@ -93,7 +93,7 @@ hl.config({
 
         touchpad           = {
             natural_scroll = true,
-            scroll_factor = 0.75
+            scroll_factor = 0.7
         },
     },
 })

@@ -14,6 +14,6 @@ hl.on("hyprland.start", function ()
     hl.exec_cmd("wl-paste --type text --watch cliphist store")
     hl.exec_cmd("wl-paste --type image --watch cliphist store")
 
-    hl.exec_cmd("hyprctl setcursor Bibata-Modern-Classic 22")
+    hl.exec_cmd("hyprctl setcursor Bibata-Modern-Classic 21")
 end
 )
